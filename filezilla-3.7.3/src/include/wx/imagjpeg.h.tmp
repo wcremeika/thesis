@@ -1,0 +1,54 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\imagjpeg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/imagjpeg.h
+// Purpose:     wxImage JPEG handler
+// Author:      Vaclav Slavik
+// Copyright:   (c) Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                   
+
+//-----------------------------------------------------------------------------
+// wxJPEGHandler
+//-----------------------------------------------------------------------------
+
+                 
+
+                     
+                           
+
+                                                           
+ 
+       
+                          
+     
+                                  
+                                 
+                                         
+                                        
+                                    
+                                   
+     
+
+                                                 
+
+                 
+                                                                                                    
+                                                                                       
+          
+                                                    
+      
+
+        
+                                        
+  
+
+       // wxUSE_LIBJPEG
+
+       // _WX_IMAGJPEG_H_
+

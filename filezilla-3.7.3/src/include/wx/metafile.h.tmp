@@ -1,0 +1,55 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\metafile.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/metafile.h
+// Purpose:     wxMetaFile class declaration
+// Author:      wxWidgets team
+// Modified by:
+// Created:     13.01.00
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+                   
+
+                  
+
+                                            
+                             
+                                 
+                                                 
+
+                                                       
+
+                      
+                          
+                                   
+
+                                      
+                                           
+                                        
+                                                              
+                                             
+                                                 
+                                   
+                                                                     
+                  
+
+                                                                         
+                                     
+                                            
+                                
+                                    
+          
+                       
+                                
+                        
+                                
+      
+
+       // wxUSE_METAFILE
+
+       // _WX_METAFILE_H_BASE_

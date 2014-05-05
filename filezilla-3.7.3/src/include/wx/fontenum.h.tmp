@@ -1,0 +1,90 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\fontenum.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/fontenum.h
+// Purpose:     wxFontEnumerator class for getting available fonts
+// Author:      Julian Smart, Vadim Zeitlin
+// Modified by: extended to enumerate more than just font facenames and works
+//              not only on Windows now (VZ)
+// Created:     04/01/98
+// Copyright:   (c) Julian Smart, Vadim Zeitlin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                   
+
+                  
+
+                       
+                      
+
+                                                                               
+                                                                            
+                              
+                                                                               
+
+                                       
+ 
+       
+                         
+
+                                      
+                                  
+
+                                                                          
+                                                                      
+                                                                      
+                                
+                                   
+                  
+                                                                           
+                                               
+                   
+
+                                                                              
+                                                                            
+                                            
+                                                                              
+
+                                                                            
+                                                                             
+                               
+
+                                   
+                                                               
+                        
+
+                                   
+                                                                   
+                                                                   
+                        
+
+
+
+                                                            
+                        
+                                                                        
+                                              
+
+                                                                          
+                                                                                
+
+                                                                          
+                           
+                                                     
+
+        
+                       
+                                                             
+                                                          
+      
+
+                                              
+  
+
+       // wxUSE_FONTENUM
+
+       // _WX_FONTENUM_H_

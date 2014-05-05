@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_stbmp.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_stbmp.h
+// Purpose:     XML resource handler for wxStaticBitmap
+// Author:      Vaclav Slavik
+// Created:     2000/04/22
+// Copyright:   (c) 2000 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                         
+
+                              
+
+                                                                            
+ 
+                                                   
+
+       
+                               
+                                         
+                                            
+  
+
+       // wxUSE_XRC && wxUSE_STATBMP
+
+       // _WX_XH_STBMP_H_

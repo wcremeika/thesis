@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_bmpcbox.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_bmpcbox.h
+// Purpose:     XML resource handler for wxBitmapComboBox
+// Author:      Jaakko Salli
+// Created:     Sep-10-2006
+// Copyright:   (c) 2006 Jaakko Salli
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+                         
+
+                                     
+
+                                           
+
+                                                                              
+ 
+                                                     
+
+       
+                                 
+                                         
+                                            
+
+        
+                                    
+                                   
+  
+
+       // wxUSE_XRC && wxUSE_BITMAPCOMBOBOX
+
+       // _WX_XH_BMPCBOX_H_

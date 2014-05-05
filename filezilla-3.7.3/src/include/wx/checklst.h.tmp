@@ -1,0 +1,69 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\checklst.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/checklst.h
+// Purpose:     wxCheckListBox class interface
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     12.09.00
+// Copyright:   (c) Vadim Zeitlin
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+                   
+
+                      
+
+                       
+
+                                                                               
+                                                       
+                                                                               
+
+                                                  
+                                                                
+                                                                               
+                                                               
+                                                   
+                                                           
+                                                    
+ 
+       
+                            
+
+                                      
+                                                        
+                                                                 
+
+                                                                         
+
+                                                
+  
+
+                            
+                                 
+                          
+                                      
+                        
+                                
+                          
+                                  
+                          
+                                
+                        
+                                 
+                        
+                                
+                          
+                                  
+                       
+                                
+      
+
+       // wxUSE_CHECKLISTBOX
+
+      
+    // _WX_CHECKLST_H_BASE_

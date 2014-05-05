@@ -1,0 +1,1047 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\carbon\private.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/carbon/private.h
+// Purpose:     Private declarations: as this header is only included by
+//              wxWidgets itself, it may contain identifiers which don't start
+//              with "wx".
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+             
+
+                       
+
+                       
+                      
+                            
+                            
+
+        
+
+       // wxUSE_GUI
+
+// filefn.h
+WXDLLIMPEXP_BASE wxString wxMacFSSpec2MacFilename( const FSSpec *spec );
+WXDLLIMPEXP_BASE void wxMacFilename2FSSpec( const wxString &path , FSSpec *spec );
+
+// utils.h
+WXDLLIMPEXP_BASE wxString wxMacFindFolderNoSeparator(short vRefNum,
+                                                     OSType folderType,
+                                                     Boolean createFolder);
+WXDLLIMPEXP_BASE wxString wxMacFindFolder(short vRefNum,
+                                          OSType folderType,
+                                          Boolean createFolder);
+
+template<typename T> EventParamType wxMacGetEventParamType() { wxFAIL_MSG( wxT("Unknown Param Type") ); return 0; }
+template<> inline EventParamType wxMacGetEventParamType<HIShapeRef>() { return typeHIShapeRef; }
+template<> inline EventParamType wxMacGetEventParamType<RgnHandle>() { return typeQDRgnHandle; }
+template<> inline EventParamType wxMacGetEventParamType<ControlRef>() { return typeControlRef; }
+template<> inline EventParamType wxMacGetEventParamType<WindowRef>() { return typeWindowRef; }
+template<> inline EventParamType wxMacGetEventParamType<MenuRef>() { return typeMenuRef; }
+template<> inline EventParamType wxMacGetEventParamType<EventRef>() { return typeEventRef; }
+template<> inline EventParamType wxMacGetEventParamType<Point>() { return typeQDPoint; }
+template<> inline EventParamType wxMacGetEventParamType<Rect>() { return typeQDRectangle; }
+template<> inline EventParamType wxMacGetEventParamType<Boolean>() { return typeBoolean; }
+template<> inline EventParamType wxMacGetEventParamType<SInt16>() { return typeSInt16; }
+template<> inline EventParamType wxMacGetEventParamType<SInt32>() { return typeSInt32; }
+template<> inline EventParamType wxMacGetEventParamType<UInt32>() { return typeUInt32; }
+template<> inline EventParamType wxMacGetEventParamType<RGBColor>() { return typeRGBColor; }
+template<> inline EventParamType wxMacGetEventParamType<HICommand>() { return typeHICommand; }
+template<> inline EventParamType wxMacGetEventParamType<HIPoint>() { return typeHIPoint; }
+template<> inline EventParamType wxMacGetEventParamType<HISize>() { return typeHISize; }
+template<> inline EventParamType wxMacGetEventParamType<HIRect>() { return typeHIRect; }
+template<> inline EventParamType wxMacGetEventParamType<void*>() { return typeVoidPtr; }
+template<> inline EventParamType wxMacGetEventParamType<CFDictionaryRef>() { return typeCFDictionaryRef; }
+template<> inline EventParamType wxMacGetEventParamType<Collection>() { return typeCollection; }
+template<> inline EventParamType wxMacGetEventParamType<CGContextRef>() { return typeCGContextRef; }
+/*
+ These are ambiguous
+ template<> EventParamType wxMacGetEventParamType<GrafPtr>() { return typeGrafPtr; }
+ template<> EventParamType wxMacGetEventParamType<OSStatus>() { return typeOSStatus; }
+ template<> EventParamType wxMacGetEventParamType<CFIndex>() { return typeCFIndex; }
+ template<> EventParamType wxMacGetEventParamType<GWorldPtr>() { return typeGWorldPtr; }
+ */
+
+class WXDLLIMPEXP_CORE wxMacCarbonEvent
+{
+
+public :
+    wxMacCarbonEvent()
+    {
+        m_eventRef = 0;
+        m_release = false;
+    }
+
+    wxMacCarbonEvent( EventRef event , bool release = false )
+    {
+        m_eventRef = event;
+        m_release = release;
+    }
+
+    wxMacCarbonEvent(UInt32 inClassID,UInt32 inKind,EventTime inWhen = 0 /*now*/,EventAttributes inAttributes=kEventAttributeNone)
+    {
+        m_eventRef = NULL;
+        verify_noerr( MacCreateEvent( NULL , inClassID, inKind,inWhen,inAttributes,&m_eventRef) );
+        m_release = true;
+    }
+
+    ~wxMacCarbonEvent()
+    {
+        if ( m_release )
+            ReleaseEvent( m_eventRef );
+    }
+
+    OSStatus Create(UInt32 inClassID,UInt32 inKind,EventTime inWhen = 0 /*now*/,EventAttributes inAttributes=kEventAttributeNone)
+    {
+        verify( (m_eventRef == NULL) || m_release );
+        if ( m_eventRef && m_release )
+        {
+            ReleaseEvent( m_eventRef );
+            m_release = false;
+            m_eventRef = NULL;
+        }
+        OSStatus err = MacCreateEvent( NULL , inClassID, inKind,inWhen,inAttributes,&m_eventRef);
+        if ( err == noErr )
+            m_release = true;
+        return err;
+    }
+
+    OSStatus GetParameter( EventParamName inName, EventParamType inDesiredType, UInt32 inBufferSize, void * outData);
+
+    template <typename T> OSStatus GetParameter( EventParamName inName, EventParamType type , T *data )
+    {
+        return GetParameter( inName, type , sizeof( T ) , data );
+    }
+    template <typename T> OSStatus GetParameter( EventParamName inName, T *data )
+    {
+        return GetParameter<T>( inName, wxMacGetEventParamType<T>() , data );
+    }
+
+    template <typename T> T GetParameter( EventParamName inName )
+    {
+        T value;
+        verify_noerr( GetParameter<T>( inName, &value ) );
+        return value;
+    }
+    template <typename T> T GetParameter( EventParamName inName, EventParamType inDesiredType )
+    {
+        T value;
+        verify_noerr( GetParameter<T>( inName, inDesiredType , &value ) );
+        return value;
+    }
+
+    OSStatus SetParameter( EventParamName inName, EventParamType inType, UInt32 inSize, const void * inData);
+    template <typename T> OSStatus SetParameter( EventParamName inName, EventParamType inDesiredType , const T *data )
+    {
+        return SetParameter( inName, inDesiredType , sizeof( T ) , data );
+    }
+    template <typename T> OSStatus SetParameter( EventParamName inName, EventParamType inDesiredType , const T& data )
+    {
+        return SetParameter<T>( inName, inDesiredType , &data );
+    }
+    template <typename T> OSStatus SetParameter( EventParamName inName, const T *data )
+    {
+        return SetParameter<T>( inName, wxMacGetEventParamType<T>() , data );
+    }
+    template <typename T> OSStatus SetParameter( EventParamName inName, const T& data )
+    {
+        return SetParameter<T>( inName, wxMacGetEventParamType<T>() , &data );
+    }
+    UInt32 GetClass()
+    {
+        return ::GetEventClass( m_eventRef );
+    }
+    UInt32 GetKind()
+    {
+        return ::GetEventKind( m_eventRef );
+    }
+    EventTime GetTime()
+    {
+        return ::GetEventTime( m_eventRef );
+    }
+    UInt32 GetTicks()
+    {
+        return EventTimeToTicks( GetTime() );
+    }
+    OSStatus SetCurrentTime( )
+    {
+        return ::SetEventTime( m_eventRef , GetCurrentEventTime() );
+    }
+    OSStatus SetTime( EventTime when )
+    {
+        return ::SetEventTime( m_eventRef , when );
+    }
+    operator EventRef () { return m_eventRef; }
+
+    bool IsValid() { return m_eventRef != 0; }
+protected :
+    EventRef m_eventRef;
+    bool     m_release;
+};
+
+             
+
+                                              
+
+                                   
+ 
+        
+                    
+                     
+
+                                                                                          
+                 
+                  
+
+                  
+                       
+
+                  
+                        
+
+         
+                         
+                        
+                            
+                           
+                             
+                         
+                        
+               
+                                
+      
+                                 
+   
+
+         
+
+                                                                                                                            
+                                                                                
+
+                                       
+                                         
+                                   
+                                        
+                                    
+                                    
+                                  
+                                     
+                                      
+
+                        
+ 
+                                                        
+                                           
+         
+                     
+  
+
+                                                                      
+                                                                      
+                                                                         
+                                                                         
+
+                                                                  
+
+                                                             
+                                                     
+                                                                                                       
+
+                                                                                                                             
+                                                                                                                                              
+
+                                                   
+
+                                    
+
+                                                         
+ 
+        
+                                                                                            
+                    
+                            
+
+                
+
+                                       
+                                                                           
+
+                                                                      
+                                                                     
+
+                                                                            
+
+                                          
+
+                                
+
+                                
+
+                                                                         
+
+                                                                                                
+                                                                  
+                                                            
+                                                                 
+                                                                   
+
+                                                     
+                                                                      
+                                                
+
+                                         
+                                
+                                   
+                                         
+
+                                           
+                                                      
+
+                                                           
+                                       
+                                                                                   
+
+                                                             
+                                       
+                                       
+
+                                         
+                                              
+                                          
+                                                            
+                                                             
+
+                                                       
+                                          
+                                              
+                                                                     
+                                                
+                                                
+                                      
+                                                                           
+
+                               
+
+                                                     
+      
+                                                       
+                                                   
+                                                      
+      
+                                
+
+                                                                                                               
+                                                                                                                                                 
+                                                                                                            
+                                                                           
+                                                                                    
+
+                                                                                  
+
+                                       
+                                       
+
+                                                                                    
+                                                             
+
+                        
+
+                                                                        
+     
+                
+                                                                
+                  
+     
+                                                                                                        
+     
+                                                                  
+     
+                                                                                                        
+     
+                                                                   
+     
+                                                                           
+     
+                                                                             
+     
+                                                                           
+     
+                                                                              
+     
+                                                                                                        
+     
+                   
+                                                                           
+     
+                                                                                       
+     
+                
+                                                                 
+
+                           
+         
+                                                                                          
+                                                                  
+         
+
+                     
+     
+                                                                           
+     
+                   
+                                                                                      
+     
+                                                          
+     
+                                                           
+     
+
+                                                         
+
+                                                 
+                                        
+
+
+                                                                                                                         
+                                                            
+                                                             
+                                                                                                     
+                                                        
+                               
+
+                                               
+
+                                  
+
+                                                
+                                          
+                                                  
+
+                                                   
+
+                                                  
+
+
+                                                 
+
+                                           
+
+                                                                 
+
+                                                                
+           
+                                                   
+                             
+                       
+                              
+                                               
+  
+
+                                                                               
+                      
+                                                                               
+  
+                               
+  
+
+                                                                    
+ 
+        
+                                                                                                 
+                                
+
+                                                                   
+
+                                                       
+                            
+                                       
+                                       
+
+                                                   
+                            
+                                       
+                                
+
+
+                                                                  
+                                                   
+
+                                                                      
+
+                               
+
+                                                       
+                                                                           
+
+                                                    
+                                                     
+
+                                                                       
+                                           
+                                                  
+                                                     
+
+                                                                    
+                                           
+                                                    
+                                                                       
+                                           
+                                                    
+                                                
+                                             
+                                                     
+
+                                                            
+                                                                                           
+                                                        
+                                               
+                                           
+                                             
+
+                                                         
+                                             
+                                                
+                                                       
+
+                                                  
+                                                          
+
+                                                                   
+                                                                          
+
+                                                                                  
+                                                                           
+
+                                                          
+                                                   
+
+                                                       
+
+                                                                                                                
+
+                                                                                                               
+                                                                                                        
+
+                                                                   
+                                                           
+
+                                                                    
+                                                             
+
+                                                               
+                                                        
+
+                                                                                                       
+                                                                                                
+
+                                                                                                        
+                                                                                                  
+
+                                                                                            
+
+                                                                                                                                      
+           
+
+                                                       
+                           
+                                 
+                                            
+                                          
+
+                                  
+                                 
+                                            
+                                             
+
+                                                         
+                           
+                                 
+                                       
+                                        
+                              
+
+                                    
+                                 
+                                       
+                                        
+                                  
+
+                                                 
+                           
+                                    
+                                    
+                                            
+
+                                                             
+                                    
+                                                
+                                                   
+  
+
+                                                                               
+                           
+                                                                               
+  
+                              
+  
+
+               
+
+                                  
+                       
+
+                                                 
+                                                         
+
+                                                                              
+                                                                              
+                                                
+
+                                                 
+
+                                   
+
+                   
+                 
+  
+
+  
+                                    
+ 
+        
+                    
+                             
+   
+  
+
+                                    
+ 
+        
+                    
+                             
+
+                                                                
+                             
+                                              
+
+                                                             
+                                                                    
+                                       
+                                        
+                           
+
+                                                                  
+                                            
+                                                
+
+                                  
+                            
+
+           
+                        
+
+  
+
+                    
+                   
+                             
+                             
+  
+
+                                        
+                                                            
+                               
+
+                                                                                                   
+
+                                                                                   
+ 
+        
+                                                                                                      
+                                    
+                                                                 
+
+                                                                                                                  
+                                                                           
+                                                                                         
+
+                                                                                               
+
+                                                                     
+                                                          
+
+                                                                                         
+                                                              
+                                                                                             
+                                                              
+
+                                                                            
+                                                                                                        
+
+                                              
+                                                         
+
+                                                                           
+                                                                                      
+
+                                                             
+                                                                              
+                                                                                        
+
+                                                                                        
+                                                                                                  
+                                                                      
+                                                                     
+
+                                                                                       
+
+                                                                                                
+
+                     
+
+                                                        
+                                                                            
+                                       
+
+                        
+
+                                                
+
+        
+
+                                                                                        
+                                                                                              
+
+                                                                                 
+                                                       
+
+                  
+
+                                                       
+                                                                                    
+                                                   
+                                                                     
+
+
+
+          
+
+                              
+                                           
+
+                                                                            
+
+                                                             
+                                                    
+                                                            
+
+                                                             
+                                                       
+                                                        
+                                              
+
+                                     
+                                                 
+                                                            
+                                                         
+
+
+         
+
+                             
+                                                              
+  
+
+                                                              
+ 
+        
+                                                                                  
+                                               
+
+         
+
+                  
+                                           
+  
+
+                                                                               
+                                  
+                                                                               
+
+                                      
+
+                                                              
+ 
+        
+                       
+
+                                
+
+                                                                    
+                                       
+                                        
+                           
+
+                                                                  
+                                            
+                                                
+           
+  
+
+                                                                         
+ 
+        
+                                                                                                              
+                                                                         
+     
+     
+                             
+     
+     
+                                                                     
+
+                                                  
+
+                                                              
+
+           
+                                     
+                    
+                                   
+   
+
+                                                                            
+
+
+                                                                               
+ 
+        
+                                                                            
+                                           
+
+                                          
+                                              
+                                   
+                                     
+
+                                     
+                                             
+           
+                                  
+   
+
+
+                                                                                                                
+ 
+       
+                                                                                                      
+                                    
+                                           
+
+                               
+
+                                                                                                             
+                                                                                          
+                                                                                                               
+                                                                                          
+
+                                                                                             
+                                                                     
+                                                                                          
+                     
+
+                                                         
+                                                         
+                                        
+
+                
+
+                                              
+                                                                                                
+                                                     
+                                                                               
+                                                                   
+
+              
+
+                                                           
+
+                        
+
+                                                 
+                                                                          
+
+                                                                                         
+                                                              
+
+                    
+
+                                                                               
+
+          
+                                             
+                                                         
+                                                                    
+                                                                 
+
+        
+                                           
+                        
+
+                                                              
+  
+
+                                                                               
+                          
+                                                                               
+
+                                                                   
+
+                                           
+                                                         
+                                                        
+                                                         
+
+                                                                               
+
+       // wxUSE_GUI
+
+                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------
+// cocoa bridging utilities
+//---------------------------------------------------------------------------
+
+bool wxMacInitCocoa();
+
+typedef Cursor ClassicCursor;
+
+// -------------
+// Common to all
+// -------------
+
+// Cursor support
+
+const short kwxCursorBullseye = 0;
+const short kwxCursorBlank = 1;
+const short kwxCursorPencil = 2;
+const short kwxCursorMagnifier = 3;
+const short kwxCursorNoEntry = 4;
+const short kwxCursorPaintBrush = 5;
+const short kwxCursorPointRight = 6;
+const short kwxCursorPointLeft = 7;
+const short kwxCursorQuestionArrow = 8;
+const short kwxCursorRightArrow = 9;
+const short kwxCursorSizeNS = 10;
+const short kwxCursorSize = 11;
+const short kwxCursorSizeNESW = 12;
+const short kwxCursorSizeNWSE = 13;
+const short kwxCursorRoller = 14;
+const short kwxCursorWatch = 15;
+const short kwxCursorLast = kwxCursorWatch;
+
+// exposing our fallback cursor map
+
+extern ClassicCursor gMacCursors[];
+
+//
+//
+//
+
+             
+
+                                                              
+ 
+        
+                                                                
+
+                                 
+                                          
+
+                                    
+                                                                          
+                                                         
+                                                           
+
+                                 
+                 
+                 
+                         
+                                                                          
+
+
+                  
+                                      
+                                                   
+                                       
+                                                     
+                             
+                                                         
+                                             
+                                                  
+                                                                                 
+
+                                          
+
+                                                                             
+
+                                     
+
+                                    
+
+                                         
+
+                                         
+
+                                      
+
+                                                       
+
+                                         
+
+                                                 
+
+                                                  
+
+                                                  
+                            
+
+
+                                          
+                                                                                             
+                                             
+                                            
+                                        
+                                             
+
+                                                                            
+
+                                                        
+           
+                                                               
+
+                                           
+                                    
+                                             
+                                                             
+  
+
+       // wxUSE_GUI
+
+      
+    // _WX_PRIVATE_H_

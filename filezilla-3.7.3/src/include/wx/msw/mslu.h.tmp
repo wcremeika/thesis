@@ -1,0 +1,24 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\mslu.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/mslu.h
+// Purpose:     MSLU-related declarations
+// Author:      Vaclav Slavik
+// Modified by: Vadim Zeitlin to move out various functions to other files
+//              to fix header inter-dependencies
+// Created:     2002/02/17
+// Copyright:   (c) 2002 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                   
+                   
+
+                   
+
+// Returns true if we are running under Unicode emulation in Win9x environment.
+// Workaround hacks take effect only if this condition is met
+// (NB: this function is needed even if !wxUSE_UNICODE_MSLU)
+WXDLLIMPEXP_BASE bool wxUsingUnicowsDll();
+
+       // _WX_MSLU_H_

@@ -1,0 +1,4730 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSLog.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSLog.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                 
+                 
+
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+/**
+* Silly wrapper to abstract away the difference between a Unicode
+* (wchar_t) and non-Unicode (char) std::string, as well as
+* Linux/Windows portability.
+*
+*/
+
+                
+/*
+ * _S is defined same as m'soft's _T, just to avoid collisions or
+ * lousy include order dependencies.
+ */
+
+// Sometimes we need specific ones irrespective of in Unicode mode or not.
+// In particular, the underlying format of most XML is Unicode.
+typedef std::wstring wstringT;
+typedef std::string  cstringT;
+
+              
+                             
+                      
+                    
+     
+typedef std::string stringT;
+typedef char charT;
+               
+      
+
+                               
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\../core/PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+// some globally useful includes for non-Windows
+                 
+      
+
+                
+                  
+      
+
+// Following seems needed on Linux/cygwin
+                                             
+                   
+      
+
+// stop MS VC++ 6 and earlier being quite so pedantic
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+// PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN can be specified on the 
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+// 
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+// Following from libtomcrypt, for twofish & SHA256
+/* Controls endianess and size of registers.  Leave uncommented to get platform neutral [slower] code 
+* 
+* Note: in order to use the optimized macros your platform must support unaligned 32 and 64 bit read/writes.
+* The x86 platforms allow this but some others [ARM for instance] do not.  On those platforms you **MUST**
+* use the portable [slower] macros.
+*/
+
+/* detect x86-32 machines somewhat */
+                                                                                                                                                                                 
+                     
+                        
+      
+
+/* detects MIPS R5900 processors (PS2) */
+                                                                                                                        
+                     
+                        
+      
+
+/* detect amd64 */
+                                                                
+                     
+                        
+      
+
+/* #define ENDIAN_LITTLE */
+/* #define ENDIAN_BIG */
+
+/* #define ENDIAN_32BITWORD */
+/* #define ENDIAN_64BITWORD */
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+/* fix for MSVC ...evil! */
+               
+                            
+                                 
+     
+                           
+typedef uint64_t ulong64;
+      
+
+/* this is the "32-bit at least" data type 
+* Re-define it to suit your platform but it must be at least 32-bits 
+*/
+                       
+                         
+     
+typedef unsigned long ulong32;
+      
+
+/* ---- HELPER MACROS ---- */
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+       /* ENDIAN_NEUTRAL */
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+       /* ENDIAN_LITTLE */
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+       /* ENDIAN_BIG */
+
+                                                                                                                         
+
+
+
+/* 32-bit Rotates */
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+/* rotates the hard way */
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+/* 64-bit Rotates */
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+      /* Not x86_64  */
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+/* extract a byte portably */
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 46 // for afxwin.h, and endian macros
+
+// Hotkey values. Internal PWS values - need to convert to either MFC or wxWidgets
+// values in the GUI when retrieving these from the preferences and aso back to PWS
+// internal values before giving them to PWSPrefs for saving in the XML config file.
+                                
+                                
+                                
+                                
+ 
+// wxWidgets Only - Not used in Windows MFC
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+      /* !defined(_WIN32) */
+                  
+                     
+typedef int8_t  int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef int64_t int64;
+
+typedef uint8_t  uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
+
+typedef int errno_t;
+
+              
+          
+                    
+      
+                      
+     
+               
+typedef char TCHAR;
+typedef wchar_t WCHAR;
+       /* UNICODE */
+
+// mimic Microsoft conventional typdefs:
+typedef TCHAR *LPTSTR;
+typedef const TCHAR *LPCTSTR;
+typedef bool BOOL;
+typedef unsigned char BYTE;
+typedef uint16_t WORD;
+typedef uint32_t DWORD;
+typedef int32_t LONG;
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+typedef int32_t LPARAM;
+typedef unsigned int UINT;
+typedef int HANDLE;
+                                       
+
+// assorted conveniences:
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+/* These two files require the above definitions */
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\debug.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+                  
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\debug.h" 14
+             
+                   
+      
+
+namespace pws_os {
+  // MFC TRACE equivalent in MFC, non-MFC Windows and non-Windows
+  void Trace(LPCTSTR lpszFormat, ...);
+  void Trace0(LPCTSTR lpszFormat);
+
+  // Opens a messagebox or write to debugger window 
+  // with text of last system error, titlebar
+  // is csFunction
+  void IssueError(const stringT &csFunction, bool bMsgBox = true);
+
+  /*
+    Outputs a printable version of memory dump (hex + ascii)
+
+    parameters:
+      pmemory   - pointer to memory to format
+      length    - length memory to format in bytes
+      cs_prefix - prefix each line with this
+      maxnum    - maximum hex characters dumped per line
+  */
+  void HexDump(unsigned char *pmemory, const int &length,
+               const stringT &cs_prefix = "", const int &maxnum = 16);
+}
+
+       /* _OSDEBUG_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 224
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\linux/pws_time.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                    
+                    
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\linux\../typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\linux/pws_time.h" 13
+                  
+typedef time_t __time32_t;
+typedef uint64_t __time64_t;
+
+extern struct tm *gmtime64_r(const __time64_t *timep, struct tm *result);
+
+namespace pws_os {
+  /**
+   * Workaround the lack of a wchar_t version of asctime()
+   */
+  extern int asctime(TCHAR *buf, size_t N, const struct tm *tm);
+}
+
+       /* __PWS_TIME_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 225
+       /* _WIN32 */
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSLog.h" 14
+
+               
+
+class PWSLog
+{
+public:
+  PWSLog() {}
+  virtual ~PWSLog() {}
+
+  static PWSLog *GetLog(); // singleton
+  static void DeleteLog();
+  
+  void Add(const stringT &sLogRecord);
+  stringT DumpLog();
+
+private:
+  static PWSLog *self;
+  std::deque<stringT> m_log;
+};
+
+       /* _PWSLOG_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSLog.cpp" 9
+                
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                
+                
+
+// Util.h
+//-----------------------------------------------------------------------------
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha256.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// sha256.h
+// SHA256 for PasswordSafe, based on LibTomCrypt by
+// Tom St Denis, tomstdenis@iahu.ca, http://libtomcrypt.org
+//-----------------------------------------------------------------------------
+                  
+                  
+
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha256.h" 21
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+                                                
+                  
+      
+
+                
+                   
+      
+
+                                         
+                                             
+                   
+      
+
+                                                     
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+                                                                
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+   
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+                                                   
+                                                                                                      
+  
+                                                                                                            
+                                                                                                          
+                                   
+  
+
+                                     
+                                                                                                                                                                                 
+                     
+                        
+      
+
+                                         
+                                                                                                                        
+                     
+                        
+      
+
+                  
+                                                                
+                     
+                        
+      
+
+                           
+                        
+
+                              
+                              
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+                           
+               
+                            
+                                 
+     
+                           
+                         
+      
+
+                                           
+                                                                     
+  
+                       
+                         
+     
+                              
+      
+
+                             
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                           
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+                          
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+                       
+
+                                                                                                                         
+
+
+
+                    
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+                          
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+                    
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+                       
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+                             
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha256.h" 22
+
+class SHA256
+{
+public:
+  enum {HASHLEN = 32, BLOCKSIZE = 64};
+  SHA256();
+  ~SHA256();
+  void Update(const unsigned char *in, size_t inlen);
+  void Final(unsigned char digest[HASHLEN]);
+
+private:
+  ulong64 length;
+  size_t curlen;
+  ulong32 state[8];
+  unsigned char buf[BLOCKSIZE];
+};
+
+       /* __SHA256_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 18
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                   
+                   
+
+/**
+ * \file StringX.h
+ *
+ * STL-based implementation of secure strings.
+ * Like std::string in all respects, except that
+ * memory is scrubbed before being returned to system.
+ *
+ */
+
+                
+                
+                
+                  // for ptrdiff_t
+                  // for malloc
+                  // for memset
+
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 33
+                         
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\./PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+                                                
+                  
+      
+
+                
+                   
+      
+
+                                         
+                                             
+                   
+      
+
+                                                     
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+                                                                
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+   
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+                                                   
+                                                                                                      
+  
+                                                                                                            
+                                                                                                          
+                                   
+  
+
+                                     
+                                                                                                                                                                                 
+                     
+                        
+      
+
+                                         
+                                                                                                                        
+                     
+                        
+      
+
+                  
+                                                                
+                     
+                        
+      
+
+                           
+                        
+
+                              
+                              
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+                           
+               
+                            
+                                 
+     
+                           
+                         
+      
+
+                                           
+                                                                     
+  
+                       
+                         
+     
+                              
+      
+
+                             
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                           
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+                          
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+                       
+
+                                                                                                                         
+
+
+
+                    
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+                          
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+                    
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+                       
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+                             
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 34
+
+namespace S_Alloc
+{
+  template <typename T>
+    class SecureAlloc
+    {
+    public:
+      // Typedefs
+      typedef size_t    size_type;
+      typedef ptrdiff_t difference_type;
+      typedef T*        pointer;
+      typedef const T*  const_pointer;
+      typedef T&        reference;
+      typedef const T&  const_reference;
+      typedef T         value_type;
+
+    public:
+      // Constructors
+      SecureAlloc() throw() {}
+      SecureAlloc(const SecureAlloc&) throw() {}
+
+      template <typename U>
+        SecureAlloc(const SecureAlloc<U>&) throw() {}
+
+      SecureAlloc& operator=(const SecureAlloc&) {
+        return *this;
+      }
+
+      // Destructor
+      ~SecureAlloc() throw() {}
+
+      // Utility functions
+      pointer address(reference r) const {
+        return (&r);
+      }
+
+      const_pointer address(const_reference c) const {
+        return (&c);
+      }
+
+      size_type max_size() const {
+        return (std::numeric_limits<size_t>::max)() / sizeof(T);
+      }
+
+      // In-place construction
+      void construct(pointer p, const_reference c) {
+        // placement new operator
+        new(reinterpret_cast<void *>(p)) T(c);
+      }
+
+      // In-place destruction
+      void destroy(pointer p) const {
+        // call destructor directly
+        (p)->T::~T();
+      }
+
+      // Rebind to allocators of other types
+      template <typename U>
+        struct rebind {
+          typedef SecureAlloc<U> other;
+        };
+
+      // Allocate raw memory
+      pointer allocate(size_type n, const_pointer hint = 0) {
+        (void)(hint);
+        pointer p = static_cast<pointer>(std::malloc(n * sizeof(T)));
+        // pws_os::Trace(_T("Securely Allocated %d bytes at %p\n"), n * sizeof(T), p);
+        if (p == NULL)
+          throw std::bad_alloc();
+        return p;
+      }
+
+      // Free raw memory.
+      // Note that C++ standard defines this function as:
+      //   deallocate(pointer p, size_type n).
+      void deallocate(pointer p, size_type n) {
+        // assert(p != NULL);
+        // The standard states that p must not be NULL. However, some
+        // STL implementations fail this requirement, so the check must
+        // be made here.
+        if (p == NULL)
+          return;
+
+        if (n > 0) {
+          const size_type N = n * sizeof(T);
+          std::memset(p, 0x55, N);
+          std::memset(p, 0xAA, N);
+          std::memset(p,    0, N);
+        }
+        std::free(p);
+      }
+
+    private:
+      // No data
+
+    }; // end of SecureAlloc
+
+  // Comparison
+  template <typename T1, typename T2>
+    bool operator==(const SecureAlloc<T1>&,
+                    const SecureAlloc<T2>&) throw() {
+    return true;
+  }
+
+  template <typename T1, typename T2>
+    bool operator!=(const SecureAlloc<T1>&,
+                    const SecureAlloc<T2>&) throw() {
+    return false;
+  }
+
+} // end namespace S_Alloc
+
+              
+                                  
+                                                    
+                                                                  
+     
+typedef std::basic_string<char,
+                          std::char_traits<char>,
+                          S_Alloc::SecureAlloc<char> > StringX;
+      
+
+// Following should really be StringX member functions, but there's no 
+// elegant way of extending a template class without public inheritance, 
+// including duplicating large parts of the interface
+//
+// Since we need the for stringT as well, we might as well templatize them
+// (In for a dime, in for a $).
+
+template<class T> int CompareNoCase(const T &s1, const T &s2);
+template<class T> int CompareCase(const T &s1, const T &s2);
+template<class T> void ToLower(T &s);
+template<class T> void ToUpper(T &s);
+template<class T> T &TrimRight(T &s, const TCHAR *set = NULL);
+template<class T> T &TrimLeft(T &s, const TCHAR *set = NULL);
+template<class T> T &Trim(T &s, const TCHAR *set = NULL);
+template<class T> void EmptyIfOnlyWhiteSpace(T &s);
+template<class T> int Replace(T &s, TCHAR from, TCHAR to);
+template<class T> int Replace(T &s, const T &from, const T &to);
+template<class T> int Remove(T &s, TCHAR c);
+template<class T> void Format(T &s, const TCHAR *fmt, ...);
+template<class T> void Format(T &s, int fmt, ...);
+template<class T> void LoadAString(T &s, int id);
+
+inline stringT stringx2std(const StringX &str) { return stringT(str.data(), str.size()); }
+inline StringX std2stringx(const stringT& str)   { return StringX(str.data(), str.size()); }
+
+       /* __STRINGX_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 19
+                
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Fish.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// Fish.h
+                
+                
+
+/**
+* Fish is an abstract base class for BlowFish and TwoFish
+* (and for any block cipher, but it's cooler to call it "Fish"
+* rather than "Cipher"...)
+*/
+
+class Fish
+{
+public:
+  Fish() {}
+  virtual ~Fish() {}
+  virtual unsigned int GetBlockSize() const = 0;
+  // Following encrypt/decrypt a single block
+  // (blocksize dependent on cipher)
+  virtual void Encrypt(const unsigned char *pt, unsigned char *ct) = 0;
+  virtual void Decrypt(const unsigned char *ct, unsigned char *pt) = 0;
+};
+
+       /* __FISH_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 20
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+                                                
+                  
+      
+
+                
+                   
+      
+
+                                         
+                                             
+                   
+      
+
+                                                     
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+                                                                
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+   
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+                                                   
+                                                                                                      
+  
+                                                                                                            
+                                                                                                          
+                                   
+  
+
+                                     
+                                                                                                                                                                                 
+                     
+                        
+      
+
+                                         
+                                                                                                                        
+                     
+                        
+      
+
+                  
+                                                                
+                     
+                        
+      
+
+                           
+                        
+
+                              
+                              
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+                           
+               
+                            
+                                 
+     
+                           
+                         
+      
+
+                                           
+                                                                     
+  
+                       
+                         
+     
+                              
+      
+
+                             
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                           
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+                          
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+                       
+
+                                                                                                                         
+
+
+
+                    
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+                          
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+                    
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+                       
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+                             
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 21
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\UTF8Conv.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// UTF8Conv.h
+//-----------------------------------------------------------------------------
+                    
+                    
+
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                   
+                   
+
+   
+                  
+  
+                                              
+                                                
+                                                      
+  
+   
+
+                 
+                 
+                 
+                                   
+                                
+                                
+
+                           
+                          
+
+                 
+ 
+                       
+                     
+     
+           
+                 
+                                  
+                                        
+                                
+                                      
+                                  
+                                        
+                                   
+
+           
+                     
+                              
+                                                
+
+                           
+                                                     
+
+                                                  
+                     
+       
+
+                   
+                               
+
+                          
+                                          
+                    
+       
+
+                                                      
+                    
+       
+
+                                  
+                                                                
+       
+
+                              
+                                                    
+                                 
+                                              
+       
+
+                             
+                                     
+                                   
+                     
+       
+
+                                            
+                           
+                       
+                                       
+          
+
+                            
+                                                             
+                                     
+                                                                     
+                                                                                      
+                      
+                                 
+                 
+       
+
+                         
+                                                         
+                                              
+                                               
+                             
+                                                                     
+                                                                       
+                        
+                      
+                 
+
+                    
+                                            
+                                  
+                                  
+                                  
+         
+                     
+       
+
+            
+                
+
+                            
+
+               
+                                     
+                                           
+                                                     
+                
+   
+
+                                     
+                                           
+                                                     
+                 
+   
+
+                          
+
+              
+                                  
+                                                    
+                                                                  
+     
+                               
+                                                 
+                                                               
+      
+
+                                                                       
+                                                                         
+                                                     
+  
+                                                                          
+                               
+
+                                                              
+                                                            
+                                     
+                                     
+                                                              
+                                                             
+                                                         
+                                                   
+                                                          
+                                                                
+                                            
+                                                           
+                                                  
+                                                 
+
+                                                                                          
+                                                                                            
+
+       /* __STRINGX_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\UTF8Conv.h" 17
+
+/** \file
+* A utility class to convert between UTF-8 and StringX
+*/
+
+class CUTF8Conv
+{
+public:
+  CUTF8Conv(bool cp_acp=false) : m_utf8(NULL), m_utf8Len(0), m_utf8MaxLen(0),
+                                 m_wc(NULL), m_wcMaxLen(0), m_tmp(NULL),
+                                 m_tmpMaxLen(0), m_cp_acp(cp_acp) {}
+  ~CUTF8Conv();
+  // In following, char * is managed internally. Caller must NOT
+  // allocate or deallocate it!
+  bool ToUTF8(const StringX &data, const unsigned char *&utf8, size_t &utf8Len);
+  // In following, char * is managed by caller.
+  bool FromUTF8(const unsigned char *utf8, size_t utf8Len, StringX &data);
+
+private:
+  CUTF8Conv(const CUTF8Conv &); // not supported
+  CUTF8Conv &operator=(const CUTF8Conv &); // ditto
+  // following pointers allocated dynamically and monotically increase in size
+  // for efficiency w/o arbitrary restrictions
+  // deallocated by d'tor
+  unsigned char *m_utf8;
+  size_t m_utf8Len;
+  size_t m_utf8MaxLen;
+  wchar_t *m_wc;
+  size_t m_wcMaxLen;
+  unsigned char *m_tmp;
+  size_t m_tmpMaxLen;
+  bool m_cp_acp; // if set, FromUTF8 uses CP_ACP, instead UTF8 encoding
+};
+
+       /* __UTF8CONV_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 22
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/debug.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+                  
+
+                     
+             
+                   
+      
+
+                  
+                                                                 
+                                      
+                                  
+
+                                                    
+                                             
+                  
+                                                                  
+
+    
+                                                            
+
+               
+                                             
+                                                  
+                                            
+                                                        
+    
+                                                         
+                                                                          
+ 
+
+       /* _OSDEBUG_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 24
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 25
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/mem.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+               
+               
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\..\os\typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/mem.h" 12
+
+namespace pws_os {
+  /**
+   * platform-indepenedent functions to lock and unlock memory
+   * in RAM. Useful to prevent sensitive stuff from being swapped
+   * to a snoopable swap file/device
+   */
+  extern bool mlock(void *p, size_t size);
+  extern bool munlock(void *p, size_t size);
+
+  /**
+   * Following are wrappers for Window's 'protect memory' functions,
+   * that use an unspecified algorithm with an unspecified key
+   * to 'protect' memory in user space. FWIW.
+   */
+  extern bool mcryptProtect(void *p, size_t size);
+  extern bool mcryptUnprotect(void *p, size_t size);
+}
+       /* __MEM_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Util.h" 26
+
+                 
+                  
+
+                     
+                    
+
+                       
+
+//Use non-standard dash (ANSI decimal 173) for separation
+                          
+                              
+                             
+
+//Version defines
+             
+             
+
+extern void trashMemory(void *buffer, size_t length);
+extern void trashMemory(LPTSTR buffer, size_t length);
+extern void burnStack(unsigned long len); // borrowed from libtomcrypt
+
+extern void ConvertString(const StringX &text,
+                          unsigned char *&txt, size_t &txtlen);
+
+extern void GenRandhash(const StringX &passkey,
+                        const unsigned char *m_randstuff,
+                        unsigned char *m_randhash);
+
+// buffer is allocated by _readcbc, *** delete[] is responsibility of caller ***
+extern size_t _readcbc(FILE *fp, unsigned char * &buffer,
+                       size_t &buffer_len,
+                       unsigned char &type, Fish *Algorithm,
+                       unsigned char *cbcbuffer,
+                       const unsigned char *TERMINAL_BLOCK = NULL, 
+                       size_t file_len = 0);
+
+// _writecbc will throw(EIO) iff a write fail occurs!
+extern size_t _writecbc(FILE *fp, const unsigned char *buffer, size_t length,
+                        unsigned char type, Fish *Algorithm,
+                        unsigned char *cbcbuffer);
+
+/*
+* Get an integer that is stored in little-endian format
+*/
+inline int getInt32(const unsigned char buf[4])
+{
+  assert(sizeof(int32) == 4);
+                              
+                   
+                                                                                                          
+   
+                                                                                              
+   
+      
+                                             
+                             
+                   
+                                                                                     
+                                   
+                                                                                                          
+   
+                                                                                              
+   
+      
+                                                                     
+     
+      
+      
+}
+
+/*
+* Store an integer that is stored in little-endian format
+*/
+inline void putInt32(unsigned char buf[4], const int val )
+{
+  assert(sizeof(int32) == 4);
+                              
+                                        
+                   
+                                                                                                   
+   
+                                                                                              
+   
+      
+                             
+                      
+                             
+                              
+                              
+                   
+                                                                                  
+                                   
+                                                                                  
+   
+                                                                                              
+   
+      
+     
+      
+      
+}
+
+                                         
+                                                              
+                                                                                             
+      
+
+namespace PWSUtil {
+  // namespace of common utility functions
+
+  // For Windows implementation, hide Unicode abstraction,
+  // and use secure versions (_s) when available
+  void strCopy(LPTSTR target, size_t tcount, const LPCTSTR source, size_t scount);
+  size_t strLength(const LPCTSTR str);
+  // Time conversion result formats:
+  enum TMC {TMC_ASC_UNKNOWN, TMC_ASC_NULL, TMC_EXPORT_IMPORT, TMC_XML,
+            TMC_LOCALE, TMC_LOCALE_DATE_ONLY};
+  StringX ConvertToDateTimeString(const time_t &t, TMC result_format);
+  stringT GetNewFileName(const stringT &oldfilename, const stringT &newExtn);
+  extern const TCHAR *UNKNOWN_ASC_TIME_STR, *UNKNOWN_XML_TIME_STR;
+  void GetTimeStamp(stringT &sTimeStamp, const bool bShort = false);
+  stringT GetTimeStamp(const bool bShort = false);
+  stringT Base64Encode(const BYTE *inData, size_t len);
+  void Base64Decode(const StringX &inString, BYTE* &outData, size_t &out_len);
+  StringX NormalizeTTT(const StringX &in, size_t maxlen = 64);
+  bool WriteXMLField(std::ostream &os, const char *fname,
+                     const StringX &value, CUTF8Conv &utf8conv,
+                     const char *tabs = "\t\t");
+  std::string GetXMLTime(int indent, const char *name,
+                         time_t t, CUTF8Conv &utf8conv);
+
+  StringX DeDupString(StringX &in_string);
+  stringT GetSafeXMLString(const StringX &sxInString);
+}
+
+///////////////////////////////////////////////////////
+// Following two templates lets us use the two types
+// of iterators in a common (templatized) function when 
+// all we need to do is to access the underlying value
+template <typename PairAssociativeContainer>
+class get_second {
+  public:
+    typedef typename PairAssociativeContainer::mapped_type mapped_type;
+    typedef typename PairAssociativeContainer::const_iterator const_iterator;
+    const mapped_type& operator()(const_iterator val) { return val->second; }
+};
+
+template <typename SequenceContainer>
+class dereference {
+  public:
+    typedef typename SequenceContainer::value_type value_type;
+    typedef typename SequenceContainer::const_iterator const_iterator;
+    const value_type& operator()(const_iterator itr) { return *itr; }
+};
+
+extern int GetStringBufSize(const TCHAR *fmt, va_list args);
+       /* __UTIL_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSLog.cpp" 10
+                         
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringXStream.h" 0
+/*
+ * Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+ * All rights reserved. Use of the code is allowed under the
+ * Artistic License 2.0 terms, as specified in the LICENSE file
+ * distributed with this code, or available from
+ * http://www.opensource.org/licenses/artistic-license-2.0.php
+ */
+
+/**
+ * \file StringXStream.h
+ *
+ * STL-based implementation of secure string streams.
+ * typedefs of secure versions of istringstream, ostringstream
+ * and stringbuf.
+ * Secure in the sense that memory is scrubbed before
+ * being returned to system.
+ */
+
+                         
+                         
+
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                   
+                   
+
+   
+                  
+  
+                                              
+                                                
+                                                      
+  
+   
+
+                 
+                 
+                 
+                                   
+                                
+                                
+
+                           
+                          
+
+                 
+ 
+                       
+                     
+     
+           
+                 
+                                  
+                                        
+                                
+                                      
+                                  
+                                        
+                                   
+
+           
+                     
+                              
+                                                
+
+                           
+                                                     
+
+                                                  
+                     
+       
+
+                   
+                               
+
+                          
+                                          
+                    
+       
+
+                                                      
+                    
+       
+
+                                  
+                                                                
+       
+
+                              
+                                                    
+                                 
+                                              
+       
+
+                             
+                                     
+                                   
+                     
+       
+
+                                            
+                           
+                       
+                                       
+          
+
+                            
+                                                             
+                                     
+                                                                     
+                                                                                      
+                      
+                                 
+                 
+       
+
+                         
+                                                         
+                                              
+                                               
+                             
+                                                                     
+                                                                       
+                        
+                      
+                 
+
+                    
+                                            
+                                  
+                                  
+                                  
+         
+                     
+       
+
+            
+                
+
+                            
+
+               
+                                     
+                                           
+                                                     
+                
+   
+
+                                     
+                                           
+                                                     
+                 
+   
+
+                          
+
+              
+                                  
+                                                    
+                                                                  
+     
+                               
+                                                 
+                                                               
+      
+
+                                                                       
+                                                                         
+                                                     
+  
+                                                                          
+                               
+
+                                                              
+                                                            
+                                     
+                                     
+                                                              
+                                                             
+                                                         
+                                                   
+                                                          
+                                                                
+                                            
+                                                           
+                                                  
+                                                 
+
+                                                                                          
+                                                                                            
+
+       /* __STRINGX_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringXStream.h" 24
+                 
+
+// stringstream typedefs for StringX 
+typedef std::basic_stringbuf<wchar_t,
+                             std::char_traits<wchar_t>,
+                             S_Alloc::SecureAlloc<wchar_t> > wStringXBuf;
+
+typedef std::basic_istringstream<wchar_t,
+                                 std::char_traits<wchar_t>,
+                                 S_Alloc::SecureAlloc<wchar_t> > wiStringXStream;
+
+typedef std::basic_ostringstream<wchar_t,
+                                 std::char_traits<wchar_t>,
+                                 S_Alloc::SecureAlloc<wchar_t> > woStringXStream;
+
+typedef std::basic_stringstream<wchar_t,
+                                std::char_traits<wchar_t>,
+                                S_Alloc::SecureAlloc<wchar_t> > wStringXStream;
+
+typedef std::basic_stringbuf<char,
+                             std::char_traits<char>,
+                             S_Alloc::SecureAlloc<char> > cStringXBuf;
+
+typedef std::basic_istringstream<char,
+                                 std::char_traits<char>,
+                                 S_Alloc::SecureAlloc<char> > ciStringXStream;
+
+typedef std::basic_ostringstream<char,
+                                 std::char_traits<char>,
+                                 S_Alloc::SecureAlloc<char> > coStringXStream;
+
+typedef std::basic_stringstream<char,
+                                std::char_traits<char>,
+                                S_Alloc::SecureAlloc<char> > cStringXStream;
+
+              
+                                    
+                                       
+                                       
+                                       
+     
+typedef cStringXBuf      StringXBuf;
+typedef ciStringXStream iStringXStream;
+typedef coStringXStream oStringXStream;
+typedef cStringXStream   StringXStream;
+      
+
+// Following not related to StringX, but putting it here
+// is the lesser of two evils (other is creating a new file
+// just for this)
+// hide w_char/char differences where possible:
+              
+                                           
+                                           
+                                           
+     
+typedef std::istringstream istringstreamT;
+typedef std::ostringstream ostringstreamT;
+typedef std::stringstream   stringstreamT;
+      
+
+       /* __STRINGXSTREAM_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSLog.cpp" 11
+
+using namespace std;
+
+
+                           
+
+PWSLog *PWSLog::self = NULL;
+
+PWSLog *PWSLog::GetLog()
+{
+  if (self == NULL) {
+    self = new PWSLog();
+    // The following sets the queue size once, avoiding
+    // memory management @ each call to Add(). (reference TBD)
+    self->m_log.resize(256, " ");
+  }
+  return self;
+}
+
+void PWSLog::DeleteLog()
+{
+  delete self;
+  self = NULL;
+}
+
+void PWSLog::Add(const stringT &sLogRecord)
+{
+  static const stringT sb(" ");
+  stringT sTimeStamp;
+  PWSUtil::GetTimeStamp(sTimeStamp);
+
+  // m_log preloaded, so pop_fornt is always valid (see GetLog).
+  m_log.pop_front();
+  m_log.push_back(sTimeStamp + sb + sLogRecord);
+}
+
+stringT PWSLog::DumpLog()
+{
+  const TCHAR *sHeader = "US04 ";
+  ostringstreamT stLog;
+
+  // Start with header for Userstream
+  stLog << sHeader;
+
+  // Then total number of records
+  stLog << m_log.size() << " ";
+
+  deque<stringT>::const_reverse_iterator criter;
+  deque<stringT>::const_reverse_iterator crend = m_log.rend();
+
+  // Now add records - last first
+  for (criter = m_log.rbegin(); criter != crend; criter++) {
+    if (criter->length() > 1) {
+      // First add record length, then record
+      stLog << criter->length() << " ";
+      stLog << criter->c_str() << " ";
+    }
+  }
+
+  return stLog.str();
+}

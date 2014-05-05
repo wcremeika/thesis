@@ -1,0 +1,2966 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 0
+                          
+                          
+
+                    
+                     
+      
+
+                      
+                                    
+      
+
+                   
+
+// Include after defs.h so that __WXFOO__ is properly defined
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\setup.h" 0
+               
+               
+                       
+                                                            
+       
+                         
+        
+
+                              
+          
+        
+
+     
+                       
+      
+
+                
+                   
+                   
+                            
+                           
+                    
+                            
+        
+
+                     
+                      
+                               
+                              
+                       
+                               
+        
+
+                     
+                
+                         
+                        
+                 
+                         
+        
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 15
+
+                
+                    
+      
+
+                       
+                    
+                     
+
+              
+                
+             
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\optionsbase.h" 0
+                         
+                         
+
+// The engine of FileZilla 3 can be configured using a few settings.
+// In order to read and set the settings, the engine has to be passed
+// a pointer to a COptionsBase object.
+// Since COptionsBase is virtual, the user of the engine has to create a
+// derived class which handles settings-reading and writing.
+
+enum engineOptions
+{
+	OPTION_USEPASV,			// Use passive mode unless overridden by
+							// server settings
+	OPTION_LIMITPORTS,
+	OPTION_LIMITPORTS_LOW,
+	OPTION_LIMITPORTS_HIGH,
+	OPTION_EXTERNALIPMODE,		/* External IP Address mode for use in active mode
+								   Values: 0: ask operating system
+										   1: use provided IP
+										   2: use provided resolver
+								*/
+	OPTION_EXTERNALIP,
+	OPTION_EXTERNALIPRESOLVER,
+	OPTION_LASTRESOLVEDIP,
+	OPTION_NOEXTERNALONLOCAL,	// Don't use external IP address if connection is
+								// coming from a local unroutable address
+	OPTION_PASVREPLYFALLBACKMODE,
+	OPTION_TIMEOUT,
+	OPTION_LOGGING_DEBUGLEVEL,
+	OPTION_LOGGING_RAWLISTING,
+
+	OPTION_FZSFTP_EXECUTABLE,	// full path to fzsftp executable
+
+	OPTION_ALLOW_TRANSFERMODEFALLBACK, // If PORT fails, allow PASV and vice versa
+
+	OPTION_RECONNECTCOUNT,
+	OPTION_RECONNECTDELAY,
+
+	OPTION_SPEEDLIMIT_ENABLE,
+	OPTION_SPEEDLIMIT_INBOUND,
+	OPTION_SPEEDLIMIT_OUTBOUND,
+	OPTION_SPEEDLIMIT_BURSTTOLERANCE,
+
+	OPTION_VIEW_HIDDEN_FILES,
+
+	OPTION_PRESERVE_TIMESTAMPS,
+
+	OPTION_SOCKET_BUFFERSIZE_RECV,
+	OPTION_SOCKET_BUFFERSIZE_SEND,
+
+	OPTION_FTP_SENDKEEPALIVE,
+
+	OPTION_FTP_PROXY_TYPE,
+	OPTION_FTP_PROXY_HOST,
+	OPTION_FTP_PROXY_USER,
+	OPTION_FTP_PROXY_PASS,
+	OPTION_FTP_PROXY_CUSTOMLOGINSEQUENCE,
+
+	OPTION_SFTP_KEYFILES,
+
+	OPTION_PROXY_TYPE,
+	OPTION_PROXY_HOST,
+	OPTION_PROXY_PORT,
+	OPTION_PROXY_USER,
+	OPTION_PROXY_PASS,
+
+	OPTION_LOGGING_FILE,
+	OPTION_LOGGING_FILE_SIZELIMIT,
+
+	OPTION_INTERNAL_ROOTCERT,
+
+	OPTION_SIZE_FORMAT,
+	OPTION_SIZE_USETHOUSANDSEP,
+	OPTION_SIZE_DECIMALPLACES,
+
+	OPTIONS_ENGINE_NUM
+};
+
+class COptionsBase
+{
+public:
+	inline virtual ~COptionsBase() {};
+	virtual int GetOptionVal(unsigned int nID) = 0;
+	virtual wxString GetOption(unsigned int nID) = 0;
+
+	virtual bool SetOption(unsigned int nID, int value) = 0;
+	virtual bool SetOption(unsigned int nID, wxString value) = 0;
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 29
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\logging.h" 0
+                     
+                     
+
+enum MessageType
+{
+	Status,
+	Error,
+	Command,
+	Response,
+	Debug_Warning,
+	Debug_Info,
+	Debug_Verbose,
+	Debug_Debug,
+
+	RawList,
+
+	MessageTypeCount
+};
+
+      
+
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 30
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\server.h" 0
+                    
+                    
+
+enum ServerProtocol
+{
+	// Never change any existing values or user's saved sites will become
+	// corrupted.
+	UNKNOWN = -1,
+	FTP, // FTP, attempts AUTH TLS
+	SFTP,
+	HTTP,
+	FTPS, // Implicit SSL
+	FTPES, // Explicit SSL
+	HTTPS,
+	INSECURE_FTP, // Insecure, as the name suggests
+
+	MAX_VALUE = INSECURE_FTP
+};
+
+enum ServerType
+{
+	DEFAULT,
+	UNIX,
+	VMS,
+	DOS,
+	MVS,
+	VXWORKS,
+	ZVM,
+	HPNONSTOP,
+	DOS_VIRTUAL,
+	CYGWIN,
+
+	SERVERTYPE_MAX
+};
+
+enum LogonType
+{
+	ANONYMOUS,
+	NORMAL,
+	ASK, // ASK should not be sent to the engine, it's intendet to be used by the interface
+	INTERACTIVE,
+	ACCOUNT,
+
+	LOGONTYPE_MAX
+};
+
+enum PasvMode
+{
+	MODE_DEFAULT,
+	MODE_ACTIVE,
+	MODE_PASSIVE
+};
+
+enum CharsetEncoding
+{
+	ENCODING_AUTO,
+	ENCODING_UTF8,
+	ENCODING_CUSTOM
+};
+
+class CServerPath;
+class CServer
+{
+public:
+
+	// No error checking is done in the constructors
+	CServer();
+	CServer(wxString host, unsigned int);
+	CServer(wxString host, unsigned int, wxString user, wxString pass = _T(""));
+	CServer(enum ServerProtocol protocol, enum ServerType type, wxString host, unsigned int);
+	CServer(enum ServerProtocol protocol, enum ServerType type, wxString host, unsigned int, wxString user, wxString pass = _T(""), wxString account = _T(""));
+
+	void SetType(enum ServerType type);
+
+	enum ServerProtocol GetProtocol() const;
+	enum ServerType GetType() const;
+	wxString GetHost() const;
+	unsigned int GetPort() const;
+	enum LogonType GetLogonType() const;
+	wxString GetUser() const;
+	wxString GetPass() const;
+	wxString GetAccount() const;
+	int GetTimezoneOffset() const;
+	enum PasvMode GetPasvMode() const;
+	int MaximumMultipleConnections() const;
+	bool GetBypassProxy() const;
+
+	// Return true if URL could be parsed correctly, false otherwise.
+	// If parsing fails, pError is filled with the reason and the CServer instance may be left an undefined state.
+	bool ParseUrl(wxString host, unsigned int port, wxString user, wxString pass, wxString &error, CServerPath &path);
+	bool ParseUrl(wxString host, wxString port, wxString user, wxString pass, wxString &error, CServerPath &path);
+
+	void SetProtocol(enum ServerProtocol serverProtocol);
+	bool SetHost(wxString Host, unsigned int port);
+
+	void SetLogonType(enum LogonType logonType);
+	bool SetUser(const wxString& user, const wxString& pass = _T(""));
+	bool SetAccount(const wxString& account);
+
+	CServer& operator=(const CServer &op);
+	bool operator==(const CServer &op) const;
+	bool operator<(const CServer &op) const;
+	bool operator!=(const CServer &op) const;
+	bool EqualsNoPass(const CServer &op) const;
+
+	bool SetTimezoneOffset(int minutes);
+	void SetPasvMode(enum PasvMode pasvMode);
+	void MaximumMultipleConnections(int maximum);
+
+	wxString FormatHost(bool always_omit_port = false) const;
+	wxString FormatServer(const bool always_include_prefix = false) const;
+
+	bool SetEncodingType(enum CharsetEncoding type, const wxString& encoding = _T(""));
+	bool SetCustomEncoding(const wxString& encoding);
+	enum CharsetEncoding GetEncodingType() const;
+	wxString GetCustomEncoding() const;
+
+	static unsigned int GetDefaultPort(enum ServerProtocol protocol);
+	static enum ServerProtocol GetProtocolFromPort(unsigned int port, bool defaultOnly = false);
+
+	static wxString GetProtocolName(enum ServerProtocol protocol);
+	static enum ServerProtocol GetProtocolFromName(const wxString& name);
+
+	static enum ServerProtocol GetProtocolFromPrefix(const wxString& prefix);
+	static wxString GetPrefixFromProtocol(const enum ServerProtocol protocol);
+
+	// Some protocol distinguish between ASCII and binary files for line-ending
+	// conversion.
+	static bool ProtocolHasDataTypeConcept(const enum ServerProtocol protocol);
+
+	// These commands will be executed after a successful login.
+	const std::vector<wxString>& GetPostLoginCommands() const { return m_postLoginCommands; }
+	bool SetPostLoginCommands(const std::vector<wxString>& postLoginCommands);
+	void SetBypassProxy(bool val);
+
+	// Abstract server name.
+	// Not compared in ==, < and related operators
+	void SetName(const wxString& name) { m_name = name; }
+	wxString GetName() const { return m_name; }
+
+	static wxString GetNameFromServerType(enum ServerType type);
+	static enum ServerType GetServerTypeFromName(const wxString& name);
+
+	static wxString GetNameFromLogonType(enum LogonType type);
+	static enum LogonType GetLogonTypeFromName(const wxString& name);
+
+protected:
+	void Initialize();
+
+	enum ServerProtocol m_protocol;
+	enum ServerType m_type;
+	wxString m_host;
+	unsigned int m_port;
+	enum LogonType m_logonType;
+	wxString m_user;
+	wxString m_pass;
+	wxString m_account;
+	int m_timezoneOffset;
+	enum PasvMode m_pasvMode;
+	int m_maximumMultipleConnections;
+	enum CharsetEncoding m_encodingType;
+	wxString m_customEncoding;
+	wxString m_name;
+
+	std::vector<wxString> m_postLoginCommands;
+	bool m_bypassProxy;
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 31
+                      
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\serverpath.h" 0
+                        
+                        
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\refcount.h" 0
+                      
+                      
+
+// Simple shared pointer. Takes ownership of passed regular pointers
+template<class T> class CSharedPointer
+{
+public:
+	CSharedPointer();
+	CSharedPointer(const CSharedPointer<T>& v);
+	CSharedPointer(T *v);
+	~CSharedPointer();
+
+	void clear();
+
+	T& operator*() const;
+	T* operator->() const;
+
+	T* Value() const {return m_ptr; } // Promise to NEVER EVER call delete on the returned value
+
+	bool operator==(const CSharedPointer<T>& cmp) const { return m_ptr == cmp.m_ptr; }
+	inline bool operator!=(const CSharedPointer<T>& cmp) const { return m_ptr != cmp.m_ptr; }
+	bool operator<(const CSharedPointer<T>& cmp) const { return m_ptr < cmp.m_ptr; }
+
+	// Magic for CSharedPointer foo(bar); if (foo) ...
+	// aka safe bool idiom
+	typedef void (CSharedPointer::*bool_type)() const;
+	void uncomparable() const {}
+	operator bool_type() const { return m_ptr ? &CSharedPointer::uncomparable : 0; }
+
+	CSharedPointer<T>& operator=(const CSharedPointer<T>& v);
+	CSharedPointer<T>& operator=(T *v);
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+template<class T> class CSharedPointerArray
+{
+public:
+	CSharedPointerArray();
+	CSharedPointerArray(const CSharedPointerArray<T>& v);
+	CSharedPointerArray(T *v);
+	~CSharedPointerArray();
+
+	void clear();
+
+	T& operator*() const;
+	T* operator->() const;
+
+	T* Value() const {return m_ptr; } // Promise to NEVER EVER call delete on the returned value
+
+	bool operator==(const CSharedPointerArray<T>& cmp) const { return m_ptr == cmp.m_ptr; }
+	inline bool operator!=(const CSharedPointerArray<T>& cmp) const { return m_ptr != cmp.m_ptr; }
+	bool operator<(const CSharedPointerArray<T>& cmp) const { return m_ptr < cmp.m_ptr; }
+
+	// Magic for CSharedPointerArray foo(bar); if (foo) ...
+	// aka safe bool idiom
+	typedef void (CSharedPointerArray::*bool_type)() const;
+	void uncomparable() const {}
+	operator bool_type() const { return m_ptr ? &CSharedPointerArray::uncomparable : 0; }
+
+	CSharedPointerArray<T>& operator=(const CSharedPointerArray<T>& v);
+	CSharedPointerArray<T>& operator=(T *v);
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+// Trivial template class to refcount objects with COW semantics.
+template<class T> class CRefcountObject
+{
+public:
+	CRefcountObject();
+	CRefcountObject(const CRefcountObject<T>& v);
+	CRefcountObject(const T& v);
+	virtual ~CRefcountObject();
+
+	void clear();
+
+	T& Get();
+
+	const T& operator*() const;
+	const T* operator->() const;
+
+	bool operator==(const CRefcountObject<T>& cmp) const;
+	inline bool operator!=(const CRefcountObject<T>& cmp) const { return !(*this == cmp); }
+	bool operator<(const CRefcountObject<T>& cmp) const;
+
+	CRefcountObject<T>& operator=(const CRefcountObject<T>& v);
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+template<class T> class CRefcountObject_Uninitialized
+{
+	/* Almost same as CRefcountObject but does not allocate
+	   an object initially.
+	   You need to ensure to assign some data prior to calling
+	   operator* or ->, otherwise you'll dereference the null-pointer.
+	 */
+public:
+	CRefcountObject_Uninitialized();
+	CRefcountObject_Uninitialized(const CRefcountObject_Uninitialized<T>& v);
+	CRefcountObject_Uninitialized(const T& v);
+	virtual ~CRefcountObject_Uninitialized();
+
+	void clear();
+
+	T& Get();
+
+	const T& operator*() const;
+	const T* operator->() const;
+
+	bool operator==(const CRefcountObject_Uninitialized<T>& cmp) const;
+	inline bool operator!=(const CRefcountObject_Uninitialized<T>& cmp) const { return !(*this == cmp); }
+	bool operator<(const CRefcountObject_Uninitialized<T>& cmp) const;
+
+	CRefcountObject_Uninitialized<T>& operator=(const CRefcountObject_Uninitialized<T>& v);
+
+	bool operator!() const { return m_ptr == 0; }
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+template<class T> CSharedPointer<T>::CSharedPointer()
+{
+	m_ptr = 0;
+	m_refcount = 0;
+}
+
+template<class T> CSharedPointer<T>::CSharedPointer(const CSharedPointer<T>& v)
+{
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+}
+
+template<class T> CSharedPointer<T>::CSharedPointer(T* v)
+{
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+}
+
+template<class T> CSharedPointer<T>::~CSharedPointer()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+}
+
+template<class T> void CSharedPointer<T>::clear()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> T& CSharedPointer<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> T* CSharedPointer<T>::operator->() const
+{
+	return m_ptr;
+}
+
+template<class T> CSharedPointer<T>& CSharedPointer<T>::operator=(const CSharedPointer<T>& v)
+{
+	if (this == &v)
+		return *this;
+
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+
+	return *this;
+}
+
+template<class T> CSharedPointer<T>& CSharedPointer<T>::operator=(T* v)
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+
+	return *this;
+}
+
+template<class T> CSharedPointerArray<T>::CSharedPointerArray()
+{
+	m_ptr = 0;
+	m_refcount = 0;
+}
+
+template<class T> CSharedPointerArray<T>::CSharedPointerArray(const CSharedPointerArray<T>& v)
+{
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+}
+
+template<class T> CSharedPointerArray<T>::CSharedPointerArray(T* v)
+{
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+}
+
+template<class T> CSharedPointerArray<T>::~CSharedPointerArray()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+}
+
+template<class T> void CSharedPointerArray<T>::clear()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> T& CSharedPointerArray<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> T* CSharedPointerArray<T>::operator->() const
+{
+	return m_ptr;
+}
+
+template<class T> CSharedPointerArray<T>& CSharedPointerArray<T>::operator=(const CSharedPointerArray<T>& v)
+{
+	if (this == &v)
+		return *this;
+
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+
+	return *this;
+}
+
+template<class T> CSharedPointerArray<T>& CSharedPointerArray<T>::operator=(T* v)
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+
+	return *this;
+}
+
+template<class T> bool CRefcountObject<T>::operator==(const CRefcountObject<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return true;
+
+	return *m_ptr == *cmp.m_ptr;
+}
+
+template<class T> CRefcountObject<T>::CRefcountObject()
+{
+	m_refcount = new int(1);
+
+	m_ptr = new T;
+}
+
+template<class T> CRefcountObject<T>::CRefcountObject(const CRefcountObject<T>& v)
+{
+	m_refcount = v.m_refcount;
+	(*m_refcount)++;
+	m_ptr = v.m_ptr;
+}
+
+template<class T> CRefcountObject<T>::CRefcountObject(const T& v)
+{
+	m_ptr = new T(v);
+	m_refcount = new int(1);
+}
+
+template<class T> CRefcountObject<T>::~CRefcountObject()
+{
+	if ((*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+}
+
+template<class T> T& CRefcountObject<T>::Get()
+{
+	if (*m_refcount != 1)
+	{
+		(*m_refcount)--;
+		m_refcount = new int(1);
+		T* ptr = new T(*m_ptr);
+		m_ptr = ptr;
+	}
+
+	return *m_ptr;
+}
+
+template<class T> CRefcountObject<T>& CRefcountObject<T>::operator=(const CRefcountObject<T>& v)
+{
+	if (m_ptr == v.m_ptr)
+		return *this;
+	if ((*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+
+	m_refcount = v.m_refcount;
+	(*m_refcount)++;
+	m_ptr = v.m_ptr;
+	return *this;
+}
+
+template<class T> bool CRefcountObject<T>::operator<(const CRefcountObject<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return false;
+
+	return *m_ptr < *cmp.m_ptr;
+}
+
+template<class T> void CRefcountObject<T>::clear()
+{
+	if (*m_refcount != 1)
+	{
+		(*m_refcount)--;
+		m_refcount = new int(1);
+	}
+	else
+		delete m_ptr;
+	m_ptr = new T;
+}
+
+template<class T> const T& CRefcountObject<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> const T* CRefcountObject<T>::operator->() const
+{
+	return m_ptr;
+}
+
+// The same for the uninitialized version
+template<class T> bool CRefcountObject_Uninitialized<T>::operator==(const CRefcountObject_Uninitialized<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return true;
+
+	return *m_ptr == *cmp.m_ptr;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::CRefcountObject_Uninitialized()
+{
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::CRefcountObject_Uninitialized(const CRefcountObject_Uninitialized<T>& v)
+{
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+	m_ptr = v.m_ptr;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::CRefcountObject_Uninitialized(const T& v)
+{
+	m_ptr = new T(v);
+	m_refcount = new int(1);
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::~CRefcountObject_Uninitialized()
+{
+	if (!m_refcount)
+		return;
+
+	if (*m_refcount == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+	else
+		(*m_refcount)--;
+}
+
+template<class T> T& CRefcountObject_Uninitialized<T>::Get()
+{
+	if (!m_refcount)
+	{
+		m_refcount= new int(1);
+		m_ptr = new T;
+	}
+	else if (*m_refcount != 1)
+	{
+		(*m_refcount)--;
+		m_refcount = new int(1);
+		T* ptr = new T(*m_ptr);
+		m_ptr = ptr;
+	}
+
+	return *m_ptr;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>& CRefcountObject_Uninitialized<T>::operator=(const CRefcountObject_Uninitialized<T>& v)
+{
+	if (m_ptr == v.m_ptr)
+		return *this;
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+	m_ptr = v.m_ptr;
+	return *this;
+}
+
+template<class T> bool CRefcountObject_Uninitialized<T>::operator<(const CRefcountObject_Uninitialized<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return false;
+	if (!m_ptr)
+		return true;
+	if (!cmp.m_ptr)
+		return false;
+
+	return *m_ptr < *cmp.m_ptr;
+}
+
+template<class T> void CRefcountObject_Uninitialized<T>::clear()
+{
+	if (!m_refcount)
+		return;
+	else if (*m_refcount != 1)
+		(*m_refcount)--;
+	else
+	{
+		delete m_ptr;
+		delete m_refcount;
+	}
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> const T& CRefcountObject_Uninitialized<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> const T* CRefcountObject_Uninitialized<T>::operator->() const
+{
+	return m_ptr;
+}
+
+template<typename T> class CScopedArray
+{
+public:
+	CScopedArray() : v_() {}
+	CScopedArray(T* v) : v_(v) {}
+	~CScopedArray() { delete [] v_; }
+
+private:
+	T* v_;
+};
+
+       //__REFCOUNT_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\serverpath.h" 6
+
+               
+
+class CServerPathData
+{
+public:
+	CServerPathData();
+	CServerPathData(const CServerPathData& v);
+	std::deque<wxString> m_segments;
+	wxString m_prefix;
+
+	bool operator==(const CServerPathData& cmp) const;
+};
+
+class CServerPath
+{
+public:
+	CServerPath();
+	CServerPath(wxString path, ServerType type = DEFAULT);
+	CServerPath(const CServerPath &path, wxString subdir); // Ignores parent on absolute subdir
+	CServerPath(const CServerPath &path);
+	virtual ~CServerPath();
+
+	bool IsEmpty() const { return m_bEmpty; };
+	void Clear();
+
+	bool SetPath(wxString newPath);
+	bool SetPath(wxString &newPath, bool isFile);
+	bool SetSafePath(const wxString& path, bool coalesce = true);
+
+	// If ChangePath returns false, the object will be left an
+	// undefined state
+	bool ChangePath(wxString subdir);
+	bool ChangePath(wxString &subdir, bool isFile);
+
+	wxString GetPath() const;
+	wxString GetSafePath() const;
+
+	bool HasParent() const;
+	CServerPath GetParent() const;
+	wxString GetLastSegment() const;
+
+	CServerPath GetCommonParent(const CServerPath& path) const;
+
+	bool SetType(enum ServerType type);
+	enum ServerType GetType() const;
+
+	bool IsSubdirOf(const CServerPath &path, bool cmpNoCase) const;
+	bool IsParentOf(const CServerPath &path, bool cmpNoCase) const;
+
+	bool operator==(const CServerPath &op) const;
+	bool operator!=(const CServerPath &op) const;
+	bool operator<(const CServerPath &op) const;
+
+	int CmpNoCase(const CServerPath &op) const;
+
+	// omitPath is just a hint. For example dataset member names on MVS servers
+	// always use absolute filenames including the full path
+	wxString FormatFilename(const wxString &filename, bool omitPath = false) const;
+
+	// Returns identity on all but VMS. On VMS it esscapes dots
+	wxString FormatSubdir(const wxString &subdir) const;
+
+	bool AddSegment(const wxString& segment);
+
+	void Coalesce();
+
+protected:
+	bool m_bEmpty;
+	ServerType m_type;
+
+	typedef std::deque<wxString> tSegmentList;
+	typedef tSegmentList::iterator tSegmentIter;
+	typedef tSegmentList::const_iterator tConstSegmentIter;
+
+	bool Segmentize(wxString str, tSegmentList& segments);
+	bool ExtractFile(wxString& dir, wxString& file);
+
+	static void EscapeSeparators(ServerType type, wxString& subdir);
+
+	CRefcountObject<CServerPathData> m_data;
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 32
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\commands.h" 0
+                      
+                      
+
+// See below for actual commands and their parameters
+
+// Command IDs
+// -----------
+enum Command
+{
+	cmd_none = 0,
+	cmd_connect,
+	cmd_disconnect,
+	cmd_cancel,
+	cmd_list,
+	cmd_transfer,
+	cmd_delete,
+	cmd_removedir,
+	cmd_mkdir,
+	cmd_rename,
+	cmd_chmod,
+	cmd_raw,
+
+	// Only used internally
+	cmd_cwd,
+	cmd_rawtransfer
+};
+
+// Reply codes
+// -----------
+                   				        
+                           		        
+                      			        
+                              	                                                                             
+														  // code is returned.
+                         		                         
+                            	                         
+                             	                         
+                             	        
+                              	                                                                                 
+														  // given by the last Debug_Warning log message. This
+														  // should not happen unless there is a bug in FileZilla 3.
+                     			                         
+                                 	                                                                             
+                               	                                                             
+                        		                         
+                             	                                                                                       
+                            	                                                                                       
+                           		        
+
+// Small macro to simplify command class declaration
+// Basically all this macro does, is to declare the class and add the required
+// standard functions to it.
+                                  	                             	  	        		                                                  		                                                           
+
+
+
+
+
+
+// --------------- //
+// Actual commands //
+// --------------- //
+
+class CCommand
+{
+public:
+	CCommand() {}
+	virtual ~CCommand() {}
+	virtual enum Command GetId() const = 0;
+	virtual CCommand *Clone() const = 0;
+};
+
+class CConnectCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_connect; } 		virtual CCommand* Clone() const { return new CConnectCommand(*this); }
+	CConnectCommand(const CServer &server, bool retry_conncting = true);
+
+	const CServer GetServer() const;
+	bool RetryConnecting() const { return m_retry_connecting; }
+protected:
+	CServer m_Server;
+	bool m_retry_connecting;
+};
+
+class CDisconnectCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_disconnect; } 		virtual CCommand* Clone() const { return new CDisconnectCommand(*this); }
+};
+
+class CCancelCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_cancel; } 		virtual CCommand* Clone() const { return new CCancelCommand(*this); }
+};
+
+                           
+                         
+                                    
+                        
+class CListCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_list; } 		virtual CCommand* Clone() const { return new CListCommand(*this); }
+	// Without a given directory, the current directory will be listed.
+	// Directories can either be given as absolute path or as
+	// pair of an absolute path and the very last path segments.
+
+	// Set LIST_FLAG_REFRESH to get a directory listing even if a cache
+	// lookup can be made after finding out true remote directory.
+	//
+	// Set LIST_FLAG_AVOID to get a directory listing only if cache lookup
+	// fails or contains unsure entries, otherwise don't send listing.
+	//
+	// If LIST_FLAG_FALLBACK_CURRENT is set and CWD fails, list whatever
+	// directory we are currently in. Useful for initial reconnect to the
+	// server when we don't know if remote directory still exists
+	//
+	// LIST_FLAG_LINK is used for symlink discovery. There's unfortunately
+	// no sane way to distinguish between symlinks to files and symlinks to
+	// directories.
+	CListCommand(int flags = 0);
+	CListCommand(CServerPath path, wxString subDir = _T(""), int flags = 0);
+
+	CServerPath GetPath() const;
+	wxString GetSubDir() const;
+
+	int GetFlags() const { return m_flags; }
+
+protected:
+	CServerPath m_path;
+	wxString m_subDir;
+	int m_flags;
+};
+
+class CFileTransferCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_transfer; } 		virtual CCommand* Clone() const { return new CFileTransferCommand(*this); }
+
+	class t_transferSettings
+	{
+	public:
+		t_transferSettings()
+			: binary(true)
+		{}
+
+		bool binary;
+	};
+
+	// For uploads, set download to false.
+	// For downloads, localFile can be left empty if supported by protocol.
+	// Check for nId_data notification.
+	// FIXME: localFile empty iff protocol is HTTP.
+	CFileTransferCommand(const wxString &localFile, const CServerPath& remotePath, const wxString &remoteFile, bool download, const t_transferSettings& m_transferSettings);
+
+	wxString GetLocalFile() const;
+	CServerPath GetRemotePath() const;
+	wxString GetRemoteFile() const;
+	bool Download() const;
+	const t_transferSettings& GetTransferSettings() const { return m_transferSettings; }
+
+protected:
+	wxString m_localFile;
+	CServerPath m_remotePath;
+	wxString m_remoteFile;
+	bool m_download;
+	t_transferSettings m_transferSettings;
+};
+
+class CRawCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_raw; } 		virtual CCommand* Clone() const { return new CRawCommand(*this); }
+	CRawCommand(const wxString &command);
+
+	wxString GetCommand() const;
+
+protected:
+	wxString m_command;
+};
+
+class CDeleteCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_delete; } 		virtual CCommand* Clone() const { return new CDeleteCommand(*this); }
+	CDeleteCommand(const CServerPath& path, const std::list<wxString>& files);
+
+	CServerPath GetPath() const { return m_path; }
+	const std::list<wxString>& GetFiles() const { return m_files; }
+
+protected:
+
+	const CServerPath m_path;
+	const std::list<wxString> m_files;
+};
+
+class CRemoveDirCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_removedir; } 		virtual CCommand* Clone() const { return new CRemoveDirCommand(*this); }
+	// Directories can either be given as absolute path or as
+	// pair of an absolute path and the very last path segments.
+	CRemoveDirCommand(const CServerPath& path, const wxString& subdDir);
+
+	CServerPath GetPath() const { return m_path; }
+	wxString GetSubDir() const { return m_subDir; }
+
+protected:
+
+	CServerPath m_path;
+	wxString m_subDir;
+};
+
+class CMkdirCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_mkdir; } 		virtual CCommand* Clone() const { return new CMkdirCommand(*this); }
+	CMkdirCommand(const CServerPath& path);
+
+	CServerPath GetPath() const { return m_path; }
+
+protected:
+
+	CServerPath m_path;
+};
+
+class CRenameCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_rename; } 		virtual CCommand* Clone() const { return new CRenameCommand(*this); }
+	CRenameCommand(const CServerPath& fromPath, const wxString& fromFile,
+				   const CServerPath& toPath, const wxString& toFile);
+
+	CServerPath GetFromPath() const { return m_fromPath; }
+	CServerPath GetToPath() const { return m_toPath; }
+	wxString GetFromFile() const { return m_fromFile; }
+	wxString GetToFile() const { return m_toFile; }
+
+protected:
+	CServerPath m_fromPath;
+	CServerPath m_toPath;
+	wxString m_fromFile;
+	wxString m_toFile;
+};
+
+class CChmodCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_chmod; } 		virtual CCommand* Clone() const { return new CChmodCommand(*this); }
+	// The permission string should be given in a format understandable by the server.
+	// Most likely it's the defaut octal representation used by the unix chmod command,
+	// i.e. chmod 755 foo.bar
+	CChmodCommand(const CServerPath& path, const wxString& file, const wxString& permission);
+
+	CServerPath GetPath() const { return m_path; }
+	wxString GetFile() const { return m_file; }
+	wxString GetPermission() const { return m_permission; }
+
+protected:
+	CServerPath m_path;
+	wxString m_file;
+	wxString m_permission;
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 33
+                        
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\notification.h" 0
+                          
+                          
+
+// Notification overview
+// ---------------------
+
+// To inform the application about what's happening, the engine sends
+// some notifications to the application using events.
+// For example the event table entry could look like this:
+//     EVT_FZ_NOTIFICATION(wxID_ANY, CMainFrame::OnEngineEvent)
+// and the handler function has the following declaration:
+//     void OnEngineEvent(wxEvent& event);
+// You can get the engine which sent the event by calling
+//     event.GetEventObject()
+// Whenever you get a notification event,
+// CFileZillaEngine::GetNextNotification has to be called until it returns 0,
+// or you will lose important notifications or your memory will fill with
+// pending notifications.
+
+// A special class of notifications are the asynchronous requests. These
+// requests have to be answered. Once proessed, call
+// CFileZillaEngine::SetAsyncRequestReply to continue the current operation.
+
+                      
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\local_path.h" 0
+                        
+                        
+
+// This class encapsulates local paths.
+// On Windows it uses the C:\foo\bar\ syntax and also supports
+// UNC paths.
+// On all other systems it uses /foo/bar/baz/
+
+class CLocalPath
+{
+public:
+	CLocalPath() {}
+	CLocalPath(const CLocalPath &path);
+
+	// Creates path. If the path is not syntactically
+	// correct, empty() will return true.
+	// If file is given and path not terminated by a separator,
+	// the filename portion is returned in file.
+	explicit CLocalPath(const wxString& path, wxString* file = 0);
+	bool SetPath(const wxString& path, wxString* file = 0);
+
+	// Always terminated by a separator
+	const wxString& GetPath() const { return m_path; }
+
+	bool empty() const;
+	void clear();
+
+	// On failure the path is undefined
+	bool ChangePath(const wxString& path);
+
+	// Do not call with separators in the segment
+	void AddSegment(const wxString& segment);
+
+	// HasParent() and HasLogicalParent() only return different values on
+	// MSW: C:\ is the drive root but has \ as logical parent, the drive list.
+	bool HasParent() const;
+	bool HasLogicalParent() const;
+
+	CLocalPath GetParent(wxString* last_segment = 0) const;
+
+	// If it fails, the path is undefined
+	bool MakeParent(wxString* last_segment = 0);
+
+	/* Calling GetLastSegment() only returns non-empty string if
+	 * HasParent() returns true
+	 */
+	wxString GetLastSegment() const;
+
+	bool IsSubdirOf(const CLocalPath &path) const;
+	bool IsParentOf(const CLocalPath &path) const;
+
+	/* Checks if the directory is writeable purely on a syntactical level.
+	 * Currently only works on MSW where some logical paths
+	 * are not writeable, e.g. the drive list \ or a remote computer \\foo
+	 */
+	bool IsWriteable() const;
+
+	// Checks if the directory exists.
+	bool Exists(wxString *error = 0) const;
+
+	static const wxChar path_separator;
+
+	bool operator==(const CLocalPath& op) const;
+	bool operator!=(const CLocalPath& op) const;
+
+	void Coalesce();
+protected:
+
+	wxString m_path;
+};
+
+       //__LOCAL_PATH_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\notification.h" 43
+
+extern const wxEventType fzEVT_NOTIFICATION;
+                                    	                                		                            		                                                                                    		                            	  
+
+
+
+
+
+
+class wxFzEvent : public wxEvent
+{
+public:
+	wxFzEvent(int id = wxID_ANY);
+	virtual wxEvent *Clone() const;
+};
+
+enum NotificationId
+{
+	nId_logmsg,				// notification about new messages for the message log
+	nId_operation,			// operation reply codes
+	nId_connection,			// connection information: connects, disconnects, timeouts etc..
+	nId_transferstatus,		// transfer information: bytes transferes, transfer speed and such
+	nId_listing,			// directory listings
+	nId_asyncrequest,		// asynchronous request
+	nId_active,				// sent if data gets either received or sent
+	nId_data,				// for memory downloads, indicates that new data is available.
+	nId_sftp_encryption,	// information about key exchange, encryption algorithms and so on for SFTP
+	nId_local_dir_created	// local directory has been created
+};
+
+// Async request IDs
+enum RequestId
+{
+	reqId_fileexists,		// Target file already exists, awaiting further instructions
+	reqId_interactiveLogin, // gives a challenge prompt for a password
+	reqId_hostkey,			// used only by SSH/SFTP to indicate new host key
+	reqId_hostkeyChanged,	// used only by SSH/SFTP to indicate changed host key
+	reqId_certificate		// sent after a successful TLS/SSL handshake to allow certificate
+							// validation
+};
+
+class CNotification
+{
+public:
+	CNotification();
+	virtual ~CNotification();
+	virtual enum NotificationId GetID() const = 0;
+};
+
+class CLogmsgNotification : public CNotification
+{
+public:
+	CLogmsgNotification();
+	virtual ~CLogmsgNotification();
+	virtual enum NotificationId GetID() const;
+
+	wxString msg;
+	enum MessageType msgType; // Type of message, see logging.h for details
+};
+
+// If CFileZillaEngine does return with FZ_REPLY_WOULDBLOCK, you will receive
+// a nId_operation notification once the operation ends.
+class COperationNotification : public CNotification
+{
+public:
+	COperationNotification();
+	virtual ~COperationNotification();
+	virtual enum NotificationId GetID() const;
+
+	int nReplyCode;
+	enum Command commandId;
+};
+
+// You get this type of notification everytime a directory listing has been
+// requested explicitely or when a directory listing was retrieved implicitely
+// during another operation, e.g. file transfers.
+class CDirectoryListing;
+class CDirectoryListingNotification : public CNotification
+{
+public:
+	CDirectoryListingNotification(const CServerPath& path, const bool modified = false, const bool failed = false);
+	virtual ~CDirectoryListingNotification();
+	virtual enum NotificationId GetID() const;
+	bool Modified() const { return m_modified; }
+	bool Failed() const { return m_failed; }
+	const CServerPath GetPath() const { return m_path; }
+
+protected:
+	bool m_modified;
+	bool m_failed;
+	CServerPath m_path;
+};
+
+class CAsyncRequestNotification : public CNotification
+{
+public:
+	CAsyncRequestNotification();
+	virtual ~CAsyncRequestNotification();
+	virtual enum NotificationId GetID() const;
+
+	virtual enum RequestId GetRequestID() const = 0;
+
+	unsigned int requestNumber; // Do never change this
+};
+
+class CFileExistsNotification : public CAsyncRequestNotification
+{
+public:
+	CFileExistsNotification();
+	virtual ~CFileExistsNotification();
+	virtual enum RequestId GetRequestID() const;
+
+	bool download;
+
+	wxString localFile;
+	wxLongLong localSize;
+	wxDateTime localTime;
+
+	wxString remoteFile;
+	CServerPath remotePath;
+	wxLongLong remoteSize;
+	wxDateTime remoteTime;
+
+	bool ascii;
+
+	bool canResume;
+
+	// overwriteAction will be set by the request handler
+	enum OverwriteAction
+	{
+		unknown = -1,
+		ask,
+		overwrite,
+		overwriteNewer,	// Overwrite if source file is newer than target file
+		overwriteSize,	// Overwrite if source file is is different in size than target file
+		overwriteSizeOrNewer,	// Overwrite if source file is different in size or newer than target file
+		resume, // Overwrites if cannot be resumed
+		rename,
+		skip,
+
+		ACTION_COUNT
+	};
+
+	// Set overwriteAction to the desired action
+	enum OverwriteAction overwriteAction;
+
+	// Set to new filename if overwriteAction is rename. Might trigger further
+	// file exists notifications if new target file exists as well.
+	wxString newName;
+};
+
+class CInteractiveLoginNotification : public CAsyncRequestNotification
+{
+public:
+	CInteractiveLoginNotification(const wxString& challenge);
+	virtual ~CInteractiveLoginNotification();
+	virtual enum RequestId GetRequestID() const;
+
+	// Set to true if you have set a password
+	bool passwordSet;
+
+	// Set password by calling server.SetUser
+	CServer server;
+
+	const wxString& GetChallenge() const { return m_challenge; }
+
+protected:
+	// Password prompt string as given by the server
+	const wxString m_challenge;
+};
+
+// Indicate network action.
+class CActiveNotification : public CNotification
+{
+public:
+	CActiveNotification(int direction);
+	virtual ~CActiveNotification();
+	virtual enum NotificationId GetID() const;
+	int GetDirection() const { return m_direction; }
+protected:
+	const int m_direction;
+};
+
+class CTransferStatus
+{
+public:
+	wxDateTime started;
+	wxFileOffset totalSize;		// Total size of the file to transfer, -1 if unknown
+	wxFileOffset startOffset;
+	wxFileOffset currentOffset;
+
+	// True on download notifications iff currentOffset != startOffset.
+	// True on FTP upload notifications iff currentOffset != startOffset
+	// AND after the first accepted data after the first wxSOCKET_WOULDBLOCK.
+	// SFTP uploads: Set to true if currentOffset >= startOffset + 65536.
+	bool madeProgress;
+
+	bool list;
+};
+
+class CTransferStatusNotification : public CNotification
+{
+public:
+	CTransferStatusNotification(CTransferStatus *pStatus);
+	virtual ~CTransferStatusNotification();
+	virtual enum  NotificationId GetID() const;
+
+	const CTransferStatus *GetStatus() const;
+
+protected:
+	CTransferStatus *m_pStatus;
+};
+
+// Notification about new or changed hostkeys, only used by SSH/SFTP transfers.
+// GetRequestID() returns either reqId_hostkey or reqId_hostkeyChanged
+class CHostKeyNotification : public CAsyncRequestNotification
+{
+public:
+	CHostKeyNotification(wxString host, int port, wxString fingerprint, bool changed = false);
+	virtual ~CHostKeyNotification();
+	virtual enum RequestId GetRequestID() const;
+
+	wxString GetHost() const;
+	int GetPort() const;
+	wxString GetFingerprint() const;
+
+	// Set to true if you trust the server
+	bool m_trust;
+
+	// If m_truest is true, set this to true to always trust this server
+	// in future.
+	bool m_alwaysTrust;
+
+protected:
+
+	const wxString m_host;
+	const int m_port;
+	const wxString m_fingerprint;
+	const bool m_changed;
+};
+
+class CDataNotification : public CNotification
+{
+public:
+	CDataNotification(char* pData, int len);
+	virtual ~CDataNotification();
+	virtual enum NotificationId GetID() const { return nId_data; }
+
+	char* Detach(int& len);
+
+protected:
+	char* m_pData;
+	unsigned int m_len;
+};
+
+class CCertificate
+{
+public:
+	CCertificate();
+
+	CCertificate(
+		const unsigned char* rawData, unsigned int len,
+		wxDateTime activationTime, wxDateTime expirationTime,
+		const wxString& serial,
+		const wxString& pkalgoname, unsigned int bits,
+		const wxString& signalgoname,
+		const wxString& fingerprint_md5,
+		const wxString& fingerprint_sha1,
+		const wxString& subject,
+		const wxString& issuer);
+	CCertificate(const CCertificate& op);
+	virtual ~CCertificate();
+
+	const unsigned char* GetRawData(unsigned int& len) const { len = m_len; return m_rawData; }
+	wxDateTime GetActivationTime() const { return m_activationTime; }
+	wxDateTime GetExpirationTime() const { return m_expirationTime; }
+
+	const wxString& GetSerial() const { return m_serial; }
+	const wxString& GetPkAlgoName() const { return m_pkalgoname; }
+	unsigned int GetPkAlgoBits() const { return m_pkalgobits; }
+
+	const wxString& GetSignatureAlgorithm() const { return m_signalgoname; }
+
+	const wxString& GetFingerPrintMD5() const { return m_fingerprint_md5; }
+	const wxString& GetFingerPrintSHA1() const { return m_fingerprint_sha1; }
+
+	const wxString& GetSubject() const { return m_subject; }
+	const wxString& GetIssuer() const { return m_issuer; }
+
+	CCertificate& operator=(const CCertificate &op);
+
+private:
+	wxDateTime m_activationTime;
+	wxDateTime m_expirationTime;
+
+	unsigned char* m_rawData;
+	unsigned int m_len;
+
+	wxString m_serial;
+	wxString m_pkalgoname;
+	unsigned int m_pkalgobits;
+
+	wxString m_signalgoname;
+
+	wxString m_fingerprint_md5;
+	wxString m_fingerprint_sha1;
+
+	wxString m_subject;
+	wxString m_issuer;
+};
+
+class CCertificateNotification : public CAsyncRequestNotification
+{
+public:
+	CCertificateNotification(const wxString& host, unsigned int port,
+		const wxString& protocol,
+		const wxString& keyExchange,
+		const wxString& sessionCipher,
+		const wxString& sessionMac,
+		const std::vector<CCertificate> &certificates);
+	virtual ~CCertificateNotification();
+	virtual enum RequestId GetRequestID() const { return reqId_certificate; }
+
+	const wxString& GetHost() const { return m_host; }
+	unsigned int GetPort() const { return m_port; }
+
+	const wxString& GetSessionCipher() const { return m_sessionCipher; }
+	const wxString& GetSessionMac() const { return m_sessionMac; }
+
+	bool m_trusted;
+
+	const std::vector<CCertificate> GetCertificates() const { return m_certificates; }
+
+	const wxString& GetProtocol() const { return m_protocol; }
+	const wxString& GetKeyExchange() const { return m_keyExchange; }
+
+protected:
+	wxString m_host;
+	unsigned int m_port;
+
+	wxString m_protocol;
+	wxString m_keyExchange;
+	wxString m_sessionCipher;
+	wxString m_sessionMac;
+
+	std::vector<CCertificate> m_certificates;
+};
+
+class CSftpEncryptionNotification : public CNotification
+{
+public:
+	virtual enum NotificationId GetID() const { return nId_sftp_encryption; }
+
+	wxString hostKey;
+	wxString kexAlgorithm;
+	wxString kexHash;
+	wxString cipherClientToServer;
+	wxString cipherServerToClient;
+	wxString macClientToServer;
+	wxString macServerToClient;
+};
+
+class CLocalDirCreatedNotification : public CNotification
+{
+public:
+	virtual enum NotificationId GetID() const { return nId_local_dir_created; }
+
+	CLocalPath dir;
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 34
+                           
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\FileZillaEngine.h" 0
+                             
+                             
+
+                         
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\engineprivate.h" 0
+                                    
+                                    
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\timeex.h" 0
+                    
+                    
+
+/* If called multiple times in a row, wxDateTime::Now may return the same
+ * time. This causes problems with the cache logic. This class implements
+ * an extended time class in wich Now() never returns the same value.
+ */
+
+                    
+
+class CTimeEx
+{
+public:
+	CTimeEx(const wxDateTime& time);
+	CTimeEx();
+
+	static CTimeEx Now();
+
+	wxDateTime GetTime() const { return m_time; }
+
+	bool IsValid() const { return m_time.IsValid(); }
+
+	bool operator < (const CTimeEx& op) const;
+	bool operator <= (const CTimeEx& op) const;
+	bool operator > (const CTimeEx& op) const;
+	bool operator >= (const CTimeEx& op) const;
+	bool operator == (const CTimeEx& op) const;
+
+protected:
+	static wxDateTime m_lastTime;
+	static int m_lastOffset;
+
+	wxDateTime m_time;
+	int m_offset;
+};
+
+       //__TIMEEX_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\engineprivate.h" 6
+
+enum EngineNotificationType
+{
+	engineCancel,
+	engineTransferEnd
+};
+
+class wxFzEngineEvent;
+class CControlSocket;
+class CLogging;
+class CRateLimiter;
+class CFileZillaEnginePrivate : public wxEvtHandler
+{
+public:
+	int ResetOperation(int nErrorCode);
+	void SetActive(int direction);
+
+	// Add new pending notification
+	void AddNotification(CNotification *pNotification);
+
+	unsigned int GetNextAsyncRequestNumber();
+
+	// Event handling
+	bool SendEvent(enum EngineNotificationType eventType, int data = 0);
+
+	bool IsBusy() const;
+	bool IsConnected() const;
+
+	const CCommand *GetCurrentCommand() const;
+	enum Command GetCurrentCommandId() const;
+
+	COptionsBase *GetOptions() { return m_pOptions; }
+
+	void SendDirectoryListingNotification(const CServerPath& path, bool onList, bool modified, bool failed);
+
+	// If deleting or renaming a directory, it could be possible that another
+	// engine's CControlSocket instance still has that directory as
+	// current working directory (m_CurrentPath)
+	// Since this would cause problems, this function interate over all engines
+	// connected ot the same server and invalidates the current working
+	// directories if they match or if it is a subdirectory of the changed
+	// directory.
+	void InvalidateCurrentWorkingDirs(const CServerPath& path);
+
+	int GetEngineId() const {return m_engine_id; }
+
+protected:
+	CFileZillaEnginePrivate();
+	virtual ~CFileZillaEnginePrivate();
+
+	// Command handlers, only called by CFileZillaEngine::Command
+	int Connect(const CConnectCommand &command);
+	int Disconnect(const CDisconnectCommand &command);
+	int Cancel(const CCancelCommand &command);
+	int List(const CListCommand &command);
+	int FileTransfer(const CFileTransferCommand &command);
+	int RawCommand(const CRawCommand& command);
+	int Delete(const CDeleteCommand& command);
+	int RemoveDir(const CRemoveDirCommand& command);
+	int Mkdir(const CMkdirCommand& command);
+	int Rename(const CRenameCommand& command);
+	int Chmod(const CChmodCommand& command);
+
+	int ContinueConnect();
+
+	DECLARE_EVENT_TABLE()
+	void OnEngineEvent(wxFzEngineEvent &event);
+	void OnTimer(wxTimerEvent& event);
+
+	wxEvtHandler *m_pEventHandler;
+
+	int m_engine_id;
+	static std::list<CFileZillaEnginePrivate*> m_engineList;
+
+	// Indicicates if data has been received/sent and whether to send any notifications
+	static int m_activeStatus[2];
+
+	// Remember last path used in a dirlisting.
+	CServerPath m_lastListDir;
+	CTimeEx m_lastListTime;
+
+	CControlSocket *m_pControlSocket;
+
+	CCommand *m_pCurrentCommand;
+
+	std::list<CNotification*> m_NotificationList;
+	bool m_maySendNotificationEvent;
+
+	bool m_bIsInCommand; //true if Command is on the callstack
+	int m_nControlSocketError;
+
+	COptionsBase *m_pOptions;
+
+	unsigned int m_asyncRequestCounter;
+
+	// Used to synchronize access to the notification list
+	wxCriticalSection m_lock;
+
+	CLogging* m_pLogging;
+
+	// Everything related to the retry code
+	// ------------------------------------
+
+	void RegisterFailedLoginAttempt(const CServer& server, bool critical);
+
+	// Get the amount of time to wait till next reconnection attempt in milliseconds
+	unsigned int GetRemainingReconnectDelay(const CServer& server);
+
+	struct t_failedLogins
+	{
+		CServer server;
+		wxDateTime time;
+		bool critical;
+	};
+	static std::list<t_failedLogins> m_failedLogins;
+	int m_retryCount;
+	wxTimer m_retryTimer;
+
+	CRateLimiter* m_pRateLimiter;
+};
+
+       //__FILEZILLAENGINEPRIVATE_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\FileZillaEngine.h" 6
+
+class CFileZillaEngine : public CFileZillaEnginePrivate
+{
+public:
+	CFileZillaEngine();
+	virtual ~CFileZillaEngine();
+
+	// Initialize the engine. Pass over the event handler that should receive notification
+	// events as defined in notification.h
+	// You also need to pass an options handler as defined in optionsbase.h
+	//
+	// The COptionsBase instance has to be the same for every instance of CFileZillaEngine
+	int Init(wxEvtHandler *pEventHandler, COptionsBase *pOptions);
+
+	// TODO: Init function with a function pointer for a callback function for
+	// notifications. Not all users of the engine use wxWidgets.
+
+	// Execute the given command. See commands.h for a list of the available
+	// commands and reply codes.
+	int Command(const CCommand &command);
+
+	bool IsBusy() const;
+	bool IsConnected() const;
+
+	// IsActive returns true only if data has been transferred in the
+	// given direction since the last time IsActive was called with
+	// the same argument.
+	enum _direction
+	{
+		send,
+		recv
+	};
+	static bool IsActive(enum _direction direction);
+
+	// Returns the next pending notification.
+	// It is mandatory to call this function until it returns 0 each time you
+	// get the pending notifications event, or you'll either lose notifications
+	// or your memory will fill with pending notifications.
+	// See notification.h for details.
+	CNotification* GetNextNotification();
+
+	const CCommand *GetCurrentCommand() const;
+	enum Command GetCurrentCommandId() const;
+
+	// Sets the reply to an async request, e.g. a file exists request.
+	// See notifiction.h for details.
+	bool IsPendingAsyncRequestReply(const CAsyncRequestNotification *pNotification);
+	bool SetAsyncRequestReply(CAsyncRequestNotification *pNotification);
+
+	// Get a progress update about the current transfer. changed will be set
+	// to true if the data has been updated compared to the last time
+	// GetTransferStatus was called.
+	bool GetTransferStatus(CTransferStatus &status, bool &changed);
+
+	int CacheLookup(const CServerPath& path, CDirectoryListing& listing);
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 35
+                            
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\directorylisting.h" 0
+                              
+                              
+
+             
+
+class CDirentry
+{
+public:
+	wxString name;
+	wxLongLong size;
+	wxString permissions;
+	wxString ownerGroup;
+
+	enum _flags
+	{
+		flag_dir = 1,
+		flag_link = 2,
+		flag_unsure = 4, // May be set on cached items if any changes were made to the file
+
+		flag_timestamp_date = 0x10,
+		flag_timestamp_time = 0x20,
+		flag_timestamp_seconds = 0x40,
+
+		flag_timestamp_mask = 0x70
+	};
+	int flags;
+
+	inline bool is_dir() const
+	{
+		return (flags & flag_dir) != 0;
+	}
+	inline bool is_link() const
+	{
+		return (flags & flag_link) != 0;
+	}
+
+	inline bool is_unsure() const
+	{
+		return (flags & flag_unsure) != 0;
+	}
+
+	inline bool has_date() const
+	{
+		return (flags & flag_timestamp_date) != 0;
+	}
+	inline bool has_time() const
+	{
+		return (flags & flag_timestamp_time) != 0;
+	}
+	inline bool has_seconds() const
+	{
+		return (flags & flag_timestamp_seconds) != 0;
+	}
+
+
+	wxString target; // Set to linktarget it link is true
+
+	wxDateTime time;
+
+	wxString dump() const;
+	bool operator==(const CDirentry &op) const;
+};
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\refcount.h" 0
+                      
+                      
+
+                                                                    
+                                      
+ 
+       
+	                 
+	                                           
+	                     
+	                  
+
+	             
+
+	                     
+	                      
+
+	                                                                                            
+
+	                                                                                  
+	                                                                                         
+	                                                                                
+
+	                                                  
+	                      
+	                                                  
+	                            
+	                                                                                
+
+	                                                         
+	                                   
+          
+	                
+	         
+  
+
+                                           
+ 
+       
+	                      
+	                                                     
+	                          
+	                       
+
+	             
+
+	                     
+	                      
+
+	                                                                                            
+
+	                                                                                       
+	                                                                                              
+	                                                                                     
+
+	                                                       
+	                      
+	                                                       
+	                            
+	                                                                                     
+
+	                                                                   
+	                                        
+          
+	                
+	         
+  
+
+                                                                 
+                                       
+ 
+       
+	                  
+	                                             
+	                            
+	                           
+
+	             
+
+	         
+
+	                           
+	                            
+
+	                                                     
+	                                                                                       
+	                                                    
+
+	                                                           
+          
+	                
+	         
+  
+
+                                                     
+ 
+	                                                       
+	                       
+	                                                          
+	                                                                  
+	   
+       
+	                                
+	                                                                         
+	                                          
+	                                         
+
+	             
+
+	         
+
+	                           
+	                            
+
+	                                                                   
+	                                                                                                     
+	                                                                  
+
+	                                                                                       
+
+	                                             
+          
+	                
+	         
+  
+
+                                                     
+ 
+	          
+	               
+ 
+
+                                                                               
+ 
+	                
+	                          
+	               
+		                
+ 
+
+                                                         
+ 
+	      
+	 
+		          
+		                        
+	 
+	    
+	 
+		          
+		               
+	 
+ 
+
+                                                      
+ 
+	                                       
+	 
+		                  
+		             
+	 
+ 
+
+                                                 
+ 
+	                                       
+	 
+		                  
+		             
+	 
+	               
+	          
+ 
+
+                                                         
+ 
+	              
+ 
+
+                                                          
+ 
+	             
+ 
+
+                                                                                             
+ 
+	               
+		             
+
+	                                       
+	 
+		                  
+		             
+	 
+	                
+	                          
+	               
+		                
+
+	             
+ 
+
+                                                                       
+ 
+	                                       
+	 
+		                  
+		             
+	 
+
+	      
+	 
+		          
+		                        
+	 
+	    
+	 
+		          
+		               
+	 
+
+	             
+ 
+
+                                                               
+ 
+	          
+	               
+ 
+
+                                                                                              
+ 
+	                
+	                          
+	               
+		                
+ 
+
+                                                                   
+ 
+	      
+	 
+		          
+		                        
+	 
+	    
+	 
+		          
+		               
+	 
+ 
+
+                                                                
+ 
+	                                       
+	 
+		                  
+		                
+	 
+ 
+
+                                                      
+ 
+	                                       
+	 
+		                  
+		                
+	 
+	               
+	          
+ 
+
+                                                              
+ 
+	              
+ 
+
+                                                               
+ 
+	             
+ 
+
+                                                                                                            
+ 
+	               
+		             
+
+	                                       
+	 
+		                  
+		                
+	 
+	                
+	                          
+	               
+		                
+
+	             
+ 
+
+                                                                                 
+ 
+	                                       
+	 
+		                  
+		                
+	 
+
+	      
+	 
+		          
+		                        
+	 
+	    
+	 
+		          
+		               
+	 
+
+	             
+ 
+
+                                                                                          
+ 
+	                       
+		            
+
+	                            
+ 
+
+                                                       
+ 
+	                        
+
+	              
+ 
+
+                                                                                  
+ 
+	                          
+	                
+	                
+ 
+
+                                                                 
+ 
+	                 
+	                        
+ 
+
+                                                        
+ 
+	                         
+	 
+		                  
+		             
+	 
+ 
+
+                                              
+ 
+	                     
+	 
+		                
+		                        
+		                       
+		            
+	 
+
+	              
+ 
+
+                                                                                                
+ 
+	                     
+		             
+	                         
+	 
+		                  
+		             
+	 
+
+	                          
+	                
+	                
+	             
+ 
+
+                                                                                         
+ 
+	                       
+		             
+
+	                           
+ 
+
+                                                  
+ 
+	                     
+	 
+		                
+		                        
+	 
+	    
+		             
+	              
+ 
+
+                                                                
+ 
+	              
+ 
+
+                                                                 
+ 
+	             
+ 
+
+                                         
+                                                                                                                      
+ 
+	                       
+		            
+
+	                            
+ 
+
+                                                                                   
+ 
+	               
+	          
+ 
+
+                                                                                                                            
+ 
+	                          
+	               
+		                
+	                
+ 
+
+                                                                                             
+ 
+	                 
+	                        
+ 
+
+                                                                                    
+ 
+	                
+		       
+
+	                     
+	 
+		                  
+		             
+	 
+	    
+		                
+ 
+
+                                                            
+ 
+	                
+	 
+		                       
+		              
+	 
+	                          
+	 
+		                
+		                        
+		                       
+		            
+	 
+
+	              
+ 
+
+                                                                                                                                          
+ 
+	                     
+		             
+	                                       
+	 
+		                  
+		             
+	 
+
+	                          
+	               
+		                
+	                
+	             
+ 
+
+                                                                                                                     
+ 
+	                       
+		             
+	           
+		            
+	               
+		             
+
+	                           
+ 
+
+                                                                
+ 
+	                
+		       
+	                          
+		                
+	    
+	 
+		             
+		                  
+	 
+	               
+	          
+ 
+
+                                                                              
+ 
+	              
+ 
+
+                                                                               
+ 
+	             
+ 
+
+                                       
+ 
+       
+	                        
+	                             
+	                                 
+
+        
+	      
+  
+
+       //__REFCOUNT_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\directorylisting.h" 68
+
+class CDirectoryListing
+{
+public:
+	CDirectoryListing();
+	CDirectoryListing(const CDirectoryListing& listing);
+
+	CServerPath path;
+	CDirectoryListing& operator=(const CDirectoryListing &a);
+
+	const CDirentry& operator[](unsigned int index) const;
+
+	// Word of caution: You MUST NOT change the name of the returned
+	// entry if you do not call ClearFindMap afterwards
+	CDirentry& operator[](unsigned int index);
+
+	void SetCount(unsigned int count);
+	unsigned int GetCount() const { return m_entryCount; }
+
+	int FindFile_CmpCase(const wxString& name) const;
+	int FindFile_CmpNoCase(wxString name) const;
+
+	void ClearFindMap();
+
+	enum
+	{
+		unsure_file_added = 0x01,
+		unsure_file_removed = 0x02,
+		unsure_file_changed = 0x04,
+		unsure_file_mask = 0x07,
+		unsure_dir_added = 0x08,
+		unsure_dir_removed = 0x10,
+		unsure_dir_changed = 0x20,
+		unsure_dir_mask = 0x38,
+		unsure_unknown = 0x40,
+		unsure_invalid = 0x80 // Recommended action: Do a full refresh
+	};
+	// Lowest bit indicates a file got added
+	// Next bit indicates a file got removed
+	// 3rd bit indicates a file got changed.
+	// 4th bit is set if an update cannot be applied to
+	// one of the other categories.
+	//
+	// These bits should help the user interface to choose an appropriate sorting
+	// algorithm for modified listings
+	int m_hasUnsureEntries;
+	bool m_failed;
+	bool m_hasDirs;
+
+	bool m_has_perms;
+	bool m_has_usergroup;
+
+	CTimeEx m_firstListTime;
+
+	void Assign(const std::list<CDirentry> &entries);
+
+	bool RemoveEntry(unsigned int index);
+
+	void GetFilenames(std::vector<wxString> &names) const;
+
+protected:
+
+	CRefcountObject_Uninitialized<std::vector<CRefcountObject<CDirentry> > > m_entries;
+
+	mutable CRefcountObject_Uninitialized<std::multimap<wxString, unsigned int> > m_searchmap_case;
+	mutable CRefcountObject_Uninitialized<std::multimap<wxString, unsigned int> > m_searchmap_nocase;
+
+	unsigned int m_entryCount;
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 36
+
+                
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\misc.h" 0
+                  
+                  
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\socket.h" 0
+                    
+                    
+
+// IPv6 capable, non-blocking socket class for use with wxWidgets.
+// Error codes are the same as used by the POSIX socket functions,
+// see 'man 2 socket', 'man 2 connect', ...
+
+class CSocketEventHandler;
+class CSocketEventSource;
+class CSocketEvent
+{
+public:
+	enum EventType
+	{
+		hostaddress,
+
+		// This is a nonfatal condition. It
+		// means there are additional addresses to try.
+		connection_next,
+		connection,
+		read,
+		write,
+		close
+	};
+
+	CSocketEvent(CSocketEventHandler* pSocketEventHandler, CSocketEventSource* pSource, enum EventType type, const wxChar* data);
+	CSocketEvent(CSocketEventHandler* pSocketEventHandler, CSocketEventSource* pSource, enum EventType type, int error = 0);
+	~CSocketEvent();
+
+	CSocketEventSource* GetSocketEventSource() const { return m_pSource; }
+	enum EventType GetType() const { return m_type; }
+	CSocketEventHandler* GetSocketEventHandler() const { return m_pSocketEventHandler; }
+
+	wxString GetData() const;
+	int GetError() const { return m_error; }
+
+protected:
+	CSocketEventSource* m_pSource;
+	const enum EventType m_type;
+	wxChar *m_data;
+	int m_error;
+	CSocketEventHandler* m_pSocketEventHandler;
+
+	friend class CSocketEventDispatcher;
+};
+
+class CSocketEventDispatcher : protected wxEvtHandler
+{
+public:
+	void SendEvent(CSocketEvent* evt);
+	void RemovePending(const CSocketEventHandler* pHandler);
+	void RemovePending(const CSocketEventSource* pSource);
+	void UpdatePending(const CSocketEventHandler* pOldHandler, const CSocketEventSource* pOldSource, CSocketEventHandler* pNewHandler, CSocketEventSource* pNewSource);
+
+	static CSocketEventDispatcher& Get();
+
+private:
+	CSocketEventDispatcher();
+	~CSocketEventDispatcher();
+
+	virtual bool ProcessEvent(wxEvent& event);
+
+	std::list<CSocketEvent*> m_pending_events;
+
+	wxCriticalSection m_sync;
+
+	static CSocketEventDispatcher m_dispatcher;
+
+	bool m_inside_loop;
+};
+
+class CSocketEventHandler
+{
+public:
+	CSocketEventHandler() {};
+	virtual ~CSocketEventHandler();
+
+	virtual void OnSocketEvent(CSocketEvent& event) = 0;
+};
+
+class CSocketEventSource
+{
+public:
+	virtual ~CSocketEventSource();
+};
+
+class CCallback
+{
+public:
+	virtual void cb() {}
+};
+
+class CSocketThread;
+class CSocket : public CSocketEventSource
+{
+	friend class CSocketThread;
+public:
+	CSocket(CSocketEventHandler* pEvtHandler);
+	virtual ~CSocket();
+
+	enum SocketState
+	{
+		// How the socket is initially
+		none,
+
+		// Only in listening and connecting states you can get a connection event.
+		// After sending the event, socket is in connected state
+		listening,
+		connecting,
+
+		// Only in this state you can get send or receive events
+		connected,
+
+		// Graceful shutdown, you get close event once done
+		closing,
+		closed
+	};
+	enum SocketState GetState();
+
+	enum address_family
+	{
+		unspec, // AF_UNSPEC
+		ipv4,   // AF_INET
+		ipv6    // AF_INET6
+	};
+
+	// Connects to the given host, given as name, IPv4 or IPv6 address.
+	// Returns 0 on success, else an error code. Note: EINPROGRESS is
+	// not really an error. On success, you should still wait for the
+	// connection event.
+	// If host is a name that can be resolved, a hostaddress socket event gets sent.
+	// Once connections got established, a connection event gets sent. If
+	// connection could not be established, a close event gets sent.
+	int Connect(wxString host, unsigned int port, enum address_family family = unspec);
+
+	// After receiving a send or receive event, you can call these functions
+	// as long as their return value is positive.
+	int Read(void *buffer, unsigned int size, int& error);
+	int Peek(void *buffer, unsigned int size, int& error);
+	int Write(const void *buffer, unsigned int size, int& error);
+
+	int Close();
+
+	// Returns empty string on error
+	wxString GetLocalIP(bool strip_zone_index = false) const;
+	wxString GetPeerIP(bool strip_zone_index = false) const;
+
+	// -1 on error
+	int GetLocalPort(int& error);
+	int GetRemotePort(int& error);
+
+	// If connected, either ipv4 or ipv6, unspec otherwise
+	enum address_family GetAddressFamily() const;
+
+	static wxString GetErrorString(int error);
+	static wxString GetErrorDescription(int error);
+
+	// Can only be called if the state is none
+	void SetEventHandler(CSocketEventHandler* pEvtHandler);
+	CSocketEventHandler* GetEventHandler() { return m_pEvtHandler; }
+
+	static bool Cleanup(bool force);
+
+	static wxString AddressToString(const struct sockaddr* addr, int addr_len, bool with_port = true, bool strip_zone_index = false);
+
+	int Listen(enum address_family family, int port = 0);
+	CSocket* Accept(int& error);
+
+	enum Flags
+	{
+		flag_nodelay = 0x01,
+		flag_keepalive = 0x02
+	};
+
+	void SetFlags(int flags);
+
+	// If called on listen socket, sizes will be inherited by
+	// accepted sockets
+	void SetBufferSizes(int size_read, int size_write);
+
+	void SetSynchronousReadCallback(CCallback* cb);
+
+protected:
+	static int DoSetFlags(int fd, int flags, int flags_mask);
+	static int DoSetBufferSizes(int fd, int size_read, int size_write);
+	static int SetNonblocking(int fd);
+
+	void DetachThread();
+
+	CSocketEventHandler* m_pEvtHandler;
+
+	int m_fd;
+
+	enum SocketState m_state;
+
+	CSocketThread* m_pSocketThread;
+
+	wxString m_host;
+	unsigned int m_port;
+	int m_family;
+
+	int m_flags;
+
+	int m_buffer_sizes[2];
+
+	CCallback* m_synchronous_read_cb;
+};
+
+                
+
+               
+                          
+      
+                   
+                                  
+      
+                    
+                                    
+      
+                  
+                                
+      
+               
+                          
+      
+                       
+                                          
+      
+                
+                            
+      
+                    
+                                    
+      
+                
+                            
+      
+                 
+                              
+      
+                   
+                                  
+      
+                    
+                                    
+      
+                
+                            
+      
+                 
+                              
+      
+                  
+                                
+      
+                 
+                              
+      
+                
+                            
+      
+                    
+                                    
+      
+                  
+                                
+      
+
+                  
+                                  
+       //__WXMSW__
+
+       //__SOCKET_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\misc.h" 6
+
+bool VerifySetDate(wxDateTime& date, int year, wxDateTime::Month month, int day, int hour = 0, int minute = 0, int second = 0);
+
+// Also verifies that it is a correct IPv6 address
+wxString GetIPV6LongForm(wxString short_address);
+
+int DigitHexToDecNum(wxChar c);
+
+bool IsRoutableAddress(const wxString& address, enum CSocket::address_family family);
+
+bool IsIpAddress(const wxString& address);
+
+int GetRandomNumber(int low, int high);
+
+// Under some locales (e.g. Turkish), there is a different
+// relationship between the letters a-z and A-Z.
+// In Turkish for example there are different types of i
+// (dotted and dotless), with i lowercase dotted and I
+// uppercase dotless.
+// If needed, use this function to transform the case manually
+// and locale-independently
+void MakeLowerAscii(wxString& str);
+
+// Strongly typed enum would be nice, but we need to support older compilers still.
+namespace dependency {
+enum type {
+	wxwidgets,
+	gnutls,
+	sqlite,
+	count
+};
+}
+
+wxString GetDependencyName( dependency::type d );
+wxString GetDependencyVersion( dependency::type d );
+
+wxString ListTlsCiphers(const wxString& priority);
+
+       //__MISC_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\libfilezilla.h" 38
+
+       //__LIBFILEZILLA_H__

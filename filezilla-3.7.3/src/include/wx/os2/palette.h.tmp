@@ -1,0 +1,76 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\palette.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/palette.h
+// Purpose:     wxPalette class
+// Author:      David Webster
+// Modified by:
+// Created:     10/12/99
+// Copyright:   (c) David Webster
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                     
+                          
+
+class WXDLLIMPEXP_FWD_CORE wxPalette;
+
+class WXDLLIMPEXP_CORE wxPaletteRefData: public wxGDIRefData
+{
+    friend class WXDLLIMPEXP_FWD_CORE wxPalette;
+public:
+    wxPaletteRefData();
+    virtual ~wxPaletteRefData();
+// protected:
+    WXHPALETTE                      m_hPalette;
+    HPS                             m_hPS;
+}; // end of CLASS wxPaletteRefData
+
+                                                     
+
+class WXDLLIMPEXP_CORE wxPalette: public wxPaletteBase
+{
+public:
+    wxPalette();
+
+    wxPalette( int                  n
+              ,const unsigned char* pRed
+              ,const unsigned char* pGreen
+              ,const unsigned char* pBlue
+             );
+    virtual ~wxPalette();
+
+    bool Create( int                  n
+                ,const unsigned char* pRed
+                ,const unsigned char* pGreen
+                ,const unsigned char* pBlue
+               );
+    int  GetPixel( unsigned char cRed
+                  ,unsigned char cGreen
+                  ,unsigned char cBlue
+                 ) const;
+    bool GetRGB( int            nPixel
+                ,unsigned char* pRed
+                ,unsigned char* pGreen
+                ,unsigned char* pBlue
+               ) const;
+
+    virtual bool FreeResource(bool bForce = false);
+
+    inline WXHPALETTE GetHPALETTE(void) const { return (((wxPaletteRefData *)m_refData) ? ((wxPaletteRefData *)m_refData)->m_hPalette : 0); }
+    void              SetHPALETTE(WXHPALETTE hPalette);
+    void              SetPS(HPS hPS);
+
+protected:
+    virtual wxGDIRefData *CreateGDIRefData() const;
+    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+
+private:
+    DECLARE_DYNAMIC_CLASS(wxPalette)
+}; // end of CLASS wxPalette
+
+      
+    // _WX_PALETTE_H_

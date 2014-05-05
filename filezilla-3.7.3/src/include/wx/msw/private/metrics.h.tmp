@@ -1,0 +1,50 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\private\metrics.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/private/metrics.h
+// Purpose:     various helper functions to retrieve system metrics
+// Author:      Vadim Zeitlin
+// Created:     2008-09-05
+// Copyright:   (c) 2008 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                  
+                                  
+
+namespace wxMSWImpl
+{
+
+// return NONCLIENTMETRICS as retrieved by SystemParametersInfo()
+//
+// currently this is not cached as the values may change when system settings
+// do and we don't react to this to invalidate the cache but it could be done
+// in the future
+//
+// MT-safety: this function is only meant to be called from the main thread
+inline const NONCLIENTMETRICS& GetNonClientMetrics()
+{
+    static WinStruct<NONCLIENTMETRICS> nm;
+    if ( !::SystemParametersInfo(SPI_GETNONCLIENTMETRICS, 0, &nm, 0) )
+    {
+                    
+                                                                         
+                                                                        
+                                                                        
+                     
+                                 
+                                                                          
+       // WINVER >= 0x0600
+        {
+            // maybe we should initialize the struct with some defaults?
+            wxLogLastError(wxT("SystemParametersInfo(SPI_GETNONCLIENTMETRICS)"));
+        }
+    }
+
+    return nm;
+}
+
+} // namespace wxMSWImpl
+
+       // _WX_MSW_PRIVATE_METRICS_H_
+

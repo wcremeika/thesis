@@ -1,0 +1,153 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\config_xcode.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/config_xcode.h
+// Purpose:     configurations for xcode builds
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     29.04.04
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+// from config.log confdefs
+
+                      
+                      
+                     
+                         
+      
+                    
+                  
+                 
+                    
+                      
+                       
+
+                       
+                      
+                              
+                          
+                                                         
+                                                             
+                                
+                                
+                              
+                                  
+      
+      
+                         
+                                
+                             
+                            
+                              
+                              
+                                 
+                             
+                         
+                       
+                     
+                           
+                           
+                    
+                    
+                          
+                                  
+                                             
+                             
+                                        
+                       
+                            
+                            
+                     
+                          
+                       
+                            
+                       
+                                        
+                        
+                             
+                      
+                           
+                     
+                     
+                        
+                      
+                    
+               
+                       
+                     
+                       
+     
+                       
+                     
+                       
+      
+                          
+                           
+                                
+                      
+                    
+                            
+                            
+                       
+                        
+                        
+                          
+                      
+                     
+/* #define HAVE_PUTENV 1 */
+                       
+                    
+                     
+                           
+                      
+                       
+                      
+/* better to use the built-in CF conversions, also avoid iconv versioning problems */
+/* #undef HAVE_ICONV */
+                   
+                         
+                        
+                     
+                      
+                        
+                       
+                     
+                           
+                     
+                      
+                         
+                         
+                       
+                      
+
+                                                           
+                                                      
+                                
+                                        
+                                   
+                               
+
+// for regex
+                              
+
+// for jpeg
+
+                       
+
+// OBSOLETE ?
+
+                  
+                    
+                         
+                       
+
+                      
+                        
+                       
+                         
+                          
+                         
+                           
+                            

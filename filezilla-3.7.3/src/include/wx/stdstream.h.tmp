@@ -1,0 +1,124 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\stdstream.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/stdstream.h
+// Purpose:     Header of std::istream and std::ostream derived wrappers for
+//              wxInputStream and wxOutputStream
+// Author:      Jonathan Liu <net147@gmail.com>
+// Created:     2009-05-02
+// Copyright:   (c) 2009 Jonathan Liu
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                       // wxUSE_STD_IOSTREAM
+
+                                       
+
+                    
+                      
+                       
+
+                                                                             
+                         
+                                                                             
+
+                                                                     
+ 
+       
+                                                  
+                                         
+
+          
+                                                               
+                                                      
+                                                              
+                                                                  
+                                                          
+                                                           
+                                                     
+                                                                  
+                                                          
+                                                           
+                                        
+                                                               
+                            
+                        
+                                       
+
+                                                                            
+                                                                             
+                                                                               
+                                                                               
+                                                  
+                           
+                                                                
+     
+                            
+     
+                    
+
+                            
+                   
+  
+
+                                                                             
+                   
+                                                                             
+
+                                                             
+ 
+       
+                                            
+                                   
+
+          
+                                          
+  
+
+                                                                             
+                          
+                                                                             
+
+                                                                      
+ 
+       
+                                                    
+                                          
+
+          
+                                                               
+                                                      
+                                                              
+                                                                  
+                                                          
+                                                           
+                                                     
+                                                                  
+                                                          
+                                                           
+                                                                     
+                                
+
+                             
+  
+
+                                                                             
+                    
+                                                                             
+
+                                                              
+ 
+       
+                                              
+                                    
+
+          
+                                           
+  
+
+       // wxUSE_STREAMS && wxUSE_STD_IOSTREAM
+
+       // _WX_STDSTREAM_H_

@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\ipc.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/ipc.h
+// Purpose:     wrapper around different wxIPC classes implementations
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     15.04.02
+// Copyright:   (c) 2002 Vadim Zeitlin
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                  
+                  
+
+// Set wxUSE_DDE_FOR_IPC to 1 to use DDE for IPC under Windows. If it is set to
+// 0, or if the platform is not Windows, use TCP/IP for IPC implementation
+
+                               
+                      
+                                   
+         
+                                   
+          
+       // !defined(wxUSE_DDE_FOR_IPC)
+
+                         
+                            
+                               
+      
+
+                     
+                                           
+                                       
+                                       
+
+                       
+      // !wxUSE_DDE_FOR_IPC
+                                           
+                                       
+                                       
+
+                         
+       // wxUSE_DDE_FOR_IPC/!wxUSE_DDE_FOR_IPC
+
+       // _WX_IPC_H_

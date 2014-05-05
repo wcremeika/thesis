@@ -1,0 +1,34 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\option_change_event_handler.h" 0
+                                         
+                                         
+
+             
+                
+
+class COptions;
+
+class COptionChangeEventHandler
+{
+	friend class COptions;
+
+public:
+	COptionChangeEventHandler();
+	virtual ~COptionChangeEventHandler();
+
+	void RegisterOption(int option);
+	void UnregisterOption(int option);
+
+protected:
+	virtual void OnOptionChanged(int option) = 0;
+
+private:
+	std::set<int> m_handled_options;
+
+	static void DoNotify(int option);
+	static void UnregisterAll();
+
+	static std::vector<std::set<COptionChangeEventHandler*> > m_handlers;
+};
+
+       //__OPTION_CHANGE_EVENT_HANDLER_H__

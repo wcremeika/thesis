@@ -1,0 +1,57 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\x11\cursor.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/x11/cursor.h
+// Purpose:     wxCursor class
+// Author:      Julian Smart
+// Modified by:
+// Created:     17/09/98
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+                     
+                     
+                     
+
+class WXDLLIMPEXP_FWD_CORE wxImage;
+
+//-----------------------------------------------------------------------------
+// wxCursor
+//-----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxCursor : public wxGDIObject
+{
+public:
+    wxCursor();
+    wxCursor(wxStockCursor id) { InitFromStock(id); }
+                           
+                                                          
+      
+               
+                                      
+      
+
+    wxCursor(const wxString& name,
+             wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
+             int hotSpotX = 0, int hotSpotY = 0);
+    virtual ~wxCursor();
+
+    // implementation
+
+    WXCursor GetCursor() const;
+
+protected:
+    void InitFromStock(wxStockCursor);
+
+    virtual wxGDIRefData *CreateGDIRefData() const;
+    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+
+private:
+    DECLARE_DYNAMIC_CLASS(wxCursor)
+};
+
+       // _WX_CURSOR_H_

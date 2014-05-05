@@ -1,0 +1,68 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\encinfo.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/encinfo.h
+// Purpose:     declares wxNativeEncodingInfo struct
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     19.09.2003 (extracted from wx/fontenc.h)
+// Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                     
+
+// ----------------------------------------------------------------------------
+// wxNativeEncodingInfo contains all encoding parameters for this platform
+// ----------------------------------------------------------------------------
+
+// This private structure specifies all the parameters needed to create a font
+// with the given encoding on this platform.
+//
+// Under X, it contains the last 2 elements of the font specifications
+// (registry and encoding).
+//
+// Under Windows, it contains a number which is one of predefined CHARSET_XXX
+// values.
+//
+// Under all platforms it also contains a facename string which should be
+// used, if not empty, to create fonts in this encoding (this is the only way
+// to create a font of non-standard encoding (like KOI8) under Windows - the
+// facename specifies the encoding then)
+
+struct WXDLLIMPEXP_CORE wxNativeEncodingInfo
+{
+    wxString facename;          // may be empty meaning "any"
+    wxFontEncoding encoding;    // so that we know what this struct represents
+
+                                                                                                                            
+
+
+
+
+                          
+                    
+                                         
+                                       
+       
+
+                     
+                             
+                       
+                       
+                               
+                                                                           
+     
+          
+      
+    // this struct is saved in config by wxFontMapper, so it should know to
+    // serialise itself (implemented in platform-specific code)
+    bool FromString(const wxString& s);
+    wxString ToString() const;
+};
+
+       // _WX_ENCINFO_H_
+

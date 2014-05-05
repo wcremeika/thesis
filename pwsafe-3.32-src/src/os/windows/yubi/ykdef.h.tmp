@@ -1,0 +1,242 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\windows\yubi\ykdef.h" 0
+/*****************************************************************************************
+**																						**
+**		Y K D E F  -  Common Yubikey project header										**
+**																						**
+**		Date		/ Rev		/ Sign	/ Remark										**
+**		06-06-03	/ 0.9.0		/ J E	/ Main											**
+**		06-08-25	/ 1.0.0		/ J E	/ Rewritten for final spec						**
+**		08-06-03	/ 1.3.0		/ J E	/ Added static OTP feature						**
+**		09-06-02	/ 2.0.0		/ J E	/ Added version 2 flags                         **
+**		09-09-23	/ 2.1.0		/ J E	/ Added version 2.1 flags (OATH-HOTP)           **
+**      10-05-01    / 2.2.0     / J E   / Added support for 2.2 extensions + frame      **
+**      11-04-15    / 2.3.0     / J E   / Added support for 2.3 extensions              **
+**      11-12-05    / 2.4.0     / J E   / Added support for NFC and NDEF                **
+**      12-10-28    / 3.0.0     / J E   / NEO changes                                   **
+**      13-03-05    / 3.1.0     / J E   / Added EXTFLAG_LED_INV flag                    **         
+**      13-03-06    / 3.1.0     / J E   / Added NEO startup busy flag                   **
+**																						**
+*****************************************************************************************/
+
+                            
+       	                    
+
+// Slot entries
+
+       	           					                                             
+                                                                        
+
+                                                            
+                                                            
+                                                                
+
+                                                                
+                                                                           
+
+                                                                   
+                                                                                 
+                                                                 
+
+                                                                                                        
+                                                                                                        
+
+                                                                                                        
+                                                                                                        
+
+                                                                                 
+
+                                                                        
+                                                                                                           
+                                                                    
+                                                                                          
+
+                                                                                            
+                                                                                     
+
+                                                                           
+                                                                             
+
+                                                                           
+
+// Frame structure
+
+       	              				  
+
+typedef struct {
+    unsigned char payload[64]; // Frame payload
+    unsigned char slot;                 // Slot # field
+    unsigned short crc;                 // CRC field
+    unsigned char filler[3];            // Filler
+} YKFRAME;
+
+// Ticket structure
+
+       	        					 	                          
+
+typedef struct {
+	unsigned char uid[6];		// Unique (secret) ID
+	unsigned short useCtr;				// Use counter (incremented by 1 at first use after power up) + usage flag in msb
+	unsigned short tstpl;				// Timestamp incremented by approx 8Hz (low part)
+	unsigned char tstph;				// Timestamp (high part)
+	unsigned char sessionCtr;			// Number of times used within session. 0 for first use. After it wraps from 0xff to 1
+	unsigned short rnd;					// Pseudo-random value
+	unsigned short crc;					// CRC16 value of all fields
+} TICKET;
+
+// Activation modifier of sessionUse field (bitfields not uses as they are not portable)
+
+       	                 		      	                                                               
+       	               			      	                                          
+
+// Configuration structure
+
+       	          				  		                          
+       	        				  		                  
+                                                                                                   
+       	             			 		                                           
+
+typedef struct {
+	unsigned char fixed[16];	// Fixed data in binary format
+	unsigned char uid[6];		// Fixed UID part of ticket
+	unsigned char key[16];		// AES key
+	unsigned char accCode[6]; // Access code to re-program device
+	unsigned char fixedSize;			// Number of bytes in fixed field (0 if not used)
+	unsigned char extFlags;				// Extended flags
+	unsigned char tktFlags;				// Ticket configuration flags
+	unsigned char cfgFlags;				// General configuration flags
+	unsigned char rfu[2];				// Reserved for future use
+	unsigned short crc;					// CRC16 value of all fields
+} CONFIG;
+
+// Ticket flags
+
+       	                 			    		                             
+       	                   			    		                            
+       	                   			    		                             
+       	                     		    		                                  
+       	                     		    		                                   
+       	                 			    		                               
+       	                    		    		                                                                              
+
+// Configuration flags
+
+                        			    		                                           
+                           			    		                            
+                           			    		                            
+                             		    		                           
+
+// V1 flags only
+
+       	                    		    		                                            
+                             		    		                                     
+
+// V2 flags only
+
+       	                    		    		                                      
+                                                                                              
+                                                                                                            
+                                                                                            
+
+// V2.1 flags only
+
+       	                 			    		                 
+                                        	                                                  
+                                                                                          
+                                                                                               
+                                                                            
+                                                                              
+
+// V2.2 flags only
+
+                                                                                                
+                                                                                               
+                                                                                 
+                                                                                         
+                                                                                              
+                                                                                                     
+
+                                                                                                  
+                                                                                             
+                                                                                     
+
+// V2.3 flags only
+
+                                                                                
+                                                                                 
+                                                                                                                        
+                                                                                                                                  
+
+// V2.4/3.1 flags only
+
+                                                                                       
+
+// Flags valid for update
+
+                                                                                                                                                                       
+                                                                               
+                                                                                                                                                                                                                                       
+
+// NDEF structure
+
+       	              		          
+
+typedef struct {
+    unsigned char len;                          // Payload length
+    unsigned char type;                         // NDEF type specifier
+    unsigned char data[54];         // Payload size
+    unsigned char curAccCode[6];    // Access code
+} YKNDEF;
+        
+// Device configuration block (version 3.0)
+
+typedef struct {
+    unsigned char mode;                         // Device mode
+    unsigned char crTimeout;                    // Challenge-response timeout in seconds
+    unsigned short autoEjectTime;               // Auto eject time in seconds    
+} DEVICE_CONFIG;
+
+                                                           
+                                                                          
+                                                                        
+                                                                     
+
+                                                                                                                 
+
+                                                                                       
+
+// Scancode mapping (version 3.0)
+
+                                                                    
+                                                                              
+
+// Status block
+
+typedef struct {
+	unsigned char versionMajor;				    // Firmware version information
+	unsigned char versionMinor;
+	unsigned char versionBuild;
+	unsigned char pgmSeq;					    // Programming sequence number. 0 if no valid configuration
+	unsigned short touchLevel;				    // Level from touch detector
+} STATUS;
+
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                       
+                                                                                                                                       
+                                                                                                                                      
+                                                                       
+
+// Modified hex string mapping
+
+       	          					                  
+
+// USB vendor ID (VID) and product ID (PID) mapping
+
+       	          	                                               
+       	           		                                                    
+       	                                                                 
+       	                                                                     
+       	                                                                  
+
+      		// __YKDEF_H_INCLUDED__

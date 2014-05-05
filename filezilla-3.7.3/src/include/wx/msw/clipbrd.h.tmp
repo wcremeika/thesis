@@ -1,0 +1,91 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\clipbrd.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/clipbrd.h
+// Purpose:     wxClipboad class and clipboard functions for MSW
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                   
+
+                                                                      
+                                                
+
+                           
+                                        
+                                            
+                                           
+                                         
+
+               
+                                         
+                                                                 
+                                                     
+                                                                   
+                                                                  
+                                                       
+
+                    
+                                                                            
+                                                                              
+                                                                    
+                                                                       
+                                                             
+                                                        
+
+                                                                               
+              
+                                                                               
+
+                                                           
+ 
+       
+                  
+                           
+
+                                                        
+                        
+
+                                                        
+                         
+
+                                            
+                                  
+
+                                                                 
+                                               
+
+                                 
+                                               
+
+                                                 
+                                                           
+
+                                                          
+                                               
+
+                                                                   
+                         
+
+                                                                            
+                                                                               
+                                                                      
+                         
+
+        
+                                  
+                    
+
+                                      
+  
+
+       // wxUSE_CLIPBOARD
+
+       // _WX_CLIPBRD_H_

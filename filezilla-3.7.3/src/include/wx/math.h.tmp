@@ -1,0 +1,167 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\math.h" 0
+/**
+* Name:        wx/math.h
+* Purpose:     Declarations/definitions of common math functions
+* Author:      John Labenski and others
+* Modified by:
+* Created:     02/02/03
+* Copyright:   (c) John Labenski
+* Licence:     wxWindows licence
+*/
+
+/* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
+
+                   
+                   
+
+                   
+
+                
+
+            
+                                                  
+      
+
+/* Scaling factors for various unit conversions: 1 inch = 2.54 cm */
+                                  
+                                               
+      
+
+                 
+                                                  
+      
+
+                 
+                                     
+      
+
+                
+                                                      
+      
+
+                
+                                   
+      
+
+             
+                                                 
+      
+
+             
+                             
+      
+
+
+                  
+
+/* Any C++11 compiler should provide isfinite() */
+                         
+                    
+                                        
+                                                                           
+                      
+                                  
+                                                          
+      
+                                                                         
+                                            
+       
+                                                         
+                                                
+                                            
+         
+                                       
+          
+                                                                                                                                                                                                                             
+
+
+                  
+                   
+      
+                                 
+     
+                                    
+      
+
+
+                                              
+                                
+                                                                                                                                                              
+
+
+                               
+     
+                                   
+      
+
+                 
+
+                                                  
+     
+                                                                                 
+                                                                              
+                                                                   
+          
+                                                                                    
+               
+
+                                                                            
+               
+
+                      
+
+               
+     
+
+      /* !__INTELC__ */
+    wxGCC_WARNING_SUPPRESS(float-equal)
+    inline bool wxIsSameDouble(double x, double y) { return x == y; }
+    wxGCC_WARNING_RESTORE(float-equal)
+
+       /* __INTELC__/!__INTELC__ */
+
+inline bool wxIsNullDouble(double x) { return wxIsSameDouble(x, 0.); }
+
+inline int wxRound(double x)
+{
+    wxASSERT_MSG( x > INT_MIN - 0.5 && x < INT_MAX + 0.5,
+                  wxT("argument out of supported range") );
+
+                           
+                             
+         
+        return (int)(x < 0 ? x - 0.5 : x + 0.5);
+          
+}
+
+       /* __cplusplus */
+
+
+                                                 
+                                                            
+     
+                                                                                   
+      
+
+                    
+                  
+                
+      
+                                          
+                                                                              
+                                                                                
+
+                                                                               
+                           
+                                                                                            
+                                                                                              
+      
+
+                  
+     
+      
+       /* wxUSE_APPLE_IEEE */
+
+
+       /* _WX_MATH_H_ */

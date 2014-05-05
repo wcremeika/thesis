@@ -1,0 +1,107 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\generic\helpext.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/generic/helpext.h
+// Purpose:     an external help controller for wxWidgets
+// Author:      Karsten Ballueder (Ballueder@usa.net)
+// Modified by:
+// Copyright:   (c) Karsten Ballueder 1998
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+              
+
+
+                                                                               
+          
+                                                                               
+
+                        
+
+
+                                                                               
+                      
+                                                                               
+
+                                                      
+                                                                       
+ 
+       
+                                                       
+                                   
+
+                           
+                                                                                                         
+      
+
+                                          
+                                                                  
+                                                          
+
+                                                                      
+                                   
+
+                                                 
+                                                                
+                                       
+                                               
+                                                         
+                                            
+                                                 
+                                                                           
+
+                            
+                              
+
+                                                
+
+                                                                    
+                                                                 
+                                                                                     
+                                                                            
+         
+                                      
+         
+
+                                                                      
+                                                                  
+                                                                            
+         
+                                                   
+         
+
+          
+                                             
+                               
+
+                                                   
+                                    
+
+                                                          
+                               
+
+        
+                                                                 
+      
+                                                           
+                                                
+
+                                        
+                          
+
+
+                                   
+                                   
+
+                                           
+                                         
+
+                                      
+  
+
+       // wxUSE_HELP
+
+       // __WX_HELPEXT_H_

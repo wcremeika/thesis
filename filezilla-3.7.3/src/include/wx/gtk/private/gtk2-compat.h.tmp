@@ -1,0 +1,517 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\gtk\private\gtk2-compat.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/gtk/private/compat.h
+// Purpose:     Compatibility code for older GTK+ versions
+// Author:      Vaclav Slavik
+// Created:     2011-03-25
+// Copyright:   (c) 2011 Vaclav Slavik <vslavik@fastmail.fm>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                 
+                                 
+
+// ----------------------------------------------------------------------------
+// Implementations of new accessors for older GTK+ versions
+// ----------------------------------------------------------------------------
+
+// GTK+ deprecated direct access to struct members and some other stuff,
+// replacing them with simple accessor functions. These aren't available in
+// older versions, though, so we have to provide them for compatibility.
+//
+// Note: wx_ prefix is used to avoid symbol conflicts at runtime
+//
+// Note 2: We support building against newer GTK+ version and using an older
+//         one at runtime, so we must provide our implementations of these
+//         functions even if GTK_CHECK_VERSION would indicate the function is
+//         already available in GTK+.
+
+                  
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.8
+
+static inline GtkWidget* wx_gtk_scrolled_window_get_hscrollbar(GtkScrolledWindow* scrolled_window)
+{
+    return scrolled_window->hscrollbar;
+}
+                                                                                
+
+static inline GtkWidget* wx_gtk_scrolled_window_get_vscrollbar(GtkScrolledWindow* scrolled_window)
+{
+    return scrolled_window->vscrollbar;
+}
+                                                                                
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GLib 2.10
+
+static inline gpointer wx_g_object_ref_sink(gpointer object)
+{
+    g_object_ref(object);
+    gtk_object_sink(GTK_OBJECT(object));
+    return object;
+}
+                                              
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.12
+
+static inline void wx_gtk_about_dialog_set_program_name(GtkAboutDialog* about, const gchar* name)
+{
+    gtk_about_dialog_set_name(about, name);
+}
+                                                                              
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.14
+
+static inline gdouble wx_gtk_adjustment_get_lower(GtkAdjustment* adjustment)
+{
+    return adjustment->lower;
+}
+                                                            
+
+static inline gdouble wx_gtk_adjustment_get_page_increment(GtkAdjustment* adjustment)
+{
+    return adjustment->page_increment;
+}
+                                                                              
+
+static inline gdouble wx_gtk_adjustment_get_page_size(GtkAdjustment* adjustment)
+{
+    return adjustment->page_size;
+}
+                                                                    
+
+static inline gdouble wx_gtk_adjustment_get_step_increment(GtkAdjustment* adjustment)
+{
+    return adjustment->step_increment;
+}
+                                                                              
+
+static inline gdouble wx_gtk_adjustment_get_upper(GtkAdjustment* adjustment)
+{
+    return adjustment->upper;
+}
+                                                            
+
+static inline void wx_gtk_adjustment_set_page_size(GtkAdjustment* adjustment, gdouble page_size)
+{
+    adjustment->page_size = page_size;
+}
+                                                                    
+
+static inline GtkWidget* wx_gtk_color_selection_dialog_get_color_selection(GtkColorSelectionDialog* csd)
+{
+    return csd->colorsel;
+}
+                                                                                                        
+
+static inline GtkWidget* wx_gtk_dialog_get_content_area(GtkDialog* dialog)
+{
+    return dialog->vbox;
+}
+                                                                  
+
+static inline GtkWidget* wx_gtk_dialog_get_action_area(GtkDialog* dialog)
+{
+    return dialog->action_area;
+}
+                                                                
+
+static inline guint16 wx_gtk_entry_get_text_length(GtkEntry* entry)
+{
+    return entry->text_length;
+}
+                                                              
+
+static inline const guchar* wx_gtk_selection_data_get_data(GtkSelectionData* selection_data)
+{
+    return selection_data->data;
+}
+                                                                  
+
+static inline GdkAtom wx_gtk_selection_data_get_data_type(GtkSelectionData* selection_data)
+{
+    return selection_data->type;
+}
+                                                                            
+
+static inline gint wx_gtk_selection_data_get_format(GtkSelectionData* selection_data)
+{
+    return selection_data->format;
+}
+                                                                      
+
+static inline gint wx_gtk_selection_data_get_length(GtkSelectionData* selection_data)
+{
+    return selection_data->length;
+}
+                                                                      
+
+static inline GdkAtom wx_gtk_selection_data_get_target(GtkSelectionData* selection_data)
+{
+    return selection_data->target;
+}
+                                                                      
+
+static inline GdkWindow* wx_gtk_widget_get_window(GtkWidget* widget)
+{
+    return widget->window;
+}
+                                                      
+
+static inline GtkWidget* wx_gtk_window_get_default_widget(GtkWindow* window)
+{
+    return window->default_widget;
+}
+                                                                      
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.16
+
+static inline GdkAtom wx_gtk_selection_data_get_selection(GtkSelectionData* selection_data)
+{
+    return selection_data->selection;
+}
+                                                                            
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.18
+
+static inline void wx_gtk_cell_renderer_get_alignment(GtkCellRenderer* cell, gfloat* xalign, gfloat* yalign)
+{
+    *xalign = cell->xalign;
+    *yalign = cell->yalign;
+}
+                                                                          
+
+static inline void wx_gtk_cell_renderer_get_padding(GtkCellRenderer* cell, gint* xpad, gint* ypad)
+{
+    *xpad = cell->xpad;
+    *ypad = cell->ypad;
+}
+                                                                      
+
+static inline void wx_gtk_widget_get_allocation(GtkWidget* widget, GtkAllocation* allocation)
+{
+    *allocation = widget->allocation;
+}
+                                                              
+
+inline gboolean wx_gtk_widget_get_has_window(GtkWidget *widget)
+{
+    return !GTK_WIDGET_NO_WINDOW(widget);
+}
+                                                              
+
+
+inline gboolean wx_gtk_widget_get_has_grab(GtkWidget *widget)
+{
+    return GTK_WIDGET_HAS_GRAB(widget);
+}
+                                                          
+
+
+inline gboolean wx_gtk_widget_get_visible(GtkWidget *widget)
+{
+    return GTK_WIDGET_VISIBLE(widget);
+}
+                                                        
+
+
+inline gboolean wx_gtk_widget_get_sensitive(GtkWidget *widget)
+{
+    return GTK_WIDGET_SENSITIVE(widget);
+}
+                                                            
+
+
+inline gboolean wx_gtk_widget_is_drawable(GtkWidget *widget)
+{
+    return GTK_WIDGET_DRAWABLE(widget);
+}
+                                                        
+
+
+inline gboolean wx_gtk_widget_get_can_focus(GtkWidget *widget)
+{
+    return GTK_WIDGET_CAN_FOCUS(widget);
+}
+                                                            
+
+inline void wx_gtk_widget_set_can_focus(GtkWidget *widget, gboolean can)
+{
+    if ( can )
+        GTK_WIDGET_SET_FLAGS(widget, GTK_CAN_FOCUS);
+    else
+        GTK_WIDGET_UNSET_FLAGS(widget, GTK_CAN_FOCUS);
+}
+                                                            
+
+
+inline gboolean wx_gtk_widget_get_can_default(GtkWidget *widget)
+{
+    return GTK_WIDGET_CAN_DEFAULT(widget);
+}
+                                                                
+
+inline void wx_gtk_widget_set_can_default(GtkWidget *widget, gboolean can)
+{
+    if ( can )
+        GTK_WIDGET_SET_FLAGS(widget, GTK_CAN_DEFAULT);
+    else
+        GTK_WIDGET_UNSET_FLAGS(widget, GTK_CAN_DEFAULT);
+}
+                                                                
+
+
+inline gboolean wx_gtk_widget_has_default(GtkWidget *widget)
+{
+    return GTK_WIDGET_HAS_DEFAULT(widget);
+}
+                                                        
+
+
+inline GtkStateType wx_gtk_widget_get_state(GtkWidget *widget)
+{
+    return (GtkStateType)GTK_WIDGET_STATE(widget);
+}
+                                                    
+
+
+inline gboolean wx_gtk_widget_get_double_buffered(GtkWidget *widget)
+{
+    return GTK_WIDGET_DOUBLE_BUFFERED(widget);
+}
+                                                                        
+
+static inline gboolean wx_gtk_widget_has_grab(GtkWidget* widget)
+{
+    return GTK_WIDGET_HAS_GRAB(widget);
+}
+                                                  
+
+static inline void wx_gtk_widget_set_allocation(GtkWidget* widget, const GtkAllocation* allocation)
+{
+    widget->allocation = *allocation;
+}
+                                                              
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.20
+
+inline gboolean wx_gtk_widget_get_realized(GtkWidget *widget)
+{
+    return GTK_WIDGET_REALIZED(widget);
+}
+                                                          
+
+
+inline gboolean wx_gtk_widget_get_mapped(GtkWidget *widget)
+{
+    return GTK_WIDGET_MAPPED(widget);
+}
+                                                      
+
+static inline void wx_gtk_widget_get_requisition(GtkWidget* widget, GtkRequisition* requisition)
+{
+    *requisition = widget->requisition;
+}
+                                                                
+
+static inline GdkWindow* wx_gtk_entry_get_text_window(GtkEntry* entry)
+{
+    return entry->text_area;
+}
+                                                              
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.22
+
+static inline GdkWindow* wx_gtk_button_get_event_window(GtkButton* button)
+{
+    return button->event_window;
+}
+                                                                  
+
+static inline GdkDragAction wx_gdk_drag_context_get_actions(GdkDragContext* context)
+{
+    return context->actions;
+}
+                                                                    
+
+static inline GdkDragAction wx_gdk_drag_context_get_selected_action(GdkDragContext* context)
+{
+    return context->action;
+}
+                                                                                    
+
+static inline GdkDragAction wx_gdk_drag_context_get_suggested_action(GdkDragContext* context)
+{
+    return context->suggested_action;
+}
+                                                                                      
+
+static inline GList* wx_gdk_drag_context_list_targets(GdkDragContext* context)
+{
+    return context->targets;
+}
+                                                                      
+
+static inline gint wx_gdk_visual_get_depth(GdkVisual* visual)
+{
+    return visual->depth;
+}
+                                                    
+
+static inline gboolean wx_gtk_window_has_group(GtkWindow* window)
+{
+    return window->group != NULL;
+}
+                                                    
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 2.24
+
+static inline GdkDisplay* wx_gdk_window_get_display(GdkWindow* window)
+{
+    return gdk_drawable_get_display(window);
+}
+                                                        
+
+static inline GdkScreen* wx_gdk_window_get_screen(GdkWindow* window)
+{
+    return gdk_drawable_get_screen(window);
+}
+                                                      
+
+static inline gint wx_gdk_window_get_height(GdkWindow* window)
+{
+    int h;
+    gdk_drawable_get_size(window, NULL, &h);
+    return h;
+}
+                                                      
+
+static inline gint wx_gdk_window_get_width(GdkWindow* window)
+{
+    int w;
+    gdk_drawable_get_size(window, &w, NULL);
+    return w;
+}
+                                                    
+
+                             
+                                                                                                       
+ 
+                                                  
+ 
+                                                                  
+      
+
+// ----------------------------------------------------------------------------
+// the following were introduced in GTK+ 3.0
+
+static inline void wx_gdk_window_get_geometry(GdkWindow* window, gint* x, gint* y, gint* width, gint* height)
+{
+    gdk_window_get_geometry(window, x, y, width, height, NULL);
+}
+                                                          
+
+static inline GtkWidget* wx_gtk_tree_view_column_get_button(GtkTreeViewColumn* tree_column)
+{
+    return tree_column->button;
+}
+                                                                          
+
+static inline GtkWidget* wx_gtk_box_new(GtkOrientation orientation, gint spacing)
+{
+    GtkWidget* widget;
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        widget = gtk_hbox_new(false, spacing);
+    else
+        widget = gtk_vbox_new(false, spacing);
+    return widget;
+}
+                                  
+
+static inline GtkWidget* wx_gtk_button_box_new(GtkOrientation orientation)
+{
+    GtkWidget* widget;
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        widget = gtk_hbutton_box_new();
+    else
+        widget = gtk_vbutton_box_new();
+    return widget;
+}
+                                                
+
+static inline GtkWidget* wx_gtk_scale_new(GtkOrientation orientation, GtkAdjustment* adjustment)
+{
+    GtkWidget* widget;
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        widget = gtk_hscale_new(adjustment);
+    else
+        widget = gtk_vscale_new(adjustment);
+    return widget;
+}
+                                      
+
+static inline GtkWidget* wx_gtk_scrollbar_new(GtkOrientation orientation, GtkAdjustment* adjustment)
+{
+    GtkWidget* widget;
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        widget = gtk_hscrollbar_new(adjustment);
+    else
+        widget = gtk_vscrollbar_new(adjustment);
+    return widget;
+}
+                                              
+
+static inline GtkWidget* wx_gtk_separator_new(GtkOrientation orientation)
+{
+    GtkWidget* widget;
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        widget = gtk_hseparator_new();
+    else
+        widget = gtk_vseparator_new();
+    return widget;
+}
+                                              
+
+static inline void wx_gtk_widget_get_preferred_height(GtkWidget* widget, gint* minimum, gint* natural)
+{
+    GtkRequisition req;
+    gtk_widget_size_request(widget, &req);
+    if (minimum)
+        *minimum = req.height;
+    if (natural)
+        *natural = req.height;
+}
+                                                                          
+
+static inline void wx_gtk_widget_get_preferred_width(GtkWidget* widget, gint* minimum, gint* natural)
+{
+    GtkRequisition req;
+    gtk_widget_size_request(widget, &req);
+    if (minimum)
+        *minimum = req.width;
+    if (natural)
+        *natural = req.width;
+}
+                                                                        
+
+static inline void wx_gtk_widget_get_preferred_size(GtkWidget* widget, GtkRequisition* minimum, GtkRequisition* natural)
+{
+    GtkRequisition* req = minimum;
+    if (req == NULL)
+        req = natural;
+    gtk_widget_size_request(widget, req);
+}
+                                                                      
+
+       // !__WXGTK3__
+       // _WX_GTK_PRIVATE_COMPAT_H_

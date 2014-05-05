@@ -1,0 +1,114 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\DropSource.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\stdafx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\DropSource.cpp" 9
+                  
+                      
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\DropSource.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+                  
+// Drag and Drop source
+// Note values to stop D&D between instances where data is of different lengths
+enum {
+  FROMCC = 0,       // From Column Chooser Dialog
+  FROMHDR = 1,      // From ListCtrl Header
+  FROMTREE_L = 2,   // From TreeCtrl - left  mouse D&D
+  FROMTREE_R = 4,   // From TreeCtrl - right mouse D&D
+  FROMTREE_RSC = 8  // From TreeCtrl - right mouse D&D - create Shortcut allowed
+};
+
+class CDataSource : protected COleDataSource
+{
+public:
+  CDataSource();
+  virtual ~CDataSource();
+  virtual DROPEFFECT StartDragging(BYTE *szData, DWORD dwLength,
+    CLIPFORMAT cpfmt, RECT* rClient, CPoint* ptMousePos);
+
+protected:
+  virtual void CompleteMove() {};
+
+private:
+};
+
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\DropSource.cpp" 11
+
+CDataSource::CDataSource()
+{
+}
+
+CDataSource::~CDataSource()
+{
+}
+
+DROPEFFECT CDataSource::StartDragging(BYTE *szData, DWORD dwLength, CLIPFORMAT cpfmt,
+                                      RECT *rClient, CPoint *ptMousePos)
+{
+  HGLOBAL hgData = GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, dwLength);
+  ;
+
+  LPCSTR lpData = (LPCSTR)GlobalLock(hgData);
+  ;
+
+  memcpy((void *)lpData, szData, dwLength);
+  CacheGlobalData(cpfmt, hgData);
+
+  DROPEFFECT dropEffect = DoDragDrop(DROPEFFECT_COPY | DROPEFFECT_MOVE,
+    (LPCRECT)rClient);
+
+  if ((dropEffect & DROPEFFECT_MOVE) == DROPEFFECT_MOVE)
+    CompleteMove();
+
+  LPARAM lparam = (LPARAM(ptMousePos->y) << 16) | LPARAM(ptMousePos->x);
+  SendMessage(GetActiveWindow(), WM_LBUTTONUP, 0, lparam);
+
+  Empty();
+
+  //InternalRelease();
+
+  return dropEffect;
+}

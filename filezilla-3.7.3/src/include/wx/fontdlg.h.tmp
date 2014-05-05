@@ -1,0 +1,117 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\fontdlg.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/fontdlg.h
+// Purpose:     common interface for different wxFontDialog classes
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     12.05.02
+// Copyright:   (c) 1997-2002 wxWidgets team
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                               // for wxUSE_FONTDLG
+
+                 
+
+                                                 
+                        
+
+                                                                               
+                         
+                                                                               
+
+                                                         
+ 
+       
+                             
+                          
+                                                             
+                                                              
+                                                   
+
+                                 
+                                    
+                                                         
+                                                       
+
+                             
+                                                                
+                                                    
+
+                           
+                                                              
+                                                                               
+
+                                                                          
+                                 
+
+          
+                                                                               
+
+                                                    
+                                           
+
+                          
+
+                                              
+  
+
+                           
+                                                              
+                                                                                   
+                                          
+
+                                                                              
+                                              
+                                 
+
+                                                                               
+                                                
+                                                                               
+
+                            
+                                                   
+                                           
+     
+                                           
+                                           
+      
+
+                                                                                                                                                      
+
+
+
+
+
+                                    
+                                            
+                        
+                               
+                          
+                               
+                        
+                                
+                       
+                               
+                        
+                               
+      
+
+                                                                               
+                          
+                                                                               
+
+                                                                             
+            
+                                                                  
+                                                                              
+                                                                                   
+
+       // wxUSE_FONTDLG
+
+      
+    // _WX_FONTDLG_H_BASE_

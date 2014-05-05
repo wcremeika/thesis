@@ -1,0 +1,32 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\x11\chkconf.h" 0
+/*
+ * Name:        wx/x11/chkconf.h
+ * Purpose:     Compiler-specific configuration checking
+ * Author:      Julian Smart
+ * Modified by:
+ * Created:     01/02/97
+ * Copyright:   (c) Julian Smart
+ * Licence:     wxWindows licence
+ */
+
+/* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
+
+                          
+                          
+
+/* wxPalette is always needed */
+                  
+      
+      
+
+                                             
+                              
+      
+     
+                              
+                                 
+      
+      
+
+       /* _WX_X11_CHKCONF_H_ */

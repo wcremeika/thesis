@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_auinotbk.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_auinotbk.h
+// Purpose:     XML resource handler for wxAuiNotebook
+// Author:      Steve Lamerton
+// Created:     2009-06-12
+// Copyright:   (c) 2009 Steve Lamerton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                 
+                                 
+
+                         
+
+class WXDLLIMPEXP_FWD_AUI wxAuiNotebook;
+
+                          
+
+                                                                           
+ 
+       
+                              
+                                         
+                                            
+
+        
+                    
+                              
+
+                                                     
+  
+
+       // wxUSE_XRC && wxUSE_AUI
+
+       // _WX_XRC_XH_AUINOTEBOOK_H_

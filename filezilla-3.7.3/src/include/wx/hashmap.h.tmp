@@ -1,0 +1,755 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\hashmap.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/hashmap.h
+// Purpose:     wxHashMap class
+// Author:      Mattia Barbon
+// Modified by:
+// Created:     29/01/2002
+// Copyright:   (c) Mattia Barbon
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                     
+                    
+
+// In wxUSE_STD_CONTAINERS build we prefer to use the standard hash map class
+// but it can be either in non-standard hash_map header (old g++ and some other
+// STL implementations) or in C++0x standard unordered_map which can in turn be
+// available either in std::tr1 or std namespace itself
+//
+// To summarize: if std::unordered_map is available use it, otherwise use tr1
+// and finally fall back to non-standard hash_map
+
+                                                                                                                                
+
+                             
+      
+
+                                                                                                    
+
+
+                                   
+                            
+                                     
+                                     
+                                
+                                          
+      
+
+                                                                                                                                                                                    
+
+
+                                                        
+
+                              
+                           
+                            
+                       
+      
+
+                                  
+                                           
+                                
+                                     
+      
+
+                                                                                                                                                                               
+
+
+      // !wxUSE_STD_CONTAINERS || no std::{hash,unordered}_map class available
+
+                           
+
+                  
+                      
+     
+                               // for ptrdiff_t
+      
+
+// private
+struct WXDLLIMPEXP_BASE _wxHashTable_NodeBase
+{
+    _wxHashTable_NodeBase() : m_next(NULL) {}
+
+    _wxHashTable_NodeBase* m_next;
+
+// Cannot do this:
+//  wxDECLARE_NO_COPY_CLASS(_wxHashTable_NodeBase);
+// without rewriting the macros, which require a public copy constructor.
+};
+
+// private
+class WXDLLIMPEXP_BASE _wxHashTableBase2
+{
+public:
+    typedef void (*NodeDtor)(_wxHashTable_NodeBase*);
+    typedef unsigned long (*BucketFromNode)(_wxHashTableBase2*,_wxHashTable_NodeBase*);
+    typedef _wxHashTable_NodeBase* (*ProcessNode)(_wxHashTable_NodeBase*);
+protected:
+    static _wxHashTable_NodeBase* DummyProcessNode(_wxHashTable_NodeBase* node);
+    static void DeleteNodes( size_t buckets, _wxHashTable_NodeBase** table,
+                             NodeDtor dtor );
+    static _wxHashTable_NodeBase* GetFirstNode( size_t buckets,
+                                                _wxHashTable_NodeBase** table )
+    {
+        for( size_t i = 0; i < buckets; ++i )
+            if( table[i] )
+                return table[i];
+        return NULL;
+    }
+
+    // as static const unsigned prime_count = 31 but works with all compilers
+    enum { prime_count = 31 };
+    static const unsigned long ms_primes[prime_count];
+
+    // returns the first prime in ms_primes greater than n
+    static unsigned long GetNextPrime( unsigned long n );
+
+    // returns the first prime in ms_primes smaller than n
+    // ( or ms_primes[0] if n is very small )
+    static unsigned long GetPreviousPrime( unsigned long n );
+
+    static void CopyHashTable( _wxHashTable_NodeBase** srcTable,
+                               size_t srcBuckets, _wxHashTableBase2* dst,
+                               _wxHashTable_NodeBase** dstTable,
+                               BucketFromNode func, ProcessNode proc );
+
+    static void** AllocTable( size_t sz )
+    {
+        return (void **)calloc(sz, sizeof(void*));
+    }
+    static void FreeTable(void *table)
+    {
+        free(table);
+    }
+};
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// defines an STL-like pair class CLASSNAME storing two fields: first of type
+// KEY_T and second of type VALUE_T
+                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// defines the class CLASSNAME returning the key part (of type KEY_T) from a
+// pair of type PAIR_T
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// grow/shrink predicates
+inline bool never_grow( size_t, size_t ) { return false; }
+inline bool never_shrink( size_t, size_t ) { return false; }
+inline bool grow_lf70( size_t buckets, size_t items )
+{
+    return float(items)/float(buckets) >= 0.85f;
+}
+
+       // various hash map implementations
+
+// ----------------------------------------------------------------------------
+// hashing and comparison functors
+// ----------------------------------------------------------------------------
+
+// NB: implementation detail: all of these classes must have dummy assignment
+//     operators to suppress warnings about "statement with no effect" from gcc
+//     in the hash table class assignment operator (where they're assigned)
+
+                           
+
+                
+                                     
+ 
+        
+                                               
+                                                         
+                                             
+                                                       
+                                                 
+                                                           
+
+                                            
+                                                                     
+                                                                                                                                    
+
+                                               
+     
+                                                      
+                                                                           
+     
+                                                                     
+                                                   
+         
+                                                           
+          
+                                               
+
+       
+                       
+                                                               
+                                                                         
+                                                             
+                                                                       
+                                                                 
+                                                                           
+                                            
+                                                                         
+                                                                          
+                                               
+
+                                                                    
+  
+
+      // wxNEEDS_WX_HASH_MAP
+
+// integer types
+struct WXDLLIMPEXP_BASE wxIntegerHash
+{
+    wxIntegerHash() { }
+    unsigned long operator()( long x ) const { return (unsigned long)x; }
+    unsigned long operator()( unsigned long x ) const { return x; }
+    unsigned long operator()( int x ) const { return (unsigned long)x; }
+    unsigned long operator()( unsigned int x ) const { return x; }
+    unsigned long operator()( short x ) const { return (unsigned long)x; }
+    unsigned long operator()( unsigned short x ) const { return x; }
+                                            
+                                                                                              
+                                                                   
+       // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
+
+    wxIntegerHash& operator=(const wxIntegerHash&) { return *this; }
+};
+
+       // !wxNEEDS_WX_HASH_MAP/wxNEEDS_WX_HASH_MAP
+
+struct WXDLLIMPEXP_BASE wxIntegerEqual
+{
+    wxIntegerEqual() { }
+    bool operator()( long a, long b ) const { return a == b; }
+    bool operator()( unsigned long a, unsigned long b ) const { return a == b; }
+    bool operator()( int a, int b ) const { return a == b; }
+    bool operator()( unsigned int a, unsigned int b ) const { return a == b; }
+    bool operator()( short a, short b ) const { return a == b; }
+    bool operator()( unsigned short a, unsigned short b ) const { return a == b; }
+                                            
+                                                                              
+                                                                                
+       // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
+
+    wxIntegerEqual& operator=(const wxIntegerEqual&) { return *this; }
+};
+
+// pointers
+struct WXDLLIMPEXP_BASE wxPointerHash
+{
+    wxPointerHash() { }
+
+                          
+    wxUIntPtr operator()( const void* k ) const { return wxPtrToUInt(k); }
+     
+                                                                  
+      
+
+    wxPointerHash& operator=(const wxPointerHash&) { return *this; }
+};
+
+struct WXDLLIMPEXP_BASE wxPointerEqual
+{
+    wxPointerEqual() { }
+    bool operator()( const void* a, const void* b ) const { return a == b; }
+
+    wxPointerEqual& operator=(const wxPointerEqual&) { return *this; }
+};
+
+// wxString, char*, wchar_t*
+struct WXDLLIMPEXP_BASE wxStringHash
+{
+    wxStringHash() {}
+    unsigned long operator()( const wxString& x ) const
+        { return stringHash( x.wx_str() ); }
+    unsigned long operator()( const wchar_t* x ) const
+        { return stringHash( x ); }
+    unsigned long operator()( const char* x ) const
+        { return stringHash( x ); }
+
+                           
+                                                            
+                                 
+                     
+                                                        
+                                 
+          
+       // WXWIN_COMPATIBILITY_2_8
+
+    static unsigned long stringHash( const wchar_t* );
+    static unsigned long stringHash( const char* );
+
+    wxStringHash& operator=(const wxStringHash&) { return *this; }
+};
+
+struct WXDLLIMPEXP_BASE wxStringEqual
+{
+    wxStringEqual() {}
+    bool operator()( const wxString& a, const wxString& b ) const
+        { return a == b; }
+    bool operator()( const wxChar* a, const wxChar* b ) const
+        { return wxStrcmp( a, b ) == 0; }
+                 
+                                                         
+                                       
+       // wxUSE_UNICODE
+
+    wxStringEqual& operator=(const wxStringEqual&) { return *this; }
+};
+
+                          
+
+                                                                                              
+
+                            
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       // wxNEEDS_WX_HASH_MAP
+
+// these macros are to be used in the user code
+                                                                                                                                                        
+
+
+                                                                                                                                                                               
+
+
+
+                                                                                                                                                                               
+
+
+
+// and these do exactly the same thing but should be used inside the
+// library
+                                                                                                                                                                       
+
+
+                                                                                                                                                                                                                              
+
+
+
+                                                                                                                                                                                              
+
+
+
+                                                                                                                                                                                                  
+
+
+
+                                                                                                                                                                                              
+
+
+
+                                                                                                                                                                                                     
+
+
+
+// delete all hash elements
+//
+// NB: the class declaration of the hash elements must be visible from the
+//     place where you use this macro, otherwise the proper destructor may not
+//     be called (a decent compiler should give a warning about it, but don't
+//     count on it)!
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------
+// Declarations of common hashmap classes
+
+;
+
+;
+
+;
+
+
+       // _WX_HASHMAP_H_

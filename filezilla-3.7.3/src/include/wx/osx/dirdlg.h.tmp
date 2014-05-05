@@ -1,0 +1,72 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\dirdlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/dirdlg.h
+// Purpose:     wxDirDialog class
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+                   
+                                            
+      
+
+class WXDLLIMPEXP_CORE wxDirDialog : public wxDirDialogBase
+{
+public:
+    wxDirDialog() { Init(); }
+
+    wxDirDialog(wxWindow *parent,
+                const wxString& message = wxDirSelectorPromptStr,
+                const wxString& defaultPath = wxT(""),
+                long style = wxDD_DEFAULT_STYLE,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                const wxString& name = wxDirDialogNameStr)
+    {
+        Init();
+
+        Create(parent,message,defaultPath,style,pos,size,name);
+    }
+
+    void Create(wxWindow *parent,
+                const wxString& message = wxDirSelectorPromptStr,
+                const wxString& defaultPath = wxT(""),
+                long style = wxDD_DEFAULT_STYLE,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                const wxString& name = wxDirDialogNameStr);
+
+                   
+                   
+      
+
+    virtual int ShowModal();
+
+                   
+                                   
+                                                                    
+      
+
+private:
+                   
+                                                                            
+                         
+                                          
+
+                                
+      
+
+    // Common part of all ctors.
+    void Init();
+
+    DECLARE_DYNAMIC_CLASS(wxDirDialog)
+};
+
+       // _WX_DIRDLG_H_

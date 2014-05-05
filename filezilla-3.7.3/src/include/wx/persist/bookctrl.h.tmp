@@ -1,0 +1,68 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\persist\bookctrl.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/persist/bookctrl.h
+// Purpose:     persistence support for wxBookCtrl
+// Author:      Vadim Zeitlin
+// Created:     2009-01-19
+// Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                               
+                               
+
+                             
+
+                       
+
+// ----------------------------------------------------------------------------
+// string constants used by wxPersistentBookCtrl
+// ----------------------------------------------------------------------------
+
+                                  
+
+                                            
+
+// ----------------------------------------------------------------------------
+// wxPersistentBookCtrl: supports saving/restoring book control selection
+// ----------------------------------------------------------------------------
+
+class wxPersistentBookCtrl : public wxPersistentWindow<wxBookCtrlBase>
+{
+public:
+    wxPersistentBookCtrl(wxBookCtrlBase *book)
+        : wxPersistentWindow<wxBookCtrlBase>(book)
+    {
+    }
+
+    virtual void Save() const
+    {
+        SaveValue("Selection", Get()->GetSelection());
+    }
+
+    virtual bool Restore()
+    {
+        long sel;
+        if ( RestoreValue("Selection", &sel) )
+        {
+            wxBookCtrlBase * const book = Get();
+            if ( sel >= 0 && (unsigned)sel < book->GetPageCount() )
+            {
+                book->SetSelection(sel);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    virtual wxString GetKind() const { return "Book"; }
+};
+
+inline wxPersistentObject *wxCreatePersistentObject(wxBookCtrlBase *book)
+{
+    return new wxPersistentBookCtrl(book);
+}
+
+       // _WX_PERSIST_BOOKCTRL_H_

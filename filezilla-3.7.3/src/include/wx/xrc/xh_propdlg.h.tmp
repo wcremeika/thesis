@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_propdlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_propdlg.h
+// Purpose:     XML resource handler for wxPropertySheetDialog
+// Author:      Sander Berents
+// Created:     2007/07/12
+// Copyright:   (c) 2007 Sander Berents
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+                         
+
+             
+
+                                                
+
+                                                                                   
+ 
+                                                          
+
+       
+                                      
+                                         
+                                            
+
+        
+                    
+                                    
+  
+
+       // wxUSE_XRC
+
+       // _WX_XH_PROPDLG_H_

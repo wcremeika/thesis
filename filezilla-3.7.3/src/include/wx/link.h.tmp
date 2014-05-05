@@ -1,0 +1,33 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\link.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/link.h
+// Purpose:     macros to force linking modules which might otherwise be
+//              discarded by the linker
+// Author:      Vaclav Slavik
+// Copyright:   (c) Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                   
+                   
+
+// This must be part of the module you want to force:
+                                                                                                                                                                                                         
+
+
+
+
+// And this must be somewhere where it certainly will be linked:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+
+
+
+
+
+       // _WX_LINK_H_

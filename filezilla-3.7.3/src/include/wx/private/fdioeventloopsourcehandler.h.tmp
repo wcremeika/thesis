@@ -1,0 +1,40 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\private\fdioeventloopsourcehandler.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/private/fdioeventloopsourcehandler.h
+// Purpose:     declares wxFDIOEventLoopSourceHandler class
+// Author:      Rob Bresalier, Vadim Zeitlin
+// Created:     2013-06-13 (extracted from src/unix/evtloopunix.cpp)
+// Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
+//              (c) 2013 Rob Bresalier
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                                    
+                                                    
+
+                         
+
+// This class is a temporary bridge between event loop sources and
+// FDIODispatcher. It is going to be removed soon, when all subject interfaces
+// are modified
+class wxFDIOEventLoopSourceHandler : public wxFDIOHandler
+{
+public:
+    wxEXPLICIT wxFDIOEventLoopSourceHandler(wxEventLoopSourceHandler* handler)
+        : m_handler(handler)
+    {
+    }
+
+    // Just forward to the real handler.
+    virtual void OnReadWaiting() { m_handler->OnReadWaiting(); }
+    virtual void OnWriteWaiting() { m_handler->OnWriteWaiting(); }
+    virtual void OnExceptionWaiting() { m_handler->OnExceptionWaiting(); }
+
+protected:
+    wxEventLoopSourceHandler* const m_handler;
+
+    wxDECLARE_NO_COPY_CLASS(wxFDIOEventLoopSourceHandler);
+};
+
+       // _WX_PRIVATE_FDIO_EVENT_LOOP_SOURCE_HANDLER_H

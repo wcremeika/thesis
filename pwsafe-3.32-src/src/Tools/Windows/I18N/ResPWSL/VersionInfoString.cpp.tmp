@@ -1,0 +1,263 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.cpp" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// VersionInfoString.cpp: implementation of the CVersionInfoString class.
+//
+//////////////////////////////////////////////////////////////////////
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\stdafx.h" 0
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+       
+
+                                                                             
+
+                           // MFC core and standard components
+                           // MFC extensions
+
+                  
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.cpp" 12
+                             
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.h" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// VersionInfoString.h: interface for the CVersionInfoString class.
+//
+//////////////////////////////////////////////////////////////////////
+
+       
+
+                                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoHelperStructures.h" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// ******************************************************************
+//  VersionInfoHelperStructures   version:  1.0   ·  date: 03/06/2006
+//  -----------------------------------------------------------------
+//  -----------------------------------------------------------------
+
+//////////////////////////////////////////////////////////////////////////
+// Helper structures
+// All Version structures are essentially the same, and are declared to
+// increase code readability
+//
+
+       
+
+                                                    
+
+struct BaseVersionStruct {
+  WORD        wLength; 
+  WORD        wValueLength; 
+  WORD        wType; 
+  WCHAR       szKey[1]; 
+  WORD        Padding[1]; 
+};
+
+struct VERSION_INFO_HEADER: public BaseVersionStruct{ 
+  VS_FIXEDFILEINFO Value; 
+};
+
+struct String: public BaseVersionStruct{ 
+  WORD   Value[1]; 
+}; 
+
+struct StringTable: public BaseVersionStruct { 
+  String Children[1]; 
+};
+
+struct Var: public BaseVersionStruct { 
+  DWORD Value[1]; 
+}; 
+
+
+struct BaseFileInfo: public BaseVersionStruct 
+{ 
+};
+
+struct StringFileInfo: public BaseFileInfo { 
+  StringTable Children[1]; 
+};
+
+struct VarFileInfo: public BaseFileInfo  { 
+  Var   Children[1]; 
+}; 
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.h" 21
+
+class CVersionInfoBuffer;
+
+class CVersionInfoString: public CObject
+{
+public:
+  CVersionInfoString(String* pString);
+  CVersionInfoString(const CString& strKey, const CString& strValue = "");
+
+  const CString& GetKey() const;
+  const CString& GetValue() const;
+
+  CString& GetValue();
+
+  void FromString(String* pString);
+  void Write(CVersionInfoBuffer & viBuf);
+private:
+  CString m_strKey;
+  CString m_strValue;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.cpp" 13
+                             
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoBuffer.h" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// VersionInfoBuffer.h: interface for the CVersionInfoBuffer class.
+//
+//////////////////////////////////////////////////////////////////////
+
+       
+
+// Helper class for VersionInfo (auto reallocation of buffer, and helpful functions like Pad, PadToDWORD, WriteStructSize
+class CVersionInfoBuffer : public CObject  
+{
+public:
+
+  CVersionInfoBuffer();
+  virtual ~CVersionInfoBuffer();
+
+  // Writes data to the buffer
+  void Write(LPVOID lpData, DWORD dwSize);
+
+  // Writes string to the buffer (converts to Unicode)
+  WORD WriteString(const CString& strValue);
+
+  // Writes a WORD to the buffer
+  void WriteWord(WORD wData);
+
+  // Writes the difference between specified offset and current length to a WORD at given offset
+  // this writing the structure size wLength
+  void WriteStructSize(DWORD dwOffsetOfSizeMemember);
+
+  // Returns current position
+  DWORD GetPosition();
+
+  // Allings to DWORD (pads with 0s)
+  DWORD PadToDWORD();
+
+  // Pads with zeroes 
+  DWORD Pad(WORD wLength);
+
+  // Get pointer to data (pointer can not be used after any writes made after calling GetData() due to possible relocation)
+  const LPBYTE GetData();
+private:
+  DWORD m_dwPosition;
+  DWORD m_dwBufSize;
+  LPBYTE m_lpData;
+protected:
+  void ReallocBuffer(DWORD dwMinimumSize);
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.cpp" 14
+
+             
+                
+                                 
+                     
+      
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+
+CVersionInfoString::CVersionInfoString(const CString& strKey, const CString& strValue):m_strKey(strKey), m_strValue(strValue)
+{
+}
+
+CVersionInfoString::CVersionInfoString(String* pString)
+{
+  FromString(pString);
+}
+
+//////////////////////////////////////////////////////////////////////
+// Loading/saving
+void CVersionInfoString::FromString(String* pString)
+{
+  m_strKey = pString->szKey;
+  LPWSTR lpwszValue = (LPWSTR) (((DWORD)(LPBYTE) &pString->szKey[wcslen(pString->szKey)+1] + 3) & ~3);
+  CString strValue;
+  if (pString->wValueLength)
+    m_strValue = lpwszValue;
+}
+
+void CVersionInfoString::Write(CVersionInfoBuffer & viBuf)
+{
+  //Pad to DWORD and save position for wLength
+  DWORD pos = viBuf.PadToDWORD();
+
+  //Skip size for now;
+  viBuf.Pad(sizeof WORD);
+
+  //Write wValueLength
+  if (!m_strValue.IsEmpty())
+    viBuf.WriteWord(m_strValue.GetLength() + 1);
+  else
+    viBuf.WriteWord(0);
+
+  //Write wType (Text)
+  viBuf.WriteWord(1);
+
+  //Write key
+  viBuf.WriteString(m_strKey);
+
+  //Pad for Value
+  viBuf.PadToDWORD();
+
+  //Write the value
+  if (!m_strValue.IsEmpty())
+    viBuf.WriteString(m_strValue);
+
+  //Set the size of the structure based on current offset from the position
+  viBuf.WriteStructSize(pos);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Operations
+
+const CString& CVersionInfoString::GetKey() const
+{
+  return m_strKey;
+}
+
+const CString& CVersionInfoString::GetValue() const
+{
+  return m_strValue;
+}
+
+CString& CVersionInfoString::GetValue()
+{
+  return m_strValue;
+}

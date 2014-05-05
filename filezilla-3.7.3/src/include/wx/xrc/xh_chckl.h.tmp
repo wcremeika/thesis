@@ -1,0 +1,35 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_chckl.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_chckl.h
+// Purpose:     XML resource handler for wxCheckListBox
+// Author:      Bob Mitchell
+// Created:     2000/03/21
+// Copyright:   (c) 2000 Bob Mitchell and Verant Interactive
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                         
+
+                                   
+
+                                                                            
+ 
+                                                   
+
+       
+                               
+                                         
+                                            
+
+        
+                     
+                          
+  
+
+       // wxUSE_XRC && wxUSE_CHECKLISTBOX
+
+       // _WX_XH_CHECKLIST_H_

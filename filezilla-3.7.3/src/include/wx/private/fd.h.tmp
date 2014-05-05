@@ -1,0 +1,55 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\private\fd.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/private/fd.h
+// Purpose:     private stuff for working with file descriptors
+// Author:      Vadim Zeitlin
+// Created:     2008-11-23 (moved from wx/unix/private.h)
+// Copyright:   (c) 2008 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+// standard Linux headers produce many warnings when used with icc so define
+// our own replacements for FD_XXX macros
+                                             
+                                      
+     
+               
+               
+                     
+               
+     
+
+                                             
+     
+               
+               
+                        
+               
+     
+
+                                               
+     
+               
+               
+                                 
+               
+     
+                                             
+     
+               
+               
+                        
+               
+     
+      // !__INTELC__
+                                       
+                                             
+                                                 
+                                             
+       // __INTELC__/!__INTELC__
+
+       // _WX_PRIVATE_FD_H_

@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\evtloop.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/evtloop.h
+// Purpose:     simply forwards to wx/osx/carbon/evtloop.h or
+//              wx/osx/cocoa/evtloop.h for consistency with the other Mac
+//              headers
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     2006-01-12
+// Copyright:   (c) 2006 Vadim Zeitlin <vadim@wxwindows.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                      
+                                     
+     
+                                     
+      
+
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_CORE wxNonOwnedWindow;
+
+class WXDLLIMPEXP_CORE wxModalEventLoop : public wxGUIEventLoop
+{
+public:
+    wxModalEventLoop(wxWindow *modalWindow);
+    wxModalEventLoop(WXWindow modalNativeWindow);
+    
+                      
+                                                                    
+                                              
+      
+protected:
+    virtual void OSXDoRun();
+    virtual void OSXDoStop();
+
+    // (in case) the modal window for this event loop
+    wxNonOwnedWindow* m_modalWindow;
+    WXWindow m_modalNativeWindow;
+};
+
+       // _WX_OSX_EVTLOOP_H_

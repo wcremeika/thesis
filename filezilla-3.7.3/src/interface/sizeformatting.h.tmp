@@ -1,0 +1,68 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\sizeformatting.h" 0
+                            
+                            
+
+                               
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\sizeformatting_base.h" 0
+                                 
+                                 
+
+class COptionsBase;
+class CSizeFormatBase
+{
+public:
+	enum _format
+	{
+		bytes,
+		iec,
+		si1024,
+		si1000,
+
+		formats_count
+	};
+
+	// We stop at Exa. If someone has files bigger than that, he can afford to
+	// make a donation to have this changed ;)
+	enum _unit
+	{
+		byte,
+		kilo,
+		mega,
+		giga,
+		tera,
+		peta,
+		exa
+	};
+
+	static wxString FormatNumber(COptionsBase* pOptions, const wxLongLong& size, bool* thousands_separator = 0);
+
+	static wxString GetUnitWithBase(COptionsBase* pOptions, _unit unit, int base);
+	static wxString GetUnit(COptionsBase* pOptions, _unit unit, enum _format = formats_count);
+	static wxString FormatUnit(COptionsBase* pOptions, const wxLongLong& size, _unit unit, int base = 1024);
+
+	static wxString Format(COptionsBase* pOptions, const wxLongLong& size, bool add_bytes_suffix, enum _format format, bool thousands_separator, int num_decimal_places);
+	static wxString Format(COptionsBase* pOptions, const wxLongLong& size, bool add_bytes_suffix = false);
+
+	static const wxString& GetThousandsSeparator();
+	static const wxString& GetRadixSeparator();
+};
+
+       //__SIZEFORMATTING_BASE_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\sizeformatting.h" 4
+
+class CSizeFormat : public CSizeFormatBase
+{
+public:
+	static wxString FormatNumber(const wxLongLong& size, bool* thousands_separator = 0);
+
+	static wxString GetUnitWithBase(_unit unit, int base);
+	static wxString GetUnit(_unit unit, enum _format = formats_count);
+	static wxString FormatUnit(const wxLongLong& size, _unit unit, int base = 1024);
+
+	static wxString Format(const wxLongLong& size, bool add_bytes_suffix, enum _format format, bool thousands_separator, int num_decimal_places);
+	static wxString Format(const wxLongLong& size, bool add_bytes_suffix = false);
+};
+
+       //__SIZEFORMATTING_H__

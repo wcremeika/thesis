@@ -1,0 +1,49 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_ribbon.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_ribbon.h
+// Purpose:     XML resource handler for wxRibbon related classes
+// Author:      Armel Asselin
+// Created:     2010-04-23
+// Copyright:   (c) 2010 Armel Asselin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+                         
+
+                             
+
+                                             
+
+                                                                         
+ 
+       
+                         
+                                         
+                                            
+
+        
+                                  
+
+                                           
+
+                                 
+                              
+                               
+                            
+                               
+                                   
+                             
+                           
+
+                                                            
+
+                                                
+  
+
+       // wxUSE_XRC && wxUSE_RIBBON
+
+       // _WX_XRC_XH_RIBBON_H_

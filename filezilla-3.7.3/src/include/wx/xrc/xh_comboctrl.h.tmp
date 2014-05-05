@@ -1,0 +1,33 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_comboctrl.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_comboctrl.h
+// Purpose:     XML resource handler for wxComboBox
+// Author:      Jaakko Salli
+// Created:     2009/01/25
+// Copyright:   (c) 2009 Jaakko Salli
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                         
+
+                                
+
+                                                                         
+ 
+                                                
+
+       
+                            
+                                         
+                                            
+
+        
+  
+
+       // wxUSE_XRC && wxUSE_COMBOCTRL
+
+       // _WX_XH_COMBOCTRL_H_

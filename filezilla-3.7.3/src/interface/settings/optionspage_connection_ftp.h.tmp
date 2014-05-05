@@ -1,0 +1,14 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_connection_ftp.h" 0
+                                        
+                                        
+
+class COptionsPageConnectionFTP : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_CONNECTION_FTP"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+};
+
+       //__OPTIONSPAGE_CONNECTION_FTP_H__

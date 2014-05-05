@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\gtk\private\messagetype.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/gtk/private/messagetype.h
+// Purpose:     translate between wx and GtkMessageType
+// Author:      Vadim Zeitlin
+// Created:     2009-09-27
+// Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                               
+                               
+
+                   
+
+namespace wxGTKImpl
+{
+
+// Convert the given wx style to GtkMessageType, return true if succeeded or
+// false if failed.
+inline bool ConvertMessageTypeFromWX(int style, GtkMessageType *type)
+{
+                   
+                                                                      
+                                  
+        
+       // __WXGTK210__
+    if (style & wxICON_EXCLAMATION)
+        *type = GTK_MESSAGE_WARNING;
+    else if (style & wxICON_ERROR)
+        *type = GTK_MESSAGE_ERROR;
+    else if (style & wxICON_INFORMATION)
+        *type = GTK_MESSAGE_INFO;
+    else if (style & wxICON_QUESTION)
+        *type = GTK_MESSAGE_QUESTION;
+    else
+        return false;
+
+    return true;
+}
+
+} // namespace wxGTKImpl
+
+       // _GTK_PRIVATE_MSGTYPE_H_
+

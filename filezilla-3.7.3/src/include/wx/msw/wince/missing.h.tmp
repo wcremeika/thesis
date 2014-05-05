@@ -1,0 +1,141 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\wince\missing.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/wince/missing.h
+// Purpose:     Missing things in WinCE
+// Author:      Marco Cavallini
+// Modified by:
+// Created:     16/11/2002
+// Copyright:   (c) KOAN SAS ( www.koansoftware.com )
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+                          
+                    
+
+inline BOOL IsIconic( HWND WXUNUSED(hWnd) )
+{
+    // Probably not right...
+     
+                                                
+                                        
+      
+    return FALSE;
+}
+
+                   
+                                  
+                                  
+      
+
+// Missing from eVC 4 for some reason
+                   
+                        
+      
+
+                                 
+                                        
+      
+
+                      
+                                           
+      
+
+                         
+                                                                                                           
+      
+
+                         
+                                                           
+      
+
+                            
+                                           
+      
+
+                         
+                                          
+      
+
+                      
+                                                   
+                                                   
+      
+
+// Used in msgdlg.cpp, evtloop.cpp
+                    
+                           
+      
+
+                  
+                                          
+      
+
+// some windows styles don't exist in CE SDK, replace them with closest
+// equivalents
+                     
+                                   
+      
+
+                   
+                         
+      
+
+                   
+                         
+      
+
+
+// global memory functions don't exist under CE (good riddance, of course, but
+// the existing code still uses them in some places, so make it compile)
+//
+// update: they're defined in eVC 4 inside "#ifdef UNDER_CE" block
+                
+                                  
+                                
+                                
+                     
+                     
+                           
+                        
+       // !UNDER_CE
+
+// WinCE RTL doesn't implement bsearch() used in encconv.cpp
+extern "C" void *
+bsearch(const void *key, const void *base, size_t num, size_t size,
+        int (wxCMPFUNC_CONV *cmp)(const void *, const void *));
+
+                                                          
+                                                          
+                                                                 
+                                                       
+
+                                                         
+                                                      
+                                                                            
+
+                                                                   
+                                                                       
+
+                 
+                                 
+      
+
+// unsupported flags for WINDOWPOS structure
+                      
+                            
+      
+
+                         
+                               
+      
+
+                          
+                                
+      
+
+       // _WX_CE_MISSING_H_
+

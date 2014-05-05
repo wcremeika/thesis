@@ -1,0 +1,50 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\bmpbuttn.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/bmpbuttn.h
+// Purpose:     wxBitmapButton class
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                     
+
+                                 
+
+class WXDLLIMPEXP_CORE wxBitmapButton : public wxBitmapButtonBase
+{
+public:
+    wxBitmapButton()
+        {
+            SetMargins(4, 4);
+        }
+
+    wxBitmapButton(wxWindow *parent, wxWindowID id, const wxBitmap& bitmap,
+                   const wxPoint& pos = wxDefaultPosition,
+                   const wxSize& size = wxDefaultSize, long style = wxBU_AUTODRAW,
+                   const wxValidator& validator = wxDefaultValidator,
+                   const wxString& name = wxButtonNameStr)
+        {
+            Create(parent, id, bitmap, pos, size, style, validator, name);
+        }
+
+    bool Create(wxWindow *parent, wxWindowID id, const wxBitmap& bitmap,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize, long style = wxBU_AUTODRAW,
+                const wxValidator& validator = wxDefaultValidator,
+                const wxString& name = wxButtonNameStr);
+
+protected:
+
+    virtual wxSize DoGetBestSize() const;
+
+    DECLARE_DYNAMIC_CLASS(wxBitmapButton)
+};
+
+       // _WX_OSX_BMPBUTTN_H_

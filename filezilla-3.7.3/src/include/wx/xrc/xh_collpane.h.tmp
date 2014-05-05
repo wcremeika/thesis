@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_collpane.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_collpane.h
+// Purpose:     XML resource handler for wxCollapsiblePane
+// Author:      Francesco Montorsi
+// Created:     2006-10-27
+// Copyright:   (c) 2006 Francesco Montorsi
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                         
+
+                               
+
+                                             
+
+                                                                               
+ 
+       
+                                  
+                                         
+                                            
+
+        
+                    
+                                  
+
+                                                      
+  
+
+       // wxUSE_XRC && wxUSE_COLLPANE
+
+       // _WX_XH_COLLPANE_H_

@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\motif\popupwin.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/motif/popupwin.h
+// Purpose:     wxPopupWindow class for wxMotif
+// Author:      Mattia Barbon
+// Modified by:
+// Created:     28.08.03
+// Copyright:   (c) 2003 Mattia Barbon
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                             
+                             
+
+// ----------------------------------------------------------------------------
+// wxPopupWindow
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxPopupWindow : public wxPopupWindowBase
+{
+public:
+    wxPopupWindow() { Init(); }
+
+    wxPopupWindow( wxWindow *parent, int flags = wxBORDER_NONE )
+        { Init(); (void)Create( parent, flags ); }
+
+    bool Create( wxWindow *parent, int flags = wxBORDER_NONE );
+
+    virtual bool Show( bool show = true );
+private:
+    void Init() { m_isShown = false; }
+
+    DECLARE_DYNAMIC_CLASS_NO_COPY(wxPopupWindow)
+};
+
+       // _WX_MOTIF_POPUPWIN_H_

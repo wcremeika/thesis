@@ -1,0 +1,61 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\imagtiff.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/imagtiff.h
+// Purpose:     wxImage TIFF handler
+// Author:      Robert Roebling
+// Copyright:   (c) Robert Roebling
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                   
+
+//-----------------------------------------------------------------------------
+// wxTIFFHandler
+//-----------------------------------------------------------------------------
+
+                 
+
+                     
+                           
+
+                                 
+                                                                                      
+                                                                                        
+                                                                                    
+                                                                                    
+                                                                                        
+
+                              
+                                                                                    
+                                                                                      
+                                                                                  
+                                                                                      
+
+                                                           
+ 
+       
+                    
+
+                                                 
+
+                 
+                                                                                                    
+                                                                                       
+
+          
+                                                         
+                                                    
+      
+
+        
+                                        
+  
+
+       // wxUSE_LIBTIFF
+
+       // _WX_IMAGTIFF_H_
+

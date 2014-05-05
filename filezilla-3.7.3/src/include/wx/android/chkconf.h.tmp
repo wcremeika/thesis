@@ -1,0 +1,232 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\android\chkconf.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/android/chkconf.h
+// Purpose:     Android-specific configuration options checks
+// Author:      Zsolt Bakcsi
+// Modified by:
+// Created:     2011-12-08
+// RCS-ID:
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                              
+                              
+
+// ----------------------------------------------------------------------------
+// Disable features which don't work (yet) or don't make sense under Android.
+// ----------------------------------------------------------------------------
+
+// please keep the list in alphabetic order except for closely related settings
+// (e.g. wxUSE_ENH_METAFILE is put immediately after wxUSE_METAFILE)
+
+
+// ----------------------------------------------------------------------------
+// These are disabled because they are TODO. Or to decide whether to do or not.
+// ----------------------------------------------------------------------------
+
+                   
+                      
+
+// This compiles, but not yet tested, so:
+                              
+                                 
+
+                        
+                           
+
+                           
+                              
+
+                    
+                       
+
+                           
+                              
+
+                         
+                            
+
+                     
+                        
+
+// Compile-time errors when last tried (wxHAS_INOTIFY, wxHAS_KQUEUE)
+                      
+                         
+
+// Seems like Android lacks locale support. TODO: check!
+// Hint:
+// http://groups.google.com/group/android-ndk/browse_thread/thread/ffd012a047ec2392?pli=1
+//  "Android doesn't provide locale support in its C and C++ runtimes.
+//  This is handled at a higher-level in the application stack, using ICU
+//  (which is not exposed by the NDK, since the ABI is very volatile, and the
+//  set of built-in tables varies from device to device, based on customization
+//  / size reasons).
+//  You might want to use a different locale implementation. The STLport and GNU
+//  libstdc++ do provide then if you're using C++."
+                 
+                    
+                    
+                       
+
+                
+                   
+
+                      
+                         
+
+                               
+                                  
+
+                  
+                     
+
+                     
+                        
+
+                        
+                           
+
+                     
+                        
+
+                  
+                     
+
+                   
+                      
+
+                             
+                                
+
+                  
+                     
+
+                           
+                              
+
+                
+                   
+
+
+// ----------------------------------------------------------------------------
+// GUI is completely TODO.
+// ----------------------------------------------------------------------------
+
+                             
+                                
+
+                      
+                         
+
+                     
+                        
+
+                    
+                       
+
+                 
+                    
+
+                 
+                    
+
+                     
+                        
+
+                        
+                           
+
+                     
+                        
+
+                     
+                        
+                      
+                         
+
+                      
+                         
+
+// Are tooltips useful at all on a touch screen?
+                     
+                        
+
+                        
+                           
+
+
+// ----------------------------------------------------------------------------
+// All image classes are TODO.
+// ----------------------------------------------------------------------------
+
+                  
+                             
+
+                   
+                             
+
+                    
+                             
+
+                    
+                             
+
+                
+                             
+
+                
+                             
+
+                
+                             
+
+                
+                             
+
+                
+                             
+
+                
+                             
+
+                    
+                             
+
+                    
+                             
+
+
+
+// ----------------------------------------------------------------------------
+// These are disabled because they don't make sense, are not supported, or
+// would require too much effort.
+// ----------------------------------------------------------------------------
+
+// Unnecessary under Android, probably it doesn't even compile.
+                
+                   
+
+// No command line on Android.
+                           
+                              
+
+// No joystick on Android devices.
+// (What about using the direction sensor or the accelerometer?)
+                     
+                        
+
+// No MDI under Android. Well, no GUI at all (yet).
+                
+                   
+                             
+                                
+
+// No printing support on Android (2011).
+// Although 3rd party SDKs may exist (I know of one payware).
+                                  
+                                     
+
+
+       // _WX_ANDROID_CHKCONF_H_

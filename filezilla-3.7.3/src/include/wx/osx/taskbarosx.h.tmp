@@ -1,0 +1,45 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\taskbarosx.h" 0
+/////////////////////////////////////////////////////////////////////////
+// File:        wx/mac/taskbarosx.h
+// Purpose:     Defines wxTaskBarIcon class for OSX
+// Author:      Ryan Norton
+// Modified by:
+// Created:     04/04/2003
+// Copyright:   (c) Ryan Norton, 2003
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////
+
+                   
+                   
+
+class WXDLLIMPEXP_FWD_CORE wxIcon;
+class WXDLLIMPEXP_FWD_CORE wxMenu;
+
+class WXDLLIMPEXP_ADV wxTaskBarIcon : public wxTaskBarIconBase
+{
+    DECLARE_DYNAMIC_CLASS_NO_COPY(wxTaskBarIcon)
+public:
+    wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
+    virtual ~wxTaskBarIcon();
+
+    // returns true if the taskbaricon is in the global menubar
+                   
+                           
+     
+    bool OSXIsStatusItem() { return false; }
+      
+    bool IsOk() const { return true; }
+
+    bool IsIconInstalled() const;
+    bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxEmptyString);
+    bool RemoveIcon();
+    bool PopupMenu(wxMenu *menu);
+
+protected:
+    wxTaskBarIconType m_type;
+    class wxTaskBarIconImpl* m_impl;
+    friend class wxTaskBarIconImpl;
+};
+      
+    // _TASKBAR_H_

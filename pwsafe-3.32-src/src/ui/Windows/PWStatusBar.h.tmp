@@ -1,0 +1,104 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWStatusBar.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\InfoDisplay.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+/*
+*  This is nearly an exact copy of CInfoDisplay class in Asynch Explorer by
+*  Joseph M. Newcomer [MVP]; http://www.flounder.com
+*  Only minor formatting and naming changes have been made to fit in with this
+*  project.
+*/
+
+       
+
+// CInfoDisplay
+
+class CInfoDisplay : public CWnd
+{
+  
+
+public:
+  CInfoDisplay();
+  virtual ~CInfoDisplay();
+  BOOL Create(int x, int y, LPCWSTR caption, CWnd * parent);
+
+protected:
+  
+  HFONT m_font;
+
+   void OnPaint();
+   BOOL OnEraseBkgnd(CDC* pDC);
+   void OnSetFont(WPARAM, LPARAM);
+   void OnGetFont(WPARAM, LPARAM);
+
+  virtual void PostNcDestroy();
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWStatusBar.h" 11      // for Tooltips
+
+// CPWStatusBar
+
+class CPWStatusBar : public CStatusBar
+{
+  
+
+  enum {SB_DBLCLICK = 0, SB_CLIPBOARDACTION,
+                                     
+                  
+      
+        SB_MODIFIED, SB_READONLY, SB_NUM_ENT, SB_FILTER,
+        SB_TOTAL /* this must be the last entry */};
+
+public:
+  CPWStatusBar();
+  virtual ~CPWStatusBar();
+  virtual void DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct);
+  virtual BOOL OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, void *pResult);
+
+  void SetFilterStatus(const bool bStatus)
+  {m_bFilterStatus = bStatus;}
+
+  int GetBitmapWidth()
+  {return m_bmWidth;}
+
+protected:
+  //{{AFX_MSG(CPWStatusBar)
+   int OnCreate(LPCREATESTRUCT lpCreateStruct);
+   void OnTimer(UINT_PTR nIDEvent);
+   void OnMouseMove(UINT nFlags, CPoint point);
+   void OnMouseLeave(WPARAM, LPARAM);
+  //}}AFX_MSG
+
+  
+
+private:
+  bool ShowToolTip(int nPane, const bool bVisible);
+
+  CInfoDisplay *m_pSBToolTips;
+  bool m_bFilterStatus;
+  int m_bmHeight, m_bmWidth;
+  CBitmap m_FilterBitmap;
+
+  UINT_PTR m_nHoverSBTimerID, m_nShowSBTimerID;
+  CPoint m_HoverSBPoint;
+  int m_HoverSBnPane;
+  bool m_bUseToolTips, m_bMouseInWindow;
+};

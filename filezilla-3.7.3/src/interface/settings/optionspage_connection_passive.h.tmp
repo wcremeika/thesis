@@ -1,0 +1,15 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_connection_passive.h" 0
+                                            
+                                            
+
+class COptionsPageConnectionPassive : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_CONNECTION_PASSIVE"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+};
+
+       //__OPTIONSPAGE_CONNECTION_PASSIVE_H__

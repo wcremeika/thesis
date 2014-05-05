@@ -1,0 +1,200 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\hashset.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/hashset.h
+// Purpose:     wxHashSet class
+// Author:      Mattia Barbon
+// Modified by:
+// Created:     11/08/2003
+// Copyright:   (c) Mattia Barbon
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                      
+
+// see comment in wx/hashmap.h which also applies to different standard hash
+// set classes
+
+                                                                                                    
+
+
+                                   
+                            
+                                                        
+                                     
+                                
+                                                             
+     
+          
+      
+
+                                                        
+
+                              
+                           
+                            
+                       
+      
+
+                                                                 
+
+       // different hash_set/unordered_set possibilities
+
+                                
+
+                                                                              
+                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                              
+                                                                             
+                                                                             
+                                                                              
+                                                                           
+                                        
+                                                                            
+                                                                     
+                                                                              
+                                                           
+               
+                                                          
+     
+                                                                 
+      
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+
+
+
+
+
+
+
+      // no appropriate STL class, use our own implementation
+
+// this is a complex way of defining an easily inlineable identity function...
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       // STL/wx implementations
+
+
+// these macros are to be used in the user code
+                                                                                                                                                      
+
+
+// and these do exactly the same thing but should be used inside the
+// library
+                                                                                                                                                                     
+
+
+                                                                                                                                                                                                            
+
+
+
+// Finally these versions allow to define hash sets of non-objects (including
+// pointers, hence the confusing but wxArray-compatible name) without
+// operator->() which can't be used for them. This is mostly used inside the
+// library itself to avoid warnings when using such hash sets with some less
+// common compilers (notably Sun CC).
+                                                                                                                                                       
+
+                                                                                                                                                                      
+
+
+// delete all hash elements
+//
+// NB: the class declaration of the hash elements must be visible from the
+//     place where you use this macro, otherwise the proper destructor may not
+//     be called (a decent compiler should give a warning about it, but don't
+//     count on it)!
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+
+
+       // _WX_HASHSET_H_

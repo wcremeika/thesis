@@ -1,0 +1,13 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\ptr_shrd.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/ptr_shrd.h
+// Purpose:     compatibility wrapper for wx/sharedptr.h
+// Author:      Vadim Zeitlin
+// Created:     2009-02-03
+// Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+// do not include this file in any new code, include wx/sharedptr.h instead
+                        

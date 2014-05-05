@@ -1,0 +1,112 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\richtext\richtextbackgroundpage.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/richtext/richtextbackgroundpage.h
+// Purpose:
+// Author:      Julian Smart
+// Modified by:
+// Created:     13/11/2010 11:17:25
+// RCS-ID:
+// Copyright:   (c) Julian Smart
+// Licence:
+/////////////////////////////////////////////////////////////////////////////
+
+                                  
+                                  
+
+/*!
+ * Includes
+ */
+
+                                          
+
+////@begin includes
+                       
+////@end includes
+
+/*!
+ * Forward declarations
+ */
+
+class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextColourSwatchCtrl;
+
+/*!
+ * Control identifiers
+ */
+
+////@begin control identifiers
+                                                             
+                                                           
+                                                                        
+                                                             
+                                                                  
+////@end control identifiers
+
+
+/*!
+ * wxRichTextBackgroundPage class declaration
+ */
+
+class WXDLLIMPEXP_RICHTEXT wxRichTextBackgroundPage: public wxRichTextDialogPage
+{
+    DECLARE_DYNAMIC_CLASS( wxRichTextBackgroundPage )
+    DECLARE_EVENT_TABLE()
+    DECLARE_HELP_PROVISION()
+
+public:
+    /// Constructors
+    wxRichTextBackgroundPage();
+    wxRichTextBackgroundPage( wxWindow* parent, wxWindowID id = ID_RICHTEXTBACKGROUNDPAGE, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(400, 300), long style = wxTAB_TRAVERSAL );
+
+    /// Creation
+    bool Create( wxWindow* parent, wxWindowID id = ID_RICHTEXTBACKGROUNDPAGE, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(400, 300), long style = wxTAB_TRAVERSAL );
+
+    /// Destructor
+    ~wxRichTextBackgroundPage();
+
+    /// Initialises member variables
+    void Init();
+
+    /// Creates the controls and sizers
+    void CreateControls();
+
+    /// Gets the attributes from the formatting dialog
+    wxRichTextAttr* GetAttributes();
+
+    /// Data transfer
+    virtual bool TransferDataToWindow();
+    virtual bool TransferDataFromWindow();
+
+    /// Respond to colour swatch click
+    void OnColourSwatch(wxCommandEvent& event);
+
+////@begin wxRichTextBackgroundPage event handler declarations
+
+////@end wxRichTextBackgroundPage event handler declarations
+
+////@begin wxRichTextBackgroundPage member function declarations
+
+    /// Retrieves bitmap resources
+    wxBitmap GetBitmapResource( const wxString& name );
+
+    /// Retrieves icon resources
+    wxIcon GetIconResource( const wxString& name );
+////@end wxRichTextBackgroundPage member function declarations
+
+    /// Should we show tooltips?
+    static bool ShowToolTips();
+
+////@begin wxRichTextBackgroundPage member variables
+    wxCheckBox* m_backgroundColourCheckBox;
+    wxRichTextColourSwatchCtrl* m_backgroundColourSwatch;
+    /// Control identifiers
+    enum {
+        ID_RICHTEXTBACKGROUNDPAGE = 10845,
+        ID_RICHTEXT_BACKGROUND_COLOUR_CHECKBOX = 10846,
+        ID_RICHTEXT_BACKGROUND_COLOUR_SWATCH = 10847
+    };
+////@end wxRichTextBackgroundPage member variables
+};
+
+      
+    // _RICHTEXTBACKGROUNDPAGE_H_

@@ -1,0 +1,325 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\translation.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/translation.h
+// Purpose:     Internationalization and localisation for wxWidgets
+// Author:      Vadim Zeitlin, Vaclav Slavik,
+//              Michael N. Filippov <michael@idisys.iae.nsk.su>
+// Created:     2010-04-23
+// Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
+//              (c) 2010 Vaclav Slavik <vslavik@fastmail.fm>
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                   
+                     
+
+              
+
+                      
+                        
+                       
+                       
+                         
+
+                                                                               
+               
+                                                                               
+
+                                                                               
+         
+                                                                               
+
+                                                                      
+                                                 
+                                           
+                               
+                                                          
+                                                                        
+      
+
+                                                                       
+                                                             
+                            
+
+                                                                               
+                
+                                                                               
+
+                                         
+                                                
+                                    
+
+                              
+                                                                         
+
+                                                                               
+                                                          
+                                                                               
+
+                                   
+ 
+       
+                                                                       
+                                             
+                  
+                    
+      
+
+                                                                         
+                                
+                                                                 
+                                                                
+
+                                                                       
+                                                                
+
+                              
+                                                   
+
+                                                           
+                                                                               
+
+          
+                                        
+                                         
+                  
+                      
+      
+      
+
+        
+                                                                       
+                          
+                                
+
+                                                                      
+                                                             
+
+                  
+                                                                              
+                        
+                     
+      
+
+                                                       
+  
+
+                                                                               
+                                   
+                                                                               
+
+                                                    
+                                     
+ 
+       
+                     
+                      
+
+                                                           
+                                 
+                                                                      
+                                       
+
+                                                                     
+                                                 
+
+                                      
+                                           
+
+                                           
+                                                                         
+
+                                                      
+                                                                                  
+                                                       
+                                                                      
+
+                                               
+                         
+
+                                                                         
+                           
+                                            
+                                                                      
+                  
+                                           
+                                             
+                                                  
+      
+
+                                           
+                                                
+
+                             
+                                                                   
+                                                                                      
+                                                                   
+                                                   
+                                                                                      
+
+                                                   
+                                                                          
+
+                                                                          
+                                                                                
+                                                      
+                                                                      
+
+        
+                                                  
+                                                                                              
+
+                                                                   
+                                                            
+
+                                                                 
+                                               
+                          
+
+        
+                    
+                                   
+
+                                                                  
+  
+
+
+                                                    
+                                           
+ 
+       
+                             
+                                      
+
+                                                             
+                                                                
+
+                                                                                     
+  
+
+
+                                                                 
+                                               
+                                 
+ 
+       
+                                                                   
+
+                                                             
+                                                            
+
+                                                                                 
+  
+
+
+                  
+                                          
+                                                   
+                                 
+ 
+       
+                                                             
+                                                            
+
+                                                                                 
+
+          
+                                                    
+                                                                 
+
+                                            
+                                                       
+  
+                     
+
+
+                                                                               
+                   
+                                                                               
+
+                                                          
+                                                            
+                                                                            
+ 
+                                                  
+                                                                              
+                                            
+                   
+                         
+        
+                                                                              
+                                     
+                                                          
+ 
+
+                                                             
+                                                             
+                                                   
+                                                                            
+ 
+                                                  
+                                                                                  
+                                            
+                   
+                         
+        
+                                                                              
+                                     
+                     
+                                                            
+                                                             
+ 
+
+      // !wxUSE_INTL
+
+// the macros should still be defined - otherwise compilation would fail
+
+                                     
+                   
+                                        
+          
+                                                                 
+      
+
+                            
+
+// NB: we use a template here in order to avoid using
+//     wxLocale::GetUntranslatedString() above, which would be required if
+//     we returned const wxString&; this way, the compiler should be able to
+//     optimize wxGetTranslation() away
+
+template<typename TString>
+inline TString wxGetTranslation(TString str)
+    { return str; }
+
+template<typename TString, typename TDomain>
+inline TString wxGetTranslation(TString str, TDomain WXUNUSED(domain))
+    { return str; }
+
+template<typename TString, typename TDomain>
+inline TString wxGetTranslation(TString str1, TString str2, size_t n)
+    { return n == 1 ? str1 : str2; }
+
+template<typename TString, typename TDomain>
+inline TString wxGetTranslation(TString str1, TString str2, size_t n,
+                                TDomain WXUNUSED(domain))
+    { return n == 1 ? str1 : str2; }
+
+       // wxUSE_INTL/!wxUSE_INTL
+
+// define this one just in case it occurs somewhere (instead of preferred
+// wxTRANSLATE) too
+                                     
+                              
+                                       
+          
+                    
+                                     
+          
+      
+
+       // _WX_TRANSLATION_H_

@@ -1,0 +1,211 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\VirtualKeyboard\VKBButton.cpp" 0
+/*
+* Copyright (c) 2009 David Kelvin <c-273@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+// VKBButton.cpp
+//
+
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\VirtualKeyboard\../stdafx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\VirtualKeyboard\VKBButton.cpp" 12
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\VirtualKeyboard\VKBButton.h" 0
+/*
+* Copyright (c) 2009 David Kelvin <c-273@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+// VKBButton.h : header file
+//-----------------------------------------------------------------------------
+
+// Special Flat button for Virtual Keyboards
+// Also, if a Push button, will show pushed state by change of colour (unless disabled)
+
+class CVKBButton : public CButton
+{
+public:
+  CVKBButton();
+  virtual ~CVKBButton();
+
+public:
+  void SetDeadKeyState(bool bState)
+  {m_bDeadKey = bState;}
+  void SetFlatState(bool bState)
+  {m_bFlat = bState;}
+  void SetPushedState(bool bPushed)
+  {m_bPushed = bPushed;}
+  void ChangePushColour(bool bChangePushColour)
+  {m_bChangePushColour = bChangePushColour;}
+
+protected:
+  // ClassWizard generated virtual function overrides
+  //{{AFX_VIRTUAL(CVKBButton)
+  virtual void DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct);
+  virtual void PreSubclassWindow();
+  //}}AFX_VIRTUAL
+
+  // Generated message map functions
+  //{{AFX_MSG(CVKBButton)
+   void OnMouseMove(UINT nFlags, CPoint point);
+   void OnMouseLeave(WPARAM, LPARAM);
+  //}}AFX_MSG
+
+  
+
+private:
+  bool m_bMouseInWindow;
+  bool m_bDeadKey, m_bFlat, m_bPushed, m_bChangePushColour;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\VirtualKeyboard\VKBButton.cpp" 13
+
+             
+                     
+                
+                                   
+      
+
+// Special Flat button for Virtual Keyboards
+// Also, if a Push button, will show pushed state by change of colour (unless disabled)
+
+const COLORREF crefGreen  = (RGB(222, 255, 222));  // Light green
+const COLORREF crefYellow = (RGB(255, 255, 228));  // Very light yellow
+const COLORREF crefOrange = (RGB(255, 208, 192));  // Light Orange
+const COLORREF crefPink   = (RGB(255, 222, 222));  // Light Pink
+
+CVKBButton::CVKBButton()
+  : m_bMouseInWindow(false), m_bDeadKey(false),
+  m_bFlat(true), m_bPushed(false), m_bChangePushColour(true)
+{
+}
+
+CVKBButton::~CVKBButton()
+{
+}
+
+
+  //{{AFX_MSG_MAP(CVKBButton)
+  
+  ON_WM_MOUSEMOVE()
+  //}}AFX_MSG_MAP
+
+
+/////////////////////////////////////////////////////////////////////////////
+// CVKBButton message handlers
+
+void CVKBButton::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
+{
+  CDC* pDC   = CDC::FromHandle(lpDrawItemStruct->hDC);
+  CRect rect = lpDrawItemStruct->rcItem;
+  UINT state = lpDrawItemStruct->itemState;
+
+  CString strText;
+  GetWindowText(strText);
+
+  // draw the control edges (DrawFrameControl is handy!)
+  if (state & ODS_SELECTED)
+    pDC->DrawFrameControl(rect, DFC_BUTTON, DFCS_BUTTONPUSH | DFCS_PUSHED |
+                                (m_bFlat ? DFCS_FLAT : 0));
+  else
+    pDC->DrawFrameControl(rect, DFC_BUTTON, DFCS_BUTTONPUSH |
+                                (m_bFlat ? DFCS_FLAT : 0));
+
+  // Fill the interior colour if necessary
+  rect.DeflateRect(CSize(GetSystemMetrics(SM_CXEDGE), GetSystemMetrics(SM_CYEDGE)));
+  if (m_bDeadKey) {
+    pDC->FillSolidRect(rect, crefOrange);
+  } else {
+    COLORREF crefColour;
+    if (m_bPushed)
+      crefColour = m_bMouseInWindow ? crefGreen : (m_bChangePushColour ? crefPink : crefYellow);
+    else
+      crefColour = m_bMouseInWindow ? crefGreen : crefYellow;
+
+    pDC->FillSolidRect(rect, crefColour);
+  }
+
+  // Draw the text
+  if (!strText.IsEmpty()) {
+    CSize Extent = pDC->GetTextExtent(strText);
+    CPoint pt(rect.CenterPoint().x - Extent.cx / 2, rect.CenterPoint().y - Extent.cy / 2);
+
+    if (state & ODS_SELECTED)
+      pt.Offset(1, 1);
+
+    int nMode = pDC->SetBkMode(TRANSPARENT);
+
+    if (state & ODS_DISABLED)
+      pDC->DrawState(pt, Extent, strText, DSS_DISABLED, TRUE, 0, (HBRUSH)NULL);
+    else
+      pDC->TextOut(pt.x, pt.y, strText);
+
+    pDC->SetBkMode(nMode);
+  }
+}
+
+void CVKBButton::PreSubclassWindow()
+{
+  CButton::PreSubclassWindow();
+
+  ModifyStyle(0, BS_OWNERDRAW);  // make the button owner drawn
+}
+
+void CVKBButton::OnMouseMove(UINT nFlags, CPoint point)
+{
+  if (!m_bMouseInWindow) {
+    m_bMouseInWindow = true;
+    Invalidate();
+    UpdateWindow();
+
+    TRACKMOUSEEVENT tme = {sizeof(TRACKMOUSEEVENT), TME_LEAVE, m_hWnd, 0};
+    ;
+  }
+
+  CButton::OnMouseMove(nFlags, point);
+}
+
+void CVKBButton::OnMouseLeave(WPARAM, LPARAM)
+{
+  m_bMouseInWindow = false;
+  // Reset background
+  Invalidate();
+  UpdateWindow();
+
+  return 0L;
+}

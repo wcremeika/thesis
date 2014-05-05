@@ -1,0 +1,33 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\motif\dcprint.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/motif/dcprint.h
+// Purpose:     wxPrinterDC class
+// Author:      Julian Smart
+// Modified by:
+// Created:     17/09/98
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                       
+
+class WXDLLIMPEXP_CORE wxPrinterDC : public wxMotifDCImpl
+{
+public:
+    // Create a printer DC
+    wxPrinterDCImpl(const wxString& driver, const wxString& device,
+                    const wxString& output,
+                    bool interactive = true,
+                    wxPrintOrientation orientation = wxPORTRAIT);
+    virtual ~wxPrinterDC();
+
+    wxRect GetPaperRect() const;
+
+    DECLARE_CLASS(wxPrinterDCImpl)
+};
+
+       // _WX_DCPRINT_H_

@@ -1,0 +1,71 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\local_filesys.h" 0
+                           
+                           
+
+// This class adds an abstraction layer for the local filesystem.
+// Although wxWidgets provides functions for this, they are in
+// general too slow.
+// This class offers exactly what's needed by FileZilla and
+// exploits some platform-specific features.
+class CLocalFileSystem
+{
+public:
+	CLocalFileSystem();
+	virtual ~CLocalFileSystem();
+	enum local_fileType
+	{
+		unknown = -1,
+		file,
+		dir,
+		link,
+		link_file = link,
+		link_dir
+	};
+
+	static const wxChar path_separator;
+
+	// If called with a symlink, GetFileType stats the link, not
+	// the target.
+	static enum local_fileType GetFileType(const wxString& path);
+
+	// Follows symlinks and stats the target, sets isLink to true if path was
+	// a link.
+	static enum local_fileType GetFileInfo(const wxString& path, bool &isLink, wxLongLong* size, wxDateTime* modificationTime, int* mode);
+
+	// If parent window is given, display confirmation dialog
+	// Returns false iff there's an encoding error, e.g. program
+	// started without UTF-8 locale.
+	static bool RecursiveDelete(const wxString& path, wxWindow* parent);
+	static bool RecursiveDelete(std::list<wxString> dirsToVisit, wxWindow* parent);
+
+	bool BeginFindFiles(wxString path, bool dirs_only);
+	bool GetNextFile(wxString& name);
+	bool GetNextFile(wxString& name, bool &isLink, bool &is_dir, wxLongLong* size, wxDateTime* modificationTime, int* mode);
+	void EndFindFiles();
+
+protected:
+                
+	                                                                              
+      
+
+                 
+	static enum local_fileType GetFileInfo(const char* path, bool &isLink, wxLongLong* size, wxDateTime* modificationTime, int* mode);
+	void AllocPathBuffer(const char* file);  // Ensures m_raw_path is large enough to hold path and filename
+      
+
+	// State for directory enumeration
+	bool m_dirs_only;
+                
+	                            
+	               
+	             
+     
+	char* m_raw_path;
+	char* m_file_part; // Points into m_raw_path past the trailing slash of the path part
+	int m_buffer_length;
+	DIR* m_dir;
+      
+};
+
+       //__LOCAL_FILESYS_H__

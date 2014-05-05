@@ -1,0 +1,212 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\textbuf.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/textbuf.h
+// Purpose:     class wxTextBuffer to work with text buffers of _small_ size
+//              (buffer is fully loaded in memory) and which understands CR/LF
+//              differences between platforms.
+// Created:     14.11.01
+// Author:      Morten Hanssen, Vadim Zeitlin
+// Copyright:   (c) 1998-2001 Morten Hanssen, Vadim Zeitlin
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                   
+                     
+                       
+
+// ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+// the line termination type (kept wxTextFileType name for compatibility)
+enum wxTextFileType
+{
+    wxTextFileType_None,  // incomplete (the last line of the file only)
+    wxTextFileType_Unix,  // line is terminated with 'LF' = 0xA = 10 = '\n'
+    wxTextFileType_Dos,   //                         'CR' 'LF'
+    wxTextFileType_Mac,   //                         'CR' = 0xD = 13 = '\r'
+    wxTextFileType_Os2    //                         'CR' 'LF'
+};
+
+                     
+
+                    
+
+                        
+
+                                                                               
+               
+                                                                               
+
+                                                 
+                                                   
+                                                          
+
+       // wxUSE_TEXTBUFFER
+
+class WXDLLIMPEXP_BASE wxTextBuffer
+{
+public:
+    // constants and static functions
+    // default type for current platform (determined at compile time)
+    static const wxTextFileType typeDefault;
+
+    // this function returns a string which is identical to "text" passed in
+    // except that the line terminator characters are changed to correspond the
+    // given type. Called with the default argument, the function translates
+    // the string to the native format (Unix for Unix, DOS for Windows, ...).
+    static wxString Translate(const wxString& text,
+                            wxTextFileType type = typeDefault);
+
+    // get the buffer termination string
+    static const wxChar *GetEOL(wxTextFileType type = typeDefault);
+
+    // the static methods of this class are compiled in even when
+    // !wxUSE_TEXTBUFFER because they are used by the library itself, but the
+    // rest can be left out
+                    
+
+                        
+                        
+
+                     
+                        
+
+                                                    
+                  
+
+                                                      
+                                               
+
+                                                    
+                                                   
+
+                                                    
+                                                                                  
+
+                                                             
+                 
+
+                                  
+                                                
+
+                
+                
+
+                                            
+                                                           
+
+                                                                          
+                                                                      
+                                                                      
+                                                                      
+                                                                      
+
+                                                          
+                                                                          
+                                                  
+                                                        
+                                               
+                                                              
+
+                                                                        
+                                                
+                                                                         
+
+                                                                      
+                                                               
+                                        
+                                                                        
+                                        
+                                                         
+                                                                          
+                                        
+                                                                    
+                                       
+                                                                     
+
+                                                 
+                                                                      
+
+                               
+                                     
+
+                                 
+                                                               
+
+                       
+                       
+
+                            
+                                                                        
+                                                              
+                                             
+                                        
+                           
+                                                    
+     
+                                                   
+                                                  
+     
+
+                      
+                             
+     
+                                             
+                                             
+     
+
+                       
+                                                                        
+
+                                                                     
+                                 
+                                                            
+                                                    
+
+           
+                            
+
+          
+            
+            
+
+                                     
+                                                          
+
+                         
+                                                
+
+                                                          
+
+                                               
+                                      
+                                                      
+                                                           
+                               
+                                                  
+                                                                           
+
+                                                               
+                                                     
+
+        
+                                                     
+                                                 
+
+                                                                     
+
+                                                                                  
+       // wxUSE_TEXTBUFFER
+
+    // copy ctor/assignment operator not implemented
+    wxTextBuffer(const wxTextBuffer&);
+    wxTextBuffer& operator=(const wxTextBuffer&);
+};
+
+       // _WX_TEXTBUFFER_H
+

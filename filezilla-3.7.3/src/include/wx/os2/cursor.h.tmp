@@ -1,0 +1,61 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\cursor.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/cursor.h
+// Purpose:     wxCursor class
+// Author:      David Webster
+// Modified by:
+// Created:     10/13/99
+// Copyright:   (c) David Webster
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+                     
+
+class WXDLLIMPEXP_CORE wxCursorRefData: public wxGDIImageRefData
+{
+public:
+    wxCursorRefData();
+    virtual ~wxCursorRefData() { Free(); }
+    virtual void Free(void);
+    bool                            m_bDestroyCursor;
+}; // end of CLASS wxCursorRefData
+
+                                                   
+                                                                  
+
+// Cursor
+class WXDLLIMPEXP_CORE wxCursor: public wxBitmap
+{
+public:
+    wxCursor();
+
+    wxCursor(const wxImage& rImage);
+
+    wxCursor( const wxString& rsName
+             ,wxBitmapType    lType = wxCURSOR_DEFAULT_TYPE
+             ,int             nHotSpotX = 0
+             ,int             nHotSpotY = 0
+            );
+    wxCursor(wxStockCursor id) { InitFromStock(id); }
+                           
+                                                          
+      
+    inline ~wxCursor() { }
+
+    inline WXHCURSOR GetHCURSOR(void) const { return (((wxCursorRefData *)m_refData) ? ((wxCursorRefData *)m_refData)->m_hCursor : 0); }
+    inline void      SetHCURSOR(WXHCURSOR hCursor) { SetHandle((WXHANDLE)hCursor); }
+
+protected:
+    void InitFromStock(wxStockCursor);
+    inline virtual wxGDIImageRefData* CreateData(void) const { return (new wxCursorRefData); }
+
+private:
+    DECLARE_DYNAMIC_CLASS(wxCursor)
+}; // end of CLASS wxCursor
+
+      
+    // _WX_CURSOR_H_

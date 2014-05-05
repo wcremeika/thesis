@@ -1,0 +1,98 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\protocol\http.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/protocol/http.h
+// Purpose:     HTTP protocol
+// Author:      Guilhem Lavaux
+// Modified by: Simo Virokannas (authentication, Dec 2005)
+// Created:     August 1997
+// Copyright:   (c) 1997, 1998 Guilhem Lavaux
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+                  
+                  
+
+                   
+
+                       
+
+                       
+                                 
+                      
+
+                                                
+ 
+       
+             
+                      
+
+                                                                    
+                                                                           
+                                                               
+                 
+
+                                                        
+
+                                    
+                                                     
+                                                       
+
+                                                                 
+                                                                   
+                                                 
+                                          
+                                                        
+                                                                                
+                               
+
+                 
+                                                     
+                                                            
+
+                                                                       
+                                                               
+
+          
+                                                               
+                                                                          
+                                                               
+                                                                          
+
+                                                                    
+                       
+                        
+
+                                                                                  
+
+                                   
+                                                        
+                                                                   
+                                                        
+                                                                   
+
+                                       
+                        
+                        
+
+                          
+
+                      
+                                      
+
+                                      
+                
+                      
+                          
+                                
+                                 
+                        
+
+                                 
+                            
+                                    
+  
+
+       // wxUSE_PROTOCOL_HTTP
+
+       // _WX_HTTP_H
+

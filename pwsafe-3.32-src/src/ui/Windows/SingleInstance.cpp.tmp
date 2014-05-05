@@ -1,0 +1,206 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\SingleInstance.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+/// \file SingleInstance.cpp
+
+/*
+*  This comes from the article "Avoiding Multiple Instances of an Application"
+*  Joseph M. Newcomer [MVP]; http://www.flounder.com
+*  
+*  However, the pure-C version by Daniel Lohmann  [http://www.netexec.de/]
+*  for creating the appropriate unique mutex name, as referenced by Joseph,
+*  was used in preference to his MFC implementation.
+*
+*  Minor changes to require the caller to provide the length of the buffer
+*  supplied to prevent overruns.
+*/
+
+// Note: Option "SI_TRUSTEE_UNIQUE" (Allow one instance per user account)
+// has been implemented for Password Safe
+
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\stdafx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\SingleInstance.cpp" 26
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\SingleInstance.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+/// \file SingleInstance.cpp
+
+/*
+*  This comes from the article "Avoiding Multiple Instances of an Application"
+*  Joseph M. Newcomer [MVP]; http://www.flounder.com/nomultiples.htm
+*  
+*  However, the pure-C version by Daniel Lohmann  [http://www.netexec.de/]
+*  for creating the appropriate unique mutex name, as referenced by Joseph,
+*  was used in preference to his MFC implementation.
+*
+*  Minor changes to require the caller to provide the length of the buffer
+*  supplied to prevent overruns.
+*/
+
+       
+
+const int SI_SESSION_UNIQUE = 0x0001;  // Allow only one instance per login session
+const int SI_DESKTOP_UNIQUE = 0x0002;  // Allow only one instance on current desktop
+const int SI_TRUSTEE_UNIQUE = 0x0004;  // Allow only one instance for current user
+const int SI_SYSTEM_UNIQUE  = 0x0000;  // Allow only one instance at all (on the whole system)
+
+// Note: SI_SESSION_UNIQE and SI_TRUSTEE_UNIQUE can
+// be combined with SI_DESKTOP_UNIQUE
+
+LPWSTR CreateUniqueName(const LPCWSTR pszGUID, LPWSTR pszBuffer, const int iBuffLen,
+                        const int nMode = SI_DESKTOP_UNIQUE);
+
+
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\SingleInstance.cpp" 27
+
+                    // Use the _malloca/_freea functions (changed from original)
+                    // String safe replacement of wsprintf by StringCchPrintf
+
+////////////////////////////////////////////////////////////////////////////////
+// LPWSTR CreateUniqueName(pszGUID, pszBuffer, iBuffLen, nMode)
+//
+// Creates a "unique" name, where the meaning of "unique" depends on the nMode 
+// flag values. Returns pszBuffer
+//
+// pszGUID:    Copied to the beginning of pszBuffer, should be an GUID
+// pszBuffer:  Buffer for unique name.
+// iBuffLen:   Buffer length (in chararcters) must be >= MAX_PATH
+// nMode:    Information, that should be used to create the unique name.
+//        Can be one of the following values:
+//
+//
+//        SI_SESSION_UNIQUE            - Allow one instance per login session
+//        SI_DESKTOP_UNIQUE            - Allow one instance per desktop
+//        SI_TRUSTEE_UNIQUE            - Allow one instance per user account
+//        SI_SESSION_UNIQUE | SI_DESKTOP_UNIQUE
+//                                     - Allow one instance per login session,
+//                                       instances in different login sessions
+//                                       must also reside on a different desktop
+//        SI_TRUSTEE_UNIQUE | SI_DESKTOP_UNIQUE  
+//                                     - Allow one instance per user account,
+//                                       instances in login sessions running a
+//                                       different user account must also reside  
+//                                       on different desktops.
+//        SI_SYSTEM_UNIQUE             - Allow only one instance on the whole system  
+//
+LPWSTR CreateUniqueName(const LPCWSTR pszGUID, LPWSTR pszBuffer, const int iBuffLen,
+                        const int nMode  /* = SI_TRUSTEE_UNIQUE */)
+{
+  if (pszBuffer == NULL) {
+    SetLastError(ERROR_INVALID_PARAMETER);
+    return NULL;
+  }
+
+  // First copy GUID to destination buffer
+  if (pszGUID)
+                      
+                                           
+     
+    wcscpy(pszBuffer, pszGUID);
+      
+  else
+    *pszBuffer = 0;
+
+  if (nMode & SI_DESKTOP_UNIQUE) {
+    // Name should be desktop unique, so add current desktop name
+                      
+                                        
+     
+    wcscat(pszBuffer, L"-");
+      
+    HDESK hDesk    = GetThreadDesktop(GetCurrentThreadId());
+    ULONG cchDesk  = (ULONG)(MAX_PATH - wcslen(pszBuffer) - 1);
+
+    if (!GetUserObjectInformation(hDesk, UOI_NAME, pszBuffer + wcslen(pszBuffer), 
+                                  cchDesk, &cchDesk))
+      // Call will fail on Win9x
+                      
+                                                        
+     
+      wsncat(pszBuffer, L"Win9x", cchDesk);
+      
+  }
+  if (nMode & SI_SESSION_UNIQUE) {
+    // Name should be session unique, so add current session id
+    
+    HANDLE hToken = NULL;
+    // Try to open the token (fails on Win9x) and check necessary buffer size
+    if (OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken) &&
+        (MAX_PATH - wcslen(pszBuffer) > 9)) {
+      DWORD cbBytes = 0;
+
+      if (!GetTokenInformation(hToken, TokenStatistics, NULL, cbBytes, &cbBytes) &&
+           GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
+        PTOKEN_STATISTICS pTS = (PTOKEN_STATISTICS)_malloca(cbBytes);
+        if (GetTokenInformation(hToken, TokenStatistics, (LPVOID) pTS, cbBytes, &cbBytes)) {
+          HRESULT hr;
+          hr = StringCchPrintf(pszBuffer + wcslen(pszBuffer), iBuffLen - wcslen(pszBuffer),
+                          L"-%08x%08x", pTS->AuthenticationId.HighPart, pTS->AuthenticationId.LowPart);
+          ;
+        }
+        _freea(pTS);
+      }
+    }
+  }
+  if (nMode & SI_TRUSTEE_UNIQUE) {
+    // Name should be unique to the current user
+    wchar_t szUser[64] = {0};
+    wchar_t szDomain[64] = {0};
+    DWORD cchUser  = 64;
+    DWORD cchDomain  = 64;
+
+    if (GetUserName(szUser, &cchUser)) {
+      // Since NetApi() calls are quite time consuming
+      // we retrieve the domain name from an environment variable
+      cchDomain = GetEnvironmentVariable(L"USERDOMAIN", szDomain, cchDomain);
+      size_t cchUsed = wcslen(pszBuffer);
+      if (MAX_PATH - cchUsed > cchUser + cchDomain + 3) {
+        HRESULT hr;
+        hr = StringCchPrintf(pszBuffer + cchUsed, iBuffLen - cchUsed,
+                          L"-%s-%s", szDomain, szUser);
+        ;
+      }
+    }
+  }
+  return pszBuffer;
+}

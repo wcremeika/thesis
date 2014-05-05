@@ -1,0 +1,60 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\aui\tabartgtk.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        include/wx/aui/tabartgtk.h
+// Purpose:     declaration of the wxAuiGTKTabArt
+// Author:      Jens Lody and Teodor Petrov
+// Modified by:
+// Created:     2012-03-23
+// Copyright:   (c) 2012 Jens Lody <jens@codeblocks.org>
+//                  and Teodor Petrov
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+// ----------------------------------------------------------------------------
+// headers
+// ----------------------------------------------------------------------------
+
+                   
+
+             
+
+                          
+                      
+
+               
+           
+
+                                                                
+ 
+       
+                     
+
+                                 
+                                                                         
+                                                                             
+                                  
+                                       
+                                                       
+                                               
+                                                
+                                              
+                                                 
+                                        
+                                                                                  
+                                                                         
+                                                                              
+                                                             
+                                      
+                                                
+                                                                               
+                                                                  
+                                                                     
+  
+
+        // wxUSE_AUI
+
+       // _WX_AUI_TABARTGTK_H_

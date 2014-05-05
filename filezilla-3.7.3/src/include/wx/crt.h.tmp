@@ -1,0 +1,24 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\crt.h" 0
+//////////////////////////////////////////////////////////////////////////////
+// Name:        wx/crt.h
+// Purpose:     Header to include all headers with wrappers for CRT functions
+// Author:      Robert Roebling
+// Created:     2007-05-30
+// Copyright:   (c) 2007 wxWidgets dev team
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                  
+                  
+
+                   
+
+// include wxChar type definition:
+                       
+
+// and wrappers for CRT functions:
+                    
+                          
+
+       // _WX_CRT_H_

@@ -1,0 +1,92 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\version.h" 0
+/*
+ *  Name:        wx/version.h
+ *  Purpose:     wxWidgets version numbers
+ *  Author:      Julian Smart
+ *  Modified by: Ryan Norton (Converted to C)
+ *  Created:     29/01/98
+ *  Copyright:   (c) 1998 Julian Smart
+ *  Licence:     wxWindows licence
+ */
+
+/* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
+
+                      
+                      
+
+                      /* for wxSTRINGIZE */
+
+/*  the constants below must be changed with each new version */
+/*  ---------------------------------------------------------------------------- */
+
+/*
+    Don't forget to update WX_CURRENT, WX_REVISION and WX_AGE in
+    build/bakefiles/version.bkl and regenerate the makefiles when you change
+    this!
+ */
+
+/*  NB: this file is parsed by automatic tools so don't change its format! */
+                              
+                              
+                              
+                              
+                                                 
+
+/*  nothing to update below this line when updating the version */
+/*  ---------------------------------------------------------------------------- */
+
+/* Users can pre-define wxABI_VERSION to a lower value in their
+ * makefile/project settings to compile code that will be binary compatible
+ * with earlier versions of the ABI within the same minor version (between
+ * minor versions binary compatibility breaks anyway). The default is the
+ * version of wxWidgets being used. A single number with two decimal digits
+ * for each component, e.g. 20601 for 2.6.1 */
+                     
+                                                                              
+      
+
+/*  helpers for wxVERSION_NUM_XXX */
+                                                                                       
+
+                                                                                                   
+
+
+                                                                                               
+
+                                                                                                                     
+
+
+/*  these are used by src/msw/version.rc and should always be ASCII, not Unicode */
+                                                                                                        
+
+                                                                                                                
+
+
+/* those are Unicode-friendly */
+                                                                                                            
+
+                                                                                                                    
+
+
+/*  some more defines, not really sure if they're [still] useful */
+                                                                                                  
+                            
+                                                                                                                         
+
+/*  check if the current version is at least major.minor.release */
+                                                                                                                                                                                                                                                
+
+
+
+
+/* the same but check the subrelease also */
+                                                                                                                                                                                                                                                                                               
+
+
+
+
+
+
+       /*  _WX_VERSION_H_ */
+

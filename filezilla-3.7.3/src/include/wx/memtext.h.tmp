@@ -1,0 +1,56 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\memtext.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/memtext.h
+// Purpose:     wxMemoryText allows to use wxTextBuffer without a file
+// Created:     14.11.01
+// Author:      Morten Hanssen
+// Copyright:   (c) 2001 Morten Hanssen
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+                   
+
+// there is no separate setting for wxMemoryText, it's smallish anyhow
+                    
+
+                                                                               
+               
+                                                                               
+
+                                                         
+ 
+       
+                    
+                      
+                                                               
+
+          
+                                 
+                         
+
+                                                                 
+                                                                
+                        
+
+                          
+                        
+
+                                                       
+                        
+
+                                                          
+                                                                         
+                        
+
+        
+                                          
+  
+
+       // wxUSE_TEXTBUFFER
+
+       // _WX_MEMTEXT_H
+

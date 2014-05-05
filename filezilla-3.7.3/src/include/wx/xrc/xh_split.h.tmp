@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_split.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_split.h
+// Purpose:     XRC resource for wxSplitterWindow
+// Author:      panga@freemail.hu, Vaclav Slavik
+// Created:     2003/01/26
+// Copyright:   (c) 2003 panga@freemail.hu, Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                         
+
+                               
+
+                                                                              
+ 
+                                                     
+
+       
+                                 
+                                         
+                                            
+  
+
+       // wxUSE_XRC && wxUSE_SPLITTER
+
+       // _WX_XH_SPLIT_H_

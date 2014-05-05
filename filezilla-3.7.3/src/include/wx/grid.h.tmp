@@ -1,0 +1,23 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\grid.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/grid.h
+// Purpose:     wxGrid base header
+// Author:      Julian Smart
+// Modified by:
+// Created:
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                           
+
+// these headers used to be included from the above header but isn't any more,
+// still do it from here for compatibility
+                                  
+                               
+
+       // _WX_GRID_H_BASE_

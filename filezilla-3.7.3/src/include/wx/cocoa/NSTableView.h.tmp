@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cocoa\NSTableView.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cocoa/NSTableView.h
+// Purpose:     wxCocoaNSTableView class
+// Author:      David Elliott
+// Modified by:
+// Created:     2003/08/05
+// Copyright:   (c) 2003 David Elliott
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                  
+                                  
+
+                      
+                                  
+
+WX_DECLARE_OBJC_HASHMAP(NSTableView);
+
+class wxCocoaNSTableView
+{
+    WX_DECLARE_OBJC_INTERFACE(NSTableView)
+public:
+    virtual int CocoaDataSource_numberOfRows() = 0;
+    virtual struct objc_object* CocoaDataSource_objectForTableColumn(
+        WX_NSTableColumn tableColumn, int rowIndex) = 0;
+    virtual ~wxCocoaNSTableView() { }
+};
+
+       // _WX_COCOA_NSTABLEVIEW_H_

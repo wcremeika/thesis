@@ -1,0 +1,115 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\datectrl.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/datectrl.h
+// Purpose:     implements wxDatePickerCtrl
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     2005-01-09
+// Copyright:   (c) 2005 Vadim Zeitlin <vadim@wxwindows.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                   
+
+                      
+
+                                                 
+
+                                               
+
+                          
+    
+ 
+                                                                        
+                     
+
+                                                                         
+                  
+
+                                                                 
+                      
+
+                                                                               
+                                                                   
+                         
+
+                                                                               
+                                                                     
+                      
+  
+
+                                                                               
+                                                     
+                                                                               
+
+                                                                        
+ 
+       
+      
+                                                                             
+                           
+
+                                     
+                                  
+                                                             
+                                                           
+                                                       
+                                                                 
+                                                                      
+                                                                    
+       
+
+      
+                                                                       
+
+                                                        
+                                                
+      
+
+                                                                           
+                                                                              
+                                                
+                                                                            
+                                                                      
+  
+
+                                                   
+                                
+
+                                     
+                                                           
+                                
+
+                                     
+     
+                                    
+
+                                                                           
+     
+           
+                              
+                                          
+                                       
+                                                                    
+                                                                
+                                                            
+                                                                      
+                                                                           
+                                                                        
+                                                                                          
+         
+         
+
+            
+                                                       
+      
+      
+
+       // wxUSE_DATEPICKCTRL
+
+       // _WX_DATECTRL_H_
+

@@ -1,0 +1,38 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_wizrd.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_wizrd.h
+// Purpose:     XML resource handler for wxWizard
+// Author:      Vaclav Slavik
+// Created:     2003/03/02
+// Copyright:   (c) 2000 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                         
+
+                                
+
+                                   
+                                             
+
+                                                                      
+ 
+                                             
+
+       
+                         
+                                         
+                                            
+
+        
+                       
+                                         
+  
+
+       // wxUSE_XRC && wxUSE_WIZARDDLG
+
+       // _WX_XH_WIZRD_H_

@@ -1,0 +1,23 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\logging.h" 0
+                     
+                     
+
+enum MessageType
+{
+	Status,
+	Error,
+	Command,
+	Response,
+	Debug_Warning,
+	Debug_Info,
+	Debug_Verbose,
+	Debug_Debug,
+
+	RawList,
+
+	MessageTypeCount
+};
+
+      
+

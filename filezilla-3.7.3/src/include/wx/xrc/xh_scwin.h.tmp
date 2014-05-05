@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_scwin.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_scwin.h
+// Purpose:     XML resource handler for wxScrolledWindow
+// Author:      Vaclav Slavik
+// Created:     2002/10/18
+// Copyright:   (c) 2002 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                         
+
+             
+
+                                                                              
+ 
+                                                     
+
+       
+                                 
+                                         
+                                            
+  
+
+       // wxUSE_XRC
+
+       // _WX_XH_SCWIN_H_

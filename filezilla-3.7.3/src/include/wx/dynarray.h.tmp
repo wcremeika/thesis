@@ -1,0 +1,1073 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\dynarray.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/dynarray.h
+// Purpose:     auto-resizable (i.e. dynamic) array support
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     12.09.97
+// Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                   
+                     
+
+                   
+
+                        
+                             
+                     
+                        
+                            
+      
+
+/*
+  This header defines the dynamic arrays and object arrays (i.e. arrays which
+  own their elements). Dynamic means that the arrays grow automatically as
+  needed.
+
+  These macros are ugly (especially if you look in the sources ;-), but they
+  allow us to define "template" classes without actually using templates and so
+  this works with all compilers (and may be also much faster to compile even
+  with a compiler which does support templates). The arrays defined with these
+  macros are type-safe.
+
+  Range checking is performed in debug build for both arrays and objarrays but
+  not in release build - so using an invalid index will just lead to a crash
+  then.
+
+  Note about memory usage: arrays never shrink automatically (although you may
+  use Shrink() function explicitly), they only grow, so loading 10 millions in
+  an array only to delete them 2 lines below might be a bad idea if the array
+  object is not going to be destroyed soon. However, as it does free memory
+  when destroyed, it is ok if the array is a local variable.
+ */
+
+// ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+/*
+   The initial size by which an array grows when an element is added default
+   value avoids allocate one or two bytes when the array is created which is
+   rather inefficient
+*/
+                                             
+
+                                                                         
+
+// ----------------------------------------------------------------------------
+// types
+// ----------------------------------------------------------------------------
+
+/*
+    Callback compare function for quick sort.
+
+    It must return negative value, 0 or positive value if the first item is
+    less than, equal to or greater than the second one.
+ */
+extern "C"
+{
+typedef int (wxCMPFUNC_CONV *CMPFUNC)(const void* pItem1, const void* pItem2);
+}
+
+// ----------------------------------------------------------------------------
+// Base class managing data having size of type 'long' (not used directly)
+//
+// NB: for efficiency this often used class has no virtual functions (hence no
+//     virtual table), even dtor is *not* virtual. If used as expected it
+//     won't create any problems because ARRAYs from DEFINE_ARRAY have no dtor
+//     at all, so it's not too important if it's not called (this happens when
+//     you cast "SomeArray *" as "BaseArray *" and then delete it)
+// ----------------------------------------------------------------------------
+
+                        
+
+                 
+                          
+ 
+       
+                                                                
+
+                                                
+                                             
+                                           
+        
+                
+  
+
+                             
+                                
+ 
+       
+                      
+
+                                                      
+                                             
+                                 
+        
+                
+  
+
+                                                                                                                                                                                                                                                                                
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // if !wxUSE_STD_CONTAINERS
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       // !wxUSE_STD_CONTAINERS
+
+// ============================================================================
+// The private helper macros containing the core of the array classes
+// ============================================================================
+
+// Implementation notes:
+//
+// JACS: Salford C++ doesn't like 'var->operator=' syntax, as in:
+//          { ((wxBaseArray *)this)->operator=((const wxBaseArray&)src);
+//       so using a temporary variable instead.
+//
+// The classes need a (even trivial) ~name() to link under Mac X
+
+// ----------------------------------------------------------------------------
+// _WX_DEFINE_TYPEARRAY: array for simple types
+// ----------------------------------------------------------------------------
+
+                        
+
+                                                                              
+                                                                    
+                                                                                                                  
+
+
+                                                                                                                         
+
+
+      // if !wxUSE_STD_CONTAINERS
+
+// common declaration used by both _WX_DEFINE_TYPEARRAY and
+// _WX_DEFINE_TYPEARRAY_PTR
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                              
+                      
+
+                                                                                                                                         
+
+                                                                                                                                           
+
+
+       // !wxUSE_STD_CONTAINERS
+
+// ----------------------------------------------------------------------------
+// _WX_DEFINE_SORTED_TYPEARRAY: sorted array for simple data types
+//    cannot handle types with size greater than pointer because of sorting
+// ----------------------------------------------------------------------------
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ----------------------------------------------------------------------------
+// _WX_DECLARE_OBJARRAY: an array for pointers to type T with owning semantics
+// ----------------------------------------------------------------------------
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ============================================================================
+// The public macros for declaration and definition of the dynamic arrays
+// ============================================================================
+
+// Please note that for each macro WX_FOO_ARRAY we also have
+// WX_FOO_EXPORTED_ARRAY and WX_FOO_USER_EXPORTED_ARRAY which are exactly the
+// same except that they use an additional __declspec(dllexport) or equivalent
+// under Windows if needed.
+//
+// The first (just EXPORTED) macros do it if wxWidgets was compiled as a DLL
+// and so must be used used inside the library. The second kind (USER_EXPORTED)
+// allow the user code to do it when it wants. This is needed if you have a dll
+// that wants to export a wxArray daubed with your own import/export goo.
+//
+// Finally, you can define the macro below as something special to modify the
+// arrays defined by a simple WX_FOO_ARRAY as well. By default is empty.
+                              
+
+// ----------------------------------------------------------------------------
+// WX_DECLARE_BASEARRAY(T, name) declare an array class named "name" containing
+// the elements of type T
+// ----------------------------------------------------------------------------
+
+                                                                                                                                         
+
+
+                                                                                                                                   
+
+
+                                                                                                                                                                                                  
+
+
+
+// ----------------------------------------------------------------------------
+// WX_DEFINE_TYPEARRAY(T, name, base) define an array class named "name" deriving
+// from class "base" containing the elements of type T
+//
+// Note that the class defined has only inline function and doesn't take any
+// space at all so there is no size penalty for defining multiple array classes
+// ----------------------------------------------------------------------------
+
+                                                                                                                                                
+
+
+                                                                                                                                                        
+
+
+                                                                                                                                          
+
+
+                                                                                                                                                  
+
+
+                                                                                                                                 
+
+
+                                                                                                                                         
+
+
+                                                                                                                                                                                               
+
+
+
+                                                                                                                                                                                                              
+
+
+
+// ----------------------------------------------------------------------------
+// WX_DEFINE_SORTED_TYPEARRAY: this is the same as the previous macro, but it
+// defines a sorted array.
+//
+// Differences:
+//  1) it must be given a COMPARE function in ctor which takes 2 items of type
+//     T* and should return -1, 0 or +1 if the first one is less/greater
+//     than/equal to the second one.
+//  2) the Add() method inserts the item in such was that the array is always
+//     sorted (it uses the COMPARE function)
+//  3) it has no Sort() method because it's always sorted
+//  4) Index() method is much faster (the sorted arrays use binary search
+//     instead of linear one), but Add() is slower.
+//  5) there is no Insert() method because you can't insert an item into the
+//     given position in a sorted array but there is IndexForInsert()/AddAt()
+//     pair which may be used to optimize a common operation of "insert only if
+//     not found"
+//
+// Note that you have to specify the comparison function when creating the
+// objects of this array type. If, as in 99% of cases, the comparison function
+// is the same for all objects of a class, WX_DEFINE_SORTED_TYPEARRAY_CMP below
+// is more convenient.
+//
+// Summary: use this class when the speed of Index() function is important, use
+// the normal arrays otherwise.
+// ----------------------------------------------------------------------------
+
+// we need a macro which expands to nothing to pass correct number of
+// parameters to a nested macro invocation even when we don't have anything to
+// pass it
+                     
+
+                                                                                                                                                                                                                        
+
+
+
+                                                                                                                                                       
+
+
+                                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+// ----------------------------------------------------------------------------
+// WX_DEFINE_SORTED_TYPEARRAY_CMP: exactly the same as above but the comparison
+// function is provided by this macro and the objects of this class have a
+// default constructor which just uses it.
+//
+// The arguments are: the element type, the comparison function and the array
+// name
+//
+// NB: this is, of course, how WX_DEFINE_SORTED_TYPEARRAY() should have worked
+//     from the very beginning - unfortunately I didn't think about this earlier
+// ----------------------------------------------------------------------------
+
+                                                                                                                                                                                                                                  
+
+
+
+                                                                                                                                                                                                                            
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+
+
+
+
+
+// ----------------------------------------------------------------------------
+// WX_DECLARE_OBJARRAY(T, name): this macro generates a new array class
+// named "name" which owns the objects of type T it contains, i.e. it will
+// delete them when it is destroyed.
+//
+// An element is of type T*, but arguments of type T& are taken (see below!)
+// and T& is returned.
+//
+// Don't use this for simple types such as "int" or "long"!
+//
+// Note on Add/Insert functions:
+//  1) function(T*) gives the object to the array, i.e. it will delete the
+//     object when it's removed or in the array's dtor
+//  2) function(T&) will create a copy of the object and work with it
+//
+// Also:
+//  1) Remove() will delete the object after removing it from the array
+//  2) Detach() just removes the object from the array (returning pointer to it)
+//
+// NB1: Base type T should have an accessible copy ctor if Add(T&) is used
+// NB2: Never ever cast a array to it's base type: as dtor is not virtual
+//      and so you risk having at least the memory leaks and probably worse
+//
+// Some functions of this class are not inline, so it takes some space to
+// define new class from this template even if you don't use it - which is not
+// the case for the simple (non-object) array classes
+//
+// To use an objarray class you must
+//      #include "dynarray.h"
+//      WX_DECLARE_OBJARRAY(element_type, list_class_name)
+//      #include "arrimpl.cpp"
+//      WX_DEFINE_OBJARRAY(list_class_name) // name must be the same as above!
+//
+// This is necessary because at the moment of DEFINE_OBJARRAY class parsing the
+// element_type must be fully defined (i.e. forward declaration is not
+// enough), while WX_DECLARE_OBJARRAY may be done anywhere. The separation of
+// two allows to break cicrcular dependencies with classes which have member
+// variables of objarray type.
+// ----------------------------------------------------------------------------
+
+                                                                                                                                  
+
+
+                                                                                                                            
+
+
+                                                                                                                                                                                        
+
+
+
+                                                                                                                     
+
+
+// WX_DEFINE_OBJARRAY is going to be redefined when arrimpl.cpp is included,
+// try to provoke a human-understandable error if it used incorrectly.
+//
+// there is no real need for 3 different macros in the DEFINE case but do it
+// anyhow for consistency
+                                                        
+                                                                    
+                                                                         
+
+// ----------------------------------------------------------------------------
+// Some commonly used predefined base arrays
+// ----------------------------------------------------------------------------
+
+typedef const void * _wxArraywxBaseArrayPtrVoid;                                         class WXDLLIMPEXP_BASE wxBaseArrayPtrVoid                                                       {                                                                     typedef CMPFUNC SCMPFUNC;    public:                                                               wxBaseArrayPtrVoid();                                                             wxBaseArrayPtrVoid(const wxBaseArrayPtrVoid& array);                                            wxBaseArrayPtrVoid& operator=(const wxBaseArrayPtrVoid& src);                                   ~wxBaseArrayPtrVoid();                                                                                                                                void Empty() { m_nCount = 0; }                                      void Clear();                                                       void Alloc(size_t n) { if ( n > m_nSize ) Realloc(n); }             void Shrink();                                                                                                                          size_t GetCount() const { return m_nCount; }                        void SetCount(size_t n, _wxArraywxBaseArrayPtrVoid defval = _wxArraywxBaseArrayPtrVoid());                            bool IsEmpty() const { return m_nCount == 0; }                      size_t Count() const { return m_nCount; }                                                                                               typedef _wxArraywxBaseArrayPtrVoid base_type;                                                                                                                  protected:                                                            _wxArraywxBaseArrayPtrVoid& Item(size_t uiIndex) const                                         { wxASSERT( uiIndex < m_nCount ); return m_pItems[uiIndex]; }     _wxArraywxBaseArrayPtrVoid& operator[](size_t uiIndex) const { return Item(uiIndex); }                                                                           int Index(_wxArraywxBaseArrayPtrVoid lItem, bool bFromEnd = false) const;                    int Index(_wxArraywxBaseArrayPtrVoid lItem, CMPFUNC fnCompare) const;                        size_t IndexForInsert(_wxArraywxBaseArrayPtrVoid lItem, CMPFUNC fnCompare) const;            void Add(_wxArraywxBaseArrayPtrVoid lItem, size_t nInsert = 1);                              size_t Add(_wxArraywxBaseArrayPtrVoid lItem, CMPFUNC fnCompare);                             void Insert(_wxArraywxBaseArrayPtrVoid lItem, size_t uiIndex, size_t nInsert = 1);           void Remove(_wxArraywxBaseArrayPtrVoid lItem);                                               void RemoveAt(size_t uiIndex, size_t nRemove = 1);                                                                                      void Sort(CMPFUNC fnCompare);                                                                                                                          typedef _wxArraywxBaseArrayPtrVoid value_type;                                               typedef value_type* iterator;                                       typedef const value_type* const_iterator;                           typedef value_type& reference;                                      typedef const value_type& const_reference;                          typedef ptrdiff_t difference_type;                                  typedef size_t size_type;                                                                                                               void assign(const_iterator first, const_iterator last);             void assign(size_type n, const_reference v);                        size_type capacity() const { return m_nSize; }                      iterator erase(iterator first, iterator last)                       {                                                                     size_type idx = first - begin();                                    RemoveAt(idx, last - first);                                        return begin() + idx;                                             }                                                                   iterator erase(iterator it) { return erase(it, it + 1); }           void insert(iterator it, size_type n, const value_type& v)            { Insert(v, it - begin(), n); }                                   iterator insert(iterator it, const value_type& v = value_type())    {                                                                     size_type idx = it - begin();                                       Insert(v, idx);                                                     return begin() + idx;                                             }                                                                   void insert(iterator it, const_iterator first, const_iterator last);  void pop_back() { RemoveAt(size() - 1); }                           void push_back(const value_type& v) { Add(v); }                     void reserve(size_type n) { Alloc(n); }                             void resize(size_type count, value_type defval = value_type())      {                                                                     if ( count < m_nCount )                                               m_nCount = count;                                                 else                                                                  SetCount(count, defval);                                        }                                                                                                                                       iterator begin() { return m_pItems; }                               iterator end() { return m_pItems + m_nCount; }                      const_iterator begin() const { return m_pItems; }                   const_iterator end() const { return m_pItems + m_nCount; }                                                                              void swap(wxBaseArrayPtrVoid& other)                                              {                                                                     wxSwap(m_nSize, other.m_nSize);                                     wxSwap(m_nCount, other.m_nCount);                                   wxSwap(m_pItems, other.m_pItems);                                 }                                                                                                                                                          public:                                                               void clear() { Clear(); }                                           bool empty() const { return IsEmpty(); }                            size_type max_size() const { return INT_MAX; }                      size_type size() const { return GetCount(); }                                                                                         private:                                                              void Grow(size_t nIncrement = 0);                                   bool Realloc(size_t nSize);                                                                                                             size_t  m_nSize,                                                            m_nCount;                                                                                                                       _wxArraywxBaseArrayPtrVoid      *m_pItems;                                                 };
+typedef char _wxArraywxBaseArrayChar;                                         class WXDLLIMPEXP_BASE wxBaseArrayChar                                                       {                                                                     typedef CMPFUNC SCMPFUNC;    public:                                                               wxBaseArrayChar();                                                             wxBaseArrayChar(const wxBaseArrayChar& array);                                            wxBaseArrayChar& operator=(const wxBaseArrayChar& src);                                   ~wxBaseArrayChar();                                                                                                                                void Empty() { m_nCount = 0; }                                      void Clear();                                                       void Alloc(size_t n) { if ( n > m_nSize ) Realloc(n); }             void Shrink();                                                                                                                          size_t GetCount() const { return m_nCount; }                        void SetCount(size_t n, _wxArraywxBaseArrayChar defval = _wxArraywxBaseArrayChar());                            bool IsEmpty() const { return m_nCount == 0; }                      size_t Count() const { return m_nCount; }                                                                                               typedef _wxArraywxBaseArrayChar base_type;                                                                                                                  protected:                                                            _wxArraywxBaseArrayChar& Item(size_t uiIndex) const                                         { wxASSERT( uiIndex < m_nCount ); return m_pItems[uiIndex]; }     _wxArraywxBaseArrayChar& operator[](size_t uiIndex) const { return Item(uiIndex); }                                                                           int Index(_wxArraywxBaseArrayChar lItem, bool bFromEnd = false) const;                    int Index(_wxArraywxBaseArrayChar lItem, CMPFUNC fnCompare) const;                        size_t IndexForInsert(_wxArraywxBaseArrayChar lItem, CMPFUNC fnCompare) const;            void Add(_wxArraywxBaseArrayChar lItem, size_t nInsert = 1);                              size_t Add(_wxArraywxBaseArrayChar lItem, CMPFUNC fnCompare);                             void Insert(_wxArraywxBaseArrayChar lItem, size_t uiIndex, size_t nInsert = 1);           void Remove(_wxArraywxBaseArrayChar lItem);                                               void RemoveAt(size_t uiIndex, size_t nRemove = 1);                                                                                      void Sort(CMPFUNC fnCompare);                                                                                                                          typedef _wxArraywxBaseArrayChar value_type;                                               typedef value_type* iterator;                                       typedef const value_type* const_iterator;                           typedef value_type& reference;                                      typedef const value_type& const_reference;                          typedef ptrdiff_t difference_type;                                  typedef size_t size_type;                                                                                                               void assign(const_iterator first, const_iterator last);             void assign(size_type n, const_reference v);                        size_type capacity() const { return m_nSize; }                      iterator erase(iterator first, iterator last)                       {                                                                     size_type idx = first - begin();                                    RemoveAt(idx, last - first);                                        return begin() + idx;                                             }                                                                   iterator erase(iterator it) { return erase(it, it + 1); }           void insert(iterator it, size_type n, const value_type& v)            { Insert(v, it - begin(), n); }                                   iterator insert(iterator it, const value_type& v = value_type())    {                                                                     size_type idx = it - begin();                                       Insert(v, idx);                                                     return begin() + idx;                                             }                                                                   void insert(iterator it, const_iterator first, const_iterator last);  void pop_back() { RemoveAt(size() - 1); }                           void push_back(const value_type& v) { Add(v); }                     void reserve(size_type n) { Alloc(n); }                             void resize(size_type count, value_type defval = value_type())      {                                                                     if ( count < m_nCount )                                               m_nCount = count;                                                 else                                                                  SetCount(count, defval);                                        }                                                                                                                                       iterator begin() { return m_pItems; }                               iterator end() { return m_pItems + m_nCount; }                      const_iterator begin() const { return m_pItems; }                   const_iterator end() const { return m_pItems + m_nCount; }                                                                              void swap(wxBaseArrayChar& other)                                              {                                                                     wxSwap(m_nSize, other.m_nSize);                                     wxSwap(m_nCount, other.m_nCount);                                   wxSwap(m_pItems, other.m_pItems);                                 }                                                                                                                                                          public:                                                               void clear() { Clear(); }                                           bool empty() const { return IsEmpty(); }                            size_type max_size() const { return INT_MAX; }                      size_type size() const { return GetCount(); }                                                                                         private:                                                              void Grow(size_t nIncrement = 0);                                   bool Realloc(size_t nSize);                                                                                                             size_t  m_nSize,                                                            m_nCount;                                                                                                                       _wxArraywxBaseArrayChar      *m_pItems;                                                 };
+typedef short _wxArraywxBaseArrayShort;                                         class WXDLLIMPEXP_BASE wxBaseArrayShort                                                       {                                                                     typedef CMPFUNC SCMPFUNC;    public:                                                               wxBaseArrayShort();                                                             wxBaseArrayShort(const wxBaseArrayShort& array);                                            wxBaseArrayShort& operator=(const wxBaseArrayShort& src);                                   ~wxBaseArrayShort();                                                                                                                                void Empty() { m_nCount = 0; }                                      void Clear();                                                       void Alloc(size_t n) { if ( n > m_nSize ) Realloc(n); }             void Shrink();                                                                                                                          size_t GetCount() const { return m_nCount; }                        void SetCount(size_t n, _wxArraywxBaseArrayShort defval = _wxArraywxBaseArrayShort());                            bool IsEmpty() const { return m_nCount == 0; }                      size_t Count() const { return m_nCount; }                                                                                               typedef _wxArraywxBaseArrayShort base_type;                                                                                                                  protected:                                                            _wxArraywxBaseArrayShort& Item(size_t uiIndex) const                                         { wxASSERT( uiIndex < m_nCount ); return m_pItems[uiIndex]; }     _wxArraywxBaseArrayShort& operator[](size_t uiIndex) const { return Item(uiIndex); }                                                                           int Index(_wxArraywxBaseArrayShort lItem, bool bFromEnd = false) const;                    int Index(_wxArraywxBaseArrayShort lItem, CMPFUNC fnCompare) const;                        size_t IndexForInsert(_wxArraywxBaseArrayShort lItem, CMPFUNC fnCompare) const;            void Add(_wxArraywxBaseArrayShort lItem, size_t nInsert = 1);                              size_t Add(_wxArraywxBaseArrayShort lItem, CMPFUNC fnCompare);                             void Insert(_wxArraywxBaseArrayShort lItem, size_t uiIndex, size_t nInsert = 1);           void Remove(_wxArraywxBaseArrayShort lItem);                                               void RemoveAt(size_t uiIndex, size_t nRemove = 1);                                                                                      void Sort(CMPFUNC fnCompare);                                                                                                                          typedef _wxArraywxBaseArrayShort value_type;                                               typedef value_type* iterator;                                       typedef const value_type* const_iterator;                           typedef value_type& reference;                                      typedef const value_type& const_reference;                          typedef ptrdiff_t difference_type;                                  typedef size_t size_type;                                                                                                               void assign(const_iterator first, const_iterator last);             void assign(size_type n, const_reference v);                        size_type capacity() const { return m_nSize; }                      iterator erase(iterator first, iterator last)                       {                                                                     size_type idx = first - begin();                                    RemoveAt(idx, last - first);                                        return begin() + idx;                                             }                                                                   iterator erase(iterator it) { return erase(it, it + 1); }           void insert(iterator it, size_type n, const value_type& v)            { Insert(v, it - begin(), n); }                                   iterator insert(iterator it, const value_type& v = value_type())    {                                                                     size_type idx = it - begin();                                       Insert(v, idx);                                                     return begin() + idx;                                             }                                                                   void insert(iterator it, const_iterator first, const_iterator last);  void pop_back() { RemoveAt(size() - 1); }                           void push_back(const value_type& v) { Add(v); }                     void reserve(size_type n) { Alloc(n); }                             void resize(size_type count, value_type defval = value_type())      {                                                                     if ( count < m_nCount )                                               m_nCount = count;                                                 else                                                                  SetCount(count, defval);                                        }                                                                                                                                       iterator begin() { return m_pItems; }                               iterator end() { return m_pItems + m_nCount; }                      const_iterator begin() const { return m_pItems; }                   const_iterator end() const { return m_pItems + m_nCount; }                                                                              void swap(wxBaseArrayShort& other)                                              {                                                                     wxSwap(m_nSize, other.m_nSize);                                     wxSwap(m_nCount, other.m_nCount);                                   wxSwap(m_pItems, other.m_pItems);                                 }                                                                                                                                                          public:                                                               void clear() { Clear(); }                                           bool empty() const { return IsEmpty(); }                            size_type max_size() const { return INT_MAX; }                      size_type size() const { return GetCount(); }                                                                                         private:                                                              void Grow(size_t nIncrement = 0);                                   bool Realloc(size_t nSize);                                                                                                             size_t  m_nSize,                                                            m_nCount;                                                                                                                       _wxArraywxBaseArrayShort      *m_pItems;                                                 };
+typedef int _wxArraywxBaseArrayInt;                                         class WXDLLIMPEXP_BASE wxBaseArrayInt                                                       {                                                                     typedef CMPFUNC SCMPFUNC;    public:                                                               wxBaseArrayInt();                                                             wxBaseArrayInt(const wxBaseArrayInt& array);                                            wxBaseArrayInt& operator=(const wxBaseArrayInt& src);                                   ~wxBaseArrayInt();                                                                                                                                void Empty() { m_nCount = 0; }                                      void Clear();                                                       void Alloc(size_t n) { if ( n > m_nSize ) Realloc(n); }             void Shrink();                                                                                                                          size_t GetCount() const { return m_nCount; }                        void SetCount(size_t n, _wxArraywxBaseArrayInt defval = _wxArraywxBaseArrayInt());                            bool IsEmpty() const { return m_nCount == 0; }                      size_t Count() const { return m_nCount; }                                                                                               typedef _wxArraywxBaseArrayInt base_type;                                                                                                                  protected:                                                            _wxArraywxBaseArrayInt& Item(size_t uiIndex) const                                         { wxASSERT( uiIndex < m_nCount ); return m_pItems[uiIndex]; }     _wxArraywxBaseArrayInt& operator[](size_t uiIndex) const { return Item(uiIndex); }                                                                           int Index(_wxArraywxBaseArrayInt lItem, bool bFromEnd = false) const;                    int Index(_wxArraywxBaseArrayInt lItem, CMPFUNC fnCompare) const;                        size_t IndexForInsert(_wxArraywxBaseArrayInt lItem, CMPFUNC fnCompare) const;            void Add(_wxArraywxBaseArrayInt lItem, size_t nInsert = 1);                              size_t Add(_wxArraywxBaseArrayInt lItem, CMPFUNC fnCompare);                             void Insert(_wxArraywxBaseArrayInt lItem, size_t uiIndex, size_t nInsert = 1);           void Remove(_wxArraywxBaseArrayInt lItem);                                               void RemoveAt(size_t uiIndex, size_t nRemove = 1);                                                                                      void Sort(CMPFUNC fnCompare);                                                                                                                          typedef _wxArraywxBaseArrayInt value_type;                                               typedef value_type* iterator;                                       typedef const value_type* const_iterator;                           typedef value_type& reference;                                      typedef const value_type& const_reference;                          typedef ptrdiff_t difference_type;                                  typedef size_t size_type;                                                                                                               void assign(const_iterator first, const_iterator last);             void assign(size_type n, const_reference v);                        size_type capacity() const { return m_nSize; }                      iterator erase(iterator first, iterator last)                       {                                                                     size_type idx = first - begin();                                    RemoveAt(idx, last - first);                                        return begin() + idx;                                             }                                                                   iterator erase(iterator it) { return erase(it, it + 1); }           void insert(iterator it, size_type n, const value_type& v)            { Insert(v, it - begin(), n); }                                   iterator insert(iterator it, const value_type& v = value_type())    {                                                                     size_type idx = it - begin();                                       Insert(v, idx);                                                     return begin() + idx;                                             }                                                                   void insert(iterator it, const_iterator first, const_iterator last);  void pop_back() { RemoveAt(size() - 1); }                           void push_back(const value_type& v) { Add(v); }                     void reserve(size_type n) { Alloc(n); }                             void resize(size_type count, value_type defval = value_type())      {                                                                     if ( count < m_nCount )                                               m_nCount = count;                                                 else                                                                  SetCount(count, defval);                                        }                                                                                                                                       iterator begin() { return m_pItems; }                               iterator end() { return m_pItems + m_nCount; }                      const_iterator begin() const { return m_pItems; }                   const_iterator end() const { return m_pItems + m_nCount; }                                                                              void swap(wxBaseArrayInt& other)                                              {                                                                     wxSwap(m_nSize, other.m_nSize);                                     wxSwap(m_nCount, other.m_nCount);                                   wxSwap(m_pItems, other.m_pItems);                                 }                                                                                                                                                          public:                                                               void clear() { Clear(); }                                           bool empty() const { return IsEmpty(); }                            size_type max_size() const { return INT_MAX; }                      size_type size() const { return GetCount(); }                                                                                         private:                                                              void Grow(size_t nIncrement = 0);                                   bool Realloc(size_t nSize);                                                                                                             size_t  m_nSize,                                                            m_nCount;                                                                                                                       _wxArraywxBaseArrayInt      *m_pItems;                                                 };
+typedef long _wxArraywxBaseArrayLong;                                         class WXDLLIMPEXP_BASE wxBaseArrayLong                                                       {                                                                     typedef CMPFUNC SCMPFUNC;    public:                                                               wxBaseArrayLong();                                                             wxBaseArrayLong(const wxBaseArrayLong& array);                                            wxBaseArrayLong& operator=(const wxBaseArrayLong& src);                                   ~wxBaseArrayLong();                                                                                                                                void Empty() { m_nCount = 0; }                                      void Clear();                                                       void Alloc(size_t n) { if ( n > m_nSize ) Realloc(n); }             void Shrink();                                                                                                                          size_t GetCount() const { return m_nCount; }                        void SetCount(size_t n, _wxArraywxBaseArrayLong defval = _wxArraywxBaseArrayLong());                            bool IsEmpty() const { return m_nCount == 0; }                      size_t Count() const { return m_nCount; }                                                                                               typedef _wxArraywxBaseArrayLong base_type;                                                                                                                  protected:                                                            _wxArraywxBaseArrayLong& Item(size_t uiIndex) const                                         { wxASSERT( uiIndex < m_nCount ); return m_pItems[uiIndex]; }     _wxArraywxBaseArrayLong& operator[](size_t uiIndex) const { return Item(uiIndex); }                                                                           int Index(_wxArraywxBaseArrayLong lItem, bool bFromEnd = false) const;                    int Index(_wxArraywxBaseArrayLong lItem, CMPFUNC fnCompare) const;                        size_t IndexForInsert(_wxArraywxBaseArrayLong lItem, CMPFUNC fnCompare) const;            void Add(_wxArraywxBaseArrayLong lItem, size_t nInsert = 1);                              size_t Add(_wxArraywxBaseArrayLong lItem, CMPFUNC fnCompare);                             void Insert(_wxArraywxBaseArrayLong lItem, size_t uiIndex, size_t nInsert = 1);           void Remove(_wxArraywxBaseArrayLong lItem);                                               void RemoveAt(size_t uiIndex, size_t nRemove = 1);                                                                                      void Sort(CMPFUNC fnCompare);                                                                                                                          typedef _wxArraywxBaseArrayLong value_type;                                               typedef value_type* iterator;                                       typedef const value_type* const_iterator;                           typedef value_type& reference;                                      typedef const value_type& const_reference;                          typedef ptrdiff_t difference_type;                                  typedef size_t size_type;                                                                                                               void assign(const_iterator first, const_iterator last);             void assign(size_type n, const_reference v);                        size_type capacity() const { return m_nSize; }                      iterator erase(iterator first, iterator last)                       {                                                                     size_type idx = first - begin();                                    RemoveAt(idx, last - first);                                        return begin() + idx;                                             }                                                                   iterator erase(iterator it) { return erase(it, it + 1); }           void insert(iterator it, size_type n, const value_type& v)            { Insert(v, it - begin(), n); }                                   iterator insert(iterator it, const value_type& v = value_type())    {                                                                     size_type idx = it - begin();                                       Insert(v, idx);                                                     return begin() + idx;                                             }                                                                   void insert(iterator it, const_iterator first, const_iterator last);  void pop_back() { RemoveAt(size() - 1); }                           void push_back(const value_type& v) { Add(v); }                     void reserve(size_type n) { Alloc(n); }                             void resize(size_type count, value_type defval = value_type())      {                                                                     if ( count < m_nCount )                                               m_nCount = count;                                                 else                                                                  SetCount(count, defval);                                        }                                                                                                                                       iterator begin() { return m_pItems; }                               iterator end() { return m_pItems + m_nCount; }                      const_iterator begin() const { return m_pItems; }                   const_iterator end() const { return m_pItems + m_nCount; }                                                                              void swap(wxBaseArrayLong& other)                                              {                                                                     wxSwap(m_nSize, other.m_nSize);                                     wxSwap(m_nCount, other.m_nCount);                                   wxSwap(m_pItems, other.m_pItems);                                 }                                                                                                                                                          public:                                                               void clear() { Clear(); }                                           bool empty() const { return IsEmpty(); }                            size_type max_size() const { return INT_MAX; }                      size_type size() const { return GetCount(); }                                                                                         private:                                                              void Grow(size_t nIncrement = 0);                                   bool Realloc(size_t nSize);                                                                                                             size_t  m_nSize,                                                            m_nCount;                                                                                                                       _wxArraywxBaseArrayLong      *m_pItems;                                                 };
+typedef size_t _wxArraywxBaseArraySizeT;                                         class WXDLLIMPEXP_BASE wxBaseArraySizeT                                                       {                                                                     typedef CMPFUNC SCMPFUNC;    public:                                                               wxBaseArraySizeT();                                                             wxBaseArraySizeT(const wxBaseArraySizeT& array);                                            wxBaseArraySizeT& operator=(const wxBaseArraySizeT& src);                                   ~wxBaseArraySizeT();                                                                                                                                void Empty() { m_nCount = 0; }                                      void Clear();                                                       void Alloc(size_t n) { if ( n > m_nSize ) Realloc(n); }             void Shrink();                                                                                                                          size_t GetCount() const { return m_nCount; }                        void SetCount(size_t n, _wxArraywxBaseArraySizeT defval = _wxArraywxBaseArraySizeT());                            bool IsEmpty() const { return m_nCount == 0; }                      size_t Count() const { return m_nCount; }                                                                                               typedef _wxArraywxBaseArraySizeT base_type;                                                                                                                  protected:                                                            _wxArraywxBaseArraySizeT& Item(size_t uiIndex) const                                         { wxASSERT( uiIndex < m_nCount ); return m_pItems[uiIndex]; }     _wxArraywxBaseArraySizeT& operator[](size_t uiIndex) const { return Item(uiIndex); }                                                                           int Index(_wxArraywxBaseArraySizeT lItem, bool bFromEnd = false) const;                    int Index(_wxArraywxBaseArraySizeT lItem, CMPFUNC fnCompare) const;                        size_t IndexForInsert(_wxArraywxBaseArraySizeT lItem, CMPFUNC fnCompare) const;            void Add(_wxArraywxBaseArraySizeT lItem, size_t nInsert = 1);                              size_t Add(_wxArraywxBaseArraySizeT lItem, CMPFUNC fnCompare);                             void Insert(_wxArraywxBaseArraySizeT lItem, size_t uiIndex, size_t nInsert = 1);           void Remove(_wxArraywxBaseArraySizeT lItem);                                               void RemoveAt(size_t uiIndex, size_t nRemove = 1);                                                                                      void Sort(CMPFUNC fnCompare);                                                                                                                          typedef _wxArraywxBaseArraySizeT value_type;                                               typedef value_type* iterator;                                       typedef const value_type* const_iterator;                           typedef value_type& reference;                                      typedef const value_type& const_reference;                          typedef ptrdiff_t difference_type;                                  typedef size_t size_type;                                                                                                               void assign(const_iterator first, const_iterator last);             void assign(size_type n, const_reference v);                        size_type capacity() const { return m_nSize; }                      iterator erase(iterator first, iterator last)                       {                                                                     size_type idx = first - begin();                                    RemoveAt(idx, last - first);                                        return begin() + idx;                                             }                                                                   iterator erase(iterator it) { return erase(it, it + 1); }           void insert(iterator it, size_type n, const value_type& v)            { Insert(v, it - begin(), n); }                                   iterator insert(iterator it, const value_type& v = value_type())    {                                                                     size_type idx = it - begin();                                       Insert(v, idx);                                                     return begin() + idx;                                             }                                                                   void insert(iterator it, const_iterator first, const_iterator last);  void pop_back() { RemoveAt(size() - 1); }                           void push_back(const value_type& v) { Add(v); }                     void reserve(size_type n) { Alloc(n); }                             void resize(size_type count, value_type defval = value_type())      {                                                                     if ( count < m_nCount )                                               m_nCount = count;                                                 else                                                                  SetCount(count, defval);                                        }                                                                                                                                       iterator begin() { return m_pItems; }                               iterator end() { return m_pItems + m_nCount; }                      const_iterator begin() const { return m_pItems; }                   const_iterator end() const { return m_pItems + m_nCount; }                                                                              void swap(wxBaseArraySizeT& other)                                              {                                                                     wxSwap(m_nSize, other.m_nSize);                                     wxSwap(m_nCount, other.m_nCount);                                   wxSwap(m_pItems, other.m_pItems);                                 }                                                                                                                                                          public:                                                               void clear() { Clear(); }                                           bool empty() const { return IsEmpty(); }                            size_type max_size() const { return INT_MAX; }                      size_type size() const { return GetCount(); }                                                                                         private:                                                              void Grow(size_t nIncrement = 0);                                   bool Realloc(size_t nSize);                                                                                                             size_t  m_nSize,                                                            m_nCount;                                                                                                                       _wxArraywxBaseArraySizeT      *m_pItems;                                                 };
+typedef double _wxArraywxBaseArrayDouble;                                         class WXDLLIMPEXP_BASE wxBaseArrayDouble                                                       {                                                                     typedef CMPFUNC SCMPFUNC;    public:                                                               wxBaseArrayDouble();                                                             wxBaseArrayDouble(const wxBaseArrayDouble& array);                                            wxBaseArrayDouble& operator=(const wxBaseArrayDouble& src);                                   ~wxBaseArrayDouble();                                                                                                                                void Empty() { m_nCount = 0; }                                      void Clear();                                                       void Alloc(size_t n) { if ( n > m_nSize ) Realloc(n); }             void Shrink();                                                                                                                          size_t GetCount() const { return m_nCount; }                        void SetCount(size_t n, _wxArraywxBaseArrayDouble defval = _wxArraywxBaseArrayDouble());                            bool IsEmpty() const { return m_nCount == 0; }                      size_t Count() const { return m_nCount; }                                                                                               typedef _wxArraywxBaseArrayDouble base_type;                                                                                                                  protected:                                                            _wxArraywxBaseArrayDouble& Item(size_t uiIndex) const                                         { wxASSERT( uiIndex < m_nCount ); return m_pItems[uiIndex]; }     _wxArraywxBaseArrayDouble& operator[](size_t uiIndex) const { return Item(uiIndex); }                                                                           int Index(_wxArraywxBaseArrayDouble lItem, bool bFromEnd = false) const;                    int Index(_wxArraywxBaseArrayDouble lItem, CMPFUNC fnCompare) const;                        size_t IndexForInsert(_wxArraywxBaseArrayDouble lItem, CMPFUNC fnCompare) const;            void Add(_wxArraywxBaseArrayDouble lItem, size_t nInsert = 1);                              size_t Add(_wxArraywxBaseArrayDouble lItem, CMPFUNC fnCompare);                             void Insert(_wxArraywxBaseArrayDouble lItem, size_t uiIndex, size_t nInsert = 1);           void Remove(_wxArraywxBaseArrayDouble lItem);                                               void RemoveAt(size_t uiIndex, size_t nRemove = 1);                                                                                      void Sort(CMPFUNC fnCompare);                                                                                                                          typedef _wxArraywxBaseArrayDouble value_type;                                               typedef value_type* iterator;                                       typedef const value_type* const_iterator;                           typedef value_type& reference;                                      typedef const value_type& const_reference;                          typedef ptrdiff_t difference_type;                                  typedef size_t size_type;                                                                                                               void assign(const_iterator first, const_iterator last);             void assign(size_type n, const_reference v);                        size_type capacity() const { return m_nSize; }                      iterator erase(iterator first, iterator last)                       {                                                                     size_type idx = first - begin();                                    RemoveAt(idx, last - first);                                        return begin() + idx;                                             }                                                                   iterator erase(iterator it) { return erase(it, it + 1); }           void insert(iterator it, size_type n, const value_type& v)            { Insert(v, it - begin(), n); }                                   iterator insert(iterator it, const value_type& v = value_type())    {                                                                     size_type idx = it - begin();                                       Insert(v, idx);                                                     return begin() + idx;                                             }                                                                   void insert(iterator it, const_iterator first, const_iterator last);  void pop_back() { RemoveAt(size() - 1); }                           void push_back(const value_type& v) { Add(v); }                     void reserve(size_type n) { Alloc(n); }                             void resize(size_type count, value_type defval = value_type())      {                                                                     if ( count < m_nCount )                                               m_nCount = count;                                                 else                                                                  SetCount(count, defval);                                        }                                                                                                                                       iterator begin() { return m_pItems; }                               iterator end() { return m_pItems + m_nCount; }                      const_iterator begin() const { return m_pItems; }                   const_iterator end() const { return m_pItems + m_nCount; }                                                                              void swap(wxBaseArrayDouble& other)                                              {                                                                     wxSwap(m_nSize, other.m_nSize);                                     wxSwap(m_nCount, other.m_nCount);                                   wxSwap(m_pItems, other.m_pItems);                                 }                                                                                                                                                          public:                                                               void clear() { Clear(); }                                           bool empty() const { return IsEmpty(); }                            size_type max_size() const { return INT_MAX; }                      size_type size() const { return GetCount(); }                                                                                         private:                                                              void Grow(size_t nIncrement = 0);                                   bool Realloc(size_t nSize);                                                                                                             size_t  m_nSize,                                                            m_nCount;                                                                                                                       _wxArraywxBaseArrayDouble      *m_pItems;                                                 };
+
+// ----------------------------------------------------------------------------
+// Convenience macros to define arrays from base arrays
+// ----------------------------------------------------------------------------
+
+                                                                                                                           
+
+                                                                                                                            
+
+                                                                                                                                    
+
+                                                                                                                                     
+
+                                                                                                                                            
+
+                                                                                                                                                            
+
+                                                                                                                                                             
+
+
+                                                                                                                           
+
+                                                                                                                                    
+
+                                                                                                                                                            
+
+
+                                                                                                                             
+
+                                                                                                                                      
+
+                                                                                                                                                              
+
+
+                                                                                                                           
+
+                                                                                                                                    
+
+                                                                                                                                                            
+
+
+                                                                                                                            
+
+                                                                                                                                     
+
+                                                                                                                                                             
+
+
+                                                                                                                               
+
+                                                                                                                                        
+
+                                                                                                                                                                
+
+
+                                                                                                                              
+
+                                                                                                                                       
+
+                                                                                                                                                               
+
+
+// ----------------------------------------------------------------------------
+// Convenience macros to define sorted arrays from base arrays
+// ----------------------------------------------------------------------------
+
+                                                                                                                                  
+
+                                                                                                                                           
+
+                                                                                                                                                                       
+
+
+                                                                                                                              
+
+                                                                                                                                       
+
+                                                                                                                                                                   
+
+
+                                                                                                                                
+
+                                                                                                                                         
+
+                                                                                                                                                                     
+
+
+                                                                                                                              
+
+                                                                                                                                       
+
+                                                                                                                                                     
+
+
+                                                                                                                               
+
+                                                                                                                                        
+
+                                                                                                                                                      
+
+
+                                                                                                                                  
+
+                                                                                                                                           
+
+                                                                                                                                                                       
+
+
+// ----------------------------------------------------------------------------
+// Convenience macros to define sorted arrays from base arrays
+// ----------------------------------------------------------------------------
+
+                                                                                                                                               
+
+                                                                                                                                                        
+
+                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                           
+
+                                                                                                                                                    
+
+                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                             
+
+                                                                                                                                                      
+
+                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                           
+
+                                                                                                                                                    
+
+                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                            
+
+                                                                                                                                                     
+
+                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                               
+
+                                                                                                                                                        
+
+                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+// ----------------------------------------------------------------------------
+// Some commonly used predefined arrays
+// ----------------------------------------------------------------------------
+
+typedef short _wxArraywxArrayShort;                                              wxCOMPILE_TIME_ASSERT2(sizeof(_wxArraywxArrayShort) <= sizeof(wxBaseArrayShort::base_type),                                 TypeTooBigToBeStoredInwxBaseArrayShort,                                         wxArrayShort);                                         typedef int (CMPFUNC_CONV *CMPFUNC_wxArraywxArrayShort)(_wxArraywxArrayShort *pItem1, _wxArraywxArrayShort *pItem2);         class WXDLLIMPEXP_BASE wxArrayShort : public wxBaseArrayShort                                           {                                                                     public:                                                                 wxArrayShort() { }                                                            ~wxArrayShort() { }                                                                                                                                 _wxArraywxArrayShort& operator[](size_t uiIndex) const                                     { return (_wxArraywxArrayShort&)(wxBaseArrayShort::operator[](uiIndex)); }                         _wxArraywxArrayShort& Item(size_t uiIndex) const                                           { return (_wxArraywxArrayShort&)(wxBaseArrayShort::operator[](uiIndex)); }                         _wxArraywxArrayShort& Last() const                                                         { return (_wxArraywxArrayShort&)(wxBaseArrayShort::operator[](GetCount() - 1)); }                                                                                        int Index(_wxArraywxArrayShort lItem, bool bFromEnd = false) const                         { return wxBaseArrayShort::Index((base_type)lItem, bFromEnd); }                                                                                       void Add(_wxArraywxArrayShort lItem, size_t nInsert = 1)                                   { wxBaseArrayShort::Add((base_type)lItem, nInsert); }                           void Insert(_wxArraywxArrayShort lItem, size_t uiIndex, size_t nInsert = 1)                { wxBaseArrayShort::Insert((base_type)lItem, uiIndex, nInsert) ; }                                                                                    void RemoveAt(size_t uiIndex, size_t nRemove = 1)                       { wxBaseArrayShort::RemoveAt(uiIndex, nRemove); }                               void Remove(_wxArraywxArrayShort lItem)                                                    { int iIndex = Index(lItem);                                            wxCHECK_RET( iIndex != wxNOT_FOUND, "removing inexistent element in wxArray::Remove");                wxBaseArrayShort::RemoveAt((size_t)iIndex); }                                                                                                       void Sort(CMPFUNC_wxArraywxArrayShort fCmp) { wxBaseArrayShort::Sort((CMPFUNC)fCmp); }                                                                                                                                private:                                                                typedef wxBaseArrayShort::iterator biterator;                                     typedef wxBaseArrayShort::const_iterator bconst_iterator;                         typedef wxBaseArrayShort::value_type bvalue_type;                                 typedef wxBaseArrayShort::const_reference bconst_reference;                     public:                                                                 typedef _wxArraywxArrayShort value_type;                                                 typedef value_type* pointer;                                          typedef const value_type* const_pointer;                              typedef value_type* iterator;                                         typedef const value_type* const_iterator;                             typedef value_type& reference;                                        typedef const value_type& const_reference;                            typedef wxBaseArrayShort::difference_type difference_type;                        typedef wxBaseArrayShort::size_type size_type;                                                                                                          class reverse_iterator                                                {                                                                       typedef _wxArraywxArrayShort value_type;                                                 typedef value_type& reference;                                        typedef value_type* pointer;                                          typedef reverse_iterator itor;                                        friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        reverse_iterator() : m_ptr(NULL) { }                                  reverse_iterator(pointer ptr) : m_ptr(ptr) { }                        reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }                reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { reverse_iterator tmp = *this; --m_ptr; return tmp; }              itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          class const_reverse_iterator                                          {                                                                       typedef _wxArraywxArrayShort value_type;                                                 typedef const value_type& reference;                                  typedef const value_type* pointer;                                    typedef const_reverse_iterator itor;                                  friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        const_reverse_iterator() : m_ptr(NULL) { }                            const_reverse_iterator(pointer ptr) : m_ptr(ptr) { }                  const_reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }          const_reverse_iterator(const reverse_iterator& it) : m_ptr(it.m_ptr) { }    reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { itor tmp = *this; --m_ptr; return tmp; }                          itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          wxArrayShort(size_type n) { assign(n, value_type()); }                        wxArrayShort(size_type n, const_reference v) { assign(n, v); }                wxArrayShort(const_iterator first, const_iterator last)                         { assign(first, last); }                                            void assign(const_iterator first, const_iterator last)                  { wxBaseArrayShort::assign((bconst_iterator)first, (bconst_iterator)last); }    void assign(size_type n, const_reference v)                             { wxBaseArrayShort::assign(n, (bconst_reference)v); }                           reference back() { return *(end() - 1); }                             const_reference back() const { return *(end() - 1); }                 iterator begin() { return (iterator)wxBaseArrayShort::begin(); }                  const_iterator begin() const { return (const_iterator)wxBaseArrayShort::begin(); }  size_type capacity() const { return wxBaseArrayShort::capacity(); }               iterator end() { return (iterator)wxBaseArrayShort::end(); }                      const_iterator end() const { return (const_iterator)wxBaseArrayShort::end(); }    iterator erase(iterator first, iterator last)                           { return (iterator)wxBaseArrayShort::erase((biterator)first, (biterator)last); }  iterator erase(iterator it)                                             { return (iterator)wxBaseArrayShort::erase((biterator)it); }                    reference front() { return *begin(); }                                const_reference front() const { return *begin(); }                    void insert(iterator it, size_type n, const_reference v)                { wxBaseArrayShort::insert((biterator)it, n, (bconst_reference)v); }            iterator insert(iterator it, const_reference v = value_type())          { return (iterator)wxBaseArrayShort::insert((biterator)it, (bconst_reference)v); }  void insert(iterator it, const_iterator first, const_iterator last)     { wxBaseArrayShort::insert((biterator)it, (bconst_iterator)first,                                (bconst_iterator)last); }                            void pop_back() { wxBaseArrayShort::pop_back(); }                                 void push_back(const_reference v)                                       { wxBaseArrayShort::push_back((bconst_reference)v); }                           reverse_iterator rbegin() { return reverse_iterator(end() - 1); }     const_reverse_iterator rbegin() const;                                reverse_iterator rend() { return reverse_iterator(begin() - 1); }     const_reverse_iterator rend() const;                                  void reserve(size_type n) { wxBaseArrayShort::reserve(n); }                       void resize(size_type n, value_type v = value_type())                   { wxBaseArrayShort::resize(n, v); }                                             void swap(wxArrayShort& other) { wxBaseArrayShort::swap(other); }                       };
+typedef int _wxArraywxArrayInt;                                              wxCOMPILE_TIME_ASSERT2(sizeof(_wxArraywxArrayInt) <= sizeof(wxBaseArrayInt::base_type),                                 TypeTooBigToBeStoredInwxBaseArrayInt,                                         wxArrayInt);                                         typedef int (CMPFUNC_CONV *CMPFUNC_wxArraywxArrayInt)(_wxArraywxArrayInt *pItem1, _wxArraywxArrayInt *pItem2);         class WXDLLIMPEXP_BASE wxArrayInt : public wxBaseArrayInt                                           {                                                                     public:                                                                 wxArrayInt() { }                                                            ~wxArrayInt() { }                                                                                                                                 _wxArraywxArrayInt& operator[](size_t uiIndex) const                                     { return (_wxArraywxArrayInt&)(wxBaseArrayInt::operator[](uiIndex)); }                         _wxArraywxArrayInt& Item(size_t uiIndex) const                                           { return (_wxArraywxArrayInt&)(wxBaseArrayInt::operator[](uiIndex)); }                         _wxArraywxArrayInt& Last() const                                                         { return (_wxArraywxArrayInt&)(wxBaseArrayInt::operator[](GetCount() - 1)); }                                                                                        int Index(_wxArraywxArrayInt lItem, bool bFromEnd = false) const                         { return wxBaseArrayInt::Index((base_type)lItem, bFromEnd); }                                                                                       void Add(_wxArraywxArrayInt lItem, size_t nInsert = 1)                                   { wxBaseArrayInt::Add((base_type)lItem, nInsert); }                           void Insert(_wxArraywxArrayInt lItem, size_t uiIndex, size_t nInsert = 1)                { wxBaseArrayInt::Insert((base_type)lItem, uiIndex, nInsert) ; }                                                                                    void RemoveAt(size_t uiIndex, size_t nRemove = 1)                       { wxBaseArrayInt::RemoveAt(uiIndex, nRemove); }                               void Remove(_wxArraywxArrayInt lItem)                                                    { int iIndex = Index(lItem);                                            wxCHECK_RET( iIndex != wxNOT_FOUND, "removing inexistent element in wxArray::Remove");                wxBaseArrayInt::RemoveAt((size_t)iIndex); }                                                                                                       void Sort(CMPFUNC_wxArraywxArrayInt fCmp) { wxBaseArrayInt::Sort((CMPFUNC)fCmp); }                                                                                                                                private:                                                                typedef wxBaseArrayInt::iterator biterator;                                     typedef wxBaseArrayInt::const_iterator bconst_iterator;                         typedef wxBaseArrayInt::value_type bvalue_type;                                 typedef wxBaseArrayInt::const_reference bconst_reference;                     public:                                                                 typedef _wxArraywxArrayInt value_type;                                                 typedef value_type* pointer;                                          typedef const value_type* const_pointer;                              typedef value_type* iterator;                                         typedef const value_type* const_iterator;                             typedef value_type& reference;                                        typedef const value_type& const_reference;                            typedef wxBaseArrayInt::difference_type difference_type;                        typedef wxBaseArrayInt::size_type size_type;                                                                                                          class reverse_iterator                                                {                                                                       typedef _wxArraywxArrayInt value_type;                                                 typedef value_type& reference;                                        typedef value_type* pointer;                                          typedef reverse_iterator itor;                                        friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        reverse_iterator() : m_ptr(NULL) { }                                  reverse_iterator(pointer ptr) : m_ptr(ptr) { }                        reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }                reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { reverse_iterator tmp = *this; --m_ptr; return tmp; }              itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          class const_reverse_iterator                                          {                                                                       typedef _wxArraywxArrayInt value_type;                                                 typedef const value_type& reference;                                  typedef const value_type* pointer;                                    typedef const_reverse_iterator itor;                                  friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        const_reverse_iterator() : m_ptr(NULL) { }                            const_reverse_iterator(pointer ptr) : m_ptr(ptr) { }                  const_reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }          const_reverse_iterator(const reverse_iterator& it) : m_ptr(it.m_ptr) { }    reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { itor tmp = *this; --m_ptr; return tmp; }                          itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          wxArrayInt(size_type n) { assign(n, value_type()); }                        wxArrayInt(size_type n, const_reference v) { assign(n, v); }                wxArrayInt(const_iterator first, const_iterator last)                         { assign(first, last); }                                            void assign(const_iterator first, const_iterator last)                  { wxBaseArrayInt::assign((bconst_iterator)first, (bconst_iterator)last); }    void assign(size_type n, const_reference v)                             { wxBaseArrayInt::assign(n, (bconst_reference)v); }                           reference back() { return *(end() - 1); }                             const_reference back() const { return *(end() - 1); }                 iterator begin() { return (iterator)wxBaseArrayInt::begin(); }                  const_iterator begin() const { return (const_iterator)wxBaseArrayInt::begin(); }  size_type capacity() const { return wxBaseArrayInt::capacity(); }               iterator end() { return (iterator)wxBaseArrayInt::end(); }                      const_iterator end() const { return (const_iterator)wxBaseArrayInt::end(); }    iterator erase(iterator first, iterator last)                           { return (iterator)wxBaseArrayInt::erase((biterator)first, (biterator)last); }  iterator erase(iterator it)                                             { return (iterator)wxBaseArrayInt::erase((biterator)it); }                    reference front() { return *begin(); }                                const_reference front() const { return *begin(); }                    void insert(iterator it, size_type n, const_reference v)                { wxBaseArrayInt::insert((biterator)it, n, (bconst_reference)v); }            iterator insert(iterator it, const_reference v = value_type())          { return (iterator)wxBaseArrayInt::insert((biterator)it, (bconst_reference)v); }  void insert(iterator it, const_iterator first, const_iterator last)     { wxBaseArrayInt::insert((biterator)it, (bconst_iterator)first,                                (bconst_iterator)last); }                            void pop_back() { wxBaseArrayInt::pop_back(); }                                 void push_back(const_reference v)                                       { wxBaseArrayInt::push_back((bconst_reference)v); }                           reverse_iterator rbegin() { return reverse_iterator(end() - 1); }     const_reverse_iterator rbegin() const;                                reverse_iterator rend() { return reverse_iterator(begin() - 1); }     const_reverse_iterator rend() const;                                  void reserve(size_type n) { wxBaseArrayInt::reserve(n); }                       void resize(size_type n, value_type v = value_type())                   { wxBaseArrayInt::resize(n, v); }                                             void swap(wxArrayInt& other) { wxBaseArrayInt::swap(other); }                       };
+typedef double _wxArraywxArrayDouble;                                              wxCOMPILE_TIME_ASSERT2(sizeof(_wxArraywxArrayDouble) <= sizeof(wxBaseArrayDouble::base_type),                                 TypeTooBigToBeStoredInwxBaseArrayDouble,                                         wxArrayDouble);                                         typedef int (CMPFUNC_CONV *CMPFUNC_wxArraywxArrayDouble)(_wxArraywxArrayDouble *pItem1, _wxArraywxArrayDouble *pItem2);         class WXDLLIMPEXP_BASE wxArrayDouble : public wxBaseArrayDouble                                           {                                                                     public:                                                                 wxArrayDouble() { }                                                            ~wxArrayDouble() { }                                                                                                                                 _wxArraywxArrayDouble& operator[](size_t uiIndex) const                                     { return (_wxArraywxArrayDouble&)(wxBaseArrayDouble::operator[](uiIndex)); }                         _wxArraywxArrayDouble& Item(size_t uiIndex) const                                           { return (_wxArraywxArrayDouble&)(wxBaseArrayDouble::operator[](uiIndex)); }                         _wxArraywxArrayDouble& Last() const                                                         { return (_wxArraywxArrayDouble&)(wxBaseArrayDouble::operator[](GetCount() - 1)); }                                                                                        int Index(_wxArraywxArrayDouble lItem, bool bFromEnd = false) const                         { return wxBaseArrayDouble::Index((base_type)lItem, bFromEnd); }                                                                                       void Add(_wxArraywxArrayDouble lItem, size_t nInsert = 1)                                   { wxBaseArrayDouble::Add((base_type)lItem, nInsert); }                           void Insert(_wxArraywxArrayDouble lItem, size_t uiIndex, size_t nInsert = 1)                { wxBaseArrayDouble::Insert((base_type)lItem, uiIndex, nInsert) ; }                                                                                    void RemoveAt(size_t uiIndex, size_t nRemove = 1)                       { wxBaseArrayDouble::RemoveAt(uiIndex, nRemove); }                               void Remove(_wxArraywxArrayDouble lItem)                                                    { int iIndex = Index(lItem);                                            wxCHECK_RET( iIndex != wxNOT_FOUND, "removing inexistent element in wxArray::Remove");                wxBaseArrayDouble::RemoveAt((size_t)iIndex); }                                                                                                       void Sort(CMPFUNC_wxArraywxArrayDouble fCmp) { wxBaseArrayDouble::Sort((CMPFUNC)fCmp); }                                                                                                                                private:                                                                typedef wxBaseArrayDouble::iterator biterator;                                     typedef wxBaseArrayDouble::const_iterator bconst_iterator;                         typedef wxBaseArrayDouble::value_type bvalue_type;                                 typedef wxBaseArrayDouble::const_reference bconst_reference;                     public:                                                                 typedef _wxArraywxArrayDouble value_type;                                                 typedef value_type* pointer;                                          typedef const value_type* const_pointer;                              typedef value_type* iterator;                                         typedef const value_type* const_iterator;                             typedef value_type& reference;                                        typedef const value_type& const_reference;                            typedef wxBaseArrayDouble::difference_type difference_type;                        typedef wxBaseArrayDouble::size_type size_type;                                                                                                          class reverse_iterator                                                {                                                                       typedef _wxArraywxArrayDouble value_type;                                                 typedef value_type& reference;                                        typedef value_type* pointer;                                          typedef reverse_iterator itor;                                        friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        reverse_iterator() : m_ptr(NULL) { }                                  reverse_iterator(pointer ptr) : m_ptr(ptr) { }                        reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }                reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { reverse_iterator tmp = *this; --m_ptr; return tmp; }              itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          class const_reverse_iterator                                          {                                                                       typedef _wxArraywxArrayDouble value_type;                                                 typedef const value_type& reference;                                  typedef const value_type* pointer;                                    typedef const_reverse_iterator itor;                                  friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        const_reverse_iterator() : m_ptr(NULL) { }                            const_reverse_iterator(pointer ptr) : m_ptr(ptr) { }                  const_reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }          const_reverse_iterator(const reverse_iterator& it) : m_ptr(it.m_ptr) { }    reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { itor tmp = *this; --m_ptr; return tmp; }                          itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          wxArrayDouble(size_type n) { assign(n, value_type()); }                        wxArrayDouble(size_type n, const_reference v) { assign(n, v); }                wxArrayDouble(const_iterator first, const_iterator last)                         { assign(first, last); }                                            void assign(const_iterator first, const_iterator last)                  { wxBaseArrayDouble::assign((bconst_iterator)first, (bconst_iterator)last); }    void assign(size_type n, const_reference v)                             { wxBaseArrayDouble::assign(n, (bconst_reference)v); }                           reference back() { return *(end() - 1); }                             const_reference back() const { return *(end() - 1); }                 iterator begin() { return (iterator)wxBaseArrayDouble::begin(); }                  const_iterator begin() const { return (const_iterator)wxBaseArrayDouble::begin(); }  size_type capacity() const { return wxBaseArrayDouble::capacity(); }               iterator end() { return (iterator)wxBaseArrayDouble::end(); }                      const_iterator end() const { return (const_iterator)wxBaseArrayDouble::end(); }    iterator erase(iterator first, iterator last)                           { return (iterator)wxBaseArrayDouble::erase((biterator)first, (biterator)last); }  iterator erase(iterator it)                                             { return (iterator)wxBaseArrayDouble::erase((biterator)it); }                    reference front() { return *begin(); }                                const_reference front() const { return *begin(); }                    void insert(iterator it, size_type n, const_reference v)                { wxBaseArrayDouble::insert((biterator)it, n, (bconst_reference)v); }            iterator insert(iterator it, const_reference v = value_type())          { return (iterator)wxBaseArrayDouble::insert((biterator)it, (bconst_reference)v); }  void insert(iterator it, const_iterator first, const_iterator last)     { wxBaseArrayDouble::insert((biterator)it, (bconst_iterator)first,                                (bconst_iterator)last); }                            void pop_back() { wxBaseArrayDouble::pop_back(); }                                 void push_back(const_reference v)                                       { wxBaseArrayDouble::push_back((bconst_reference)v); }                           reverse_iterator rbegin() { return reverse_iterator(end() - 1); }     const_reverse_iterator rbegin() const;                                reverse_iterator rend() { return reverse_iterator(begin() - 1); }     const_reverse_iterator rend() const;                                  void reserve(size_type n) { wxBaseArrayDouble::reserve(n); }                       void resize(size_type n, value_type v = value_type())                   { wxBaseArrayDouble::resize(n, v); }                                             void swap(wxArrayDouble& other) { wxBaseArrayDouble::swap(other); }                       };
+typedef long _wxArraywxArrayLong;                                              wxCOMPILE_TIME_ASSERT2(sizeof(_wxArraywxArrayLong) <= sizeof(wxBaseArrayLong::base_type),                                 TypeTooBigToBeStoredInwxBaseArrayLong,                                         wxArrayLong);                                         typedef int (CMPFUNC_CONV *CMPFUNC_wxArraywxArrayLong)(_wxArraywxArrayLong *pItem1, _wxArraywxArrayLong *pItem2);         class WXDLLIMPEXP_BASE wxArrayLong : public wxBaseArrayLong                                           {                                                                     public:                                                                 wxArrayLong() { }                                                            ~wxArrayLong() { }                                                                                                                                 _wxArraywxArrayLong& operator[](size_t uiIndex) const                                     { return (_wxArraywxArrayLong&)(wxBaseArrayLong::operator[](uiIndex)); }                         _wxArraywxArrayLong& Item(size_t uiIndex) const                                           { return (_wxArraywxArrayLong&)(wxBaseArrayLong::operator[](uiIndex)); }                         _wxArraywxArrayLong& Last() const                                                         { return (_wxArraywxArrayLong&)(wxBaseArrayLong::operator[](GetCount() - 1)); }                                                                                        int Index(_wxArraywxArrayLong lItem, bool bFromEnd = false) const                         { return wxBaseArrayLong::Index((base_type)lItem, bFromEnd); }                                                                                       void Add(_wxArraywxArrayLong lItem, size_t nInsert = 1)                                   { wxBaseArrayLong::Add((base_type)lItem, nInsert); }                           void Insert(_wxArraywxArrayLong lItem, size_t uiIndex, size_t nInsert = 1)                { wxBaseArrayLong::Insert((base_type)lItem, uiIndex, nInsert) ; }                                                                                    void RemoveAt(size_t uiIndex, size_t nRemove = 1)                       { wxBaseArrayLong::RemoveAt(uiIndex, nRemove); }                               void Remove(_wxArraywxArrayLong lItem)                                                    { int iIndex = Index(lItem);                                            wxCHECK_RET( iIndex != wxNOT_FOUND, "removing inexistent element in wxArray::Remove");                wxBaseArrayLong::RemoveAt((size_t)iIndex); }                                                                                                       void Sort(CMPFUNC_wxArraywxArrayLong fCmp) { wxBaseArrayLong::Sort((CMPFUNC)fCmp); }                                                                                                                                private:                                                                typedef wxBaseArrayLong::iterator biterator;                                     typedef wxBaseArrayLong::const_iterator bconst_iterator;                         typedef wxBaseArrayLong::value_type bvalue_type;                                 typedef wxBaseArrayLong::const_reference bconst_reference;                     public:                                                                 typedef _wxArraywxArrayLong value_type;                                                 typedef value_type* pointer;                                          typedef const value_type* const_pointer;                              typedef value_type* iterator;                                         typedef const value_type* const_iterator;                             typedef value_type& reference;                                        typedef const value_type& const_reference;                            typedef wxBaseArrayLong::difference_type difference_type;                        typedef wxBaseArrayLong::size_type size_type;                                                                                                          class reverse_iterator                                                {                                                                       typedef _wxArraywxArrayLong value_type;                                                 typedef value_type& reference;                                        typedef value_type* pointer;                                          typedef reverse_iterator itor;                                        friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        reverse_iterator() : m_ptr(NULL) { }                                  reverse_iterator(pointer ptr) : m_ptr(ptr) { }                        reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }                reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { reverse_iterator tmp = *this; --m_ptr; return tmp; }              itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          class const_reverse_iterator                                          {                                                                       typedef _wxArraywxArrayLong value_type;                                                 typedef const value_type& reference;                                  typedef const value_type* pointer;                                    typedef const_reverse_iterator itor;                                  friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        const_reverse_iterator() : m_ptr(NULL) { }                            const_reverse_iterator(pointer ptr) : m_ptr(ptr) { }                  const_reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }          const_reverse_iterator(const reverse_iterator& it) : m_ptr(it.m_ptr) { }    reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { itor tmp = *this; --m_ptr; return tmp; }                          itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          wxArrayLong(size_type n) { assign(n, value_type()); }                        wxArrayLong(size_type n, const_reference v) { assign(n, v); }                wxArrayLong(const_iterator first, const_iterator last)                         { assign(first, last); }                                            void assign(const_iterator first, const_iterator last)                  { wxBaseArrayLong::assign((bconst_iterator)first, (bconst_iterator)last); }    void assign(size_type n, const_reference v)                             { wxBaseArrayLong::assign(n, (bconst_reference)v); }                           reference back() { return *(end() - 1); }                             const_reference back() const { return *(end() - 1); }                 iterator begin() { return (iterator)wxBaseArrayLong::begin(); }                  const_iterator begin() const { return (const_iterator)wxBaseArrayLong::begin(); }  size_type capacity() const { return wxBaseArrayLong::capacity(); }               iterator end() { return (iterator)wxBaseArrayLong::end(); }                      const_iterator end() const { return (const_iterator)wxBaseArrayLong::end(); }    iterator erase(iterator first, iterator last)                           { return (iterator)wxBaseArrayLong::erase((biterator)first, (biterator)last); }  iterator erase(iterator it)                                             { return (iterator)wxBaseArrayLong::erase((biterator)it); }                    reference front() { return *begin(); }                                const_reference front() const { return *begin(); }                    void insert(iterator it, size_type n, const_reference v)                { wxBaseArrayLong::insert((biterator)it, n, (bconst_reference)v); }            iterator insert(iterator it, const_reference v = value_type())          { return (iterator)wxBaseArrayLong::insert((biterator)it, (bconst_reference)v); }  void insert(iterator it, const_iterator first, const_iterator last)     { wxBaseArrayLong::insert((biterator)it, (bconst_iterator)first,                                (bconst_iterator)last); }                            void pop_back() { wxBaseArrayLong::pop_back(); }                                 void push_back(const_reference v)                                       { wxBaseArrayLong::push_back((bconst_reference)v); }                           reverse_iterator rbegin() { return reverse_iterator(end() - 1); }     const_reverse_iterator rbegin() const;                                reverse_iterator rend() { return reverse_iterator(begin() - 1); }     const_reverse_iterator rend() const;                                  void reserve(size_type n) { wxBaseArrayLong::reserve(n); }                       void resize(size_type n, value_type v = value_type())                   { wxBaseArrayLong::resize(n, v); }                                             void swap(wxArrayLong& other) { wxBaseArrayLong::swap(other); }                       };
+typedef void * _wxArraywxArrayPtrVoid;                                              wxCOMPILE_TIME_ASSERT2(sizeof(_wxArraywxArrayPtrVoid) <= sizeof(wxBaseArrayPtrVoid::base_type),                                 TypeTooBigToBeStoredInwxBaseArrayPtrVoid,                                         wxArrayPtrVoid);                                         typedef int (CMPFUNC_CONV *CMPFUNC_wxArraywxArrayPtrVoid)(_wxArraywxArrayPtrVoid *pItem1, _wxArraywxArrayPtrVoid *pItem2);         class WXDLLIMPEXP_BASE wxArrayPtrVoid : public wxBaseArrayPtrVoid                                           {                                                                     public:                                                                 wxArrayPtrVoid() { }                                                            ~wxArrayPtrVoid() { }                                                                                                                                 _wxArraywxArrayPtrVoid& operator[](size_t uiIndex) const                                     { return (_wxArraywxArrayPtrVoid&)(wxBaseArrayPtrVoid::operator[](uiIndex)); }                         _wxArraywxArrayPtrVoid& Item(size_t uiIndex) const                                           { return (_wxArraywxArrayPtrVoid&)(wxBaseArrayPtrVoid::operator[](uiIndex)); }                         _wxArraywxArrayPtrVoid& Last() const                                                         { return (_wxArraywxArrayPtrVoid&)(wxBaseArrayPtrVoid::operator[](GetCount() - 1)); }                                                                                        int Index(_wxArraywxArrayPtrVoid lItem, bool bFromEnd = false) const                         { return wxBaseArrayPtrVoid::Index((base_type)lItem, bFromEnd); }                                                                                       void Add(_wxArraywxArrayPtrVoid lItem, size_t nInsert = 1)                                   { wxBaseArrayPtrVoid::Add((base_type)lItem, nInsert); }                           void Insert(_wxArraywxArrayPtrVoid lItem, size_t uiIndex, size_t nInsert = 1)                { wxBaseArrayPtrVoid::Insert((base_type)lItem, uiIndex, nInsert) ; }                                                                                    void RemoveAt(size_t uiIndex, size_t nRemove = 1)                       { wxBaseArrayPtrVoid::RemoveAt(uiIndex, nRemove); }                               void Remove(_wxArraywxArrayPtrVoid lItem)                                                    { int iIndex = Index(lItem);                                            wxCHECK_RET( iIndex != wxNOT_FOUND, "removing inexistent element in wxArray::Remove");                wxBaseArrayPtrVoid::RemoveAt((size_t)iIndex); }                                                                                                       void Sort(CMPFUNC_wxArraywxArrayPtrVoid fCmp) { wxBaseArrayPtrVoid::Sort((CMPFUNC)fCmp); }                                                                                                                                private:                                                                typedef wxBaseArrayPtrVoid::iterator biterator;                                     typedef wxBaseArrayPtrVoid::const_iterator bconst_iterator;                         typedef wxBaseArrayPtrVoid::value_type bvalue_type;                                 typedef wxBaseArrayPtrVoid::const_reference bconst_reference;                     public:                                                                 typedef _wxArraywxArrayPtrVoid value_type;                                                 typedef value_type* pointer;                                          typedef const value_type* const_pointer;                              typedef value_type* iterator;                                         typedef const value_type* const_iterator;                             typedef value_type& reference;                                        typedef const value_type& const_reference;                            typedef wxBaseArrayPtrVoid::difference_type difference_type;                        typedef wxBaseArrayPtrVoid::size_type size_type;                                                                                                          class reverse_iterator                                                {                                                                       typedef _wxArraywxArrayPtrVoid value_type;                                                 typedef value_type& reference;                                        typedef value_type* pointer;                                          typedef reverse_iterator itor;                                        friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        reverse_iterator() : m_ptr(NULL) { }                                  reverse_iterator(pointer ptr) : m_ptr(ptr) { }                        reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }                reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { reverse_iterator tmp = *this; --m_ptr; return tmp; }              itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          class const_reverse_iterator                                          {                                                                       typedef _wxArraywxArrayPtrVoid value_type;                                                 typedef const value_type& reference;                                  typedef const value_type* pointer;                                    typedef const_reverse_iterator itor;                                  friend inline itor operator+(int o, const itor& it)                       { return it.m_ptr - o; }                                          friend inline itor operator+(const itor& it, int o)                       { return it.m_ptr - o; }                                          friend inline itor operator-(const itor& it, int o)                       { return it.m_ptr + o; }                                          friend inline difference_type operator-(const itor& i1,                                                       const itor& i2)                   { return i1.m_ptr - i2.m_ptr; }                                                                                                       public:                                                                 pointer m_ptr;                                                        const_reverse_iterator() : m_ptr(NULL) { }                            const_reverse_iterator(pointer ptr) : m_ptr(ptr) { }                  const_reverse_iterator(const itor& it) : m_ptr(it.m_ptr) { }          const_reverse_iterator(const reverse_iterator& it) : m_ptr(it.m_ptr) { }    reference operator*() const { return *m_ptr; }                                                                                         itor& operator++() { --m_ptr; return *this; }                         const itor operator++(int)                                              { itor tmp = *this; --m_ptr; return tmp; }                          itor& operator--() { ++m_ptr; return *this; }                         const itor operator--(int) { itor tmp = *this; ++m_ptr; return tmp; }    bool operator ==(const itor& it) const { return m_ptr == it.m_ptr; }    bool operator !=(const itor& it) const { return m_ptr != it.m_ptr; }  };                                                                                                                                          wxArrayPtrVoid(size_type n) { assign(n, value_type()); }                        wxArrayPtrVoid(size_type n, const_reference v) { assign(n, v); }                wxArrayPtrVoid(const_iterator first, const_iterator last)                         { assign(first, last); }                                            void assign(const_iterator first, const_iterator last)                  { wxBaseArrayPtrVoid::assign((bconst_iterator)first, (bconst_iterator)last); }    void assign(size_type n, const_reference v)                             { wxBaseArrayPtrVoid::assign(n, (bconst_reference)v); }                           reference back() { return *(end() - 1); }                             const_reference back() const { return *(end() - 1); }                 iterator begin() { return (iterator)wxBaseArrayPtrVoid::begin(); }                  const_iterator begin() const { return (const_iterator)wxBaseArrayPtrVoid::begin(); }  size_type capacity() const { return wxBaseArrayPtrVoid::capacity(); }               iterator end() { return (iterator)wxBaseArrayPtrVoid::end(); }                      const_iterator end() const { return (const_iterator)wxBaseArrayPtrVoid::end(); }    iterator erase(iterator first, iterator last)                           { return (iterator)wxBaseArrayPtrVoid::erase((biterator)first, (biterator)last); }  iterator erase(iterator it)                                             { return (iterator)wxBaseArrayPtrVoid::erase((biterator)it); }                    reference front() { return *begin(); }                                const_reference front() const { return *begin(); }                    void insert(iterator it, size_type n, const_reference v)                { wxBaseArrayPtrVoid::insert((biterator)it, n, (bconst_reference)v); }            iterator insert(iterator it, const_reference v = value_type())          { return (iterator)wxBaseArrayPtrVoid::insert((biterator)it, (bconst_reference)v); }  void insert(iterator it, const_iterator first, const_iterator last)     { wxBaseArrayPtrVoid::insert((biterator)it, (bconst_iterator)first,                                (bconst_iterator)last); }                            void pop_back() { wxBaseArrayPtrVoid::pop_back(); }                                 void push_back(const_reference v)                                       { wxBaseArrayPtrVoid::push_back((bconst_reference)v); }                           reverse_iterator rbegin() { return reverse_iterator(end() - 1); }     const_reverse_iterator rbegin() const;                                reverse_iterator rend() { return reverse_iterator(begin() - 1); }     const_reverse_iterator rend() const;                                  void reserve(size_type n) { wxBaseArrayPtrVoid::reserve(n); }                       void resize(size_type n, value_type v = value_type())                   { wxBaseArrayPtrVoid::resize(n, v); }                                             void swap(wxArrayPtrVoid& other) { wxBaseArrayPtrVoid::swap(other); }                       };
+
+// -----------------------------------------------------------------------------
+// convenience macros
+// -----------------------------------------------------------------------------
+
+// prepend all element of one array to another one; e.g. if first array contains
+// elements X,Y,Z and the second contains A,B,C (in those orders), then the
+// first array will be result as A,B,C,X,Y,Z
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+
+// append all element of one array to another one
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+
+// delete all array elements
+//
+// NB: the class declaration of the array elements must be visible from the
+//     place where you use this macro, otherwise the proper destructor may not
+//     be called (a decent compiler should give a warning about it, but don't
+//     count on it)!
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+
+
+
+
+
+       // _DYNARRAY_H

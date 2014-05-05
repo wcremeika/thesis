@@ -1,0 +1,78 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\time.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/time.h
+// Purpose:     Miscellaneous time-related functions.
+// Author:      Vadim Zeitlin
+// Created:     2011-11-26
+// Copyright:   (c) 2011 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                   
+                   
+
+                       
+
+// Returns the difference between UTC and local time in seconds.
+WXDLLIMPEXP_BASE int wxGetTimeZone();
+
+// Get number of seconds since local time 00:00:00 Jan 1st 1970.
+extern long WXDLLIMPEXP_BASE wxGetLocalTime();
+
+// Get number of seconds since GMT 00:00:00, Jan 1st 1970.
+extern long WXDLLIMPEXP_BASE wxGetUTCTime();
+
+                  
+                                      
+                                                                         
+     
+    typedef double wxMilliClock_t;
+    inline long wxMilliClockToLong(double d) { return wx_truncate_cast(long, d); }
+       // wxUSE_LONGLONG
+
+// Get number of milliseconds since local time 00:00:00 Jan 1st 1970
+extern wxMilliClock_t WXDLLIMPEXP_BASE wxGetLocalTimeMillis();
+
+                  
+
+                                                                  
+                                                 
+                                               
+
+       // wxUSE_LONGLONG
+
+                                           
+
+// on some really old systems gettimeofday() doesn't have the second argument,
+// define wxGetTimeOfDay() to hide this difference
+                        
+                                
+                                                        
+         
+                                                                
+          
+       // HAVE_GETTIMEOFDAY
+
+/* Two wrapper functions for thread safety */
+                       
+                                 
+     
+WXDLLIMPEXP_BASE struct tm *wxLocaltime_r(const time_t*, struct tm*);
+                                                                   
+                                              
+                                                                              
+      
+      
+
+                    
+                           
+     
+WXDLLIMPEXP_BASE struct tm *wxGmtime_r(const time_t*, struct tm*);
+                                                                   
+                                           
+                                                                        
+      
+      
+
+       // _WX_TIME_H_

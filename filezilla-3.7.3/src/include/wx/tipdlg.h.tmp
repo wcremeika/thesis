@@ -1,0 +1,87 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\tipdlg.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/tipdlg.h
+// Purpose:     declaration of wxTipDialog
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     28.06.99
+// Copyright:   (c) Vadim Zeitlin
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+// ----------------------------------------------------------------------------
+// headers which we must include here
+// ----------------------------------------------------------------------------
+
+                   
+
+                      
+
+                        
+
+                                                                               
+                                                                              
+       
+                                                                               
+
+                                                                              
+                                                                             
+                                                                             
+                                                                               
+                                                                            
+                                   
+ 
+       
+                                                                   
+
+                                                                               
+                                    
+                                  
+
+                                                                               
+                                         
+                                                         
+
+                                                                            
+                                                                          
+                                                    
+                                                                       
+
+                                      
+                                
+
+          
+                        
+  
+
+                                                                        
+                                                                  
+  
+                                                          
+                  
+                                                                                
+                                                                          
+                        
+
+                                                                               
+              
+                                                                               
+
+                                                                            
+                                                                       
+                                                                             
+                                                                            
+                                                                      
+  
+                                                                          
+                                                
+                                                          
+                                                          
+
+       // wxUSE_STARTUP_TIPS
+
+       // _WX_TIPDLG_H_

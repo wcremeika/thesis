@@ -1,0 +1,15 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_fileexists.h" 0
+                                    
+                                    
+
+class COptionsPageFileExists : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_FILEEXISTS"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+};
+
+       //__OPTIONSPAGE_FILEEXISTS_H__

@@ -1,0 +1,39 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\joystick.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/joystick.h
+// Purpose:     wxJoystick base header
+// Author:      wxWidgets Team
+// Modified by:
+// Created:
+// Copyright:   (c) wxWidgets Team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+                   
+
+                  
+
+                        
+                            
+                          
+                             
+                        
+                             
+                        
+                             
+                         
+                                 
+                        
+                            
+                       
+                            
+      
+
+       // wxUSE_JOYSTICK
+
+      
+    // _WX_JOYSTICK_H_BASE_

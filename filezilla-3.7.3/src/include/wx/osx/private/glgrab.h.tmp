@@ -1,0 +1,15 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\private\glgrab.h" 0
+                                         
+
+                       
+    extern "C" {
+      
+
+    CF_RETURNS_RETAINED CGImageRef grabViaOpenGL(CGDirectDisplayID display,
+                             CGRect srcRect);
+
+                       
+    }
+      
+

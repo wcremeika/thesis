@@ -1,0 +1,100 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\gtk\chkconf.h" 0
+/*
+ * Name:        wx/gtk/chkconf.h
+ * Purpose:     wxGTK-specific settings consistency checks
+ * Author:      Vadim Zeitlin
+ * Created:     2007-07-19 (extracted from wx/chkconf.h)
+ * Copyright:   (c) 2000-2007 Vadim Zeitlin <vadim@wxwidgets.org>
+ * Licence:     wxWindows licence
+ */
+
+                       
+                                          
+                              
+      
+     
+                  
+                     
+      
+      
+       /* !__WXUNIVERSAL__ */
+
+                  
+                  
+                              
+      
+     
+                     
+                        
+      
+      
+       /* wxUSE_JOYSTICK */
+
+                                                             
+                       
+                          
+      
+
+                     
+                        
+                           
+      
+
+                  
+                     
+                        
+      
+
+                      
+                         
+                            
+      
+
+                
+
+                    
+                       
+                           
+                              
+
+                      
+                         
+
+    /*
+        We could use GDK_WINDOWING_X11 for those but this would require
+        including gdk/gdk.h and we don't want to do it from here, so assume
+        we're not using X11 if we're not under Unix.
+     */
+
+                              
+                                 
+
+                     
+                        
+
+       /* __UNIX__ */
+
+/*
+    We always need Cairo with wxGTK, enable it if necessary (this can only
+    happen under Windows).
+ */
+                  
+
+                
+                  
+                     
+      
+
+        /* __WINDOWS__ */
+
+                 
+                               
+                                      
+                  
+             
+                                         
+                                            
+              
+          
+      

@@ -1,0 +1,75 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\fmappriv.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/fmappriv.h
+// Purpose:     private wxFontMapper stuff, not to be used by the library users
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     21.06.2003 (extracted from common/fontmap.cpp)
+// Copyright:   (c) 1999-2003 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+// ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+// a special pseudo encoding which means "don't ask me about this charset
+// any more" -- we need it to avoid driving the user crazy with asking him
+// time after time about the same charset which he [presumably] doesn't
+// have the fonts for
+enum { wxFONTENCODING_UNKNOWN = -2 };
+
+// the config paths we use
+                
+
+                                                         
+                                               
+                                                    
+
+       // wxUSE_CONFIG
+
+// ----------------------------------------------------------------------------
+// wxFontMapperPathChanger: change the config path during our lifetime
+// ----------------------------------------------------------------------------
+
+                                    
+
+                             
+ 
+       
+                                                                               
+     
+                                  
+                                                          
+     
+
+                                      
+
+                              
+     
+                     
+                                                 
+     
+
+        
+                                               
+                                   
+
+                                          
+                       
+
+                                             
+              
+
+
+                                                     
+  
+
+       // wxUSE_CONFIG
+
+       // _WX_FMAPPRIV_H_
+

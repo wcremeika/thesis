@@ -1,0 +1,1613 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Shortcut.cpp" 0
+//*******************************************************************
+//              
+//  FILE:       Shortcut.cpp
+//              
+//  AUTHOR:     Thomas Latuske <CobUser@GMX.de>
+//              
+//  COMPONENT:  CShortcut
+//              
+//  DATE:       04.05.2004
+//              
+//  COMMENTS:   Update 11.05.2004:
+//                 - added ResolveLink
+//                 - added GetSpecialFolder (split off)
+//              Update 09.11.2006: (ronys)
+//                 - Get to compile cleanly under MSVS2005
+//                 - const correctness, char -> TCHAR, minor cleanups
+//              Update 01.07.2009: (c-273)
+//                 - TCHAR -> wchar_t
+//*******************************************************************
+
+// Includes
+//////////////////////////////////////////////////////////////////////
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\stdafx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Shortcut.cpp" 24
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Shortcut.h" 0
+//*******************************************************************
+//              
+//  FILE:       Shortcut.h
+//              
+//  AUTHOR:     Thomas Latuske <CobUser@GMX.de>
+//              
+//  COMPONENT:  CShortcut
+//              
+//  DATE:       04.05.2004
+//              
+//  COMMENTS:   Update 11.05.2004:
+//                  - added ResolveLink
+//                  - added GetSpecialFolder (split off)
+//              Update 09.11.2006: (ronys)
+//                  - Get to compile cleanly under MSVS2005
+//              
+//*******************************************************************
+//////////////////////////////////////////////////////////////////////
+
+                                                                             
+                                                                       
+
+                   
+       
+       // _MSC_VER > 1000
+
+/*
+******************************************************************
+*!!!! Don't forget to start OLE in your app's InitInstance: !!!!!*
+******************************************************************
+AfxEnableControlContainer();
+
+// initialize OLE:
+if (!AfxOleInit())
+{
+AfxMessageBox("Unable to initialize OLE.\nTerminating application!");
+return FALSE;
+}
+
+*/
+
+                  
+
+class CShortcut  
+{
+public:
+  CShortcut();
+  ~CShortcut();
+
+  /*  This routine resolves the lnk destination: */
+  HRESULT ResolveLink(const CString &LnkName, UINT SpecialFolder,
+    HWND hwnd, CString &LnkPath, CString &LnkDescription);
+  /* Looks if the link with name LnkName already exists in the special folder */
+  BOOL isLinkExist(const CString &LnkName, UINT SpecialFolder) const;
+  /* set argument(s) that will be used when a file is send (SendTo): */
+  void SetCmdArguments(const CString &sArg) {m_sCmdArg = sArg;}
+  /*! Use this routine to create a ShortCut (ShellLink) for this Application */
+  BOOL CreateShortCut(const CString &LnkTarget, const CString &LnkName,
+    UINT SpecialFolder, const CString &LnkDescription = L"",
+    const CString &IconLocation = L"", UINT IconIndex = 1);
+  /*! Use this routine to delete any Shortcut */
+  BOOL DeleteShortCut(const CString &LnkName, UINT SpecialFolder);
+
+private:
+  /*  This routine is a helper that finds the path to the special folder: */
+  BOOL GetSpecialFolder(UINT SpecialFolder, CString &SpecialFolderString) const;
+  /*  This routine is a helper that builds a long path from 8+3 one */
+  int ShortToLongPathName(const CString &sShortPath, CString &sLongPath);
+  CString m_sCmdArg;
+};
+
+       // !defined(AFX_SHORTCUT_H__2599590A_2D2B_49B1_9E63_BF123E5B67B8__INCLUDED_)
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Shortcut.cpp" 25
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/debug.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+                  
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+/**
+* Silly wrapper to abstract away the difference between a Unicode
+* (wchar_t) and non-Unicode (char) std::string, as well as
+* Linux/Windows portability.
+*
+*/
+
+                
+/*
+ * _S is defined same as m'soft's _T, just to avoid collisions or
+ * lousy include order dependencies.
+ */
+
+// Sometimes we need specific ones irrespective of in Unicode mode or not.
+// In particular, the underlying format of most XML is Unicode.
+typedef std::wstring wstringT;
+typedef std::string  cstringT;
+
+              
+                             
+                      
+                    
+     
+typedef std::string stringT;
+typedef char charT;
+               
+      
+
+                               
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\../core/PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+// some globally useful includes for non-Windows
+                 
+      
+
+                
+                  
+      
+
+// Following seems needed on Linux/cygwin
+                                             
+                   
+      
+
+// stop MS VC++ 6 and earlier being quite so pedantic
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+// PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN can be specified on the 
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+// 
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+// Following from libtomcrypt, for twofish & SHA256
+/* Controls endianess and size of registers.  Leave uncommented to get platform neutral [slower] code 
+* 
+* Note: in order to use the optimized macros your platform must support unaligned 32 and 64 bit read/writes.
+* The x86 platforms allow this but some others [ARM for instance] do not.  On those platforms you **MUST**
+* use the portable [slower] macros.
+*/
+
+/* detect x86-32 machines somewhat */
+                                                                                                                                                                                 
+                     
+                        
+      
+
+/* detects MIPS R5900 processors (PS2) */
+                                                                                                                        
+                     
+                        
+      
+
+/* detect amd64 */
+                                                                
+                     
+                        
+      
+
+/* #define ENDIAN_LITTLE */
+/* #define ENDIAN_BIG */
+
+/* #define ENDIAN_32BITWORD */
+/* #define ENDIAN_64BITWORD */
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+/* fix for MSVC ...evil! */
+               
+                            
+                                 
+     
+                           
+typedef uint64_t ulong64;
+      
+
+/* this is the "32-bit at least" data type 
+* Re-define it to suit your platform but it must be at least 32-bits 
+*/
+                       
+                         
+     
+typedef unsigned long ulong32;
+      
+
+/* ---- HELPER MACROS ---- */
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+       /* ENDIAN_NEUTRAL */
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+       /* ENDIAN_LITTLE */
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+       /* ENDIAN_BIG */
+
+                                                                                                                         
+
+
+
+/* 32-bit Rotates */
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+/* rotates the hard way */
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+/* 64-bit Rotates */
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+      /* Not x86_64  */
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+/* extract a byte portably */
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\typedefs.h" 46 // for afxwin.h, and endian macros
+
+// Hotkey values. Internal PWS values - need to convert to either MFC or wxWidgets
+// values in the GUI when retrieving these from the preferences and aso back to PWS
+// internal values before giving them to PWSPrefs for saving in the XML config file.
+                                
+                                
+                                
+                                
+ 
+// wxWidgets Only - Not used in Windows MFC
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+      /* !defined(_WIN32) */
+                  
+                     
+typedef int8_t  int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef int64_t int64;
+
+typedef uint8_t  uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
+
+typedef int errno_t;
+
+              
+          
+                    
+      
+                      
+     
+               
+typedef char TCHAR;
+typedef wchar_t WCHAR;
+       /* UNICODE */
+
+// mimic Microsoft conventional typdefs:
+typedef TCHAR *LPTSTR;
+typedef const TCHAR *LPCTSTR;
+typedef bool BOOL;
+typedef unsigned char BYTE;
+typedef uint16_t WORD;
+typedef uint32_t DWORD;
+typedef int32_t LONG;
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+typedef int32_t LPARAM;
+typedef unsigned int UINT;
+typedef int HANDLE;
+                                       
+
+// assorted conveniences:
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+/* These two files require the above definitions */
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\debug.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+                  
+
+                     
+             
+                   
+      
+
+                  
+                                                                 
+                                      
+                                  
+
+                                                    
+                                             
+                  
+                                                                  
+
+    
+                                                            
+
+               
+                                             
+                                                  
+                                            
+                                                        
+    
+                                                         
+                                                                          
+ 
+
+       /* _OSDEBUG_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\typedefs.h" 224
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux/pws_time.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                    
+                    
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux\../typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux/pws_time.h" 13
+                  
+typedef time_t __time32_t;
+typedef uint64_t __time64_t;
+
+extern struct tm *gmtime64_r(const __time64_t *timep, struct tm *result);
+
+namespace pws_os {
+  /**
+   * Workaround the lack of a wchar_t version of asctime()
+   */
+  extern int asctime(TCHAR *buf, size_t N, const struct tm *tm);
+}
+
+       /* __PWS_TIME_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\typedefs.h" 225
+       /* _WIN32 */
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/debug.h" 14
+             
+                   
+      
+
+namespace pws_os {
+  // MFC TRACE equivalent in MFC, non-MFC Windows and non-Windows
+  void Trace(LPCTSTR lpszFormat, ...);
+  void Trace0(LPCTSTR lpszFormat);
+
+  // Opens a messagebox or write to debugger window 
+  // with text of last system error, titlebar
+  // is csFunction
+  void IssueError(const stringT &csFunction, bool bMsgBox = true);
+
+  /*
+    Outputs a printable version of memory dump (hex + ascii)
+
+    parameters:
+      pmemory   - pointer to memory to format
+      length    - length memory to format in bytes
+      cs_prefix - prefix each line with this
+      maxnum    - maximum hex characters dumped per line
+  */
+  void HexDump(unsigned char *pmemory, const int &length,
+               const stringT &cs_prefix = "", const int &maxnum = 16);
+}
+
+       /* _OSDEBUG_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Shortcut.cpp" 27
+
+             
+                
+                                 
+                     
+      
+
+//////////////////////////////////////////////////////////////////////
+// Konstruktion/Destruktion
+//////////////////////////////////////////////////////////////////////
+
+CShortcut::CShortcut()
+{
+  m_sCmdArg.Empty();
+}
+
+CShortcut::~CShortcut()
+{
+}
+
+  /*!
+  ***************************************************************
+  
+  \param LnkTarget      - The File/Folder the link belongs to
+  \param LnkName        - The name of the ShortCut
+  \param SpecialFolder  - where to put the shortcut (See #defines below)
+  \param LnkDescription - an application can use it to store
+                          any text information and can retrieve
+                          it with "IShellLink::GetDescription"
+  \param IconLocation   - path to the file where the icon is located
+                          that should be used. Can be an empty string
+  \param IconIndex      - the # of the icon in the file
+  
+  \return BOOL          - ShortCut created or not
+  
+  Defines for Special Folders:
+  
+  SendTo Menu/Folder:              CSIDL_SENDTO
+  Desktop for current User         CSIDL_DESKTOP
+  Desktop:                         CSIDL_COMMON_DESKTOPDIRECTORY
+  Autostart for current User:      CSIDL_STARTUP
+  Autostart:                       CSIDL_COMMON_STARTUP
+  Start-menu for current User:     CSIDL_STARTMENU
+  Start-menu:                      CSIDL_STARTMENU
+  Programms-menu for current User: CSIDL_COMMON_STARTMENU
+  and some more.....
+*****************************************************************/
+
+BOOL CShortcut::CreateShortCut(const CString &LnkTarget,
+                               const CString &LnkName, UINT SpecialFolder,
+                               const CString &LnkDescription,
+                               const CString &IconLocation, UINT IconIndex)
+{
+  HRESULT hr;
+  CFile cfFull;
+  CString sExePath, sExe, sSpecialFolder;
+
+  wchar_t *chTmp = sExePath.GetBuffer(MAX_PATH);
+
+  GetModuleFileName(NULL, chTmp, MAX_PATH);
+
+  sExePath.ReleaseBuffer();
+
+  // Find the Special Folder:
+  if (!GetSpecialFolder(SpecialFolder, sSpecialFolder))
+    return false;
+
+  sSpecialFolder += LnkName + L"." + L"lnk";
+
+  if (LnkTarget == L"_this") {
+    cfFull.SetFilePath(sExePath);
+    sExe = cfFull.GetFileName();
+    sExe.Delete(sExe.Find(L".") + 1, 3);
+  } else {
+    sExePath = LnkTarget;
+  }
+
+  // Create the ShortCut:
+  CoInitialize(NULL);
+  BOOL bRet = false;
+  IShellLink* psl;
+
+  if (SUCCEEDED(CoCreateInstance(CLSID_ShellLink,
+                                 NULL,
+                                 CLSCTX_INPROC_SERVER,
+                                 IID_IShellLink,
+                                 (LPVOID*) &psl))) {
+    IPersistFile* ppf;
+
+    psl->SetPath(sExePath);
+    psl->SetDescription(LnkDescription);
+
+    if (!m_sCmdArg.IsEmpty())
+      psl->SetArguments(m_sCmdArg);
+
+    if (SUCCEEDED(psl->QueryInterface(IID_IPersistFile, (LPVOID *)&ppf))) {
+      /* Call IShellLink::SetIconLocation with the file containing
+         the icon and the index of the icon */
+      if (!IconLocation.IsEmpty()) {
+        hr = psl->SetIconLocation(IconLocation, IconIndex);
+             
+                       
+                                                        
+      
+      }
+
+      if (SUCCEEDED(ppf->Save(sSpecialFolder, true)))
+      {
+        bRet = true;
+      }
+      ppf->Release();
+    }
+    psl->Release();
+  } 
+
+  pws_os::Trace(bRet ? L"Lnk Written!\n" :
+               L"Lnk NOT Written! CreateShortCut(...) failed!\n");
+  return bRet;
+}
+
+/*!
+***************************************************************
+
+  \param LnkName       - The name of the ShortCut
+  \param SpecialFolder - Location of the shortcut (See #defines below)
+  
+  \return void
+  
+  Defines for Special Folders:
+  
+  SendTo Menu/Folder:              CSIDL_SENDTO
+  Desktop for current User         CSIDL_DESKTOP
+  Desktop:                         CSIDL_COMMON_DESKTOPDIRECTORY
+  Autostart for current User:      CSIDL_STARTUP
+  Autostart:                       CSIDL_COMMON_STARTUP
+  Start-menu for current User:     CSIDL_STARTMENU
+  Start-menu:                      CSIDL_STARTMENU
+  Programms-menu for current User: CSIDL_COMMON_STARTMENU
+  and some more.....
+*****************************************************************/
+
+BOOL CShortcut::DeleteShortCut(const CString &LnkName, UINT SpecialFolder)
+{
+  CFile cfFull;
+  CString sExePath, sExe, sSpecialFolder;
+  wchar_t *chTmp = sExePath.GetBuffer(MAX_PATH);
+
+  GetModuleFileName(NULL, chTmp, MAX_PATH);
+  sExePath.ReleaseBuffer();
+
+  if (!GetSpecialFolder(SpecialFolder, sSpecialFolder))
+    return false;
+
+  // Work with the special folder's path (contained in szPath)
+  cfFull.SetFilePath(sExePath);
+  sExe = cfFull.GetFileName();
+  sExe.Delete(sExe.Find(L".") + 1, 3);
+  sSpecialFolder += LnkName + L"." + L"lnk";
+
+  // DELETE THE LINK:
+  SHFILEOPSTRUCT FIO = {0};
+  //  FIO.pTo=NULL; // MUST be NULL
+  FIO.wFunc = FO_DELETE;
+  FIO.fFlags = FOF_NOERRORUI | FOF_NOCONFIRMATION;
+
+  if (sSpecialFolder.Find(L'\0') != sSpecialFolder.GetLength()) {
+    FIO.fFlags |= FOF_MULTIDESTFILES;
+  }
+
+  if (sSpecialFolder.Right(1)) {
+    sSpecialFolder += L'\0';
+  }
+
+  FIO.pFrom = &*sSpecialFolder;
+
+  int bD = SHFileOperation(&FIO);
+
+  if (!bD) {
+    pws_os::Trace(L"Lnk Deleted!\n");
+    return true;
+  } else {
+    pws_os::Trace(L"Lnk NOT Deleted! DeleteShortCut(...) FAILED!\n");
+    return false;
+  }
+}
+
+/*********************************************
+This routine tests if a link already exists:
+*********************************************/
+BOOL CShortcut::isLinkExist(const CString &LnkName,
+                            UINT SpecialFolder) const
+{
+  CFileStatus cfStatus;
+  CString sSpecialFolder;
+  // Find the Special Folder:
+  if (!GetSpecialFolder(SpecialFolder, sSpecialFolder))
+    return false;
+
+  // Work with the special folder's path (contained in szPath)
+  sSpecialFolder += L"\\";
+  sSpecialFolder += LnkName + L"." + L"lnk";
+
+  BOOL brc = CFile::GetStatus(sSpecialFolder, cfStatus);
+  pws_os::Trace(L"%s = %s\n", brc == true ? L"Full file name" : L"File NOT available", cfStatus.m_szFullName);
+  return brc;
+}
+
+/*********************************************
+This routine resolves the lnk destination:
+  
+  \param LnkName         - The name of the ShortCut\n
+  \param SpecialFolder   - where to put the shortcut (See #defines above (MSDN))
+  \param hwnd            - handle of the parent window for MessageBoxes
+                           the shell may need to display
+  \param LnkPath         - Reference to a CString that receives the linkpath if
+                           routine is successful else the string will be empty
+  \param LnkDescription  - Reference to a CString that receives the Description
+                           of the link else the string will be empty
+  
+  \returns a HRESULT
+*********************************************/
+HRESULT CShortcut::ResolveLink(const CString &LnkName, UINT SpecialFolder,
+                               HWND hwnd, CString &LnkPath,
+                               CString &LnkDescription)
+{
+  HRESULT hres;     
+  IShellLink* psl;
+  wchar_t *szGotPath = LnkPath.GetBuffer(MAX_PATH); 
+  wchar_t *szDescription = LnkDescription.GetBuffer(MAX_PATH);
+  CString sLnkFile, sSpecialFolder;
+  CString sLong;
+  WIN32_FIND_DATA wfd;  
+
+  // get the path to the special folder:
+  if (!GetSpecialFolder(SpecialFolder, sSpecialFolder))
+    return 1; // return ERROR
+  // build a linkfile:
+  sLnkFile = sSpecialFolder + LnkName + L".lnk";
+
+  // Get a pointer to the IShellLink interface. 
+  hres = CoCreateInstance(CLSID_ShellLink,
+                          NULL,
+                          CLSCTX_INPROC_SERVER,
+                          IID_IShellLink,
+                          (LPVOID*) &psl);
+  if (SUCCEEDED(hres)) {
+    IPersistFile* ppf;  
+    // Get a pointer to the IPersistFile interface. 
+    hres = psl->QueryInterface(IID_IPersistFile, (LPVOID *)&ppf);
+
+    if (SUCCEEDED(hres)) { 
+      hres = ppf->Load(sLnkFile, STGM_READ); 
+      if (SUCCEEDED(hres)) {   // Resolve the link. 
+        hres = psl->Resolve(hwnd, SLR_ANY_MATCH); 
+
+        if (SUCCEEDED(hres)) {  
+          // Get the path to the link target. 
+          hres = psl->GetPath(szGotPath, MAX_PATH,
+                              (WIN32_FIND_DATA *)&wfd, 
+                              SLGP_SHORTPATH); 
+
+          LnkPath.ReleaseBuffer();
+
+          if (!SUCCEEDED(hres)) {
+            LnkDescription.ReleaseBuffer();
+            return hres; // application-defined function  
+          }
+          // Get the description of the target:
+          hres = psl->GetDescription(szDescription, MAX_PATH); 
+          LnkDescription.ReleaseBuffer();
+
+          if (!SUCCEEDED(hres)) 
+            return hres; 
+        } 
+      }
+      // Release the pointer to the IPersistFile interface. 
+      ppf->Release();         
+    } 
+    // Release the pointer to the IShellLink interface. 
+    psl->Release();
+  }
+  // whether OS is <= NT4 or not... use this helper:
+  if (ShortToLongPathName(LnkPath, sLong) > LnkPath.GetLength())
+    LnkPath = sLong;
+
+  return hres; 
+}
+
+/*********************************************
+  This routine is a helper that finds the path to the special folder:
+  
+  \param SpecialFolder        - an UINT-define (See #defines above or (MSDN))
+  \param SpecialFolderString  - Reference to a CString that receives the
+                                path to the special folder
+  \returns a BOOL - Found or not
+*********************************************/
+BOOL CShortcut::GetSpecialFolder(UINT SpecialFolder,
+                                 CString &SpecialFolderString) const
+{
+  HRESULT hr;
+  // Find the Special Folder:
+  // Allocate a pointer to an Item ID list
+  LPITEMIDLIST pidl;
+
+  // Get a pointer to an item ID list that
+  // represents the path of a special folder
+  hr = SHGetSpecialFolderLocation(NULL, SpecialFolder, &pidl);
+  if (SUCCEEDED(hr)) {  // Convert the item ID list's binary
+    // representation into a file system path
+    wchar_t szPath[_MAX_PATH];
+    if (SHGetPathFromIDList(pidl, szPath)) {
+      // Allocate a pointer to an IMalloc interface
+      LPMALLOC pMalloc;
+
+      // Get the address of our task allocator's IMalloc interface
+      hr = SHGetMalloc(&pMalloc);
+
+      // Free the item ID list allocated by SHGetSpecialFolderLocation
+      pMalloc->Free(pidl);
+
+      // Free our task allocator
+      pMalloc->Release();
+
+      // Work with the special folder's path (contained in szPath)
+      SpecialFolderString = szPath;
+      SpecialFolderString += L"\\";
+      return true;
+    }
+  }
+  return false;
+}
+
+/*********************************************
+  This routine is a helper that builds a long path of a short (8+3) path:
+  
+  \param sShortPath  - short path to convert
+  \param sLongPath   - string that receives the long path
+  
+  \returns a BOOL - Found or not
+*********************************************/
+// if the extension contains '~', replace it with '*'!!!!!!!!!!!!!!!
+int CShortcut::ShortToLongPathName(const CString &sShortPath, CString &sLongPath)
+{
+  // Catch null pointers.
+  if (sShortPath.IsEmpty())  return 0;
+
+  // Check whether the input path is valid.
+  if (0xffffffff == GetFileAttributes(sShortPath)) return 0;
+
+  // Special characters.
+  CString sep = L"\\";
+  CString colon = L":";
+
+  CString sDrive, sCutPath, sTmpShort;
+
+  // Copy the short path into the work buffer and convert forward
+  // slashes to backslashes.
+  CString path = sShortPath;
+  path.Replace(L"/", sep);
+
+  // We need a marker for stepping through the path.
+  int right = 0;
+
+  // Parse the first bit of the path.
+  if (path.GetLength() >= 2 && isalpha(path[0]) && colon == path[1]) {// Drive letter?
+    if (2 == path.GetLength()) { // ’bare’ drive letter
+      right = -1; // skip main block
+    } else if (sep == path[2]) { // drive letter + backslash
+      // FindFirstFile doesn’t like "X:\"
+      if (3 == path.GetLength()) {
+        right = -1; // skip main block
+      }
+    }
+    else return 0; // parsing failure
+  } else if (path.GetLength() >= 1 && sep == path[0]) {
+    if (1 == path.GetLength()) { // ’bare’ backslash
+      right = -1; // skip main block
+    } else {
+      if (sep == path[1]) { // is it UNC?
+        // Find end of machine name
+        right = path.Find(sep);
+
+        if (right == -1)
+          return 0;
+        // Find end of share name
+        right = path.Find(sep);
+        if (right == 1)
+          return 0;
+      }
+      ++right;
+    }
+  }
+
+  // else FindFirstFile will handle relative paths
+  // The data block for FindFirstFile.
+  WIN32_FIND_DATA fd;
+
+  // extract the Drive-name:
+  sDrive = path.Left(3);
+  path.Delete(0, 3);
+  sTmpShort = sDrive;
+  sLongPath = sDrive;
+
+  // Main parse block - step through path.
+  while (right != -1) {
+    // Find next separator.
+    right = path.Find(sep);
+    if (right == 0) {
+      path.Delete(0, 1);
+      sTmpShort += sep;
+      right = path.Find(sep);
+    } else if (right == -1 && path.GetLength() <= 0) {
+      return sLongPath.GetLength();
+    }
+    // Temporarily replace the separator with a null character so that
+    // the path so far can be passed to FindFirstFile.
+    if (right == -1)
+      sCutPath = path.Left(path.GetLength());
+    else
+      sCutPath = path.Left(right);
+
+    path.Delete(0, right);
+
+    sTmpShort += sCutPath;
+
+    // See what FindFirstFile makes of the path so far.
+    HANDLE hf = FindFirstFile(sTmpShort, &fd);
+
+    if (HANDLE(-1) == hf)
+      return 0;
+    FindClose(hf);
+
+    // The file was found add it to the output path:
+    if (right != -1)
+      sLongPath += fd.cFileName + sep;
+    else
+      sLongPath += fd.cFileName;
+  }
+
+  // Check whether the output path is valid:
+  if (0xffffffff == GetFileAttributes(sLongPath))  return 0;
+
+  // return the number of characters in the long path:
+  return sLongPath.GetLength();
+}

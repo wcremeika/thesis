@@ -1,0 +1,80 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\generic\numdlgg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/generic/numdlgg.h
+// Purpose:     wxNumberEntryDialog class
+// Author:      John Labenski
+// Modified by:
+// Created:     07.02.04 (extracted from textdlgg.cpp)
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+                   
+
+                   
+
+                      
+
+                  
+                                          
+     
+                                          
+                        
+
+                                                                               
+                                                                             
+                                                                               
+
+                                                            
+ 
+       
+                                         
+                                                
+                                               
+                                                
+                                                       
+                                                                
+
+                                             
+
+                          
+                                     
+                                         
+
+          
+
+                  
+                           
+     
+                           
+                        
+
+                               
+
+        
+                         
+                                              
+                                                 
+  
+
+                                                                               
+                                     
+                                                                               
+
+                     
+                                                
+                                               
+                                                
+                                       
+                                     
+                                       
+                                                
+                                                                
+
+       // wxUSE_NUMBERDLG
+
+       // __NUMDLGH_G__

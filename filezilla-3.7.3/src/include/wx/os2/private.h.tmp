@@ -1,0 +1,425 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\private.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/private.h
+// Purpose:     Private declarations: as this header is only included by
+//              wxWidgets itself, it may contain identifiers which don't start
+//              with "wx".
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                 
+               
+                
+                   
+                      
+                
+                       
+                      
+                
+                    
+                      
+
+               
+
+                                   
+                                                                        
+                                                                               
+                                                                    
+                                                                                    
+                                                                                            
+                                                                    
+                                                                            
+      
+
+                                                
+                       
+                        
+                        
+
+                                                                     
+                 
+                    
+                                    
+         
+          
+
+                               
+                      
+                        
+                         
+                                                         
+                                                            
+                                               
+     
+                                           
+                  
+     
+      
+
+                                                                                     
+
+                              
+                                                             
+                                                             
+                                                                       
+                                                                       
+                                                                             
+                                                                               
+               
+
+                                
+
+      
+
+                       
+                      
+
+class WXDLLIMPEXP_FWD_CORE wxFont;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+class WXDLLIMPEXP_FWD_BASE wxString;
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+
+// ---------------------------------------------------------------------------
+// private constants
+// ---------------------------------------------------------------------------
+
+//
+// Constant strings for control names and classes
+//
+
+//
+// Controls
+//
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxButtonNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxCheckBoxNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxChoiceNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxComboBoxNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxDialogNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxFrameNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxGaugeNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxStaticBoxNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxListBoxNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxStaticLineNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxStaticTextNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxStaticBitmapNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxPanelNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxRadioBoxNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxRadioButtonNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxBitmapRadioButtonNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxScrollBarNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxSliderNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxTextCtrlNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxToolBarNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxStatusLineNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxGetTextFromUserPromptStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxMessageBoxCaptionStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxFileSelectorPromptStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxFileSelectorDefaultWildcardStr[];
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*) wxInternalErrorStr;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*) wxFatalErrorStr;
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxTreeCtrlNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxDirDialogNameStr[];
+WXDLLIMPEXP_DATA_CORE(extern const char)   wxDirDialogDefaultFolderStr[];
+
+//
+// Class names
+//
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxFrameClassName;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxFrameClassNameNoRedraw;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxMDIFrameClassName;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxMDIFrameClassNameNoRedraw;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxMDIChildFrameClassName;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxMDIChildFrameClassNameNoRedraw;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxPanelClassName;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxPanelClassNameNR;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxCanvasClassName;
+WXDLLIMPEXP_DATA_CORE(extern const wxChar*)  wxCanvasClassNameNR;
+
+// ---------------------------------------------------------------------------
+// standard icons from the resources
+// ---------------------------------------------------------------------------
+
+               
+
+                                                     
+                                                              
+                                                             
+                                                         
+                                                                  
+                                                                 
+                                                       
+
+      
+
+// ---------------------------------------------------------------------------
+// this defines a CASTWNDPROC macro which casts a pointer to the type of a
+// window proc for PM.
+// MPARAM is a void * but is really a 32-bit value
+// ---------------------------------------------------------------------------
+
+typedef MRESULT (APIENTRY * WndProcCast) (HWND, ULONG, MPARAM, MPARAM);
+                                 
+
+/*
+ * Decide what window classes we're going to use
+ * for this combination of CTl3D/FAFA settings
+ */
+
+                                      
+                                                             
+                                      
+                                                     
+                              
+                                       
+                                                        
+                           
+                              
+                    
+/*  PM has no group box button style
+#define GROUP_CLASS      "BUTTON"
+#define GROUP_FLAGS      (BS_GROUPBOX|WS_CHILD|WS_VISIBLE)
+*/
+
+/*
+#define BITCHECK_FLAGS   (FB_BITMAP|FC_BUTTONDRAW|FC_DEFAULT|WS_VISIBLE)
+#define BITRADIO_FLAGS   (FC_BUTTONDRAW|FB_BITMAP|FC_RADIO|WS_CHILD|WS_VISIBLE)
+*/
+
+// ---------------------------------------------------------------------------
+// misc macros
+// ---------------------------------------------------------------------------
+
+                             
+                               
+                              
+
+// Scale font to get edit control height
+                                                      
+
+               
+
+                                                                    
+                                  
+                                                                                                                    
+
+      
+
+// ---------------------------------------------------------------------------
+// constants which might miss from some compilers' headers
+// ---------------------------------------------------------------------------
+
+                              
+                                        
+      
+
+                         
+                                           
+      
+
+                          
+                                     
+      
+
+                                
+                                           
+      
+
+                                  
+                                         
+      
+
+                       
+                                   
+      
+
+                   
+                                   
+      
+
+                
+                                   
+      
+
+                 
+                       
+      
+
+// ---------------------------------------------------------------------------
+// debug messages -- OS/2 has no native debug output system
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// macros to make casting between WXFOO and FOO a bit easier: the GetFoo()
+// returns Foo cast to the Windows type for oruselves, while GetFooOf() takes
+// an argument which should be a pointer or reference to the object of the
+// corresponding class (this depends on the macro)
+// ---------------------------------------------------------------------------
+
+                                                 
+                                                          
+// old name
+                                         
+
+                                               
+                                                    
+
+                                                       
+                                                             
+
+                                                   
+                                                          
+
+                                                     
+                                                               
+
+                                                   
+                                                         
+
+                                                       
+                                                                
+
+                                                   
+                                                          
+
+// OS/2 convention of the mask is opposed to the wxWidgets one, so we need
+// to invert the mask each time we pass one/get one to/from Windows
+extern HBITMAP wxInvertMask(HBITMAP hbmpMask, int w = 0, int h = 0);
+extern HBITMAP wxCopyBmp(HBITMAP hbmp, bool flip=false, int w=0, int h=0);
+
+// ---------------------------------------------------------------------------
+// global data
+// ---------------------------------------------------------------------------
+
+               
+                                                                              
+                                                               
+                                               
+                                                    
+      
+
+// ---------------------------------------------------------------------------
+// global functions
+// ---------------------------------------------------------------------------
+
+               
+          
+ 
+                                           
+ 
+
+                                                     
+      
+
+                     
+static inline MRESULT MySendMsg(HWND hwnd, ULONG ulMsgid,
+                                MPARAM mpParam1, MPARAM mpParam2)
+{
+    MRESULT vRes;
+    vRes = ::WinSendMsg(hwnd, ulMsgid, mpParam1, mpParam2);
+                 
+                            
+                                                        
+      
+    return vRes;
+}
+                            
+
+               
+
+                                               
+                                            
+                                              
+                               
+
+                                                            
+
+                                                                                   
+
+                                                                    
+                                                           
+                                            
+                                                             
+                                                         
+                                                    
+                                                            
+                                                     
+                                                         
+                                                     
+                                  
+                                                                      
+                                                                            
+                                                                         
+                                                                   
+                                                                         
+                                                                     
+                                                  
+                                                                       
+                                                             
+                                                               
+                                            
+                                                            
+
+                                                                               
+                                                                               
+
+                                        
+                                                                    
+
+                                                                
+                                                                      
+
+                                                                    
+                                                              
+
+                            
+                                                               
+
+                                                                            
+                                             
+                                                          
+
+                                      
+                                                                
+
+                                             
+                                        
+ 
+                                                      
+                                                            
+ 
+
+                                       
+ 
+                                          
+
+                                       
+                 
+                           
+
+                                                             
+                                                         
+                                      
+
+
+                                                                 
+                                                                 
+                                              
+                                                                      
+                                                                   
+                                             
+             
+               
+                                                                       
+      
+
+       // __WXPM__
+
+       // _WX_OS2_PRIVATE_H_

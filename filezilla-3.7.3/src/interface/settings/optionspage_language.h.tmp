@@ -1,0 +1,24 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_language.h" 0
+                                  
+                                  
+
+class COptionsPageLanguage : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_LANGUAGE"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+
+	virtual bool OnDisplayedFirstTime();
+
+	struct _locale_info { wxString name; wxString code; };
+
+protected:
+	DECLARE_EVENT_TABLE()
+
+	std::vector<_locale_info> m_locale;
+};
+
+       //__OPTIONSPAGE_LANGUAGE_H__

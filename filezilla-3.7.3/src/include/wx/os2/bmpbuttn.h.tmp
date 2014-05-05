@@ -1,0 +1,90 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\bmpbuttn.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/bmpbuttn.h
+// Purpose:     wxBitmapButton class
+// Author:      David Webster
+// Modified by:
+// Created:     10/13/99
+// Copyright:   (c) David Webster
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                     
+                       
+
+WXDLLIMPEXP_DATA_CORE(extern const char) wxButtonNameStr[];
+
+                                 
+
+class WXDLLIMPEXP_CORE wxBitmapButton: public wxBitmapButtonBase
+{
+public:
+    inline wxBitmapButton()
+    {
+        m_marginX = 4;
+        m_marginY = 4;
+    }
+    inline wxBitmapButton( wxWindow*          pParent
+                          ,wxWindowID         vId
+                          ,const wxBitmap&    rBitmap
+                          ,const wxPoint&     rPos = wxDefaultPosition
+                          ,const wxSize&      rSize = wxDefaultSize
+                          ,long               lStyle = wxBU_AUTODRAW
+                          ,const wxValidator& rValidator = wxDefaultValidator
+                          ,const wxString&    rsName = wxButtonNameStr
+                         )
+    {
+        Create( pParent
+               ,vId
+               ,rBitmap
+               ,rPos
+               ,rSize
+               ,lStyle
+               ,rValidator
+               ,rsName
+              );
+    }
+
+    bool Create( wxWindow*          pParent
+                ,wxWindowID         vId
+                ,const wxBitmap&    rBitmap
+                ,const wxPoint&     rPos = wxDefaultPosition
+                ,const wxSize&      rSize = wxDefaultSize
+                ,long               lStyle = wxBU_AUTODRAW
+                ,const wxValidator& rValidator = wxDefaultValidator
+                ,const wxString&    rsName = wxButtonNameStr
+               );
+
+    virtual void SetLabel(const wxBitmap& rBitmap)
+    {
+        SetBitmapLabel(rBitmap);
+    }
+
+    //
+    // Implementation
+    //
+    virtual bool OS2OnDraw(WXDRAWITEMSTRUCT* pItem);
+
+private:
+
+    virtual void DrawFace( wxClientDC& rDC
+                          ,bool        bSel
+                         );
+    virtual void DrawButtonFocus(wxClientDC& rDC);
+    virtual void DrawButtonDisable( wxClientDC& rDC
+                                   ,wxBitmap&   rBmp
+                                  );
+    DECLARE_DYNAMIC_CLASS(wxBitmapButton)
+
+    virtual void SetLabel(const wxString& rsString)
+    {
+        wxButton::SetLabel(rsString);
+    }
+}; // end of CLASS wxBitmapButton
+
+       // _WX_BMPBUTTN_H_
+

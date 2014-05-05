@@ -1,0 +1,1279 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral (Default) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTPAGE1 DIALOGEX 0, 0, 260, 99
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Copyright"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "[ m p 3 - e x p l o r e r ] - version 5.1.0  FS",
+                    IDC_STATIC,73,9,183,8,SS_NOPREFIX
+    LTEXT           "Copyright © 1998-2005,  Pierre LEVY",IDC_STATIC,73,18,
+                    175,8
+    CONTROL         "http://www.mp3-explorer.com",IDC_BT_HOMEPAGE,"Button",
+                    BS_OWNERDRAW | BS_LEFT | WS_TABSTOP,73,81,178,10,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Item2=Update, support and information : ",IDC_ITEM2,73,
+                    71,179,8
+    CONTROL         169,IDC_STATIC,"Static",SS_BITMAP,7,7,50,48
+    LTEXT           "Item1=This program is free software and may be distributed according to the terms of the GNU General Public License.",
+                    IDC_ITEM1,73,39,177,29
+    LTEXT           "IDDN.FR.001.160013.00.S.C.2000.000.20000",IDC_STATIC,73,
+                    27,175,8
+END
+
+IDD_DEFINE_FORMAT DIALOG DISCARDABLE  0, 0, 332, 167
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Renaming format"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=Format name",IDC_ITEM1,7,7,251,31
+    EDITTEXT        IDC_EDIT_FORMAT_NAME,17,19,224,12,ES_AUTOHSCROLL
+    GROUPBOX        "Item2=Format definition",IDC_ITEM2,7,44,318,87
+    COMBOBOX        IDC_CMB_FIELD1,17,58,56,56,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_EDIT_SEP1,77,58,18,12,ES_CENTER | ES_AUTOHSCROLL
+    COMBOBOX        IDC_CMB_FIELD2,100,58,56,61,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_SEP2,160,58,18,12,ES_CENTER | ES_AUTOHSCROLL
+    COMBOBOX        IDC_CMB_FIELD3,183,58,56,50,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_SEP3,243,58,18,12,ES_CENTER | ES_AUTOHSCROLL
+    COMBOBOX        IDC_CMB_FIELD4,266,58,56,50,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Item3=Replace spaces with underscores  _",
+                    IDC_CHECK_UNDERSCORES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,17,76,226,10
+    GROUPBOX        "Item4=Case normalization",IDC_ITEM4,17,87,297,37
+    CONTROL         "Item5=Lowercase",IDC_RADIO_LOWER,"Button",
+                    BS_AUTORADIOBUTTON,86,97,88,10
+    CONTROL         "Item6=Uppercase",IDC_RADIO_UPPER,"Button",
+                    BS_AUTORADIOBUTTON,86,109,92,10
+    CONTROL         "Item7=Proper",IDC_RADIO_PROPER,"Button",
+                    BS_AUTORADIOBUTTON,190,97,86,10
+    CONTROL         "Item8=Unchanged",IDC_RADIO_UNCHANGED,"Button",
+                    BS_AUTORADIOBUTTON,190,109,83,10
+    GROUPBOX        "Item9=Preview",IDC_ITEM9,7,133,318,27
+    LTEXT           "Louis_Armstrong-What_A_Beautiful_Day.mp3 ",
+                    IDC_RENAMING_PREVIEW,18,144,307,9
+    DEFPUSHBUTTON   "OK",IDOK,275,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,275,24,50,14
+END
+
+IDD_FIND DIALOG DISCARDABLE  0, 0, 241, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Find ..."
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT_FIND,48,16,120,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,184,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,184,24,50,14
+    LTEXT           "Item1=Find :",IDC_ITEM1,9,18,39,8
+END
+
+IDD_ABOUTPAGE2 DIALOG DISCARDABLE  0, 0, 269, 100
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Credits"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_CREDIT,"Static",SS_BLACKRECT,7,7,255,85
+END
+
+IDD_OPTIONPAGE1 DIALOG DISCARDABLE  0, 0, 252, 127
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Rows"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=Enter key and double-click action",IDC_ITEM1,7,7,
+                    238,47,WS_GROUP
+    CONTROL         "Item2=Play",IDC_RADIO_PLAY,"Button",BS_AUTORADIOBUTTON,
+                    63,18,106,10
+    CONTROL         "Item3=Enqueue",IDC_RADIO_ENQUEUE,"Button",
+                    BS_AUTORADIOBUTTON,63,29,110,10
+    CONTROL         "Item4=Properties",IDC_RADIO_PROPERTIES,"Button",
+                    BS_AUTORADIOBUTTON,63,40,106,10
+    GROUPBOX        "Item5=Row selection",IDC_ITEM5,7,57,238,25,WS_GROUP
+    CONTROL         "Item6=Full row selection",IDC_CHECK_FULLROW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,65,69,124,10
+    GROUPBOX        "Item7=Maximum number of rows displayed",IDC_ITEM7,7,87,
+                    238,29
+    LTEXT           "Item8=Maximum :",IDC_ITEM8,46,100,54,11
+    EDITTEXT        IDC_EDIT_MAX_ROW,105,99,44,12,ES_AUTOHSCROLL
+END
+
+IDD_OPTIONPAGE2 DIALOG DISCARDABLE  0, 0, 259, 129
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Columns"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item4=Alignment",IDC_ITEM4,146,54,106,50,WS_GROUP | 
+                    WS_TABSTOP
+    LISTBOX         IDC_COLUMN_LIST,13,7,107,114,LBS_OWNERDRAWFIXED | 
+                    LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Item5=Left",IDC_LEFT_ALIGN,"Button",BS_AUTORADIOBUTTON,
+                    170,67,60,10
+    CONTROL         "Item6=Center",IDC_CENTER_ALIGN,"Button",
+                    BS_AUTORADIOBUTTON,170,77,63,10
+    CONTROL         "Item7=Right",IDC_RIGHT_ALIGN,"Button",
+                    BS_AUTORADIOBUTTON,170,87,64,10
+    GROUPBOX        "Item1=Order",IDC_ITEM1,145,7,107,43
+    PUSHBUTTON      "Item2=Move Up",IDC_BUTTON_UP,166,17,57,13
+    PUSHBUTTON      "Item3=Move Down",IDC_BUTTON_DOWN,166,32,57,13
+    CONTROL         "Item8=Displayed",IDC_DISPLAY_LIMITED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,159,111,93,10
+END
+
+IDD_OPTIONPAGE3 DIALOG DISCARDABLE  0, 0, 260, 125
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Favourite Addresses"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=My favourite addresses",IDC_ITEM1,7,14,243,35,
+                    WS_GROUP
+    EDITTEXT        IDC_EDIT_FAVORITE_ADDRESSES,15,28,181,12,ES_AUTOHSCROLL
+    LTEXT           "Item2=Type in paths of your preferred directories. All path should be separated by a semi colon as shown below  :",
+                    IDC_ITEM2,7,55,243,24
+    LTEXT           "Item3=\tc:\\mp3\\files;d:\\mp3;\\\\mp3server\\files",
+                    IDC_ITEM3,7,82,243,11
+    LTEXT           "Item4=To use this special address, type * in the address bar.",
+                    IDC_ITEM4,7,95,243,21
+END
+
+IDD_OPTIONPAGE4 DIALOG DISCARDABLE  0, 0, 261, 129
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Advanced"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=Shell command to use for the player",IDC_ITEM1,7,
+                    7,244,65
+    LTEXT           "Item2=Play :",IDC_ITEM2,17,21,40,10
+    EDITTEXT        IDC_EDIT_PLAY,63,19,44,12,ES_AUTOHSCROLL
+    LTEXT           "Item3=Enqueue :",IDC_ITEM3,125,21,47,10
+    EDITTEXT        IDC_EDIT_ENQUEUE,177,19,44,12,ES_AUTOHSCROLL
+    CONTROL         "Item5=Use cache files per address (Recommended)",
+                    IDC_CHECK_CACHED_CATALOG,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,76,244,10
+    CONTROL         "Item6=Disable Internet connection",
+                    IDC_CHECK_NO_CONNECTION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,90,244,10
+    LTEXT           "Item4=If you want to use another player, setup file type association in the player and check associated commands by right-clicking on a MP3 file in the Windows Explorer.",
+                    IDC_ITEM4,17,35,220,32
+END
+
+IDD_RENAME DIALOG DISCARDABLE  0, 0, 226, 93
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Item1=Manual rename",IDC_FORMAT_FREE,"Button",
+                    BS_AUTORADIOBUTTON,7,7,116,10
+    CONTROL         "Item2=Predefined formats",IDC_FORMAT_PREDEFINED,"Button",
+                    BS_AUTORADIOBUTTON,7,20,122,10
+    COMBOBOX        IDC_CMB_FORMATS,22,34,117,67,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_NEW_NAME,21,65,188,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,168,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,168,24,50,14
+    GROUPBOX        "Item3=New name",IDC_ITEM3,7,54,211,29
+END
+
+IDD_OPTIONPAGE5 DIALOG DISCARDABLE  0, 0, 263, 127
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Renaming"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_LIST_FORMATS,18,25,157,47,LBS_OWNERDRAWFIXED | 
+                    LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Item2=Add",IDC_BT_ADD_FORMAT,202,23,54,14
+    PUSHBUTTON      "Item3=Modify",IDC_BT_MODIFY_FORMAT,202,39,54,14
+    PUSHBUTTON      "Item4=Delete",IDC_BT_DELETE_FORMAT,202,55,54,14
+    CONTROL         "Item5=Default format",IDC_CHK_FORMAT_DEF,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,75,140,11
+    GROUPBOX        "Item1=Predefined formats list",IDC_ITEM1,7,13,178,75
+    GROUPBOX        "Item6=Preview",IDC_ITEM6,7,94,249,26
+    LTEXT           "",IDC_RENAMING_PREVIEW,16,104,185,9
+END
+
+IDD_OPTIONPAGE6 DIALOG DISCARDABLE  0, 0, 264, 146
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Export"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=Export file",IDC_ITEM1,7,7,250,64,WS_GROUP
+    CONTROL         "Item2=Choose file name with a dialog box",
+                    IDC_RADIO_CHOOSE_FILE,"Button",BS_AUTORADIOBUTTON,18,17,
+                    216,10
+    CONTROL         "Item3=Always use the following file ",
+                    IDC_RADIO_DEFAULT_FILE,"Button",BS_AUTORADIOBUTTON,18,28,
+                    217,10
+    EDITTEXT        IDC_EDIT_EXPORT_FILE,38,39,118,12,ES_AUTOHSCROLL
+    CONTROL         "Item4=Create a new file at each export",
+                    IDC_CHECK_EXPORT_REINIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,55,214,10
+    GROUPBOX        "Item5=Export format",IDC_ITEM5,7,75,250,64,WS_GROUP
+    CONTROL         "Item6=Default format",IDC_RADIO_FORMAT_DEFAULT,"Button",
+                    BS_AUTORADIOBUTTON,18,90,138,10
+    CONTROL         "Item7=Format defined in an Export Definition File",
+                    IDC_RADIO_FORMAT_SPECIFIC,"Button",BS_AUTORADIOBUTTON,18,
+                    101,183,10
+    EDITTEXT        IDC_EDIT_EXPORT_FORMAT,38,114,119,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Item8=Browse",IDC_BT_CHOOSE_EXPORT,179,112,56,14
+END
+
+IDD_OPTIONPAGE7 DIALOG DISCARDABLE  0, 0, 263, 149
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Files"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item2=Playlist files scanning",IDC_ITEM2,7,49,249,34,
+                    WS_GROUP
+    CONTROL         "M3U",IDC_CHECK_SCAN_M3U,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,21,65,48,10
+    CONTROL         "PLS",IDC_CHECK_SCAN_PLS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,111,65,59,10
+    LTEXT           "Item3=If you're not using one of these type of files, remove the corresponding option not to alter general scanning performance.",
+                    IDC_ITEM3,39,95,181,31
+    GROUPBOX        "Item1=Audio files scanning",IDC_ITEM1,7,7,249,34,
+                    WS_GROUP
+    CONTROL         "MP3",IDC_CHECK_SCAN_MP3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,21,22,48,10
+END
+
+IDD_OPTIONPAGE8 DIALOG DISCARDABLE  0, 0, 262, 153
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Skin"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=Selected skin plugin",IDC_ITEM1,6,7,249,42,
+                    WS_GROUP
+    COMBOBOX        IDC_COMBO_PLUGINS,13,20,186,56,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Item2=Skin plugin info",IDC_ITEM2,6,59,249,87
+    LTEXT           "Item3=Filename : ",IDC_ITEM3,38,79,36,9
+    LTEXT           "Item4=Version : ",IDC_ITEM4,38,93,36,9
+    LTEXT           "Item5=Credits : ",IDC_ITEM5,38,107,36,9
+    LTEXT           "Static",IDC_FILENAME,81,79,114,10
+    LTEXT           "Static",IDC_CREDITS,81,107,136,29
+    LTEXT           "Static",IDC_VERSION,81,93,106,10
+END
+
+IDD_ID3V2PAGE1 DIALOG DISCARDABLE  0, 0, 250, 159
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "General"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Item1=Title :",IDC_ITEM1,10,7,57,11
+    EDITTEXT        IDC_EDIT_TITLE,71,7,166,12,ES_AUTOHSCROLL
+    LTEXT           "Item2=Artist :",IDC_ITEM2,10,23,57,11
+    CONTROL         "",IDC_LIST_ARTIST,"ComboBoxEx32",CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP,71,23,166,74
+    LTEXT           "Item3=Album :",IDC_ITEM3,10,39,56,11
+    CONTROL         "",IDC_LIST_ALBUM,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,71,39,166,84
+    LTEXT           "Item4=Year :",IDC_ITEM4,10,55,58,11
+    EDITTEXT        IDC_EDIT_YEAR,71,55,25,12,ES_AUTOHSCROLL
+    RTEXT           "Item5:Track # :",IDC_ITEM5,106,56,32,11
+    COMBOBOX        IDC_LIST_TRACKNUM,144,55,27,72,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Item6=Rating :",IDC_ITEM6,176,56,29,11
+    COMBOBOX        IDC_LIST_RATING,210,55,27,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Item7=Genre :",IDC_ITEM7,10,71,58,11
+    CONTROL         "",IDC_CMB_GENRE,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,71,71,166,62
+    LTEXT           "Item8=Comment. :",IDC_ITEM8,10,87,59,11
+    EDITTEXT        IDC_EDIT_COMMENT,71,87,166,12,ES_AUTOHSCROLL
+    LTEXT           "Item9=Artist web site :",IDC_ITEM9,10,103,58,11
+    EDITTEXT        IDC_EDIT_ARTIST_URL,71,103,166,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Item10=&Normalize",IDC_BT_NORMALIZE,179,119,58,14
+    CONTROL         "Item11=Rename files automatically using tag's data",
+                    IDC_CHECK_RENAME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,141,190,10
+END
+
+IDD_ID3V2PAGE2 DIALOGEX 0, 0, 250, 146
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Lyrics"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_LYRICS,7,12,236,126,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_NOHIDESEL | ES_WANTRETURN | 
+                    WS_VSCROLL,WS_EX_STATICEDGE
+END
+
+IDD_ID3V2PAGE3 DIALOG DISCARDABLE  0, 0, 251, 146
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Picture"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Item1=&Browse",IDC_BUTTON_SELECT,182,7,58,16
+    CONTROL         "",IDC_PICTURE,"Button",BS_OWNERDRAW | WS_TABSTOP,7,7,
+                    164,128
+    PUSHBUTTON      "Item2=&Paste",IDC_BUTTON_PASTE,181,26,58,16
+END
+
+IDD_OPTIONPAGE9 DIALOG DISCARDABLE  0, 0, 262, 153
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Intellitag"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=Intellitag (automatic tagging from file name)",
+                    IDC_ITEM1,13,7,242,35
+    CONTROL         "Item2=Always Confirm",IDC_CHECK_VALIDATE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,41,23,95,10
+    CONTROL         "Item3=Always normalize",IDC_CHECK_NORMALIZE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,143,23,103,10
+    GROUPBOX        "Item4=Normalize capitalization and character replacement",
+                    IDC_ITEM4,13,50,242,95
+    LISTBOX         IDC_FIELD_LIST,23,70,73,43,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Item5=Do no &change",IDC_NOCHANGE,"Button",
+                    BS_AUTORADIOBUTTON,112,68,128,10
+    CONTROL         "Item6=Convert to &lowercase",IDC_LOWER,"Button",
+                    BS_AUTORADIOBUTTON,112,78,126,10
+    CONTROL         "Item7=Convert to &uppercase",IDC_UPPER,"Button",
+                    BS_AUTORADIOBUTTON,112,88,132,10
+    CONTROL         "Item8=Capitalize each &word",IDC_PROPER,"Button",
+                    BS_AUTORADIOBUTTON,112,98,130,10
+    CONTROL         "Item9=Capitalize &first character",IDC_CAPFIRST,"Button",
+                    BS_AUTORADIOBUTTON,112,108,131,10
+    CONTROL         "Item10=&Replace underscores",IDC_CHECK_UNDERSCORE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,23,129,186,10
+END
+
+IDD_ID3V1PAGE1 DIALOG DISCARDABLE  0, 0, 250, 173
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Properties ID3 v1"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Item1=Title :",IDC_ITEM1,10,7,58,11
+    EDITTEXT        IDC_EDIT_TITLE,71,7,166,12,ES_AUTOHSCROLL
+    LTEXT           "Item2=Artist :",IDC_ITEM2,10,23,59,11
+    CONTROL         "",IDC_LIST_ARTIST,"ComboBoxEx32",CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP,71,23,166,74
+    LTEXT           "Item3=Album :",IDC_ITEM3,10,39,58,11
+    CONTROL         "",IDC_LIST_ALBUM,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,71,39,166,84
+    LTEXT           "Item4=Year :",IDC_ITEM4,10,55,57,11
+    EDITTEXT        IDC_EDIT_YEAR,71,55,25,12,ES_AUTOHSCROLL
+    RTEXT           "Item5=Track # :",IDC_ITEM5,156,57,49,11
+    COMBOBOX        IDC_LIST_TRACKNUM,210,55,27,72,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Item6=Genre :",IDC_ITEM6,10,71,59,11
+    CONTROL         "",IDC_CMB_GENRE,"ComboBoxEx32",CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP,71,71,166,62
+    LTEXT           "Item7=Comment. :",IDC_ITEM7,10,87,57,11
+    EDITTEXT        IDC_EDIT_COMMENT,71,87,166,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Item8=&Normalize",IDC_BT_NORMALIZE,175,106,62,14
+    CONTROL         "Item9=Rename files automatically using tag's data",
+                    IDC_CHECK_RENAME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,128,163,10
+    DEFPUSHBUTTON   "OK",IDOK,187,151,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,132,151,50,14
+END
+
+IDD_OPTIONPAGE10 DIALOG DISCARDABLE  0, 0, 250, 130
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION | WS_SYSMENU
+CAPTION "ID3"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Item1=Use ID3v2",IDC_RADIO_ID3V2,"Button",
+                    BS_AUTORADIOBUTTON,13,15,188,10
+    LTEXT           "Item2=Enable picture and lyrics management. No fixed genre list.",
+                    IDC_ITEM2,36,28,207,27
+    CONTROL         "Item3=Still write also ID3v1 tags ",
+                    IDC_CHECK_WRITE_ID3V1_TAG,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,36,54,207,14
+    CONTROL         "Item5=Use only ID3v1",IDC_RADIO_ID3V1,"Button",
+                    BS_AUTORADIOBUTTON,14,94,229,10
+    LTEXT           "Item4=(Recommanded for compatibility with non ID3v2 softwares)",
+                    IDC_LABEL_WRITE_ID3V1_TAGS,47,67,196,21
+END
+
+IDD_INTELLITAG_VALIDATE DIALOGEX 0, 0, 273, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "IntelliTag"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Yes",IDOK,93,165,50,14
+    PUSHBUTTON      "No",IDCANCEL,147,165,50,14
+    RTEXT           "Item4=Artist :",IDC_ITEM4,13,84,45,8
+    RTEXT           "Item5=Album :",IDC_ITEM5,13,103,45,8
+    RTEXT           "Item3=Title :",IDC_ITEM3,7,65,51,8
+    RTEXT           "Item6=Track# :",IDC_ITEM6,7,122,51,8
+    GROUPBOX        "Item1=File name",IDC_ITEM1,7,8,257,32
+    GROUPBOX        "Item2=Extracted data",IDC_ITEM2,7,49,259,90
+    LTEXT           "",IDC_FILENAME,17,19,230,12,0,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_TITLE,76,65,170,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TRACK,76,119,22,12,ES_CENTER | ES_AUTOHSCROLL
+    CONTROL         "",IDC_CMB_ARTIST,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,76,83,171,73
+    CONTROL         "",IDC_CMB_ALBUM,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,76,101,171,73
+    LTEXT           "Item7=Create or Modify the ID3 tag for this file or/and all selected files?",
+                    IDC_ITEM7,7,142,256,19
+    PUSHBUTTON      "Yes to all",IDC_BT_YESTOALL,39,165,50,14
+    PUSHBUTTON      "No to all",IDC_BT_CANCELALL,201,165,50,14
+END
+
+IDD_SEARCH DIALOG DISCARDABLE  0, 0, 369, 228
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Advanced search"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Item1=Title :",IDC_LB_TITLE,29,34,40,8
+    EDITTEXT        IDC_EDIT_TITLE,70,33,121,13,ES_AUTOHSCROLL
+    LTEXT           "Item2=Artist :",IDC_LB_ARTIST,29,51,42,8
+    EDITTEXT        IDC_EDIT_ARTIST,70,49,121,13,ES_AUTOHSCROLL
+    LTEXT           "Item3=Album :",IDC_LB_ALBUM,29,67,36,8
+    EDITTEXT        IDC_EDIT_ALBUM,70,65,121,13,ES_AUTOHSCROLL
+    LTEXT           "Item4=Genre :",IDC_LB_GENRE,29,83,46,8
+    COMBOBOX        IDC_CMB_GENRE,70,81,121,62,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Item5=Year :",IDC_LB_YEAR,29,99,35,8
+    LTEXT           "Item6=Min",IDC_LB_YEAR_MIN,70,99,35,8
+    EDITTEXT        IDC_EDIT_YEAR_MIN,88,97,33,12,ES_AUTOHSCROLL
+    LTEXT           "Item7=Max",IDC_LB_YEAR_MAX,138,99,36,8
+    EDITTEXT        IDC_EDIT_YEAR_MAX,158,97,33,12,ES_AUTOHSCROLL
+    GROUPBOX        "Item8=Bitrate",IDC_GROUP_BITRATE,17,31,228,27
+    LTEXT           "Item9=Min :",IDC_LB_BITRATE_MIN,38,44,38,8
+    COMBOBOX        IDC_CMB_BITRATE_MIN,71,39,50,62,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Item10=Max :",IDC_LB_BITRATE_MAX,129,42,44,8
+    COMBOBOX        IDC_CMB_BITRATE_MAX,159,39,51,62,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Item11=Rating",IDC_GROUP_RATING,17,58,228,27
+    LTEXT           "Item12=Min :",IDC_LB_RATING_MIN,38,68,42,8
+    COMBOBOX        IDC_CMB_RATING_MIN,71,66,41,62,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Item13=Max :",IDC_LB_RATING_MAX,129,68,44,8
+    COMBOBOX        IDC_CMB_RATING_MAX,159,66,41,62,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Item14=Extented infos",IDC_GROUP_EXTEND,17,85,228,27
+    CONTROL         "Item15=Has Lyrics",IDC_CHECK_LYRICS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,71,95,74,10
+    CONTROL         "Item16=Has a picture",IDC_CHECK_PICTURE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,159,95,70,11
+    CONTROL         "Tab1",IDC_TAB,"SysTabControl32",0x0,7,6,251,115
+    DEFPUSHBUTTON   "Item17=Search",IDC_BT_SEARCH,279,18,65,14
+    PUSHBUTTON      "Item18=Close",IDCANCEL,279,34,65,14
+    CONTROL         "List1",IDC_LIST_RESULT,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,126,355,95
+END
+
+IDD_OPTIONPAGE11 DIALOG DISCARDABLE  0, 0, 252, 127
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Language"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Item1=Selected language",IDC_ITEM1,6,7,239,36,WS_GROUP
+    COMBOBOX        IDC_COMBO_LANGUAGES,13,20,186,56,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Item2=Language info",IDC_ITEM2,6,50,239,70
+    LTEXT           "Item3=Filename : ",IDC_ITEM3,17,61,49,9
+    LTEXT           "Item4=Version : ",IDC_ITEM4,17,74,51,9
+    LTEXT           "Item5=Credits : ",IDC_ITEM5,17,87,48,9
+    LTEXT           "Static",IDC_FILENAME,72,61,167,10
+    LTEXT           "Static",IDC_CREDITS,72,87,156,29
+    LTEXT           "Static",IDC_VERSION,72,74,160,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTPAGE2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 262
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 92
+    END
+
+    IDD_OPTIONPAGE1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 245
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 119
+    END
+
+    IDD_OPTIONPAGE2, DIALOG
+    BEGIN
+        LEFTMARGIN, 13
+        RIGHTMARGIN, 252
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 121
+    END
+
+    IDD_OPTIONPAGE3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 250
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 116
+    END
+
+    IDD_OPTIONPAGE4, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 251
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 120
+    END
+
+    IDD_RENAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 218
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 86
+    END
+
+    IDD_OPTIONPAGE5, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 256
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 120
+    END
+
+    IDD_OPTIONPAGE6, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 257
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_OPTIONPAGE7, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 256
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 142
+    END
+
+    IDD_OPTIONPAGE8, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 255
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 146
+    END
+
+    IDD_ID3V2PAGE2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+
+    IDD_OPTIONPAGE9, DIALOG
+    BEGIN
+        LEFTMARGIN, 13
+        RIGHTMARGIN, 255
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 145
+    END
+
+    IDD_OPTIONPAGE10, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
+
+    IDD_INTELLITAG_VALIDATE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 266
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 179
+    END
+
+    IDD_SEARCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 362
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 221
+    END
+
+    IDD_OPTIONPAGE11, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 245
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 120
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Address...\tF2",             ID_FILE_BROWSE_ADDRESS
+        MENUITEM SEPARATOR
+        MENUITEM "&Play\tCtrl+P",               ID_FILE_PLAY
+        MENUITEM "&Enqueue\tCtrl+E",            ID_FILE_ENQUEUE
+        MENUITEM SEPARATOR
+        MENUITEM "&Properties...\tAlt+Enter",   ID_FILE_EDIT_TAG
+        MENUITEM SEPARATOR
+        MENUITEM "&Delete\tCtrl+D",             ID_FILE_DELETE
+        MENUITEM "&Rename...\tCtrl+R",          ID_FILE_RENAME
+        MENUITEM "E&xport...\tCtrl+T",          ID_FILE_EXPORT
+        MENUITEM SEPARATOR
+        MENUITEM "&Save\tCtrl+S",               ID_PLAYLIST_SAVE
+        MENUITEM "Save &As...",                 ID_PLAYLIST_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "&Options...",                 ID_VIEW_OPTIONS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM SEPARATOR
+        MENUITEM "Select &All\tCtrl+A",         ID_EDIT_SELECT_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Find...\tCtrl+F",            ID_FINDFIRST
+        MENUITEM "Find &next\tF3",              ID_FINDNEXT
+        MENUITEM SEPARATOR
+        MENUITEM "Advanced search...\tF9",      ID_SEARCH
+    END
+    POPUP "&Display"
+    BEGIN
+        MENUITEM "&Artist / Album",             ID_DISPLAY_ARTIST
+        MENUITEM "&Gen&re / Artist / Album",    ID_DISPLAY_GENRE
+        MENUITEM "Al&bum / Artist",             ID_DISPLAY_ALBUM
+        MENUITEM SEPARATOR
+        MENUITEM "&Display all information",    ID_DISPLAY_ALL
+    END
+    POPUP "&View"
+    BEGIN
+        POPUP "Tool bar"
+        BEGIN
+            MENUITEM "Standard buttons",            ID_VIEW_TOOLBAR
+            MENUITEM "Address bar",                 ID_VIEW_ADRESSBAR
+            MENUITEM SEPARATOR
+            MENUITEM "Show text labels",            ID_VIEW_TOOLBAR_LABELS
+        END
+        MENUITEM "&Status bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "L.A.B. (Little Audio Browser)\tF4", ID_VIEW_SMALL_VIEWER
+        MENUITEM SEPARATOR
+        MENUITEM "Display playlists\tF12",      ID_VIEW_PLAYLIST
+        MENUITEM SEPARATOR
+        MENUITEM "Lar&ge Icons",                ID_VIEW_LARGEICON
+        MENUITEM "S&mall Icons",                ID_VIEW_SMALLICON
+        MENUITEM "&List",                       ID_VIEW_LIST
+        MENUITEM "&Details",                    ID_VIEW_DETAILS
+        MENUITEM "",                            1
+        MENUITEM "&Refresh\tF5",                ID_FILE_UPDATE_SNAPSHOT
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "&About [ m p 3 - e x p l o r e r ] ...", ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "[ m p 3 - e x p l o r e r ]\n\nMp3fin\n\n\nMp3Exp.Document\nMp3fin Document"
+    IDS_OPTION_CAPTION      "Caption"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "[ m p 3 - e x p l o r e r ]"
+    AFX_IDS_IDLEMESSAGE     " "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Select from where "
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select all files\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+    ID_VIEW_AUTOARRANGE     "Arrange icons on a grid."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_SMALLICON       "Display items by using small icons.\nSmall Icons"
+    ID_VIEW_LARGEICON       "Display items by using large icons.\nLarge Icons"
+    ID_VIEW_LIST            "Displays items in a list.\nList"
+    ID_VIEW_DETAILS         "Displays detailed information about each item in the window.\nDetails"
+    ID_VIEW_LINEUP          "Arranges icons in a grid."
+    ID_VIEW_BYNAME          "Sorts the icons alphabetically."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_UNTITLED        "untitled"
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_PLAY            "Play the selected file\nPlay"
+    ID_FILE_ENQUEUE         "Enqueue selected file(s) into the playlist\nEnqueue"
+    ID_FILE_EDIT_TAG        "Display file's properties (ID3 tag)\nProperties"
+    ID_VIEW_ADRESSBAR       "Show or hide adress bar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR_LABELS  "Show a text label on each toolbar button."
+    ID_VIEW_OPTIONS         "Options"
+    ID_DISPLAY_ALBUM        "Organize files by Album and Artist\nAlbum / Artist"
+    ID_DISPLAY_ARTIST       "Organize files by Artist and Album.\nArtist / Album"
+    ID_DISPLAY_GENRE        "Organize files by Genre,  Artist and Album\nGenre / Artist / Album"
+    ID_DISPLAY_ALL          "Display a selection or all available columns\nSelection/All columns"
+    ID_FILE_UPDATE_SNAPSHOT "Rebuild the cache file to update information"
+    ID_FILE_RENAME          "Rename selected files\nRename"
+    ID_LISTVIEW_DROPDOWN    "Modify view style\nView style"
+    ID_FILE_DELETE          "Delete selected files\nDelete"
+    ID_FILE_EXPORT          "Export file information through "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CG_IDS_CANNOT_OPEN_CLIPBOARD "Failed to open Clipboard!"
+    CG_IDS_CANNOT_GET_CLIPBOARD_DATA "Failed to get Clipboard data!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_OLE_INIT_FAILED     "OLE librairies init failed ! "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_EXPORT_ALL      "Export all"
+    ID_FILE_ADD_TO_PLAYLIST "Add selected files to the current playlist\nPlaylist"
+    ID_POPUP_PLAYLIST       "Add to the current playlist\nPlaylist"
+    ID_PLAYLIST_SAVE        "Save the current playlist into a file"
+    ID_PLAYLIST_SAVEAS      "Save the current playlist in another file"
+    ID_DETAIL_DOWN          "Move all selected files to the end of the playlist"
+    ID_DETAIL_UP            "Move all selected file to the begining of the playlist"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_COLOR_SPLASHTEXT    "EBD8FF"
+    IDS_COLOR_LINK          "400080"
+    IDS_COLOR_LISTBOX_SEL   "6F3598"
+    IDS_COLOR_VIEWTEXT      "000000"
+    IDS_COLOR_VIEWTEXTBG    "FFFFFF"
+    IDS_COLOR_VIEWBACKGROUND "FFFFFF"
+    IDS_COLOR_VIEWSELECTTEXT "FFFFFF"
+    IDS_COLOR_VIEWSELECTBACKGROUND "6F3598"
+    IDS_COLOR_TREEBACKGROUND "FFFFFF"
+    IDS_COLOR_HTMLMENUBACKGROUND "FFFFFF"
+    IDS_COLOR_TREETEXT      "000000"
+    IDS_COLOR_HTMLMENUTEXT  "000000"
+    IDS_COLOR_HTMLMENULABEL "FFFFFF"
+    IDS_COLOR_HTMLMENULABELBACKGROUND "6F3598"
+    IDS_COLOR_HTMLMENULINK  "6F3598"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_BROWSE_ADDRESS  "Select an address from where should start the MP3 files exploration."
+    ID_VIEWER_ARTIST        "Artist view\nArtist"
+    ID_VIEWER_GENRE         "Genre view\nGenre"
+    ID_VIEWER_ALBUM         "Album view\nAlbum"
+    ID_VIEWER_PLAYLIST      "Playlist view\nPlaylist"
+    ID_VIEW_SMALL_VIEWER    "Little Audio Browser\nLittle Audio Browser"
+    ID_PLAYLIST_SHUFFLE     "Shuffle all titles"
+    ID_PLAYLIST_RESET       "Reset the playlist's content"
+    ID_FILE_PLAYLIST_ALL    "Put all titles of the category into the current playlist."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PLUGIN_NAME         "NODLL"
+    IDS_PLUGIN_VERSION      "5.1.0"
+    IDS_PLUGIN_CREDITS      "Credits"
+    IDS_PLUGIN_AVI          "NONE"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FILE_PAGE_TEMPLATE  "FileView.tpl"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TOOLS_PLAYER         "Open or go to [ m p 3 - p l a y e r ]\n[ m p 3 - p l a y e r ]"
+    ID_TOOLS_NETSEARCH      "Search music on the Internet."
+    ID_FINDFIRST            "Find a category (Genre, Artist or Album)"
+    ID_FINDNEXT             "Find next matching category"
+    ID_SEARCH               "Multi-criteria search\nSearch"
+    ID_VIEW_PLAYLIST        "Toggle Web / Playlist mode \nWeb / Playlist"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LISTVIEW_BG_BITMAP  "NONE"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_INTELLITAG      "Create or modify file tags from filename\nIntelliTag "
+    ID_FILE_NORMALIZE       "Normalize capitalization of every tag field."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_COLOR_CREDITSTEXT   "EBD8FF"
+    IDS_COLOR_CREDITSBACKGROUND "6F3598"
+END
+
+#endif    // Neutral (Default) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// French (France) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+#ifdef _WIN32
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SMALL_VIEWER DIALOG DISCARDABLE  0, 0, 130, 145
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_MINIMIZEBOX | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Little Audio Browser "
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_VIEWER_LIST,16,20,112,123,LBS_SORT | 
+                    LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    CONTROL         192,IDC_STATIC,"Static",SS_BITMAP | SS_CENTERIMAGE,1,20,
+                    15,123
+END
+
+IDD_HTML_MENU DIALOGEX 0, 0, 156, 190
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_SEARCH,17,100,68,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "<IDS_BUTTON_SEARCH>",IDC_BT_SEARCH,96,100,50,14
+    CONTROL         "LOCAL",IDC_LB_LOCAL,"Button",BS_OWNERDRAW | BS_LEFT | 
+                    WS_TABSTOP,7,6,127,11
+    CONTROL         "INTERNET",IDC_LB_INTERNET,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | WS_TABSTOP,7,51,127,11
+    CONTROL         "Partners",IDC_LB_WEB_SEARCH_RESOURCES,"Button",
+                    BS_OWNERDRAW | BS_LEFT | WS_TABSTOP,17,73,127,11
+    CONTROL         "",IDC_COMBOEX_WEB_SEARCH_RESOURCES,"ComboBoxEx32",
+                    CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP,17,86,
+                    129,74
+    LTEXT           "File View",IDC_LINK_FILEVIEW,18,18,115,8
+    LTEXT           "Manual",IDC_LINK_HELP,18,28,115,8
+    LTEXT           "Read me",IDC_LINK_README,18,38,115,8
+    LTEXT           "Online",IDC_LINK_WEBSITE,18,63,125,8
+    LTEXT           "Static",IDC_WEB_SEARCH_RESOURCE_DESCRIPTION,18,118,131,
+                    64,SS_NOTIFY,WS_EX_TRANSPARENT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SMALL_VIEWER, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 128
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_HTML_MENU, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 149
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 183
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_VIEWER MENU DISCARDABLE 
+BEGIN
+    POPUP "popup"
+    BEGIN
+        MENUITEM "Play",                        ID_VIEWER_PLAY
+        MENUITEM "Enqueue",                     ID_VIEWER_ENQUEUE
+        MENUITEM "Artist",                      ID_VIEWER_ARTIST
+        MENUITEM "Genre",                       ID_VIEWER_GENRE
+        MENUITEM "Album",                       ID_VIEWER_ALBUM
+        MENUITEM "Playlist",                    ID_VIEWER_PLAYLIST
+        MENUITEM "Large Mode",                  ID_VIEWER_LARGE_MODE
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 12, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\mp3Exp.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.fra\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\mp3exp.ico"
+IDI_SYSTRAY             ICON    DISCARDABLE     "res\\systray.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LARGEICONS          BITMAP  DISCARDABLE     "res\\large.bmp"
+IDB_HOTTOOLBAR          BITMAP  DISCARDABLE     "res\\hottb.bmp"
+IDB_COLDTOOLBAR         BITMAP  DISCARDABLE     "res\\coldtb.bmp"
+IDB_REBARBITMAP         BITMAP  DISCARDABLE     "res\\rebar.bmp"
+IDB_SMALL_ICONS         BITMAP  DISCARDABLE     "res\\icons.bmp"
+IDB_LOGO                BITMAP  DISCARDABLE     "res\\logo.BMP"
+IDB_CHECK               BITMAP  DISCARDABLE     "res\\check.bmp"
+IDB_COLDVIEWER          BITMAP  DISCARDABLE     "res\\coldviewer.bmp"
+IDB_HOTVIEWER           BITMAP  DISCARDABLE     "res\\hotviewer.bmp"
+IDB_BANDEAU             BITMAP  DISCARDABLE     "res\\bandeau.bmp"
+IDB_FILE                BITMAP  DISCARDABLE     "res\\file.bmp"
+IDB_PLAYLIST            BITMAP  DISCARDABLE     "res\\playlist.bmp"
+IDB_GENRE               BITMAP  DISCARDABLE     "res\\genre.bmp"
+IDB_ARTIST              BITMAP  DISCARDABLE     "res\\artist.bmp"
+IDB_ALBUM               BITMAP  DISCARDABLE     "res\\album.bmp"
+#if defined(APSTUDIO_INVOKED) || defined(_BACKUP)
+#if defined(APSTUDIO_INVOKED)
+IDB_SPLASH$(_BACKUP)    BITMAP  DISCARDABLE     "res\\splash.bmp"
+#else
+IDB_SPLASH              BITMAP  DISCARDABLE     "res\\splash.bmp"
+#endif
+#endif
+NOPICTURE               BITMAP  DISCARDABLE     "res\\nopicture.bmp"
+IDB_WEB_SEARCH_RESOURCES BITMAP  DISCARDABLE     "res\\partners.bmp"
+IDB_ID3V1               BITMAP  DISCARDABLE     "res\\id3v1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_FILE_DELETE,         VIRTKEY, CONTROL, NOINVERT
+    "E",            ID_FILE_ENQUEUE,        VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_FINDFIRST,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PLAY,           VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_FILE_RENAME,         VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_PLAYLIST_SAVE,       VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_FILE_EXPORT,         VIRTKEY, CONTROL, NOINVERT
+    VK_DOWN,        ID_DETAIL_DOWN,         VIRTKEY, ALT, NOINVERT
+    VK_F10,         ID_TOOLS_PLAYER,        VIRTKEY, NOINVERT
+    VK_F12,         ID_VIEW_PLAYLIST,       VIRTKEY, NOINVERT
+    VK_F2,          ID_FILE_BROWSE_ADDRESS, VIRTKEY, NOINVERT
+    VK_F3,          ID_FINDNEXT,            VIRTKEY, NOINVERT
+    VK_F4,          ID_VIEW_SMALL_VIEWER,   VIRTKEY, NOINVERT
+    VK_F5,          ID_FILE_UPDATE_SNAPSHOT, VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F9,          ID_SEARCH,              VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_RETURN,      ID_FILE_EDIT_TAG,       VIRTKEY, ALT, NOINVERT
+    VK_TAB,         ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_TAB,         ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_UP,          ID_DETAIL_UP,           VIRTKEY, ALT, NOINVERT
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 5,1,0,0
+ PRODUCTVERSION 5,1,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040c04b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "MP Prime\0"
+            VALUE "FileDescription", "[ m p 3 - e x p l o r e r ]\0"
+            VALUE "FileVersion", "5, 1, 0, a\0"
+            VALUE "InternalName", "mp3explorer\0"
+            VALUE "LegalCopyright", "Copyright (C) 1998-2005 Pierre LEVY\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "MP3 Explorer.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "[ m p 3 - e x p l o r e r ]\0"
+            VALUE "ProductVersion", "5, 1, 0, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x40c, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AVI
+//
+
+IDR_AVI1                AVI     DISCARDABLE     "res\\mp3mfc.AVI"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// HTML
+//
+
+IDR_HTML_DEFAULT        HTML    DISCARDABLE     "res\\default.htm"
+LOGO.GIF                HTML    DISCARDABLE     "res\\logo.gif"
+#endif    // French (France) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+#ifdef _WIN32
+LANGUAGE 12, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\mp3Exp.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.fra\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

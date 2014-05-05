@@ -1,0 +1,54 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cocoa\filedlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cocoa/filedlg.h
+// Purpose:     wxFileDialog class
+// Author:      Ryan Norton
+// Modified by:
+// Created:     2004-10-02
+// Copyright:   (c) Ryan Norton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+DECLARE_WXCOCOA_OBJC_CLASS(NSSavePanel);
+
+                                      
+//-------------------------------------------------------------------------
+// wxFileDialog
+//-------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxCocoaFileDialog: public wxFileDialogBase
+{
+    DECLARE_DYNAMIC_CLASS(wxCocoaFileDialog)
+    wxDECLARE_NO_COPY_CLASS(wxCocoaFileDialog);
+public:
+    wxCocoaFileDialog(wxWindow *parent,
+                 const wxString& message = wxFileSelectorPromptStr,
+                 const wxString& defaultDir = wxEmptyString,
+                 const wxString& defaultFile = wxEmptyString,
+                 const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
+                 long style = wxFD_DEFAULT_STYLE,
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& sz = wxDefaultSize,
+                 const wxString& name = wxFileDialogNameStr);
+    virtual ~wxCocoaFileDialog();
+
+    virtual void SetPath(const wxString& path);
+    virtual void GetPaths(wxArrayString& paths) const;
+    virtual void GetFilenames(wxArrayString& files) const;
+
+    virtual int ShowModal();
+
+    inline WX_NSSavePanel GetNSSavePanel()
+    {   return (WX_NSSavePanel)m_cocoaNSWindow; }
+
+private:
+    WX_NSMutableArray m_wildcards;
+    wxArrayString m_fileNames;
+};
+
+       // _WX_FILEDLG_H_
+

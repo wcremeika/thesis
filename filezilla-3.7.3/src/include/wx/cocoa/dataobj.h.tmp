@@ -1,0 +1,25 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cocoa\dataobj.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cocoa/dataobj.h
+// Purpose:     declaration of the wxDataObject
+// Author:      David Elliott <dfe@cox.net>
+// Modified by:
+// Created:     2003/07/23
+// Copyright:   (c) 2003 David Elliott
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                              
+                              
+
+class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
+{
+public:
+    wxDataObject();
+    virtual ~wxDataObject();
+    virtual bool IsSupportedFormat(const wxDataFormat& format,
+        Direction dir = Get) const;
+};
+
+       // __WX_COCOA_DATAOBJ_H__

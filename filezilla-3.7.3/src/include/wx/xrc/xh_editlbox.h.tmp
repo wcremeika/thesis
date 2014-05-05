@@ -1,0 +1,41 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_editlbox.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_editlbox.h
+// Purpose:     declaration of wxEditableListBox XRC handler
+// Author:      Vadim Zeitlin
+// Created:     2009-06-04
+// Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                              
+                              
+
+                         
+
+                                      
+
+                                                                               
+                                                                 
+                                                                               
+
+                                                                               
+ 
+       
+                                  
+
+                                         
+                                            
+
+        
+                     
+                          
+
+                                                      
+  
+
+       // wxUSE_XRC && wxUSE_EDITABLELISTBOX
+
+       // _WX_XRC_XH_EDITLBOX_H_
+

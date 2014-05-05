@@ -1,0 +1,38 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\webviewarchivehandler.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        webviewarchivehandler.h
+// Purpose:     Custom webview handler to allow archive browsing
+// Author:      Steven Lamerton
+// Copyright:   (c) 2011 Steven Lamerton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                   
+                                   
+
+                    
+
+                 
+
+               
+                   
+
+                       
+
+                                                                               
+                                                            
+
+                                                                           
+ 
+       
+                                                    
+                                       
+                                                   
+        
+                               
+  
+
+       // wxUSE_WEBVIEW
+
+       // _WX_WEBVIEW_FILE_HANDLER_H_

@@ -1,0 +1,19 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\dbus\session_manager.h" 0
+                            
+                            
+
+// This class communicates with the gnome session manager through D-Bus.
+// Enables the program to gracefully react to an ending session.
+
+class CSessionManager
+{
+public:
+	static bool Init();
+	static bool Uninit();
+protected:
+	CSessionManager();
+	virtual ~CSessionManager();
+};
+
+       //__SESSIONMANAGER_H__

@@ -1,0 +1,289 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\CoolMenu.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+////////////////////////////////////////////////////////////////
+// 1997 Microsoft Systems Journal.
+// If this code works, it was written by Paul DiLascia.
+// If not, I don't know who wrote it.
+//
+
+// Modified for PWS toolbar
+// Remove automatic accelerators
+// Updated for VS2005 + UNICODE
+// Change from MS classes to STL eqivalents where possible
+// Understand that RUE menu also uses MENUITEMINFO dwItemData field for icons
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Subclass.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+////////////////////////////////////////////////////////////////
+// PixieLib(TM) Copyright 1997-1998 Paul DiLascia
+// If this code works, it was written by Paul DiLascia.
+// If not, I don't know who wrote it.
+//
+       
+
+//////////////////
+// Generic class to hook messages on behalf of a CWnd.
+// Once hooked, all messages go to CSubclassWnd::WindowProc before going
+// to the window. Specific subclasses can trap messages and do something.
+//
+// To use:
+//
+// * Derive a class from CSubclassWnd.
+//
+// * Override CSubclassWnd::WindowProc to handle messages. Make sure you call
+//   CSubclassWnd::WindowProc if you don't handle the message, or your
+//   window will never get messages. If you write seperate message handlers,
+//   you can call Default() to pass the message to the window.
+//
+// * Instantiate your derived class somewhere and call HookWindow(pWnd)
+//   to hook your window, AFTER it has been created.
+//   To unhook, call Unhook or HookWindow(NULL).
+//
+// This is a very important class, crucial to many of the widgets Window
+// widgets implemented in PixieLib. To see how it works, look at the HOOK
+// sample program.
+//
+class CSubclassWnd : public CObject
+{
+public:
+  CSubclassWnd();
+  ~CSubclassWnd();
+
+  // Subclass a window. Hook(NULL) to unhook (automatic on WM_NCDESTROY)
+  BOOL HookWindow(HWND  hwnd);
+  BOOL HookWindow(CWnd* pWnd) { return HookWindow(pWnd->GetSafeHwnd()); }
+  void Unhook() { HookWindow((HWND)NULL); }
+  BOOL IsHooked() { return m_hWnd!=NULL; }
+
+  friend void  HookWndProc(HWND, UINT, WPARAM, LPARAM);
+  friend class CSubclassWndMap;
+
+  virtual void WindowProc(UINT msg, WPARAM wp, LPARAM lp);
+  void Default();  // call this at the end of handler fns
+
+             
+                                   
+                                            
+      
+
+protected:
+  HWND m_hWnd;             // the window hooked
+  LONG_PTR m_pOldWndProc;  // ... and original window proc
+  CSubclassWnd* m_pNext;   // next in chain of hooks for this window
+
+  ;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\CoolMenu.h" 23
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWToolbar.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+// CPWToolBar
+
+             
+
+typedef std::map<UINT, UINT> ID2ImageMap;
+typedef ID2ImageMap::iterator ID2ImageMapIter;
+
+class CPWToolBar : public CToolBar
+{
+  
+
+public:
+  CPWToolBar();
+  virtual ~CPWToolBar();
+
+  void Init(const int NumBits, const bool bRefresh = false);
+  void LoadDefaultToolBar(const int toolbarMode);
+  void CustomizeButtons(CString csButtonNames);
+  void ChangeImages(const int toolbarMode);
+  void Reset();
+
+  CString GetButtonString() const;
+  int GetBrowseURLImageIndex() const {return m_iBrowseURL_BM_offset;}
+  int GetSendEmailImageIndex() {return m_iSendEmail_BM_offset;}
+  void MapControlIDtoImage(ID2ImageMap &IDtoImages);
+  void SetBitmapBackground(CBitmap &bm, const COLORREF newbkgrndColour);
+  void RefreshImages();
+
+protected:
+  //{{AFX_MSG(CPWToolBar)
+   void OnToolBarGetButtonInfo(NMHDR *pNotifyStruct, void *pLResult);
+   void OnToolBarQueryInsert(NMHDR *pNotifyStruct, void *pLResult);
+   void OnToolBarQueryDelete(NMHDR *pNotifyStruct, void *pLResult);
+   void OnToolBarQueryInfo(NMHDR *pNotifyStruct, void *pLResult);
+   void OnToolBarReset(NMHDR *pNotifyStruct, void *pLResult);
+   void OnDestroy();
+  //}}AFX_MSG
+
+  
+
+private:
+  struct GuiRecord {
+    CString name;
+    UINT ID;
+    UINT classicBM; // RESID of classic bitmap,
+    UINT newBM;     // of New bitmap, and
+    UINT disBM;     // disabled version of new bitmap
+    UINT GetClassicBM() const {return classicBM;}
+    UINT GetNewBM() const {return newBM;}
+    UINT GetDisBM() const {return disBM;}
+  };
+  // member fuction pointer typedef for above getters
+  typedef UINT (GuiRecord::*GuiRecordGetter)() const;
+  
+  // Following needed for std::find_if
+  // Abandon with great joy when C++11 Lambda supported!
+  struct GuiInfoFinder {
+  GuiInfoFinder(const CString &s) : m_s(s) {}
+    bool operator()(const GuiRecord &r) {return r.name == m_s;}
+    const CString &m_s;
+  };
+
+  void SetupImageList(const GuiRecord *guiInfo,
+                      GuiRecordGetter GetBM, GuiRecordGetter GetDisBM,
+                      const int numBMs, const int nImageList);
+
+  static const GuiRecord MainGuiInfo[];
+  static const GuiRecord OtherGuiInfo[];
+
+  // 1st = Classic; 2nd = New 8; 3rd = New 32;
+  CImageList m_ImageLists[3];
+  // 1st = New 8; 2nd = New 32;
+  CImageList m_DisabledImageLists[2];
+
+  CString m_csDefaultButtonString;
+  TBBUTTON *m_pOriginalTBinfo;
+
+  int m_iNum_Bitmaps, m_iNumDefaultButtons, m_NumBits;
+  int m_toolbarMode, m_bitmode;
+  bool m_bIsDefault;
+  int m_iBrowseURL_BM_offset, m_iSendEmail_BM_offset;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\CoolMenu.h" 24
+                
+             
+                   
+
+//////////////////
+// CCoolMenuManager implements "cool" menus with buttons in them. To use:
+//
+//  * Instantiate in your CMainFrame.
+//  * Call Install to install it
+//
+
+// identifies owner-draw data as mine
+const long COOLMENUITEMID = MAKELONG(MAKEWORD('C', 'M'),MAKEWORD('I', 'D'));
+
+// private struct: one of these for each owner-draw menu item
+struct CMenuItemData {
+  long     magicNum;      // magic number identifying me
+  CString  text;          // item text
+  UINT     fType;         // original item type flags
+  int      iButton;       // index of button image in image list
+  CMenuItemData()         { magicNum = COOLMENUITEMID; iButton = -1; fType = 0; }
+  BOOL     IsCMID()       { return magicNum == COOLMENUITEMID; }
+};
+
+typedef std::vector<HMENU> MenuVector;
+typedef MenuVector::iterator MenuVectorIter;
+
+typedef std::vector<CMenuItemData *> PMDVector;
+typedef PMDVector::iterator PMDVectorIter;
+
+class CCoolMenuManager : private CSubclassWnd
+{
+public:
+  
+  CCoolMenuManager();
+  ~CCoolMenuManager();
+  void Cleanup();
+
+  // You can set these any time
+  BOOL m_bShowButtons;      // use to control whether buttons are shown
+
+  // public functions to use
+  void Install(CWnd* pWnd) { HookWindow(pWnd); }
+  void SetImageList(CPWToolBar *pwtoolbar);
+  void SetMapping(CPWToolBar *pwtoolbar)
+  {pwtoolbar->MapControlIDtoImage(m_IDtoImages);}
+
+  // should never need to call:
+  static  HBITMAP GetMFCDotBitmap();  // get..
+  static  void    FixMFCDotBitmap();  // and fix MFC's dot bitmap
+
+protected:
+  CImageList     m_ImageList;   // image list for all buttons
+  CImageList     m_DisabledImageList; // disabled image list for all buttons
+  MenuVector     m_menuList;    // list of HMENU's initialized
+  PMDVector      m_pmdList;     // Vector of ptrs to CMenuItemData
+  CSize          m_szBitmap;    // size of button bitmap
+  CSize          m_szButton;    // size of button (including shadow)
+  CFont          m_fontMenu;    // menu font
+  ID2ImageMap    m_IDtoImages;  // To obtain image ID from Control ID
+  bool           m_bNoDIL;      // "true" if No Disabled Image List i.e. Classic toolbar
+
+  // helpers
+  void DrawMenuText(CDC& dc, CRect rc, CString text, COLORREF color);
+  BOOL Draw3DCheckmark(CDC& dc, const CRect& rc, BOOL bSelected,
+    HBITMAP hbmCheck = NULL);
+  void ConvertMenu(CMenu* pMenu,UINT nIndex,BOOL bSysMenu,BOOL bShowButtons);
+  CFont * GetMenuFont();
+
+  void FillRect(CDC& dc, const CRect& rc, COLORREF color);
+  void DrawEmbossed(CDC& dc, CImageList &il, int iBtn, CPoint p);
+
+  // Get button index for given command ID, or -1 if not found
+  int  GetButtonIndex(UINT nID) {
+    ID2ImageMapIter iter = m_IDtoImages.find(nID);
+    return iter != m_IDtoImages.end() ? iter->second : -1;
+  }
+
+  // window proc to hook frame using CSubclassWnd implementation
+  virtual void WindowProc(UINT msg, WPARAM wp, LPARAM lp);
+
+  // CSubclassWnd message handlers
+  virtual void CMOnInitMenuPopup(CMenu* pMenu, UINT nIndex, BOOL bSysMenu);
+  virtual BOOL CMOnMeasureItem(LPMEASUREITEMSTRUCT lpms);
+  virtual BOOL CMOnDrawItem(LPDRAWITEMSTRUCT lpds);
+  virtual void CMOnMenuChar(UINT nChar, UINT nFlags, CMenu* pMenu);
+  virtual void CMOnMenuSelect(UINT nItemID, UINT nFlags, HMENU hSysMenu);
+};
+
+//////////////////
+// Friendly version of MENUITEMINFO initializes itself
+//
+struct CMenuItemInfo : public MENUITEMINFO {
+  CMenuItemInfo()
+  {
+    SecureZeroMemory(this, sizeof(MENUITEMINFO));
+    cbSize = sizeof(MENUITEMINFO);
+  }
+};

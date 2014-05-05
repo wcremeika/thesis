@@ -1,0 +1,55 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\unix\private\epolldispatcher.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/unix/private/epolldispatcher.h
+// Purpose:     wxEpollDispatcher class
+// Authors:     Lukasz Michalski
+// Created:     April 2007
+// Copyright:   (c) Lukasz Michalski
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                      
+                                      
+
+                   
+
+                             
+
+                                      
+
+                   
+
+                                                                  
+ 
+       
+                                                              
+                                              
+      
+                                                    
+                                       
+
+                                 
+
+                                                
+                                                                                    
+                                                                                  
+                                      
+                                    
+                                                         
+
+        
+                                    
+                                           
+
+                                                                              
+                    
+                                                                      
+
+
+                          
+  
+
+       // wxUSE_EPOLL_DISPATCHER
+
+       // _WX_PRIVATE_SOCKETEVTDISPATCH_H_

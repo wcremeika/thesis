@@ -1,0 +1,114 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\meta\implicitconversion.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/meta/implicitconversion.h
+// Purpose:     Determine resulting type from implicit conversion
+// Author:      Vaclav Slavik
+// Created:     2010-10-22
+// Copyright:   (c) 2010 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                      
+                                      
+
+                   
+                      
+
+// C++ hierarchy of data types is:
+//
+//   Long double (highest)
+//   Double
+//   Float
+//   Unsigned long int
+//   Long int
+//   Unsigned int
+//   Int (lowest)
+//
+// Types lower in the hierarchy are converted into ones higher up if both are
+// involved e.g. in arithmetic expressions.
+
+namespace wxPrivate
+{
+
+// Helper macro to define a constant inside a template class: it's needed
+// because MSVC6 doesn't support initializing static integer members but the
+// usual workaround of using enums instead doesn't work for Borland (at least
+// in template classes).
+                   
+                                                                       
+     
+                                                                               
+      
+
+template<typename T>
+struct TypeHierarchy
+{
+    // consider unknown types (e.g. objects, pointers) to be of highest
+    // level, always convert to them if they occur
+    static const int level = 9999;
+};
+
+                                                                                                                                                                                                                                     
+
+
+
+
+
+template<> struct TypeHierarchy<char>                   {                                                           static const int level = 1;       };
+template<> struct TypeHierarchy<unsigned char>                   {                                                           static const int level = 2;       };
+template<> struct TypeHierarchy<short>                   {                                                           static const int level = 3;       };
+template<> struct TypeHierarchy<unsigned short>                   {                                                           static const int level = 4;       };
+template<> struct TypeHierarchy<int>                   {                                                           static const int level = 5;       };
+template<> struct TypeHierarchy<unsigned int>                   {                                                           static const int level = 6;       };
+template<> struct TypeHierarchy<long>                   {                                                           static const int level = 7;       };
+template<> struct TypeHierarchy<unsigned long>                   {                                                           static const int level = 8;       };
+                   
+                                          
+                                           
+      
+template<> struct TypeHierarchy<float>                   {                                                           static const int level = 11;       };
+template<> struct TypeHierarchy<double>                   {                                                           static const int level = 12;       };
+template<> struct TypeHierarchy<long double>                   {                                                           static const int level = 13;       };
+
+                          
+                                      
+                                                                                
+                                      
+                                                                              
+                                       
+                                                                               
+         
+            
+          
+      
+
+                              
+
+} // namespace wxPrivate
+
+// Helper to determine resulting type of implicit conversion in
+// an expression with two arithmetic types.
+template<typename T1, typename T2>
+struct wxImplicitConversionType
+{
+    typedef typename wxIf
+            <
+                // if T2 is "higher" type, convert to it
+                (int)(wxPrivate::TypeHierarchy<T1>::level) < (int)(wxPrivate::TypeHierarchy<T2>::level),
+                T2,
+                // otherwise use T1
+                T1
+            >::value
+            value;
+};
+
+
+template<typename T1, typename T2, typename T3>
+struct wxImplicitConversionType3 : public wxImplicitConversionType<
+                        T1,
+                        typename wxImplicitConversionType<T2,T3>::value>
+{
+};
+
+       // _WX_META_IMPLICITCONVERSION_H_

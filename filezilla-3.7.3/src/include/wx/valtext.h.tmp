@@ -1,0 +1,110 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\valtext.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/valtext.h
+// Purpose:     wxTextValidator class
+// Author:      Julian Smart
+// Modified by: Francesco Montorsi
+// Created:     29/01/98
+// Copyright:   (c) 1998 Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                   
+
+                                                          
+
+                                       
+
+                        
+
+                         
+ 
+                        
+                         
+                         
+                         
+                                
+                           
+                            
+                                 
+                                      
+                                  
+                                      
+  
+
+                                                          
+ 
+       
+                                                                      
+                                                
+
+                                
+
+                                                                            
+                                                    
+                                                                         
+                                                                              
+                                                                          
+                                          
+
+                                                             
+                                                 
+                                            
+
+                                            
+                                    
+
+                                              
+                                      
+
+                        
+                                   
+
+                
+                                                             
+                              
+
+                                
+
+                                                
+                                                                              
+                                                              
+
+                                                
+                                                                              
+                                                              
+
+                                                  
+                                                   
+
+          
+
+                                                                                   
+                                                                   
+
+                                                                                          
+                                                               
+
+                                                                     
+                                                        
+
+          
+                                          
+                                       
+                                    
+                                    
+
+        
+                                               
+                                          
+                         
+  
+
+      
+  // wxUSE_VALIDATORS && (wxUSE_TEXTCTRL || wxUSE_COMBOBOX)
+
+       // _WX_VALTEXT_H_

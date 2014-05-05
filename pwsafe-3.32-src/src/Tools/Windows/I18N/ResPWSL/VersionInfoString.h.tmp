@@ -1,0 +1,97 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.h" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// VersionInfoString.h: interface for the CVersionInfoString class.
+//
+//////////////////////////////////////////////////////////////////////
+
+       
+
+                                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoHelperStructures.h" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// ******************************************************************
+//  VersionInfoHelperStructures   version:  1.0   ·  date: 03/06/2006
+//  -----------------------------------------------------------------
+//  -----------------------------------------------------------------
+
+//////////////////////////////////////////////////////////////////////////
+// Helper structures
+// All Version structures are essentially the same, and are declared to
+// increase code readability
+//
+
+       
+
+                                                    
+
+struct BaseVersionStruct {
+  WORD        wLength; 
+  WORD        wValueLength; 
+  WORD        wType; 
+  WCHAR       szKey[1]; 
+  WORD        Padding[1]; 
+};
+
+struct VERSION_INFO_HEADER: public BaseVersionStruct{ 
+  VS_FIXEDFILEINFO Value; 
+};
+
+struct String: public BaseVersionStruct{ 
+  WORD   Value[1]; 
+}; 
+
+struct StringTable: public BaseVersionStruct { 
+  String Children[1]; 
+};
+
+struct Var: public BaseVersionStruct { 
+  DWORD Value[1]; 
+}; 
+
+
+struct BaseFileInfo: public BaseVersionStruct 
+{ 
+};
+
+struct StringFileInfo: public BaseFileInfo { 
+  StringTable Children[1]; 
+};
+
+struct VarFileInfo: public BaseFileInfo  { 
+  Var   Children[1]; 
+}; 
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoString.h" 14
+
+class CVersionInfoBuffer;
+
+class CVersionInfoString: public CObject
+{
+public:
+  CVersionInfoString(String* pString);
+  CVersionInfoString(const CString& strKey, const CString& strValue = "");
+
+  const CString& GetKey() const;
+  const CString& GetValue() const;
+
+  CString& GetValue();
+
+  void FromString(String* pString);
+  void Write(CVersionInfoBuffer & viBuf);
+private:
+  CString m_strKey;
+  CString m_strValue;
+};

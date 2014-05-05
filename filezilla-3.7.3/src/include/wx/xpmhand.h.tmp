@@ -1,0 +1,26 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xpmhand.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xpmhand.h
+// Purpose:     XPM handler base header
+// Author:      Julian Smart
+// Modified by:
+// Created:
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+// Only wxMSW and wxPM currently defines a separate XPM handler, since
+// mostly Windows and Presentation Manager apps won't need XPMs.
+                      
+      
+      
+                     
+                           
+      
+
+      
+    // _WX_XPMHAND_H_BASE_

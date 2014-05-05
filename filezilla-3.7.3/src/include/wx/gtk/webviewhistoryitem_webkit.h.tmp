@@ -1,0 +1,35 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\gtk\webviewhistoryitem_webkit.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        include/wx/gtk/webviewhistoryitem.h
+// Purpose:     wxWebViewHistoryItem header for GTK
+// Author:      Steven Lamerton
+// Copyright:   (c) 2011 Steven Lamerton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                     
+                                     
+
+                    
+
+                                                               
+
+                                              
+ 
+       
+                                                                      
+                                                  
+                                       
+                                           
+
+                                 
+
+        
+                            
+                     
+  
+
+       // wxUSE_WEBVIEW && wxUSE_WEBVIEW_WEBKIT && defined(__WXGTK__)
+
+       // _WX_GTK_WEBVIEWHISTORYITEM_H_

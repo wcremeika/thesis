@@ -1,0 +1,95 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\imaggif.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/imaggif.h
+// Purpose:     wxImage GIF handler
+// Author:      Vaclav Slavik, Guillermo Rodriguez Garcia, Gershon Elber, Troels K
+// Copyright:   (c) 1999-2011 Vaclav Slavik, Guillermo Rodriguez Garcia, Gershon Elber, Troels K
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                    
+
+
+//-----------------------------------------------------------------------------
+// wxGIFHandler
+//-----------------------------------------------------------------------------
+
+             
+
+                                                    
+
+             
+                        
+                                                      
+
+                                                           
+ 
+       
+                         
+     
+                                 
+                                 
+                                   
+                                  
+                           
+     
+
+                 
+                                                                
+                                                               
+                                                                 
+                                             
+
+                        
+                                                                          
+                                                        
+
+          
+                                                       
+                                                  
+
+                                                                   
+                                                  
+                                       
+                        
+                       
+          
+
+                              
+
+                                                                               
+                     
+                                         
+           
+                                           
+                                             
+                                                                
+                                                                                
+                                                                                 
+                                                  
+                                                                  
+                                                                    
+
+                         
+                          
+                                                      
+                                            
+
+                 
+                                                    
+                                                  
+                                                                          
+      
+
+        
+                                       
+  
+
+       // wxUSE_GIF
+
+       // _WX_IMAGGIF_H_
+

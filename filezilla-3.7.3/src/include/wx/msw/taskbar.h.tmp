@@ -1,0 +1,72 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\taskbar.h" 0
+/////////////////////////////////////////////////////////////////////////
+// File:        wx/msw/taskbar.h
+// Purpose:     Defines wxTaskBarIcon class for manipulating icons on the
+//              Windows task bar.
+// Author:      Julian Smart
+// Modified by: Vaclav Slavik
+// Created:     24/3/98
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                   
+
+// private helper class:
+class WXDLLIMPEXP_FWD_ADV wxTaskBarIconWindow;
+
+class WXDLLIMPEXP_ADV wxTaskBarIcon : public wxTaskBarIconBase
+{
+public:
+    wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
+    virtual ~wxTaskBarIcon();
+
+    // Accessors
+    bool IsOk() const { return true; }
+    bool IsIconInstalled() const { return m_iconAdded; }
+
+    // Operations
+    bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxEmptyString);
+    bool RemoveIcon(void);
+    bool PopupMenu(wxMenu *menu);
+
+    // MSW-specific class methods
+
+                              
+                                                                               
+                     
+      
+                                                                             
+                                                                              
+                                                                              
+                                                                              
+           
+      
+                                                                             
+                                     
+                                           
+                                          
+                                       
+                                    
+       // wxUSE_TASKBARICON_BALLOONS
+
+protected:
+    friend class wxTaskBarIconWindow;
+
+    long WindowProc(unsigned int msg, unsigned int wParam, long lParam);
+    void RegisterWindowMessages();
+
+
+    wxTaskBarIconWindow *m_win;
+    bool                 m_iconAdded;
+    wxIcon               m_icon;
+    wxString             m_strTooltip;
+
+    DECLARE_DYNAMIC_CLASS_NO_COPY(wxTaskBarIcon)
+};
+
+       // _WX_TASKBAR_H_

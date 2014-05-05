@@ -1,0 +1,379 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\ResText.cpp" 0
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2006 - Stefan Kueng
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\stdafx.h" 0
+// stdafx.h : include file for standard system include files,
+// or project specific include files that are used frequently, but
+// are changed infrequently
+//
+
+       
+
+       
+       
+                  
+                 
+                   
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\ResText.cpp" 18
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\ResModule.h" 0
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2007 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+       
+                
+                
+             
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.h" 0
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2007 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+       
+                
+             
+             
+                
+
+typedef struct tagResourceEntry
+{
+	WORD						menuID;
+	std::vector<std::wstring>	translatorcomments;
+	std::vector<std::wstring>	automaticcomments;
+	std::set<DWORD>				resourceIDs;
+	std::wstring				flag;
+	std::wstring				msgstr;
+} RESOURCEENTRY, * LPRESOURCEENTRY;
+
+/**
+ * \ingroup ResText
+ * Class to handle po-files. Inherits from an std::map which assigns
+ * string IDs to additional information, including the translated strings.
+ *
+ * Provides methods to load and save a po-file with the translation information
+ * we need for ResText.
+ */
+class CPOFile : public std::map<std::wstring, RESOURCEENTRY>
+{
+public:
+	CPOFile();
+	~CPOFile(void);
+
+	BOOL ParseFile(LPCTSTR szPath, BOOL bUpdateExisting = TRUE);
+	BOOL SaveFile(LPCTSTR szPath);
+	void SetQuiet(BOOL bQuiet = TRUE) {m_bQuiet = bQuiet;}
+private:
+	BOOL m_bQuiet;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\ResModule.h" 36
+
+                                              
+                                              
+                                                          
+
+                         	         
+
+// DIALOG CONTROL INFORMATION
+typedef struct tagDlgItemInfo
+{
+	DWORD   style;
+	DWORD   exStyle;
+	DWORD   helpId;
+	short   x;
+	short   y;
+	short   cx;
+	short   cy;
+	WORD    id;
+	LPCTSTR className;
+	LPCTSTR windowName;
+	LPVOID  data;
+} DLGITEMINFO, * LPDLGITEMINFO;
+
+// DIALOG TEMPLATE
+typedef struct tagDialogInfo
+{
+	DWORD   style;
+	DWORD   exStyle;
+	DWORD   helpId;
+	WORD    nbItems;
+	short   x;
+	short   y;
+	short   cx;
+	short   cy;
+	LPCTSTR menuName;
+	LPCTSTR className;
+	LPCTSTR caption;
+	WORD    pointSize;
+	WORD    weight;
+	BOOL    italic;
+	LPCTSTR faceName;
+	BOOL    dialogEx;
+} DIALOGINFO, * LPDIALOGINFO;
+// MENU resource
+typedef struct tagMenuEntry
+{
+	WORD            wID;
+	std::wstring	reference;
+	std::wstring	msgstr;
+} MENUENTRY, * LPMENUENTRY;
+
+/**
+ * \ingroup ResText
+ * Class to handle a resource module (*.exe or *.dll file).
+ *
+ * Provides methods to extract and apply resource strings.
+ */
+class CResModule
+{
+public:
+	CResModule(void);
+	~CResModule(void);
+
+	BOOL	ExtractResources(LPCTSTR lpszSrcLangDllPath, LPCTSTR lpszPOFilePath, BOOL bNoUpdate);
+	BOOL	ExtractResources(std::vector<std::wstring> filelist, LPCTSTR lpszPOFilePath, BOOL bNoUpdate);
+	BOOL	CreateTranslatedResources(LPCTSTR lpszSrcLangDllPath, LPCTSTR lpszDestLangDllPath, LPCTSTR lpszPOFilePath);
+	void	SetQuiet(BOOL bQuiet = TRUE) {m_bQuiet = bQuiet; m_StringEntries.SetQuiet(bQuiet);}
+	void	SetLanguage(WORD wLangID) {m_wTargetLang = wLangID;}
+	void	SetRTL(bool bRTL = true) {m_bRTL = bRTL;}
+   void	SetShowDefault(bool bShowDefault = true) {m_bShowDefault = bShowDefault;}
+
+private:
+	static  BOOL  EnumResNameCallback(HMODULE hModule, LPCTSTR lpszType, LPTSTR lpszName, LONG_PTR lParam);
+	static  BOOL  EnumResNameWriteCallback(HMODULE hModule, LPCTSTR lpszType, LPTSTR lpszName, LONG_PTR lParam);
+	static  BOOL  EnumResWriteLangCallback(HMODULE hModule, LPCTSTR lpszType, LPTSTR lpszName, WORD wLanguage, LONG_PTR lParam);
+	BOOL	ExtractString(UINT nID);
+	BOOL	ExtractDialog(UINT nID);
+	BOOL	ExtractMenu(UINT nID);
+	BOOL	ReplaceString(UINT nID, WORD wLanguage);
+	BOOL	ReplaceDialog(UINT nID, WORD wLanguage);
+	BOOL	ReplaceMenu(UINT nID, WORD wLanguage);
+	BOOL	ExtractAccelerator(UINT nID);
+	BOOL	ReplaceAccelerator(UINT nID, WORD wLanguage);
+
+	const WORD*	ParseMenuResource(const WORD * res);
+	const WORD*	CountMemReplaceMenuResource(const WORD * res, size_t * wordcount, WORD * newMenu);
+	const WORD*	ParseMenuExResource(const WORD * res);
+	const WORD*	CountMemReplaceMenuExResource(const WORD * res, size_t * wordcount, WORD * newMenu);
+	const WORD* GetControlInfo(const WORD* p, LPDLGITEMINFO lpDlgItemInfo, BOOL dialogEx, LPBOOL bIsID);
+	const WORD*	GetDialogInfo(const WORD * pTemplate, LPDIALOGINFO lpDlgInfo);
+	const WORD*	CountMemReplaceDialogResource(const WORD * res, size_t * wordcount, WORD * newMenu);
+	const WORD* ReplaceControlInfo(const WORD * res, size_t * wordcount, WORD * newDialog, BOOL bEx);
+
+	void	ReplaceStr(LPCWSTR src, WORD * dest, size_t * count, int * translated, int * def);
+
+	HMODULE			m_hResDll;
+	HANDLE			m_hUpdateRes;
+	CPOFile			m_StringEntries;
+	std::map<WORD, MENUENTRY> m_MenuEntries;
+	std::map<WORD, MENUENTRY>::iterator pME_iter;
+	std::wstring	sDestFile;
+
+  struct TypeName_s {LPCTSTR m_Type; LPTSTR m_Name;
+  TypeName_s(LPCTSTR t, LPTSTR n) : m_Type(t), m_Name(n) {}
+  };
+  struct LangWriter {
+    CResModule *m_module;
+  LangWriter(CResModule *m) : m_module(m) {}
+    void operator()(TypeName_s &tn);
+  };
+  
+  std::vector<TypeName_s> m_TypeNames;
+
+  BOOL			m_bQuiet;
+
+	bool			m_bRTL;
+
+   bool			m_bShowDefault;
+
+	int				m_bTranslatedStrings;
+	int				m_bDefaultStrings;
+	int				m_bTranslatedDialogStrings;
+	int				m_bDefaultDialogStrings;
+	int				m_bTranslatedMenuStrings;
+	int				m_bDefaultMenuStrings;
+	int				m_bTranslatedAcceleratorStrings;
+	int				m_bDefaultAcceleratorStrings;
+
+	WORD			m_wTargetLang;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\ResText.cpp" 19
+
+                
+                
+                   
+       
+
+typedef std::basic_string<wchar_t> wstring;
+              
+                         
+     
+                             
+      
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	bool bShowHelp = true;
+	bool bQuiet = false;
+	bool bNoUpdate = false;
+	bool bRTL = false;
+   bool bShowDefault = false;
+	//parse the command line
+	std::vector<std::string> arguments;
+	std::vector<std::string> switches;
+	for (int i=1; i<argc; ++i)
+	{
+		if ((argv[i][0] == '-')||(argv[i][0] == '/'))
+		{
+			std::string str = std::string(&argv[i][1]);
+			switches.push_back(str);
+		}
+		else
+		{
+			std::string str = std::string(&argv[i][0]);
+			arguments.push_back(str);
+		}
+	}
+
+	for (std::vector<std::string>::iterator I = switches.begin(); I != switches.end(); ++I)
+	{
+		if (_tcscmp(I->c_str(), _T("?"))==0)
+			bShowHelp = true;
+		if (_tcscmp(I->c_str(), _T("help"))==0)
+			bShowHelp = true;
+		if (_tcscmp(I->c_str(), _T("quiet"))==0)
+			bQuiet = true;
+		if (_tcscmp(I->c_str(), _T("noupdate"))==0)
+			bNoUpdate = true;
+		if (_tcscmp(I->c_str(), _T("rtl"))==0)
+			bRTL = true;
+      if (_tcscmp(I->c_str(), _T("showdefault"))==0)
+			bShowDefault = true;
+	}
+	std::vector<std::string>::iterator arg = arguments.begin();
+
+	if (arg != arguments.end())
+	{
+		if (_tcscmp(arg->c_str(), _T("extract"))==0)
+		{
+			std::string sDllFile;
+			std::string sPoFile;
+			++arg;
+			
+			std::vector<std::wstring> filelist = arguments;
+			filelist.erase(filelist.begin());
+			sPoFile = std::string((--filelist.end())->c_str());
+			filelist.erase(--filelist.end());
+			
+			CResModule module;
+			module.SetQuiet(bQuiet);
+			if (!module.ExtractResources(filelist, sPoFile.c_str(), bNoUpdate))
+				return -1;
+			bShowHelp = false;
+		}
+		else if (_tcscmp(arg->c_str(), _T("apply"))==0)
+		{
+			std::string sSrcDllFile;
+			std::string sDstDllFile;
+			std::string sPoFile;
+			WORD wLang = 0;
+			++arg;
+			if (!PathFileExists(arg->c_str()))
+			{
+				_ftprintf(stderr, _T("the resource dll <%s> does not exist!\n"), arg->c_str());
+				return -1;
+			}
+			sSrcDllFile = std::string(arg->c_str());
+			++arg;
+			sDstDllFile = std::string(arg->c_str());
+			++arg;
+			if (!PathFileExists(arg->c_str()))
+			{
+				_ftprintf(stderr, _T("the po-file <%s> does not exist!\n"), arg->c_str());
+				return -1;
+			}
+			sPoFile = std::string(arg->c_str());
+			++arg;
+			if (arg != arguments.end())
+			{
+				wLang = (WORD)_ttoi(arg->c_str());
+			}
+			CResModule module;
+			module.SetQuiet(bQuiet);
+			module.SetLanguage(wLang);
+			module.SetRTL(bRTL);
+         module.SetShowDefault(bShowDefault);
+			if (!module.CreateTranslatedResources(sSrcDllFile.c_str(), sDstDllFile.c_str(), sPoFile.c_str()))
+				return -1;
+			bShowHelp = false;
+		}
+	}
+
+	if (bShowHelp)
+	{
+		_ftprintf(stdout, _T("usage:\n"));
+		_ftprintf(stdout, _T("\n"));
+		_ftprintf(stdout, _T("ResText extract <resource.dll> [<resource.dll> ...] <po-file> [-quiet] [-noupdate]\n"));
+		_ftprintf(stdout, _T("Extracts all strings from the resource dll and writes them to the po-file\n"));
+		_ftprintf(stdout, _T("-quiet: don't print progress messages\n"));
+		_ftprintf(stdout, _T("-noupdate: overwrite the po-file\n"));
+		_ftprintf(stdout, _T("\n"));
+		_ftprintf(stdout, _T("ResText apply <src resource.dll> <dst resource.dll> <po-file> [langID] [-quiet][-rtl] [-showdefault]\n"));
+		_ftprintf(stdout, _T("Replaces all strings in the dst resource.dll with the po-file translations\n"));
+		_ftprintf(stdout, _T("-quiet: don't print progress messages\n"));
+		_ftprintf(stdout, _T("-rtl  : change the controls to RTL reading\n"));
+		_ftprintf(stdout, _T("-showdefault  : print untranslated values to stderr\n"));
+		_ftprintf(stdout, _T("\n"));
+	}
+
+	return 0;
+}
+

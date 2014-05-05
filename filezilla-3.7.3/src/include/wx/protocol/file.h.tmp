@@ -1,0 +1,40 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\protocol\file.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/protocol/file.h
+// Purpose:     File protocol
+// Author:      Guilhem Lavaux
+// Modified by:
+// Created:     1997
+// Copyright:   (c) 1997, 1998 Guilhem Lavaux
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                   
+
+                       
+
+                                 
+
+                                                    
+ 
+       
+                  
+                           
+
+                                 
+                                                             
+
+                                                        
+
+          
+                                              
+                                 
+  
+
+       // wxUSE_PROTOCOL_FILE
+
+       // __WX_PROTO_FILE_H__

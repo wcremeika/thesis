@@ -1,0 +1,1939 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha1.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+/// \file sha1.cpp
+//-----------------------------------------------------------------------------
+
+/* based on SHA-1 in C By Steve Reid <steve@edmweb.com> */
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+// some globally useful includes for non-Windows
+                 
+      
+
+                
+                  
+      
+
+// Following seems needed on Linux/cygwin
+                                             
+                   
+      
+
+// stop MS VC++ 6 and earlier being quite so pedantic
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+// PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN can be specified on the 
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+// 
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+// Following from libtomcrypt, for twofish & SHA256
+/* Controls endianess and size of registers.  Leave uncommented to get platform neutral [slower] code 
+* 
+* Note: in order to use the optimized macros your platform must support unaligned 32 and 64 bit read/writes.
+* The x86 platforms allow this but some others [ARM for instance] do not.  On those platforms you **MUST**
+* use the portable [slower] macros.
+*/
+
+/* detect x86-32 machines somewhat */
+                                                                                                                                                                                 
+                     
+                        
+      
+
+/* detects MIPS R5900 processors (PS2) */
+                                                                                                                        
+                     
+                        
+      
+
+/* detect amd64 */
+                                                                
+                     
+                        
+      
+
+/* #define ENDIAN_LITTLE */
+/* #define ENDIAN_BIG */
+
+/* #define ENDIAN_32BITWORD */
+/* #define ENDIAN_64BITWORD */
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+/* fix for MSVC ...evil! */
+               
+                            
+                                 
+     
+                           
+typedef uint64_t ulong64;
+      
+
+/* this is the "32-bit at least" data type 
+* Re-define it to suit your platform but it must be at least 32-bits 
+*/
+                       
+                         
+     
+typedef unsigned long ulong32;
+      
+
+/* ---- HELPER MACROS ---- */
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+       /* ENDIAN_NEUTRAL */
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+       /* ENDIAN_LITTLE */
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+       /* ENDIAN_BIG */
+
+                                                                                                                         
+
+
+
+/* 32-bit Rotates */
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+/* rotates the hard way */
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+/* 64-bit Rotates */
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+      /* Not x86_64  */
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+/* extract a byte portably */
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha1.cpp" 13
+//#define SHA1HANDSOFF Copies data before messing with it.
+
+                 
+                  
+                  
+                
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha1.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                
+                
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+/**
+* Silly wrapper to abstract away the difference between a Unicode
+* (wchar_t) and non-Unicode (char) std::string, as well as
+* Linux/Windows portability.
+*
+*/
+
+                
+/*
+ * _S is defined same as m'soft's _T, just to avoid collisions or
+ * lousy include order dependencies.
+ */
+
+// Sometimes we need specific ones irrespective of in Unicode mode or not.
+// In particular, the underlying format of most XML is Unicode.
+typedef std::wstring wstringT;
+typedef std::string  cstringT;
+
+              
+                             
+                      
+                    
+     
+typedef std::string stringT;
+typedef char charT;
+               
+      
+
+                               
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\../core/PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+                                                
+                  
+      
+
+                
+                   
+      
+
+                                         
+                                             
+                   
+      
+
+                                                     
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+                                                                
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+   
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+                                                   
+                                                                                                      
+  
+                                                                                                            
+                                                                                                          
+                                   
+  
+
+                                     
+                                                                                                                                                                                 
+                     
+                        
+      
+
+                                         
+                                                                                                                        
+                     
+                        
+      
+
+                  
+                                                                
+                     
+                        
+      
+
+                           
+                        
+
+                              
+                              
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+                           
+               
+                            
+                                 
+     
+                           
+                         
+      
+
+                                           
+                                                                     
+  
+                       
+                         
+     
+                              
+      
+
+                             
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                           
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+                          
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+                       
+
+                                                                                                                         
+
+
+
+                    
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+                          
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+                    
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+                       
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+                             
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 46 // for afxwin.h, and endian macros
+
+// Hotkey values. Internal PWS values - need to convert to either MFC or wxWidgets
+// values in the GUI when retrieving these from the preferences and aso back to PWS
+// internal values before giving them to PWSPrefs for saving in the XML config file.
+                                
+                                
+                                
+                                
+ 
+// wxWidgets Only - Not used in Windows MFC
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+      /* !defined(_WIN32) */
+                  
+                     
+typedef int8_t  int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef int64_t int64;
+
+typedef uint8_t  uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
+
+typedef int errno_t;
+
+              
+          
+                    
+      
+                      
+     
+               
+typedef char TCHAR;
+typedef wchar_t WCHAR;
+       /* UNICODE */
+
+// mimic Microsoft conventional typdefs:
+typedef TCHAR *LPTSTR;
+typedef const TCHAR *LPCTSTR;
+typedef bool BOOL;
+typedef unsigned char BYTE;
+typedef uint16_t WORD;
+typedef uint32_t DWORD;
+typedef int32_t LONG;
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+typedef int32_t LPARAM;
+typedef unsigned int UINT;
+typedef int HANDLE;
+                                       
+
+// assorted conveniences:
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+/* These two files require the above definitions */
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\debug.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+                  
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\debug.h" 14
+             
+                   
+      
+
+namespace pws_os {
+  // MFC TRACE equivalent in MFC, non-MFC Windows and non-Windows
+  void Trace(LPCTSTR lpszFormat, ...);
+  void Trace0(LPCTSTR lpszFormat);
+
+  // Opens a messagebox or write to debugger window 
+  // with text of last system error, titlebar
+  // is csFunction
+  void IssueError(const stringT &csFunction, bool bMsgBox = true);
+
+  /*
+    Outputs a printable version of memory dump (hex + ascii)
+
+    parameters:
+      pmemory   - pointer to memory to format
+      length    - length memory to format in bytes
+      cs_prefix - prefix each line with this
+      maxnum    - maximum hex characters dumped per line
+  */
+  void HexDump(unsigned char *pmemory, const int &length,
+               const stringT &cs_prefix = "", const int &maxnum = 16);
+}
+
+       /* _OSDEBUG_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 224
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux/pws_time.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                    
+                    
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux\../typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux/pws_time.h" 13
+                  
+typedef time_t __time32_t;
+typedef uint64_t __time64_t;
+
+extern struct tm *gmtime64_r(const __time64_t *timep, struct tm *result);
+
+namespace pws_os {
+  /**
+   * Workaround the lack of a wchar_t version of asctime()
+   */
+  extern int asctime(TCHAR *buf, size_t N, const struct tm *tm);
+}
+
+       /* __PWS_TIME_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 225
+       /* _WIN32 */
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha1.h" 12
+
+class SHA1
+{
+public:
+  enum {HASHLEN = 20, BLOCKSIZE = 64};
+  SHA1();
+  ~SHA1();
+  void Update(const unsigned char* data, unsigned int len);
+  void Final(unsigned char digest[HASHLEN]);
+
+private:
+  uint32 state[5];
+  uint32 count[2];
+  unsigned char buffer[BLOCKSIZE];
+};
+       /* __SHA1_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\sha1.cpp" 19
+
+                                                                           
+
+/* blk0() and blk() perform the initial expand. */
+/* I got the idea of expanding during the round function from SSLeay */
+                        
+                                                                                                   
+
+     
+                           
+      
+                                                                                                                    
+
+
+/* (R0+R1), R2, R3, R4 are the different operations used in SHA1 */
+                                                                                 
+                                                                                
+                                                                          
+                                                                                    
+                                                                          
+
+/* Hash a single 512-bit block. This is the core of the algorithm. */
+
+static void SHA1Transform(uint32 state[5],
+                          const unsigned char buffer[64])
+{
+  uint32 a, b, c, d, e;
+  typedef union {
+    unsigned char c[64];
+    uint32 l[16];
+  } CHAR64LONG16;
+  CHAR64LONG16* block;
+//commented, because otherwise we change the buffer
+//#ifdef SHA1HANDSOFF
+  static unsigned char workspace[64];
+  block = reinterpret_cast<CHAR64LONG16 *>(workspace);
+  memcpy(block, buffer, 64);
+//#else
+//  block = reinterpret_cast<const CHAR64LONG16 *>(buffer);
+//#endif
+  /* Copy context->state[] to working vars */
+  a = state[0];
+  b = state[1];
+  c = state[2];
+  d = state[3];
+  e = state[4];
+  /* 4 rounds of 20 operations each. Loop unrolled. */
+  e+=((b&(c^d))^d)+block->l[0]+0x5A827999+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=((a&(b^c))^c)+block->l[1]+0x5A827999+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=((e&(a^b))^b)+block->l[2]+0x5A827999+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=((d&(e^a))^a)+block->l[3]+0x5A827999+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));;
+  a+=((c&(d^e))^e)+block->l[4]+0x5A827999+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=((b&(c^d))^d)+block->l[5]+0x5A827999+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=((a&(b^c))^c)+block->l[6]+0x5A827999+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=((e&(a^b))^b)+block->l[7]+0x5A827999+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));;
+  b+=((d&(e^a))^a)+block->l[8]+0x5A827999+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=((c&(d^e))^e)+block->l[9]+0x5A827999+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=((b&(c^d))^d)+block->l[10]+0x5A827999+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=((a&(b^c))^c)+block->l[11]+0x5A827999+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));;
+  c+=((e&(a^b))^b)+block->l[12]+0x5A827999+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=((d&(e^a))^a)+block->l[13]+0x5A827999+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=((c&(d^e))^e)+block->l[14]+0x5A827999+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=((b&(c^d))^d)+block->l[15]+0x5A827999+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));;
+  d+=((a&(b^c))^c)+(block->l[16&15] = (((block->l[(16+13)&15]^block->l[(16+8)&15]   ^block->l[(16+2)&15]^block->l[16&15]) << (1)) | ((block->l[(16+13)&15]^block->l[(16+8)&15]   ^block->l[(16+2)&15]^block->l[16&15]) >> (32 - (1)))))+0x5A827999+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=((e&(a^b))^b)+(block->l[17&15] = (((block->l[(17+13)&15]^block->l[(17+8)&15]   ^block->l[(17+2)&15]^block->l[17&15]) << (1)) | ((block->l[(17+13)&15]^block->l[(17+8)&15]   ^block->l[(17+2)&15]^block->l[17&15]) >> (32 - (1)))))+0x5A827999+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=((d&(e^a))^a)+(block->l[18&15] = (((block->l[(18+13)&15]^block->l[(18+8)&15]   ^block->l[(18+2)&15]^block->l[18&15]) << (1)) | ((block->l[(18+13)&15]^block->l[(18+8)&15]   ^block->l[(18+2)&15]^block->l[18&15]) >> (32 - (1)))))+0x5A827999+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=((c&(d^e))^e)+(block->l[19&15] = (((block->l[(19+13)&15]^block->l[(19+8)&15]   ^block->l[(19+2)&15]^block->l[19&15]) << (1)) | ((block->l[(19+13)&15]^block->l[(19+8)&15]   ^block->l[(19+2)&15]^block->l[19&15]) >> (32 - (1)))))+0x5A827999+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));;
+  e+=(b^c^d)+(block->l[20&15] = (((block->l[(20+13)&15]^block->l[(20+8)&15]   ^block->l[(20+2)&15]^block->l[20&15]) << (1)) | ((block->l[(20+13)&15]^block->l[(20+8)&15]   ^block->l[(20+2)&15]^block->l[20&15]) >> (32 - (1)))))+0x6ED9EBA1+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(a^b^c)+(block->l[21&15] = (((block->l[(21+13)&15]^block->l[(21+8)&15]   ^block->l[(21+2)&15]^block->l[21&15]) << (1)) | ((block->l[(21+13)&15]^block->l[(21+8)&15]   ^block->l[(21+2)&15]^block->l[21&15]) >> (32 - (1)))))+0x6ED9EBA1+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(e^a^b)+(block->l[22&15] = (((block->l[(22+13)&15]^block->l[(22+8)&15]   ^block->l[(22+2)&15]^block->l[22&15]) << (1)) | ((block->l[(22+13)&15]^block->l[(22+8)&15]   ^block->l[(22+2)&15]^block->l[22&15]) >> (32 - (1)))))+0x6ED9EBA1+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(d^e^a)+(block->l[23&15] = (((block->l[(23+13)&15]^block->l[(23+8)&15]   ^block->l[(23+2)&15]^block->l[23&15]) << (1)) | ((block->l[(23+13)&15]^block->l[(23+8)&15]   ^block->l[(23+2)&15]^block->l[23&15]) >> (32 - (1)))))+0x6ED9EBA1+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));;
+  a+=(c^d^e)+(block->l[24&15] = (((block->l[(24+13)&15]^block->l[(24+8)&15]   ^block->l[(24+2)&15]^block->l[24&15]) << (1)) | ((block->l[(24+13)&15]^block->l[(24+8)&15]   ^block->l[(24+2)&15]^block->l[24&15]) >> (32 - (1)))))+0x6ED9EBA1+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(b^c^d)+(block->l[25&15] = (((block->l[(25+13)&15]^block->l[(25+8)&15]   ^block->l[(25+2)&15]^block->l[25&15]) << (1)) | ((block->l[(25+13)&15]^block->l[(25+8)&15]   ^block->l[(25+2)&15]^block->l[25&15]) >> (32 - (1)))))+0x6ED9EBA1+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(a^b^c)+(block->l[26&15] = (((block->l[(26+13)&15]^block->l[(26+8)&15]   ^block->l[(26+2)&15]^block->l[26&15]) << (1)) | ((block->l[(26+13)&15]^block->l[(26+8)&15]   ^block->l[(26+2)&15]^block->l[26&15]) >> (32 - (1)))))+0x6ED9EBA1+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(e^a^b)+(block->l[27&15] = (((block->l[(27+13)&15]^block->l[(27+8)&15]   ^block->l[(27+2)&15]^block->l[27&15]) << (1)) | ((block->l[(27+13)&15]^block->l[(27+8)&15]   ^block->l[(27+2)&15]^block->l[27&15]) >> (32 - (1)))))+0x6ED9EBA1+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));;
+  b+=(d^e^a)+(block->l[28&15] = (((block->l[(28+13)&15]^block->l[(28+8)&15]   ^block->l[(28+2)&15]^block->l[28&15]) << (1)) | ((block->l[(28+13)&15]^block->l[(28+8)&15]   ^block->l[(28+2)&15]^block->l[28&15]) >> (32 - (1)))))+0x6ED9EBA1+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(c^d^e)+(block->l[29&15] = (((block->l[(29+13)&15]^block->l[(29+8)&15]   ^block->l[(29+2)&15]^block->l[29&15]) << (1)) | ((block->l[(29+13)&15]^block->l[(29+8)&15]   ^block->l[(29+2)&15]^block->l[29&15]) >> (32 - (1)))))+0x6ED9EBA1+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(b^c^d)+(block->l[30&15] = (((block->l[(30+13)&15]^block->l[(30+8)&15]   ^block->l[(30+2)&15]^block->l[30&15]) << (1)) | ((block->l[(30+13)&15]^block->l[(30+8)&15]   ^block->l[(30+2)&15]^block->l[30&15]) >> (32 - (1)))))+0x6ED9EBA1+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(a^b^c)+(block->l[31&15] = (((block->l[(31+13)&15]^block->l[(31+8)&15]   ^block->l[(31+2)&15]^block->l[31&15]) << (1)) | ((block->l[(31+13)&15]^block->l[(31+8)&15]   ^block->l[(31+2)&15]^block->l[31&15]) >> (32 - (1)))))+0x6ED9EBA1+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));;
+  c+=(e^a^b)+(block->l[32&15] = (((block->l[(32+13)&15]^block->l[(32+8)&15]   ^block->l[(32+2)&15]^block->l[32&15]) << (1)) | ((block->l[(32+13)&15]^block->l[(32+8)&15]   ^block->l[(32+2)&15]^block->l[32&15]) >> (32 - (1)))))+0x6ED9EBA1+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(d^e^a)+(block->l[33&15] = (((block->l[(33+13)&15]^block->l[(33+8)&15]   ^block->l[(33+2)&15]^block->l[33&15]) << (1)) | ((block->l[(33+13)&15]^block->l[(33+8)&15]   ^block->l[(33+2)&15]^block->l[33&15]) >> (32 - (1)))))+0x6ED9EBA1+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(c^d^e)+(block->l[34&15] = (((block->l[(34+13)&15]^block->l[(34+8)&15]   ^block->l[(34+2)&15]^block->l[34&15]) << (1)) | ((block->l[(34+13)&15]^block->l[(34+8)&15]   ^block->l[(34+2)&15]^block->l[34&15]) >> (32 - (1)))))+0x6ED9EBA1+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(b^c^d)+(block->l[35&15] = (((block->l[(35+13)&15]^block->l[(35+8)&15]   ^block->l[(35+2)&15]^block->l[35&15]) << (1)) | ((block->l[(35+13)&15]^block->l[(35+8)&15]   ^block->l[(35+2)&15]^block->l[35&15]) >> (32 - (1)))))+0x6ED9EBA1+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));;
+  d+=(a^b^c)+(block->l[36&15] = (((block->l[(36+13)&15]^block->l[(36+8)&15]   ^block->l[(36+2)&15]^block->l[36&15]) << (1)) | ((block->l[(36+13)&15]^block->l[(36+8)&15]   ^block->l[(36+2)&15]^block->l[36&15]) >> (32 - (1)))))+0x6ED9EBA1+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(e^a^b)+(block->l[37&15] = (((block->l[(37+13)&15]^block->l[(37+8)&15]   ^block->l[(37+2)&15]^block->l[37&15]) << (1)) | ((block->l[(37+13)&15]^block->l[(37+8)&15]   ^block->l[(37+2)&15]^block->l[37&15]) >> (32 - (1)))))+0x6ED9EBA1+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(d^e^a)+(block->l[38&15] = (((block->l[(38+13)&15]^block->l[(38+8)&15]   ^block->l[(38+2)&15]^block->l[38&15]) << (1)) | ((block->l[(38+13)&15]^block->l[(38+8)&15]   ^block->l[(38+2)&15]^block->l[38&15]) >> (32 - (1)))))+0x6ED9EBA1+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(c^d^e)+(block->l[39&15] = (((block->l[(39+13)&15]^block->l[(39+8)&15]   ^block->l[(39+2)&15]^block->l[39&15]) << (1)) | ((block->l[(39+13)&15]^block->l[(39+8)&15]   ^block->l[(39+2)&15]^block->l[39&15]) >> (32 - (1)))))+0x6ED9EBA1+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));;
+  e+=(((b|c)&d)|(b&c))+(block->l[40&15] = (((block->l[(40+13)&15]^block->l[(40+8)&15]   ^block->l[(40+2)&15]^block->l[40&15]) << (1)) | ((block->l[(40+13)&15]^block->l[(40+8)&15]   ^block->l[(40+2)&15]^block->l[40&15]) >> (32 - (1)))))+0x8F1BBCDC+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(((a|b)&c)|(a&b))+(block->l[41&15] = (((block->l[(41+13)&15]^block->l[(41+8)&15]   ^block->l[(41+2)&15]^block->l[41&15]) << (1)) | ((block->l[(41+13)&15]^block->l[(41+8)&15]   ^block->l[(41+2)&15]^block->l[41&15]) >> (32 - (1)))))+0x8F1BBCDC+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(((e|a)&b)|(e&a))+(block->l[42&15] = (((block->l[(42+13)&15]^block->l[(42+8)&15]   ^block->l[(42+2)&15]^block->l[42&15]) << (1)) | ((block->l[(42+13)&15]^block->l[(42+8)&15]   ^block->l[(42+2)&15]^block->l[42&15]) >> (32 - (1)))))+0x8F1BBCDC+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(((d|e)&a)|(d&e))+(block->l[43&15] = (((block->l[(43+13)&15]^block->l[(43+8)&15]   ^block->l[(43+2)&15]^block->l[43&15]) << (1)) | ((block->l[(43+13)&15]^block->l[(43+8)&15]   ^block->l[(43+2)&15]^block->l[43&15]) >> (32 - (1)))))+0x8F1BBCDC+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));;
+  a+=(((c|d)&e)|(c&d))+(block->l[44&15] = (((block->l[(44+13)&15]^block->l[(44+8)&15]   ^block->l[(44+2)&15]^block->l[44&15]) << (1)) | ((block->l[(44+13)&15]^block->l[(44+8)&15]   ^block->l[(44+2)&15]^block->l[44&15]) >> (32 - (1)))))+0x8F1BBCDC+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(((b|c)&d)|(b&c))+(block->l[45&15] = (((block->l[(45+13)&15]^block->l[(45+8)&15]   ^block->l[(45+2)&15]^block->l[45&15]) << (1)) | ((block->l[(45+13)&15]^block->l[(45+8)&15]   ^block->l[(45+2)&15]^block->l[45&15]) >> (32 - (1)))))+0x8F1BBCDC+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(((a|b)&c)|(a&b))+(block->l[46&15] = (((block->l[(46+13)&15]^block->l[(46+8)&15]   ^block->l[(46+2)&15]^block->l[46&15]) << (1)) | ((block->l[(46+13)&15]^block->l[(46+8)&15]   ^block->l[(46+2)&15]^block->l[46&15]) >> (32 - (1)))))+0x8F1BBCDC+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(((e|a)&b)|(e&a))+(block->l[47&15] = (((block->l[(47+13)&15]^block->l[(47+8)&15]   ^block->l[(47+2)&15]^block->l[47&15]) << (1)) | ((block->l[(47+13)&15]^block->l[(47+8)&15]   ^block->l[(47+2)&15]^block->l[47&15]) >> (32 - (1)))))+0x8F1BBCDC+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));;
+  b+=(((d|e)&a)|(d&e))+(block->l[48&15] = (((block->l[(48+13)&15]^block->l[(48+8)&15]   ^block->l[(48+2)&15]^block->l[48&15]) << (1)) | ((block->l[(48+13)&15]^block->l[(48+8)&15]   ^block->l[(48+2)&15]^block->l[48&15]) >> (32 - (1)))))+0x8F1BBCDC+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(((c|d)&e)|(c&d))+(block->l[49&15] = (((block->l[(49+13)&15]^block->l[(49+8)&15]   ^block->l[(49+2)&15]^block->l[49&15]) << (1)) | ((block->l[(49+13)&15]^block->l[(49+8)&15]   ^block->l[(49+2)&15]^block->l[49&15]) >> (32 - (1)))))+0x8F1BBCDC+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(((b|c)&d)|(b&c))+(block->l[50&15] = (((block->l[(50+13)&15]^block->l[(50+8)&15]   ^block->l[(50+2)&15]^block->l[50&15]) << (1)) | ((block->l[(50+13)&15]^block->l[(50+8)&15]   ^block->l[(50+2)&15]^block->l[50&15]) >> (32 - (1)))))+0x8F1BBCDC+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(((a|b)&c)|(a&b))+(block->l[51&15] = (((block->l[(51+13)&15]^block->l[(51+8)&15]   ^block->l[(51+2)&15]^block->l[51&15]) << (1)) | ((block->l[(51+13)&15]^block->l[(51+8)&15]   ^block->l[(51+2)&15]^block->l[51&15]) >> (32 - (1)))))+0x8F1BBCDC+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));;
+  c+=(((e|a)&b)|(e&a))+(block->l[52&15] = (((block->l[(52+13)&15]^block->l[(52+8)&15]   ^block->l[(52+2)&15]^block->l[52&15]) << (1)) | ((block->l[(52+13)&15]^block->l[(52+8)&15]   ^block->l[(52+2)&15]^block->l[52&15]) >> (32 - (1)))))+0x8F1BBCDC+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(((d|e)&a)|(d&e))+(block->l[53&15] = (((block->l[(53+13)&15]^block->l[(53+8)&15]   ^block->l[(53+2)&15]^block->l[53&15]) << (1)) | ((block->l[(53+13)&15]^block->l[(53+8)&15]   ^block->l[(53+2)&15]^block->l[53&15]) >> (32 - (1)))))+0x8F1BBCDC+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(((c|d)&e)|(c&d))+(block->l[54&15] = (((block->l[(54+13)&15]^block->l[(54+8)&15]   ^block->l[(54+2)&15]^block->l[54&15]) << (1)) | ((block->l[(54+13)&15]^block->l[(54+8)&15]   ^block->l[(54+2)&15]^block->l[54&15]) >> (32 - (1)))))+0x8F1BBCDC+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(((b|c)&d)|(b&c))+(block->l[55&15] = (((block->l[(55+13)&15]^block->l[(55+8)&15]   ^block->l[(55+2)&15]^block->l[55&15]) << (1)) | ((block->l[(55+13)&15]^block->l[(55+8)&15]   ^block->l[(55+2)&15]^block->l[55&15]) >> (32 - (1)))))+0x8F1BBCDC+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));;
+  d+=(((a|b)&c)|(a&b))+(block->l[56&15] = (((block->l[(56+13)&15]^block->l[(56+8)&15]   ^block->l[(56+2)&15]^block->l[56&15]) << (1)) | ((block->l[(56+13)&15]^block->l[(56+8)&15]   ^block->l[(56+2)&15]^block->l[56&15]) >> (32 - (1)))))+0x8F1BBCDC+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(((e|a)&b)|(e&a))+(block->l[57&15] = (((block->l[(57+13)&15]^block->l[(57+8)&15]   ^block->l[(57+2)&15]^block->l[57&15]) << (1)) | ((block->l[(57+13)&15]^block->l[(57+8)&15]   ^block->l[(57+2)&15]^block->l[57&15]) >> (32 - (1)))))+0x8F1BBCDC+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(((d|e)&a)|(d&e))+(block->l[58&15] = (((block->l[(58+13)&15]^block->l[(58+8)&15]   ^block->l[(58+2)&15]^block->l[58&15]) << (1)) | ((block->l[(58+13)&15]^block->l[(58+8)&15]   ^block->l[(58+2)&15]^block->l[58&15]) >> (32 - (1)))))+0x8F1BBCDC+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(((c|d)&e)|(c&d))+(block->l[59&15] = (((block->l[(59+13)&15]^block->l[(59+8)&15]   ^block->l[(59+2)&15]^block->l[59&15]) << (1)) | ((block->l[(59+13)&15]^block->l[(59+8)&15]   ^block->l[(59+2)&15]^block->l[59&15]) >> (32 - (1)))))+0x8F1BBCDC+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));;
+  e+=(b^c^d)+(block->l[60&15] = (((block->l[(60+13)&15]^block->l[(60+8)&15]   ^block->l[(60+2)&15]^block->l[60&15]) << (1)) | ((block->l[(60+13)&15]^block->l[(60+8)&15]   ^block->l[(60+2)&15]^block->l[60&15]) >> (32 - (1)))))+0xCA62C1D6+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(a^b^c)+(block->l[61&15] = (((block->l[(61+13)&15]^block->l[(61+8)&15]   ^block->l[(61+2)&15]^block->l[61&15]) << (1)) | ((block->l[(61+13)&15]^block->l[(61+8)&15]   ^block->l[(61+2)&15]^block->l[61&15]) >> (32 - (1)))))+0xCA62C1D6+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(e^a^b)+(block->l[62&15] = (((block->l[(62+13)&15]^block->l[(62+8)&15]   ^block->l[(62+2)&15]^block->l[62&15]) << (1)) | ((block->l[(62+13)&15]^block->l[(62+8)&15]   ^block->l[(62+2)&15]^block->l[62&15]) >> (32 - (1)))))+0xCA62C1D6+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(d^e^a)+(block->l[63&15] = (((block->l[(63+13)&15]^block->l[(63+8)&15]   ^block->l[(63+2)&15]^block->l[63&15]) << (1)) | ((block->l[(63+13)&15]^block->l[(63+8)&15]   ^block->l[(63+2)&15]^block->l[63&15]) >> (32 - (1)))))+0xCA62C1D6+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));;
+  a+=(c^d^e)+(block->l[64&15] = (((block->l[(64+13)&15]^block->l[(64+8)&15]   ^block->l[(64+2)&15]^block->l[64&15]) << (1)) | ((block->l[(64+13)&15]^block->l[(64+8)&15]   ^block->l[(64+2)&15]^block->l[64&15]) >> (32 - (1)))))+0xCA62C1D6+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(b^c^d)+(block->l[65&15] = (((block->l[(65+13)&15]^block->l[(65+8)&15]   ^block->l[(65+2)&15]^block->l[65&15]) << (1)) | ((block->l[(65+13)&15]^block->l[(65+8)&15]   ^block->l[(65+2)&15]^block->l[65&15]) >> (32 - (1)))))+0xCA62C1D6+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(a^b^c)+(block->l[66&15] = (((block->l[(66+13)&15]^block->l[(66+8)&15]   ^block->l[(66+2)&15]^block->l[66&15]) << (1)) | ((block->l[(66+13)&15]^block->l[(66+8)&15]   ^block->l[(66+2)&15]^block->l[66&15]) >> (32 - (1)))))+0xCA62C1D6+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(e^a^b)+(block->l[67&15] = (((block->l[(67+13)&15]^block->l[(67+8)&15]   ^block->l[(67+2)&15]^block->l[67&15]) << (1)) | ((block->l[(67+13)&15]^block->l[(67+8)&15]   ^block->l[(67+2)&15]^block->l[67&15]) >> (32 - (1)))))+0xCA62C1D6+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));;
+  b+=(d^e^a)+(block->l[68&15] = (((block->l[(68+13)&15]^block->l[(68+8)&15]   ^block->l[(68+2)&15]^block->l[68&15]) << (1)) | ((block->l[(68+13)&15]^block->l[(68+8)&15]   ^block->l[(68+2)&15]^block->l[68&15]) >> (32 - (1)))))+0xCA62C1D6+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(c^d^e)+(block->l[69&15] = (((block->l[(69+13)&15]^block->l[(69+8)&15]   ^block->l[(69+2)&15]^block->l[69&15]) << (1)) | ((block->l[(69+13)&15]^block->l[(69+8)&15]   ^block->l[(69+2)&15]^block->l[69&15]) >> (32 - (1)))))+0xCA62C1D6+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(b^c^d)+(block->l[70&15] = (((block->l[(70+13)&15]^block->l[(70+8)&15]   ^block->l[(70+2)&15]^block->l[70&15]) << (1)) | ((block->l[(70+13)&15]^block->l[(70+8)&15]   ^block->l[(70+2)&15]^block->l[70&15]) >> (32 - (1)))))+0xCA62C1D6+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));; d+=(a^b^c)+(block->l[71&15] = (((block->l[(71+13)&15]^block->l[(71+8)&15]   ^block->l[(71+2)&15]^block->l[71&15]) << (1)) | ((block->l[(71+13)&15]^block->l[(71+8)&15]   ^block->l[(71+2)&15]^block->l[71&15]) >> (32 - (1)))))+0xCA62C1D6+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));;
+  c+=(e^a^b)+(block->l[72&15] = (((block->l[(72+13)&15]^block->l[(72+8)&15]   ^block->l[(72+2)&15]^block->l[72&15]) << (1)) | ((block->l[(72+13)&15]^block->l[(72+8)&15]   ^block->l[(72+2)&15]^block->l[72&15]) >> (32 - (1)))))+0xCA62C1D6+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(d^e^a)+(block->l[73&15] = (((block->l[(73+13)&15]^block->l[(73+8)&15]   ^block->l[(73+2)&15]^block->l[73&15]) << (1)) | ((block->l[(73+13)&15]^block->l[(73+8)&15]   ^block->l[(73+2)&15]^block->l[73&15]) >> (32 - (1)))))+0xCA62C1D6+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(c^d^e)+(block->l[74&15] = (((block->l[(74+13)&15]^block->l[(74+8)&15]   ^block->l[(74+2)&15]^block->l[74&15]) << (1)) | ((block->l[(74+13)&15]^block->l[(74+8)&15]   ^block->l[(74+2)&15]^block->l[74&15]) >> (32 - (1)))))+0xCA62C1D6+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));; e+=(b^c^d)+(block->l[75&15] = (((block->l[(75+13)&15]^block->l[(75+8)&15]   ^block->l[(75+2)&15]^block->l[75&15]) << (1)) | ((block->l[(75+13)&15]^block->l[(75+8)&15]   ^block->l[(75+2)&15]^block->l[75&15]) >> (32 - (1)))))+0xCA62C1D6+(((a) << (5)) | ((a) >> (32 - (5))));b=(((b) << (30)) | ((b) >> (32 - (30))));;
+  d+=(a^b^c)+(block->l[76&15] = (((block->l[(76+13)&15]^block->l[(76+8)&15]   ^block->l[(76+2)&15]^block->l[76&15]) << (1)) | ((block->l[(76+13)&15]^block->l[(76+8)&15]   ^block->l[(76+2)&15]^block->l[76&15]) >> (32 - (1)))))+0xCA62C1D6+(((e) << (5)) | ((e) >> (32 - (5))));a=(((a) << (30)) | ((a) >> (32 - (30))));; c+=(e^a^b)+(block->l[77&15] = (((block->l[(77+13)&15]^block->l[(77+8)&15]   ^block->l[(77+2)&15]^block->l[77&15]) << (1)) | ((block->l[(77+13)&15]^block->l[(77+8)&15]   ^block->l[(77+2)&15]^block->l[77&15]) >> (32 - (1)))))+0xCA62C1D6+(((d) << (5)) | ((d) >> (32 - (5))));e=(((e) << (30)) | ((e) >> (32 - (30))));; b+=(d^e^a)+(block->l[78&15] = (((block->l[(78+13)&15]^block->l[(78+8)&15]   ^block->l[(78+2)&15]^block->l[78&15]) << (1)) | ((block->l[(78+13)&15]^block->l[(78+8)&15]   ^block->l[(78+2)&15]^block->l[78&15]) >> (32 - (1)))))+0xCA62C1D6+(((c) << (5)) | ((c) >> (32 - (5))));d=(((d) << (30)) | ((d) >> (32 - (30))));; a+=(c^d^e)+(block->l[79&15] = (((block->l[(79+13)&15]^block->l[(79+8)&15]   ^block->l[(79+2)&15]^block->l[79&15]) << (1)) | ((block->l[(79+13)&15]^block->l[(79+8)&15]   ^block->l[(79+2)&15]^block->l[79&15]) >> (32 - (1)))))+0xCA62C1D6+(((b) << (5)) | ((b) >> (32 - (5))));c=(((c) << (30)) | ((c) >> (32 - (30))));;
+  /* Add the working vars back into context.state[] */
+  state[0] += a;
+  state[1] += b;
+  state[2] += c;
+  state[3] += d;
+  state[4] += e;
+  /* Wipe variables */
+  a = b = c = d = e = 0;
+}
+
+SHA1::SHA1()
+{
+  /* SHA1 initialization constants */
+  state[0] = 0x67452301;
+  state[1] = 0xEFCDAB89;
+  state[2] = 0x98BADCFE;
+  state[3] = 0x10325476;
+  state[4] = 0xC3D2E1F0;
+  count[0] = count[1] = 0;  
+}
+
+/* Run your data through this. */
+void SHA1::Update(const unsigned char* data, unsigned int len)
+{
+  unsigned int i, j;
+
+  j = (count[0] >> 3) & 63;
+  if ((count[0] += len << 3) < (len << 3)) count[1]++;
+  count[1] += (len >> 29);
+  if ((j + len) > 63) {
+    memcpy(&buffer[j], data, (i = 64-j));
+    SHA1Transform(state, buffer);
+    for ( ; i + 63 < len; i += 64) {
+      SHA1Transform(state, &data[i]);
+    }
+    j = 0;
+  }
+  else i = 0;
+  memcpy(&buffer[j], &data[i], len - i);
+}
+
+/* Add padding and return the message digest. */
+void SHA1::Final(unsigned char digest[HASHLEN])
+{
+  unsigned long i;
+  unsigned char finalcount[8];
+
+  for (i = 0; i < 8; i++) {
+    finalcount[i] = static_cast<unsigned char>((count[(i >= 4 ? 0 : 1)]
+    >> ((3-(i & 3)) * 8) ) & 255);  /* Endian independent */
+  }
+  Update(reinterpret_cast<const unsigned char *>("\200"), 1);
+  while ((count[0] & 504) != 448) {
+    Update(reinterpret_cast<const unsigned char *>("\0"), 1);
+  }
+  Update(finalcount, 8);  /* Should cause a SHA1Transform() */
+  for (i = 0; i < 20; i++) {
+    digest[i] = static_cast<unsigned char>
+      ((state[i>>2] >> ((3-(i & 3)) * 8) ) & 255);
+  }
+  /* Wipe variables */
+  memset(buffer, 0, 64);
+  memset(state, 0, 20);
+  memset(count, 0, 8);
+  memset(finalcount, 0, 8);
+                   
+                               
+      
+}
+
+SHA1::~SHA1()
+{
+  // first thought was to clear context here, but better to do this
+  // as early as possible, in Final().
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------

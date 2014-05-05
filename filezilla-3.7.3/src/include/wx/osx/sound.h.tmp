@@ -1,0 +1,85 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\sound.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/sound.h
+// Purpose:     wxSound class (loads and plays short Windows .wav files).
+//              Optional on non-Windows platforms.
+// Author:      Ryan Norton, Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Ryan Norton, Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                    
+                    
+
+               
+
+                      
+
+                                       
+
+                                 
+ 
+        
+                  
+                           
+
+                                              
+                                                     
+                        
+                                                                  
+                             
+                              
+                                   
+                                                                            
+
+                                                     
+                              
+           
+                               
+
+                         
+                           
+                             
+   
+
+                                                  
+ 
+       
+              
+                                                               
+                                           
+                       
+
+                                   
+                                                                    
+                       
+                                               
+
+                                                
+
+                             
+                       
+
+                                              
+                            
+
+                                            
+                                                      
+
+          
+                                         
+                   
+
+        
+                          
+                              
+
+                                     
+  
+
+      
+      
+    // _WX_SOUND_H_

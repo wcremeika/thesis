@@ -1,0 +1,191 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoBuffer.cpp" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// VersionInfoBuffer.cpp: implementation of the CVersionInfoBuffer class.
+//
+//////////////////////////////////////////////////////////////////////
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\stdafx.h" 0
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+       
+
+                                                                             
+
+                           // MFC core and standard components
+                           // MFC extensions
+
+                  
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoBuffer.cpp" 12
+                             
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoBuffer.h" 0
+//
+// This code was written by Denis Zabavchik as at 29 November 2006.
+// It is unmodified except for possibly formatting.
+// His article on "Modification of Version Information Resources in compiled binaries"
+// can be found at: http://www.codeproject.com/library/VerInfoLib.asp
+//
+
+// VersionInfoBuffer.h: interface for the CVersionInfoBuffer class.
+//
+//////////////////////////////////////////////////////////////////////
+
+       
+
+// Helper class for VersionInfo (auto reallocation of buffer, and helpful functions like Pad, PadToDWORD, WriteStructSize
+class CVersionInfoBuffer : public CObject  
+{
+public:
+
+  CVersionInfoBuffer();
+  virtual ~CVersionInfoBuffer();
+
+  // Writes data to the buffer
+  void Write(LPVOID lpData, DWORD dwSize);
+
+  // Writes string to the buffer (converts to Unicode)
+  WORD WriteString(const CString& strValue);
+
+  // Writes a WORD to the buffer
+  void WriteWord(WORD wData);
+
+  // Writes the difference between specified offset and current length to a WORD at given offset
+  // this writing the structure size wLength
+  void WriteStructSize(DWORD dwOffsetOfSizeMemember);
+
+  // Returns current position
+  DWORD GetPosition();
+
+  // Allings to DWORD (pads with 0s)
+  DWORD PadToDWORD();
+
+  // Pads with zeroes 
+  DWORD Pad(WORD wLength);
+
+  // Get pointer to data (pointer can not be used after any writes made after calling GetData() due to possible relocation)
+  const LPBYTE GetData();
+private:
+  DWORD m_dwPosition;
+  DWORD m_dwBufSize;
+  LPBYTE m_lpData;
+protected:
+  void ReallocBuffer(DWORD dwMinimumSize);
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\VersionInfoBuffer.cpp" 13
+                  
+
+             
+                
+                                 
+                     
+      
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CVersionInfoBuffer::CVersionInfoBuffer():m_dwBufSize(1024), m_dwPosition(0)
+{
+  m_lpData = (LPBYTE) new BYTE[m_dwBufSize];
+}
+
+CVersionInfoBuffer::~CVersionInfoBuffer()
+{
+  delete [] m_lpData;
+}
+
+void CVersionInfoBuffer::Write(LPVOID lpData, DWORD dwSize)
+{
+  if (dwSize+m_dwPosition > m_dwBufSize)
+    ReallocBuffer(dwSize+m_dwPosition);
+
+  memcpy(m_lpData + m_dwPosition, lpData, dwSize);
+  m_dwPosition += dwSize;
+}
+
+void CVersionInfoBuffer::ReallocBuffer(DWORD dwMinimumSize)
+{
+  //Allocate extra 1k or so
+  DWORD dwNewSize = (dwMinimumSize + 0x7ff) & ~0x3ff;
+
+  LPBYTE lpNewData = new BYTE[dwNewSize];
+
+  //Copy everything that is already in the buffer
+  memcpy(lpNewData, m_lpData, m_dwPosition);
+
+  delete [] m_lpData;
+  m_dwBufSize = dwNewSize;
+  m_lpData = lpNewData;
+}
+
+DWORD CVersionInfoBuffer::PadToDWORD()
+{
+
+  if (m_dwPosition % 4) {
+    DWORD dwNull = 0L;
+    Write(&dwNull, 4 - m_dwPosition % 4);
+  }
+
+  return m_dwPosition;
+}
+
+DWORD CVersionInfoBuffer::Pad(WORD wLength)
+{
+  DWORD dwNull = 0L;
+  while (wLength--)
+    Write(&dwNull, 1);
+
+  return m_dwPosition;
+}
+
+DWORD CVersionInfoBuffer::GetPosition()
+{
+  return m_dwPosition;
+}
+
+void CVersionInfoBuffer::WriteStructSize(DWORD dwOffsetOfSizeMemember)
+{
+  WORD wSize = LOWORD(m_dwPosition - dwOffsetOfSizeMemember);
+
+  WORD *pSizeMember = (WORD*) (&m_lpData[dwOffsetOfSizeMemember]);
+  *pSizeMember = wSize;
+}
+
+void CVersionInfoBuffer::WriteWord(WORD wData)
+{
+  Write(&wData, sizeof WORD);
+}
+
+WORD CVersionInfoBuffer::WriteString(const CString &strValue)
+{
+                
+  DWORD dwLength = MultiByteToWideChar(CP_ACP, 0, strValue, -1, NULL, 0);
+  WCHAR *pszwValue = (WCHAR*)_alloca(dwLength * sizeof (WCHAR));
+  MultiByteToWideChar(CP_ACP, 0, strValue, -1, pszwValue, dwLength);
+
+  Write(pszwValue, dwLength * sizeof (WCHAR));
+
+  return LOWORD(dwLength);
+     
+                                                            
+                                               
+                          
+      
+}
+
+const LPBYTE CVersionInfoBuffer::GetData()
+{
+  return m_lpData;
+}

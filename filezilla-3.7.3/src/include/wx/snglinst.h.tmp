@@ -1,0 +1,98 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\snglinst.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/snglinst.h
+// Purpose:     wxSingleInstanceChecker can be used to restrict the number of
+//              simultaneously running copies of a program to one
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     08.06.01
+// Copyright:   (c) 2001 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                          
+
+                   
+                     
+
+                                                                               
+                          
+                                                                               
+
+                                              
+ 
+       
+                                          
+                                         
+
+                                                       
+                                                 
+                                                                 
+     
+               
+                           
+     
+
+                                                                              
+                                                                        
+      
+                                                                           
+                                                                             
+      
+                                                                               
+                                                                     
+      
+                                                                           
+                                                               
+                                                                            
+
+                                                                             
+                                            
+      
+                                                                            
+                              
+                        
+     
+                                                                         
+                                                                    
+     
+
+                                                       
+                                 
+     
+                      
+         
+                                                                                
+             
+                                                                         
+                                                                              
+                             
+             
+         
+
+                                    
+     
+
+                                                                              
+                               
+
+        
+                               
+                                  
+
+                                                                             
+                                    
+
+                                                     
+                                                                   
+
+                                                     
+  
+
+       // wxUSE_SNGLINST_CHECKER
+
+       // _WX_SNGLINST_H_

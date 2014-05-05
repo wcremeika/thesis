@@ -1,0 +1,321 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\rtti.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/rtti.h
+// Purpose:     old RTTI macros (use XTI when possible instead)
+// Author:      Julian Smart
+// Modified by: Ron Lee
+// Created:     01/02/97
+// Copyright:   (c) 1997 Julian Smart
+//              (c) 2001 Ron Lee <ron@debian.org>
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                   
+                   
+
+                                                                           
+
+// ----------------------------------------------------------------------------
+// headers
+// ----------------------------------------------------------------------------
+
+                     
+
+// ----------------------------------------------------------------------------
+// forward declarations
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_FWD_BASE wxObject;
+class WXDLLIMPEXP_FWD_BASE wxString;
+class WXDLLIMPEXP_FWD_BASE wxClassInfo;
+class WXDLLIMPEXP_FWD_BASE wxHashTable;
+class WXDLLIMPEXP_FWD_BASE wxObject;
+class WXDLLIMPEXP_FWD_BASE wxPluginLibrary;
+class WXDLLIMPEXP_FWD_BASE wxHashTable_Node;
+
+// ----------------------------------------------------------------------------
+// wxClassInfo
+// ----------------------------------------------------------------------------
+
+typedef wxObject *(*wxObjectConstructorFn)(void);
+
+class WXDLLIMPEXP_BASE wxClassInfo
+{
+    friend class WXDLLIMPEXP_FWD_BASE wxObject;
+    friend WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
+public:
+    wxClassInfo( const wxChar *className,
+                 const wxClassInfo *baseInfo1,
+                 const wxClassInfo *baseInfo2,
+                 int size,
+                 wxObjectConstructorFn ctor )
+        : m_className(className)
+        , m_objectSize(size)
+        , m_objectConstructor(ctor)
+        , m_baseInfo1(baseInfo1)
+        , m_baseInfo2(baseInfo2)
+        , m_next(sm_first)
+        {
+            sm_first = this;
+            Register();
+        }
+
+    ~wxClassInfo();
+
+    wxObject *CreateObject() const
+        { return m_objectConstructor ? (*m_objectConstructor)() : 0; }
+    bool IsDynamic() const { return (NULL != m_objectConstructor); }
+
+    const wxChar       *GetClassName() const { return m_className; }
+    const wxChar       *GetBaseClassName1() const
+        { return m_baseInfo1 ? m_baseInfo1->GetClassName() : NULL; }
+    const wxChar       *GetBaseClassName2() const
+        { return m_baseInfo2 ? m_baseInfo2->GetClassName() : NULL; }
+    const wxClassInfo  *GetBaseClass1() const { return m_baseInfo1; }
+    const wxClassInfo  *GetBaseClass2() const { return m_baseInfo2; }
+    int                 GetSize() const { return m_objectSize; }
+
+    wxObjectConstructorFn      GetConstructor() const
+        { return m_objectConstructor; }
+    static const wxClassInfo  *GetFirst() { return sm_first; }
+    const wxClassInfo         *GetNext() const { return m_next; }
+    static wxClassInfo        *FindClass(const wxString& className);
+
+        // Climb upwards through inheritance hierarchy.
+        // Dual inheritance is catered for.
+
+    bool IsKindOf(const wxClassInfo *info) const
+    {
+        return info != 0 &&
+               ( info == this ||
+                 ( m_baseInfo1 && m_baseInfo1->IsKindOf(info) ) ||
+                 ( m_baseInfo2 && m_baseInfo2->IsKindOf(info) ) );
+    }
+
+    wxDECLARE_CLASS_INFO_ITERATORS();
+
+private:
+    const wxChar            *m_className;
+    int                      m_objectSize;
+    wxObjectConstructorFn    m_objectConstructor;
+
+        // Pointers to base wxClassInfos
+
+    const wxClassInfo       *m_baseInfo1;
+    const wxClassInfo       *m_baseInfo2;
+
+        // class info object live in a linked list:
+        // pointers to its head and the next element in it
+
+    static wxClassInfo      *sm_first;
+    wxClassInfo             *m_next;
+
+    static wxHashTable      *sm_classTable;
+
+protected:
+    // registers the class
+    void Register();
+    void Unregister();
+
+    wxDECLARE_NO_COPY_CLASS(wxClassInfo);
+};
+
+WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
+
+// ----------------------------------------------------------------------------
+// Dynamic class macros
+// ----------------------------------------------------------------------------
+
+                                                                                                                                                                                                                                                                                           
+
+
+
+
+                                                                                                                                                                                             
+
+
+
+                                                                                                                                                                                             
+
+
+
+                                                                                                                                                                                                 
+
+
+
+                                                                                                                
+
+
+
+// common part of the macros below
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+
+
+
+
+
+
+
+
+                                                                                                                                      
+
+
+                                                                                                                                                           
+
+
+// -----------------------------------
+// for concrete classes
+// -----------------------------------
+
+    // Single inheritance with one base class
+                                                                                                                                                                                                                                                                      
+
+
+
+
+    // Multiple inheritance with two base classes
+                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+// -----------------------------------
+// for abstract classes
+// -----------------------------------
+
+    // Single inheritance with one base class
+                                                                                                                                 
+
+
+    // Multiple inheritance with two base classes
+                                                                                                                                             
+
+
+// -----------------------------------
+// XTI-compatible macros
+// -----------------------------------
+
+                    
+
+// these macros only do something when wxUSE_EXTENDED_RTTI=1
+// (and in that case they are defined by xti.h); however to avoid
+// to be forced to wrap these macros (in user's source files) with
+//
+//  #if wxUSE_EXTENDED_RTTI
+//  ...
+//  #endif
+//
+// blocks, we define them here as empty.
+
+                                    
+
+                                                 
+                                                  
+                                               
+
+                                                                    
+
+                                                  
+                                                   
+                                                
+
+                                                                             
+
+                                                              
+                                                                
+                                                      
+
+                                                                                                             
+
+                                                                                                                                
+
+
+                                                                                                                      
+
+
+                                                                                                                                                                                                                                                                 
+
+
+                                                                                               
+                                                                                                 
+
+                                                                                                                                
+
+                                                          
+
+                                                              
+
+                                                                 
+
+                                                                
+
+                                                                       
+
+                                                                      
+
+                                                                             
+
+                                                                            
+
+                                                                                   
+
+                                                                                  
+
+                                                                                         
+
+                                                                                        
+
+                                                                                               
+
+                                                                                              
+
+                                                                                                     
+
+                                                                                                    
+
+                                                                                                           
+
+                                                                                                          
+
+                                                                                                                 
+
+
+                                                                                    
+                                                                                    
+                                                                                  
+                                                                                               
+
+                                                                  
+                                                        
+                                                        
+
+                                                                                                              
+
+
+                                                                                                                                                    
+
+
+                                                                                                                                                       
+
+
+                                                                                                                                                               
+
+
+                                                                                                                                                           
+
+
+                                                                                                                                                                   
+
+                                                                               
+
+                                                                                                    
+
+                                                                
+
+                                                            
+
+       // !wxUSE_EXTENDED_RTTI
+       // _WX_RTTIH__

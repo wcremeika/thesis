@@ -1,0 +1,43 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\windows\yubi\stdafx.cpp" 0
+// stdafx.cpp : source file that includes just the standard includes
+// YkLib22.pch will be the pre-compiled header
+// stdafx.obj will contain the pre-compiled type information
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\windows\yubi\stdafx.h" 0
+// stdafx.h : include file for standard system include files,
+// or project specific include files that are used frequently, but
+// are changed infrequently
+//
+
+       
+
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\windows\yubi\targetver.h" 0
+       
+
+// The following macros define the minimum required platform.  The minimum required platform
+// is the earliest version of Windows, Internet Explorer etc. that has the necessary features to run 
+// your application.  The macros work by enabling all features available on platform versions up to and 
+// including the version specified.
+
+// Modify the following defines if you have to target a platform prior to the ones specified below.
+// Refer to MSDN for the latest info on corresponding values for different platforms.
+                    
+                                                                                                            
+      
+
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\windows\yubi\stdafx.h" 12
+
+                                                                                         
+
+
+
+// TODO: reference additional headers your program requires here
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\windows\yubi\stdafx.cpp" 5
+
+// TODO: reference any additional headers you need in STDAFX.H
+// and not in this file

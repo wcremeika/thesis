@@ -1,0 +1,62 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\wxprec.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/wxprec.h
+// Purpose:     Includes the appropriate files for precompiled headers
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+// compiler detection; includes setup.h
+                   
+
+// check if to use precompiled headers: do it for most Windows compilers unless
+// explicitly disabled by defining NOPCH
+                                                                                                                                                 
+
+
+
+
+
+
+                                                                           
+                                                  
+                                                   
+                          
+          
+      
+
+// For some reason, this must be defined for common dialogs to work.
+                  
+                                
+      
+
+                 
+
+                                                                              
+                                 
+                        
+
+                                   
+                        
+                               
+                               
+      
+                      
+                                
+                                
+                               
+      
+
+                  
+              
+                           
+      
+
+                                     
+                  
+
+       // WX_PRECOMP

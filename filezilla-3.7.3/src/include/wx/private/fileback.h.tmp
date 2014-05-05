@@ -1,0 +1,84 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\private\fileback.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/private/fileback.h
+// Purpose:     Back an input stream with memory or a file
+// Author:      Mike Wetherell
+// Copyright:   (c) 2006 Mike Wetherell
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                   
+
+                    
+
+                      
+
+                                                                               
+                                                                   
+  
+                                                                              
+                                                                    
+                                             
+                                                                               
+
+                                    
+ 
+       
+                                    
+
+                                                                            
+                                                                         
+                                        
+                                                  
+                                                        
+
+                                      
+                     
+
+                                               
+                                                          
+
+                                                    
+
+        
+                                    
+                                     
+  
+
+                                                                               
+                                                
+                                                                               
+
+                                                                 
+ 
+       
+                                                     
+
+                                                                              
+                                                                         
+                                   
+
+                                                                             
+                                    
+
+                                            
+
+          
+                                                
+                                                              
+                                   
+
+        
+                           
+                       
+
+                                                 
+  
+
+       // wxUSE_FILESYSTEM
+
+       // _WX_FILEBACK_H__

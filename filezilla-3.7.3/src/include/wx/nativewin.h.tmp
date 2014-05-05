@@ -1,0 +1,175 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\nativewin.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/nativewin.h
+// Purpose:     classes allowing to wrap a native window handle
+// Author:      Vadim Zeitlin
+// Created:     2008-03-05
+// Copyright:   (c) 2008 Vadim Zeitlin <vadim@wxwindows.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                       
+
+// this symbol can be tested in the user code to see if the current wx port has
+// support for creating wxNativeContainerWindow from native windows
+//
+// be optimistic by default, we undefine it below if we don't have it finally
+                                     
+
+// we define the following typedefs for each of the platform supporting native
+// windows wrapping:
+//
+//  - wxNativeContainerWindowHandle is the toolkit-level handle of the native
+//    window, i.e. HWND/GdkWindow*/NSWindow
+//
+//  - wxNativeContainerWindowId is the lowest level identifier of the native
+//    window, i.e. HWND/GdkNativeWindow/NSWindow (so it's the same as above for
+//    all platforms except GTK where we also can work with Window/XID)
+//
+// later we'll also have
+//
+//  - wxNativeWindowHandle for child windows (which will be wrapped by
+//    wxNativeWindow<T> class), it is HWND/GtkWidget*/ControlRef
+                      
+                               
+
+                                           
+                                               
+                        
+                                                                            
+                   
+                                                        
+         
+                                                
+          
+                                                     
+     
+    // no support for using native windows under this platform yet
+                                        
+      
+
+                                    
+
+                                                                               
+                                                                              
+                                                                               
+
+                                                                        
+ 
+       
+                                        
+                                 
+
+                                                            
+      
+                                                                              
+                                  
+                                                                 
+     
+                       
+     
+
+                                                
+                                                      
+
+                      
+                                                                             
+                                                                              
+                                 
+      
+                                                                               
+                                                              
+                                                                               
+
+                                                 
+               
+
+                                                                             
+                                          
+                                       
+
+
+                                                                       
+                                                          
+     
+                                                           
+     
+
+                                     
+     
+                                                           
+
+                          
+     
+
+                                                         
+     
+                                                           
+     
+
+                                    
+     
+                                                           
+
+                     
+     
+
+                                                       
+     
+                                                           
+     
+
+                                   
+     
+                                                                 
+                     
+     
+
+                          
+     
+                                                           
+     
+
+                                                    
+                                                                        
+     
+                                                           
+
+                     
+     
+
+                                     
+     
+                                                           
+
+                     
+     
+
+                
+                                 
+                   
+
+                                                                         
+                                                                            
+                                                                         
+                                                                         
+                                     
+
+          
+                
+                     
+                                                                 
+                   
+
+        
+                                                     
+  
+
+       // wxHAS_NATIVE_CONTAINER_WINDOW
+
+       // _WX_NATIVEWIN_H_
+

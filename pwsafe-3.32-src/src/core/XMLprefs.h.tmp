@@ -1,0 +1,4059 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\XMLprefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                    
+                    
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+/**
+* Silly wrapper to abstract away the difference between a Unicode
+* (wchar_t) and non-Unicode (char) std::string, as well as
+* Linux/Windows portability.
+*
+*/
+
+                
+/*
+ * _S is defined same as m'soft's _T, just to avoid collisions or
+ * lousy include order dependencies.
+ */
+
+// Sometimes we need specific ones irrespective of in Unicode mode or not.
+// In particular, the underlying format of most XML is Unicode.
+typedef std::wstring wstringT;
+typedef std::string  cstringT;
+
+              
+                             
+                      
+                    
+     
+typedef std::string stringT;
+typedef char charT;
+               
+      
+
+                               
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\../core/PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+// some globally useful includes for non-Windows
+                 
+      
+
+                
+                  
+      
+
+// Following seems needed on Linux/cygwin
+                                             
+                   
+      
+
+// stop MS VC++ 6 and earlier being quite so pedantic
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+// PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN can be specified on the 
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+// 
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+// Following from libtomcrypt, for twofish & SHA256
+/* Controls endianess and size of registers.  Leave uncommented to get platform neutral [slower] code 
+* 
+* Note: in order to use the optimized macros your platform must support unaligned 32 and 64 bit read/writes.
+* The x86 platforms allow this but some others [ARM for instance] do not.  On those platforms you **MUST**
+* use the portable [slower] macros.
+*/
+
+/* detect x86-32 machines somewhat */
+                                                                                                                                                                                 
+                     
+                        
+      
+
+/* detects MIPS R5900 processors (PS2) */
+                                                                                                                        
+                     
+                        
+      
+
+/* detect amd64 */
+                                                                
+                     
+                        
+      
+
+/* #define ENDIAN_LITTLE */
+/* #define ENDIAN_BIG */
+
+/* #define ENDIAN_32BITWORD */
+/* #define ENDIAN_64BITWORD */
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+/* fix for MSVC ...evil! */
+               
+                            
+                                 
+     
+                           
+typedef uint64_t ulong64;
+      
+
+/* this is the "32-bit at least" data type 
+* Re-define it to suit your platform but it must be at least 32-bits 
+*/
+                       
+                         
+     
+typedef unsigned long ulong32;
+      
+
+/* ---- HELPER MACROS ---- */
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+       /* ENDIAN_NEUTRAL */
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+       /* ENDIAN_LITTLE */
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+       /* ENDIAN_BIG */
+
+                                                                                                                         
+
+
+
+/* 32-bit Rotates */
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+/* rotates the hard way */
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+/* 64-bit Rotates */
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+      /* Not x86_64  */
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+/* extract a byte portably */
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 46 // for afxwin.h, and endian macros
+
+// Hotkey values. Internal PWS values - need to convert to either MFC or wxWidgets
+// values in the GUI when retrieving these from the preferences and aso back to PWS
+// internal values before giving them to PWSPrefs for saving in the XML config file.
+                                
+                                
+                                
+                                
+ 
+// wxWidgets Only - Not used in Windows MFC
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+      /* !defined(_WIN32) */
+                  
+                     
+typedef int8_t  int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef int64_t int64;
+
+typedef uint8_t  uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
+
+typedef int errno_t;
+
+              
+          
+                    
+      
+                      
+     
+               
+typedef char TCHAR;
+typedef wchar_t WCHAR;
+       /* UNICODE */
+
+// mimic Microsoft conventional typdefs:
+typedef TCHAR *LPTSTR;
+typedef const TCHAR *LPCTSTR;
+typedef bool BOOL;
+typedef unsigned char BYTE;
+typedef uint16_t WORD;
+typedef uint32_t DWORD;
+typedef int32_t LONG;
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+typedef int32_t LPARAM;
+typedef unsigned int UINT;
+typedef int HANDLE;
+                                       
+
+// assorted conveniences:
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+/* These two files require the above definitions */
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\debug.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+                  
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\debug.h" 14
+             
+                   
+      
+
+namespace pws_os {
+  // MFC TRACE equivalent in MFC, non-MFC Windows and non-Windows
+  void Trace(LPCTSTR lpszFormat, ...);
+  void Trace0(LPCTSTR lpszFormat);
+
+  // Opens a messagebox or write to debugger window 
+  // with text of last system error, titlebar
+  // is csFunction
+  void IssueError(const stringT &csFunction, bool bMsgBox = true);
+
+  /*
+    Outputs a printable version of memory dump (hex + ascii)
+
+    parameters:
+      pmemory   - pointer to memory to format
+      length    - length memory to format in bytes
+      cs_prefix - prefix each line with this
+      maxnum    - maximum hex characters dumped per line
+  */
+  void HexDump(unsigned char *pmemory, const int &length,
+               const stringT &cs_prefix = "", const int &maxnum = 16);
+}
+
+       /* _OSDEBUG_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 224
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux/pws_time.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                    
+                    
+
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux\../typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\linux/pws_time.h" 13
+                  
+typedef time_t __time32_t;
+typedef uint64_t __time64_t;
+
+extern struct tm *gmtime64_r(const __time64_t *timep, struct tm *result);
+
+namespace pws_os {
+  /**
+   * Workaround the lack of a wchar_t version of asctime()
+   */
+  extern int asctime(TCHAR *buf, size_t N, const struct tm *tm);
+}
+
+       /* __PWS_TIME_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 225
+       /* _WIN32 */
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\XMLprefs.h" 11
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSprefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                    
+                    
+
+// PWSprefs.h
+//-----------------------------------------------------------------------------
+
+/*
+* A class to abstract away the persistent storage mechanism used to store and
+* retrieve user preferences. Pre-2.03 implementations used the Windows 
+* registry. People have asked for preferences to be stored along with the 
+* database, so that the same preferences can be shared across computers
+* (e.g., using disk-on-key).
+*
+* Starting with v3.05, preferences have been partitioned into two types:
+* per-database and 'application'. Per-database preferences,
+* as the name implies, are stored in the database. 'Application' preferences
+* are stored in a separate configuration file.
+* For more details, see 'config.txt' in the docs subdirectory.
+*
+* IMPORTANT: When adding a new preference, the new enum MUST be before last,
+* that is, right before the Num*Prefs enum. This is because the prefs are
+* identified in storage by their type and index.
+*/
+
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                   
+                   
+
+/**
+ * \file StringX.h
+ *
+ * STL-based implementation of secure strings.
+ * Like std::string in all respects, except that
+ * memory is scrubbed before being returned to system.
+ *
+ */
+
+                
+                
+                
+                  // for ptrdiff_t
+                  // for malloc
+                  // for memset
+
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\../os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 33
+                         
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\./PwsPlatform.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+// pws_platform.h
+//------------------------------------------------------------------------------
+//
+// This header file exists to determine, at compile time, which target we're
+// compiling to and to make the appropriate #defines and #includes.
+//
+// The following macros are defined:
+//
+//    PWS_BIG_ENDIAN    - Defined only if the target CPU is big-endian.
+//    PWS_LITTLE_ENDIAN - Defined only if the target CPU is little-endian.
+//    PWS_PLATFORM      - A string, the target platform, e.g. "Pocket PC".
+//    PWS_PLATFORM_EX   - A string, the target platform, e.g. "Pocket PC 2000".
+//    POCKET_PC         - Defined only if target is Pocket PC 2000 or later.
+//    POCKET_PC_VER     - Defined only if target is Pocket PC 2000 or later.
+//
+// Notes:
+//
+// 1. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN are mutually exclusive.
+// 2. PWS_BIG_ENDIAN and PWS_LITTLE_ENDIAN may be defined on the complier
+//    command line but checks are made to ensure that one and only one is
+//    defined.
+//
+// Supported Configurations:
+// -------------------------
+//
+// Pocket PC:
+//
+//    2000 ARM
+//    2000 MIPS
+//    2000 SH3
+//    2000 x86 Emulator
+//    2002 ARM
+//    2002 x86 Emulator
+//    2003 ARM (untested)
+//    2003 x86 Emulator (untested)
+//
+// Windows
+//
+//    Win32 X86
+//    Win32 and Win64 x64
+//
+// Linux - work in progress
+// Cygwin - work in progress
+
+                       
+                       
+
+                                                             
+                                                  
+                                 
+     
+                                                
+                  
+      
+
+                
+                   
+      
+
+                                         
+                                             
+                   
+      
+
+                                                     
+                                                                             
+       
+      
+
+                   
+                
+
+                   
+                 
+                      
+      
+                    
+                         
+      
+      
+
+                                                                
+                           
+                     
+                      
+      
+
+                              
+                        
+                         
+      
+
+                            
+                                                 
+                                                 
+                                                 
+                              
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                     
+                         
+                                   
+                         
+                                                                      
+                         
+      
+      
+                                                 
+                                                 
+                                                 
+                                  
+                                
+                                        
+                          
+                 
+                                                           
+                                 
+                         
+                                                                      
+                         
+      
+      
+     
+      
+      
+                                                 
+                                                 
+                                                 
+                     
+                                                                                                           
+                              
+                         
+      
+                                                 
+                                                 
+                                                 
+                      
+                            
+                                                                 
+                         
+      
+                                                 
+                                                  
+                                                 
+                         
+                             
+                                          
+                         
+       
+                                             
+                                                                                          
+                          
+                         
+                                                                                       
+                                                                                    
+                   
+                                           
+                              
+     
+                              
+      
+                                                                       
+                                                           
+                         
+     
+                      
+      
+                                                 
+                                                 
+                                                 
+      
+
+   
+                          
+      
+      
+
+                                                           
+      
+      
+
+                                                         
+      
+      
+
+                                                   
+                                                                                                      
+  
+                                                                                                            
+                                                                                                          
+                                   
+  
+
+                                     
+                                                                                                                                                                                 
+                     
+                        
+      
+
+                                         
+                                                                                                                        
+                     
+                        
+      
+
+                  
+                                                                
+                     
+                        
+      
+
+                           
+                        
+
+                              
+                              
+
+                                                                                                                
+      
+      
+
+                                                    
+                      
+      
+
+                           
+               
+                            
+                                 
+     
+                           
+                         
+      
+
+                                           
+                                                                     
+  
+                       
+                         
+     
+                              
+      
+
+                             
+                     
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                           
+
+                    
+
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+
+                          
+
+                 
+                                                                                                                                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                                                                                                             
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+                       
+
+                                                                              
+
+
+                                                   
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+                              
+
+                                                                              
+
+
+                                                                      
+
+
+                                                                        
+
+
+                                                     
+
+
+                             
+                       
+
+                                                                                                                         
+
+
+
+                    
+                     
+
+                       
+                   
+       
+                            
+                            
+                             
+                             
+
+                                                                                                                   
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                                                
+ 
+                     
+                
+                         
+              
+ 
+
+                   
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+                                                       
+ 
+                   
+                
+                         
+              
+ 
+
+     
+
+                
+                
+
+      
+
+     
+
+                          
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    
+
+      
+
+
+                    
+                                                                    
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                                                            
+ 
+                    
+                
+                         
+              
+ 
+
+                   
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                                                                   
+ 
+                  
+                
+                         
+              
+ 
+
+                       
+
+                  
+                  
+
+      
+
+                       
+
+                                                                                                                                                                       
+
+
+
+                                                                                                                                                                                           
+
+
+
+                                                                                                                                                                        
+
+
+
+                                                                                                                                                                                            
+
+
+
+      
+
+          
+          
+                                       
+                                       
+
+                             
+               
+                                                                 
+     
+                                             
+         
+
+                                                           
+
+                                          
+                                           
+      
+
+       /* __PWSPLATFORM_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\StringX.h" 34
+
+namespace S_Alloc
+{
+  template <typename T>
+    class SecureAlloc
+    {
+    public:
+      // Typedefs
+      typedef size_t    size_type;
+      typedef ptrdiff_t difference_type;
+      typedef T*        pointer;
+      typedef const T*  const_pointer;
+      typedef T&        reference;
+      typedef const T&  const_reference;
+      typedef T         value_type;
+
+    public:
+      // Constructors
+      SecureAlloc() throw() {}
+      SecureAlloc(const SecureAlloc&) throw() {}
+
+      template <typename U>
+        SecureAlloc(const SecureAlloc<U>&) throw() {}
+
+      SecureAlloc& operator=(const SecureAlloc&) {
+        return *this;
+      }
+
+      // Destructor
+      ~SecureAlloc() throw() {}
+
+      // Utility functions
+      pointer address(reference r) const {
+        return (&r);
+      }
+
+      const_pointer address(const_reference c) const {
+        return (&c);
+      }
+
+      size_type max_size() const {
+        return (std::numeric_limits<size_t>::max)() / sizeof(T);
+      }
+
+      // In-place construction
+      void construct(pointer p, const_reference c) {
+        // placement new operator
+        new(reinterpret_cast<void *>(p)) T(c);
+      }
+
+      // In-place destruction
+      void destroy(pointer p) const {
+        // call destructor directly
+        (p)->T::~T();
+      }
+
+      // Rebind to allocators of other types
+      template <typename U>
+        struct rebind {
+          typedef SecureAlloc<U> other;
+        };
+
+      // Allocate raw memory
+      pointer allocate(size_type n, const_pointer hint = 0) {
+        (void)(hint);
+        pointer p = static_cast<pointer>(std::malloc(n * sizeof(T)));
+        // pws_os::Trace(_T("Securely Allocated %d bytes at %p\n"), n * sizeof(T), p);
+        if (p == NULL)
+          throw std::bad_alloc();
+        return p;
+      }
+
+      // Free raw memory.
+      // Note that C++ standard defines this function as:
+      //   deallocate(pointer p, size_type n).
+      void deallocate(pointer p, size_type n) {
+        // assert(p != NULL);
+        // The standard states that p must not be NULL. However, some
+        // STL implementations fail this requirement, so the check must
+        // be made here.
+        if (p == NULL)
+          return;
+
+        if (n > 0) {
+          const size_type N = n * sizeof(T);
+          std::memset(p, 0x55, N);
+          std::memset(p, 0xAA, N);
+          std::memset(p,    0, N);
+        }
+        std::free(p);
+      }
+
+    private:
+      // No data
+
+    }; // end of SecureAlloc
+
+  // Comparison
+  template <typename T1, typename T2>
+    bool operator==(const SecureAlloc<T1>&,
+                    const SecureAlloc<T2>&) throw() {
+    return true;
+  }
+
+  template <typename T1, typename T2>
+    bool operator!=(const SecureAlloc<T1>&,
+                    const SecureAlloc<T2>&) throw() {
+    return false;
+  }
+
+} // end namespace S_Alloc
+
+              
+                                  
+                                                    
+                                                                  
+     
+typedef std::basic_string<char,
+                          std::char_traits<char>,
+                          S_Alloc::SecureAlloc<char> > StringX;
+      
+
+// Following should really be StringX member functions, but there's no 
+// elegant way of extending a template class without public inheritance, 
+// including duplicating large parts of the interface
+//
+// Since we need the for stringT as well, we might as well templatize them
+// (In for a dime, in for a $).
+
+template<class T> int CompareNoCase(const T &s1, const T &s2);
+template<class T> int CompareCase(const T &s1, const T &s2);
+template<class T> void ToLower(T &s);
+template<class T> void ToUpper(T &s);
+template<class T> T &TrimRight(T &s, const TCHAR *set = NULL);
+template<class T> T &TrimLeft(T &s, const TCHAR *set = NULL);
+template<class T> T &Trim(T &s, const TCHAR *set = NULL);
+template<class T> void EmptyIfOnlyWhiteSpace(T &s);
+template<class T> int Replace(T &s, TCHAR from, TCHAR to);
+template<class T> int Replace(T &s, const T &from, const T &to);
+template<class T> int Remove(T &s, TCHAR c);
+template<class T> void Format(T &s, const TCHAR *fmt, ...);
+template<class T> void Format(T &s, int fmt, ...);
+template<class T> void LoadAString(T &s, int id);
+
+inline stringT stringx2std(const StringX &str) { return stringT(str.data(), str.size()); }
+inline StringX std2stringx(const stringT& str)   { return StringX(str.data(), str.size()); }
+
+       /* __STRINGX_H */
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSprefs.h" 36
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\Proxy.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                 
+                 
+
+/**
+ * Abstract base classes used by core to interface with the user.
+ * UI-specific code should derive concrete classes and pass pointers
+ * to objects of derived class for use by core.
+ */
+
+// abstract base class for asking user a question
+// and getting a yes/no reply
+class Asker {
+public:
+  virtual bool operator()(const stringT &question) = 0;
+  virtual bool operator()(const stringT &title, const stringT &question) = 0;
+  virtual ~Asker() {} // keep compiler happy
+};
+
+// abstract base class for reporting something of
+// interest to the user
+class Reporter {
+public:
+  virtual void operator()(const stringT &title, const stringT &message) = 0;
+  virtual void operator()(const stringT &message) = 0;
+  virtual ~Reporter() {} // keep compiler happy
+};
+
+       /* __PROXY_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSprefs.h" 37
+                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os/typedefs.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                   
+                   
+
+   
+                                                                 
+                                                          
+                            
+ 
+  
+
+                 
+  
+                                                                 
+                                    
+   
+
+                                                                          
+                                                               
+                              
+                              
+
+              
+                             
+                      
+                    
+     
+                            
+                   
+               
+      
+
+                                                                   
+
+                                                                                  
+                                                                                   
+                                                                                    
+                                
+                                
+                                
+                                
+ 
+                                           
+                                                                 
+                                
+                                
+                                
+
+             
+                  
+                     
+                      
+                      
+                      
+
+                               
+                                
+                                
+                                
+
+                                 
+                                 
+
+                          
+
+                     
+
+                                                             
+               
+               
+               
+
+             
+                  
+
+                            
+                         
+                           
+                                                              
+            
+              
+      
+             
+               
+      
+                    
+
+                            
+                   
+                      
+                     
+                      
+                      
+                      
+
+                       
+                        
+                        
+                        
+
+                    
+
+              
+          
+                    
+      
+                      
+     
+               
+                   
+                      
+                    
+
+                                        
+                      
+                             
+                  
+                           
+                      
+                       
+                     
+                              
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+                             
+                             
+                                                   
+                                             
+                                          
+                                                                                        
+                                                                           	
+     
+      
+      
+                       
+                          
+                   
+                                       
+
+                         
+                           
+                                                      
+                           
+            
+                 
+      
+             
+                   
+      
+
+                                                   
+                  
+                           
+                   
+
+       /* _TYPEDEFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\PWSprefs.h" 38
+
+                
+
+extern HANDLE s_cfglockFileHandle;
+extern int s_cfgLockCount;
+
+struct st_prefShortcut {
+  unsigned int id;
+  unsigned short int siVirtKey;
+  unsigned char cModifier;
+};
+
+// Bool preferences unknown to this version
+struct st_BP {
+  int index;
+  bool bValue;
+};
+
+// Integer preferences unknown to this version
+struct st_IP {
+  int index;
+  int iValue;
+};
+
+// String preferences unknown to this version
+struct st_SP {
+  int index;
+  TCHAR delim;
+  StringX sValue;
+};
+
+class CXMLprefs;
+struct PWPolicy;
+
+class PWSprefs
+{
+public:
+  enum ConfigOption {CF_NONE = 0, CF_REGISTRY,
+                     CF_FILE_RO, CF_FILE_RW, CF_FILE_RW_NEW};
+
+  static const stringT cfgFileName; // one place for the config filename
+  
+  static PWSprefs *GetInstance(); // singleton
+  static void DeleteInstance();
+  static bool SetConfigFile(const stringT &fn);
+  static stringT GetConfigFile(ConfigOption &configoption)
+  {configoption = m_ConfigOption; return m_configfilename;}
+  static void SetReporter(Reporter *pReporter) {m_pReporter = pReporter;}
+  static void XMLify(charT t, stringT &name);
+  static bool UserSetCfgFile() {return m_userSetCfgFile;}
+  ConfigOption GetConfigOption() {return m_ConfigOption;}
+
+  // prefString is stored in database file, format described in PWSprefs.cpp
+  void Load(const StringX &prefString, bool bUseCopy = false);
+  StringX Store(bool bUseCopy = false); // returns string for saving in file
+
+  void SaveApplicationPreferences();
+  void SaveShortcuts();
+
+  enum BoolPrefs {AlwaysOnTop, ShowPWDefault,
+    ShowPasswordInTree,
+    SortAscending,
+    UseDefaultUser, SaveImmediately, PWUseLowercase, PWUseUppercase,
+    PWUseDigits, PWUseSymbols, PWUseHexDigits, PWUseEasyVision,
+    DontAskQuestion, DeleteQuestion, DCShowsPassword,
+    DontAskMinimizeClearYesNo, // Obsoleted in 3.13 - replaced by 2 separate
+    DatabaseClear,
+    DontAskSaveMinimize, // Obsoleted in 3.02
+    QuerySetDef, UseNewToolbar, UseSystemTray, 
+    LockOnWindowLock, 
+    LockOnIdleTimeout, // Obsoleted in 3.19 - replaced by Database equivalent
+    EscExits, IsUTF8, HotKeyEnabled, MRUOnFileMenu,
+    DisplayExpandedAddEditDlg, // Obsoleted in 3.18
+    MaintainDateTimeStamps,
+    SavePasswordHistory, 
+    FindWraps, // Obsoleted in 3.11
+    ShowNotesDefault,
+    BackupBeforeEverySave, PreExpiryWarn,
+    ExplorerTypeTree, ListViewGridLines, MinimizeOnAutotype,
+    ShowUsernameInTree, PWMakePronounceable,
+    ClearClipoardOnMinimize, ClearClipoardOneExit, // Both obsoleted in 3.14 - typos
+    ShowToolbar, ShowNotesAsTooltipsInViews, DefaultOpenRO,
+    MultipleInstances, ShowDragbar,
+    ClearClipboardOnMinimize, ClearClipboardOnExit,
+    ShowFindToolBarOnOpen, NotesWordWrap, LockDBOnIdleTimeout,
+    HighlightChanges, HideSystemTray,
+    UsePrimarySelectionForClipboard,  //Only under X-Windows
+    CopyPasswordWhenBrowseToURL,
+    NumBoolPrefs};
+
+  enum IntPrefs {Column1Width, Column2Width, Column3Width, Column4Width,
+    SortedColumn, PWDefaultLength, MaxMRUItems, IdleTimeout,
+    DoubleClickAction, HotKey, MaxREItems, TreeDisplayStatusAtOpen,
+    NumPWHistoryDefault, BackupSuffix, BackupMaxIncremented,
+    PreExpiryWarnDays, ClosedTrayIconColour, PWDigitMinLength,
+    PWLowercaseMinLength, PWSymbolMinLength, PWUppercaseMinLength,
+    OptShortcutColumnWidth, ShiftDoubleClickAction,
+    NumIntPrefs};
+
+  enum StringPrefs {CurrentBackup, CurrentFile, LastView, DefaultUsername,
+    TreeFont, BackupPrefixValue, BackupDir, AltBrowser, ListColumns,
+    ColumnWidths, DefaultAutotypeString, AltBrowserCmdLineParms,
+    MainToolBarButtons, PasswordFont, TreeListSampleText, PswdSampleText,
+    LastUsedKeyboard, VKeyboardFontName, VKSampleText, AltNotesEditor,
+    LanguageFile, DefaultSymbols,
+    NumStringPrefs};
+
+  // for DoubleClickAction and ShiftDoubleClickAction
+  // NOTE: When adding items, update the pwsafe.xsd & pwsafe_filter.xsd schemas
+  //       to increase the maximum value in "dcaType"
+  enum {minDCA = 0, DoubleClickCopyPassword = 0, DoubleClickViewEdit = 1,
+    DoubleClickAutoType = 2, DoubleClickBrowse = 3, 
+    DoubleClickCopyNotes = 4, DoubleClickCopyUsername = 5,
+    DoubleClickCopyPasswordMinimize = 6,
+    DoubleClickBrowsePlus = 7, DoubleClickRun = 8,
+    DoubleClickSendEmail = 9,
+    maxDCA = 9};
+
+  // for TreeDisplayStatusAtOpen
+  enum {minTDS = 0, AllCollapsed = 0, AllExpanded = 1, AsPerLastSave = 2,
+    maxTDS = 2};
+
+  // for Backup Mask
+  enum {minBKSFX = 0, BKSFX_None = 0, BKSFX_DateTime = 1, BKSFX_IncNumber = 2,
+    maxBKSFX = 2};
+
+  // for System Tray icon color
+  enum {stiBlack = 0, stiBlue = 1, stiWhite = 2, stiYellow = 3};
+
+  // For Password Policy
+  // Preferences changed (Database or Application or Shortcuts)
+  enum {DB_PREF = 0, APP_PREF = 1, SHC_PREF = 2};
+
+  // Preference types - values are powers of 2, except ptAll = sum of previous values
+  enum PrefType {ptObsolete = 0, ptDatabase = 1, ptApplication = 2, ptAll = 3};
+
+  bool IsDBprefsChanged() const {return m_prefs_changed[DB_PREF];}
+  bool IsAPPprefsChanged() const {return m_prefs_changed[APP_PREF];}
+  void ClearDBprefsChanged() {m_prefs_changed[DB_PREF] = false;}
+  void ClearAPPprefsChanged() {m_prefs_changed[APP_PREF] = false;}
+  void SetDBprefsChanged(const bool bChanged) {m_prefs_changed[DB_PREF] = bChanged;}
+  void SetDatabasePrefsToDefaults(const bool bUseCopy = false);
+  void ForceWriteApplicationPreferences()
+  {m_prefs_changed[APP_PREF] = true; m_prefs_changed[SHC_PREF] = true;}
+
+  bool GetPref(BoolPrefs pref_enum, const bool bUseCopy = false) const;
+  unsigned int GetPref(IntPrefs pref_enum, const bool bUseCopy = false) const;
+  StringX GetPref(StringPrefs pref_enum, const bool bUseCopy = false) const;
+
+  // Following is for case where default value is determined at runtime
+  //  Note: last parameter cannot be defaulted and must be specified in any
+  //  call to distinguish it from the normal integer GetPref
+  unsigned int GetPref(IntPrefs pref_enum, unsigned int defVal,
+                       const bool bUseCopy) const;
+
+  bool GetPrefDefVal(BoolPrefs pref_enum) const;
+  unsigned int GetPrefDefVal(IntPrefs pref_enum) const;
+  StringX GetPrefDefVal(StringPrefs pref_enum) const;
+
+  // Get all preferences for minidump user stream
+  StringX GetAllBoolPrefs(const bool bUseCopy = false);
+  StringX GetAllIntPrefs(const bool bUseCopy = false);
+  StringX GetAllStringPrefs(const bool bUseCopy = false);
+
+  // Special cases
+  void GetPrefRect(long &top, long &bottom, long &left, long &right) const;
+  void SetPrefRect(long top, long bottom, long left, long right);
+  void GetPrefPSSRect(long &top, long &bottom, long &left, long &right) const;
+  void SetPrefPSSRect(long top, long bottom, long left, long right);
+  int GetMRUList(stringT *MRUFiles) const;
+  int SetMRUList(const stringT *MRUFiles, int n, int max_MRU);
+  PWPolicy GetDefaultPolicy(const bool bUseCopy = false) const;
+  void SetDefaultPolicy(const PWPolicy &pol, const bool bUseCopy = false);
+
+  void SetupCopyPrefs();
+  void UpdateFromCopyPrefs(const PWSprefs::PrefType ptype);
+  void SetPref(BoolPrefs pref_enum, bool value, const bool bUseCopy = false);
+  void SetPref(IntPrefs pref_enum, unsigned int value, const bool bUseCopy = false);
+  void SetPref(StringPrefs pref_enum, const StringX &value, const bool bUseCopy = false);
+
+  void ResetPref(BoolPrefs pref_enum);
+  void ResetPref(IntPrefs pref_enum);
+  void ResetPref(StringPrefs pref_enum);
+
+  // CPSWRecentFileList needs to know if it can use registry or not:
+  bool IsUsingRegistry() const {return m_ConfigOption == CF_REGISTRY;}
+
+  // Get database preferences in XML format for export
+  stringT GetXMLPreferences();
+
+  // for display in status bar (debug)
+  int GetConfigIndicator() const;
+
+  // Get & set vector of user shortcuts (only in XML cnfig file)
+  std::vector<st_prefShortcut> GetPrefShortcuts() const {return m_vShortcuts;}
+  void SetPrefShortcuts(const std::vector<st_prefShortcut> &vShortcuts);
+
+  // for OptionSystem property sheet - support removing registry traces
+  bool OfferDeleteRegistry() const;
+  void DeleteRegistryEntries();
+
+  // Default User information from supplied DB preference string
+  void GetDefaultUserInfo(const StringX &sxDBPreferences,
+                          bool &bIsDefUserSet, StringX &sxDefUserValue);
+
+  static bool LockCFGFile(const stringT &filename, stringT &locker);
+  static void UnlockCFGFile(const stringT &filename);
+  static bool IsLockedCFGFile(const stringT &filename);
+
+  void ClearUnknownPrefs(); // Clear unknown preferences vectors
+
+private:
+  PWSprefs();
+  ~PWSprefs();
+
+  bool WritePref(const StringX &name, bool val);
+  bool WritePref(const StringX &name, unsigned int val);
+  bool WritePref(const StringX &name, const StringX &val);
+  void UpdateTimeStamp();
+  bool DeletePref(const StringX &name);
+  void InitializePreferences();
+  void LoadProfileFromDefaults();
+  bool LoadProfileFromFile();
+  void LoadProfileFromRegistry();
+  bool CheckRegistryExists() const;
+  void FindConfigFile();
+
+  // Handle old (pre-3.05 registry-based) prefs.
+  void ImportOldPrefs();
+  bool OldPrefsExist() const;
+  void DeleteOldPrefs();
+
+  static PWSprefs *self; // singleton
+  static stringT m_configfilename; // may be set before singleton created
+  static Reporter *m_pReporter; // set as soon as possible to show errors
+  static bool m_userSetCfgFile;
+  CXMLprefs *m_pXML_Config;
+
+  bool m_bRegistryKeyExists;
+  static ConfigOption m_ConfigOption;
+  stringT m_csHKCU, m_csHKCU_MRU, m_csHKCU_POS, m_csHKCU_PREF, m_csHKCU_SHCT;
+
+  bool m_prefs_changed[3];  // 0 - DB stored pref; 1 - App related pref; 2 - Shortcut
+
+  static const struct boolPref {
+    const TCHAR *name; bool defVal; PrefType ptype;} m_bool_prefs[NumBoolPrefs];
+  static const struct intPref {
+    const TCHAR *name; unsigned int defVal; PrefType ptype; int minVal; int maxVal;} m_int_prefs[NumIntPrefs];
+  static const struct stringPref {
+    const TCHAR *name; const TCHAR *defVal; PrefType ptype;} m_string_prefs[NumStringPrefs];
+
+  // current values
+  bool m_boolValues[NumBoolPrefs];
+  unsigned int m_intValues[NumIntPrefs];
+  StringX m_stringValues[NumStringPrefs];
+  struct {long top, bottom, left, right; bool changed;} m_rect, m_PSSrect;
+  bool m_boolChanged[NumBoolPrefs];
+  bool m_intChanged[NumIntPrefs];
+  bool m_stringChanged[NumStringPrefs];
+
+  // COPIES of current values - used to generate DB preference string for database
+  // without actually updating the preferences
+  bool m_boolCopyValues[NumBoolPrefs];
+  unsigned int m_intCopyValues[NumIntPrefs];
+  StringX m_stringCopyValues[NumStringPrefs];
+
+  stringT *m_MRUitems;
+  std::vector<st_prefShortcut> m_vShortcuts;
+
+  // Preferences we don't know in this version of PWS
+  std::vector<st_BP> m_vUnknownBPrefs;
+  std::vector<st_IP> m_vUnknownIPrefs;
+  std::vector<st_SP> m_vUnknownSPrefs;
+};
+       /*  __PWSPREFS_H */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\XMLprefs.h" 12
+
+                             
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\pugixml/pugixml.hpp" 0
+/**
+ * pugixml parser - version 1.2
+ * --------------------------------------------------------
+ * Copyright (C) 2006-2012, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
+ * Report bugs and download new versions at http://pugixml.org/
+ *
+ * This library is distributed under the MIT License. See notice at the end
+ * of this file.
+ *
+ * This work is based on the pugxml parser, which is:
+ * Copyright (C) 2003, by Kristen Wegner (kristen@tima.net)
+ */
+
+                       
+// Define version macro; evaluates to major * 100 + minor so that it's safe to use in less-than comparisons
+                           
+      
+
+// Include user configuration file (this can define various configuration macros)
+                        
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\pugixml\pugiconfig.hpp" 0
+/**
+ * pugixml parser - version 1.2
+ * --------------------------------------------------------
+ * Copyright (C) 2006-2012, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
+ * Report bugs and download new versions at http://pugixml.org/
+ *
+ * This library is distributed under the MIT License. See notice at the end
+ * of this file.
+ *
+ * This work is based on the pugxml parser, which is:
+ * Copyright (C) 2003, by Kristen Wegner (kristen@tima.net)
+ */
+
+/*
+ *
+ * Modified by DK for PasswordSafe
+ * The ONLY changes are for this configuration:
+ *  a. To place the definition of PUGIXML_WCHAR_MODE within a ifdef depending on UNICODE
+ *  b. Disable XPath as we do not need it.
+ *
+ * NO changes made to the package's source files pugixml.cpp and pugixml.hpp
+ *
+ * The pugixml source corresponds to V1.2 @ rev. 916 - latest release as of 2012-05-02.
+ * Official release of V1.2 @ rev. 914 on 2012-05-01.
+ *
+ */
+
+                             
+                             
+
+// Uncomment this to enable wchar_t mode
+              
+                          
+      
+
+// Uncomment this to disable XPath
+                        
+
+// Uncomment this to disable STL
+// #define PUGIXML_NO_STL
+
+// Uncomment this to disable exceptions
+// #define PUGIXML_NO_EXCEPTIONS
+
+// Set this to control attributes for public classes/functions, i.e.:
+// #define PUGIXML_API __declspec(dllexport) // to export all public symbols from DLL
+// #define PUGIXML_CLASS __declspec(dllimport) // to import all classes from DLL
+// #define PUGIXML_FUNCTION __fastcall // to set calling conventions to all public functions to fastcall
+// In absence of PUGIXML_CLASS/PUGIXML_FUNCTION definitions PUGIXML_API is used instead
+
+// Uncomment this to switch to header-only version
+// #define PUGIXML_HEADER_ONLY
+// #include "pugixml.cpp"
+
+// Tune these constants to adjust memory-related behavior
+// #define PUGIXML_MEMORY_PAGE_SIZE 32768
+// #define PUGIXML_MEMORY_OUTPUT_STACK 10240
+// #define PUGIXML_MEMORY_XPATH_PAGE_SIZE 4096
+
+      
+
+/**
+ * Copyright (c) 2006-2012 Arseny Kapoulkine
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\pugixml/pugixml.hpp" 24
+
+                          
+                          
+
+// Include stddef.h for size_t and ptrdiff_t
+                  
+
+// Include exception header for XPath
+                                                                 
+                    
+      
+
+// Include STL headers
+                      
+                  
+                
+                
+      
+
+// Macro for deprecated features
+                          
+                     
+                                                      
+                                           
+                                                 
+     
+                          
+      
+      
+
+// If no API is defined, assume default
+                   
+                   
+      
+
+// If no API for classes is defined, assume default
+                     
+                                 
+      
+
+// If no API for functions is defined, assume default
+                        
+                                    
+      
+
+// Character interface macros
+                         
+                              
+                            
+     
+                         
+                         
+      
+
+namespace pugi
+{
+	// Character type used for all internal storage and operations; depends on PUGIXML_WCHAR_MODE
+	typedef char char_t;
+
+                      
+	// String type used for operations that work with STL string; depends on PUGIXML_WCHAR_MODE
+	typedef std::basic_string<char, std::char_traits<char>, std::allocator<char> > string_t;
+      
+}
+
+// The PugiXML namespace
+namespace pugi
+{
+	// Tree node types
+	enum xml_node_type
+	{
+		node_null,			// Empty (null) node handle
+		node_document,		// A document tree's absolute root
+		node_element,		// Element tag, i.e. '<node/>'
+		node_pcdata,		// Plain character data, i.e. 'text'
+		node_cdata,			// Character data, i.e. '<![CDATA[text]]>'
+		node_comment,		// Comment tag, i.e. '<!-- text -->'
+		node_pi,			// Processing instruction, i.e. '<?name?>'
+		node_declaration,	// Document declaration, i.e. '<?xml version="1.0"?>'
+		node_doctype		// Document type declaration, i.e. '<!DOCTYPE doc>'
+	};
+
+	// Parsing options
+
+	// Minimal parsing mode (equivalent to turning all other flags off).
+	// Only elements and PCDATA sections are added to the DOM tree, no text conversions are performed.
+	const unsigned int parse_minimal = 0x0000;
+
+	// This flag determines if processing instructions (node_pi) are added to the DOM tree. This flag is off by default.
+	const unsigned int parse_pi = 0x0001;
+
+	// This flag determines if comments (node_comment) are added to the DOM tree. This flag is off by default.
+	const unsigned int parse_comments = 0x0002;
+
+	// This flag determines if CDATA sections (node_cdata) are added to the DOM tree. This flag is on by default.
+	const unsigned int parse_cdata = 0x0004;
+
+	// This flag determines if plain character data (node_pcdata) that consist only of whitespace are added to the DOM tree.
+	// This flag is off by default; turning it on usually results in slower parsing and more memory consumption.
+	const unsigned int parse_ws_pcdata = 0x0008;
+
+	// This flag determines if character and entity references are expanded during parsing. This flag is on by default.
+	const unsigned int parse_escapes = 0x0010;
+
+	// This flag determines if EOL characters are normalized (converted to #xA) during parsing. This flag is on by default.
+	const unsigned int parse_eol = 0x0020;
+	
+	// This flag determines if attribute values are normalized using CDATA normalization rules during parsing. This flag is on by default.
+	const unsigned int parse_wconv_attribute = 0x0040;
+
+	// This flag determines if attribute values are normalized using NMTOKENS normalization rules during parsing. This flag is off by default.
+	const unsigned int parse_wnorm_attribute = 0x0080;
+	
+	// This flag determines if document declaration (node_declaration) is added to the DOM tree. This flag is off by default.
+	const unsigned int parse_declaration = 0x0100;
+
+	// This flag determines if document type declaration (node_doctype) is added to the DOM tree. This flag is off by default.
+	const unsigned int parse_doctype = 0x0200;
+
+	// This flag determines if plain character data (node_pcdata) that is the only child of the parent node and that consists only
+	// of whitespace is added to the DOM tree.
+	// This flag is off by default; turning it on may result in slower parsing and more memory consumption.
+	const unsigned int parse_ws_pcdata_single = 0x0400;
+
+	// The default parsing mode.
+	// Elements, PCDATA and CDATA sections are added to the DOM tree, character/reference entities are expanded,
+	// End-of-Line characters are normalized, attribute values are normalized using CDATA normalization rules.
+	const unsigned int parse_default = parse_cdata | parse_escapes | parse_wconv_attribute | parse_eol;
+
+	// The full parsing mode.
+	// Nodes of all types are added to the DOM tree, character/reference entities are expanded,
+	// End-of-Line characters are normalized, attribute values are normalized using CDATA normalization rules.
+	const unsigned int parse_full = parse_default | parse_pi | parse_comments | parse_declaration | parse_doctype;
+
+	// These flags determine the encoding of input data for XML document
+	enum xml_encoding
+	{
+		encoding_auto,		// Auto-detect input encoding using BOM or < / <? detection; use UTF8 if BOM is not found
+		encoding_utf8,		// UTF8 encoding
+		encoding_utf16_le,	// Little-endian UTF16
+		encoding_utf16_be,	// Big-endian UTF16
+		encoding_utf16,		// UTF16 with native endianness
+		encoding_utf32_le,	// Little-endian UTF32
+		encoding_utf32_be,	// Big-endian UTF32
+		encoding_utf32,		// UTF32 with native endianness
+		encoding_wchar,		// The same encoding wchar_t has (either UTF16 or UTF32)
+		encoding_latin1
+	};
+
+	// Formatting flags
+	
+	// Indent the nodes that are written to output stream with as many indentation strings as deep the node is in DOM tree. This flag is on by default.
+	const unsigned int format_indent = 0x01;
+	
+	// Write encoding-specific BOM to the output stream. This flag is off by default.
+	const unsigned int format_write_bom = 0x02;
+
+	// Use raw output mode (no indentation and no line breaks are written). This flag is off by default.
+	const unsigned int format_raw = 0x04;
+	
+	// Omit default XML declaration even if there is no declaration in the document. This flag is off by default.
+	const unsigned int format_no_declaration = 0x08;
+
+	// Don't escape attribute values and PCDATA contents. This flag is off by default.
+	const unsigned int format_no_escapes = 0x10;
+
+	// Open file using text mode in xml_document::save_file. This enables special character (i.e. new-line) conversions on some systems. This flag is off by default.
+	const unsigned int format_save_file_text = 0x20;
+
+	// The default set of formatting flags.
+	// Nodes are indented depending on their depth in DOM tree, a default declaration is output if document has none.
+	const unsigned int format_default = format_indent;
+		
+	// Forward declarations
+	struct xml_attribute_struct;
+	struct xml_node_struct;
+
+	class xml_node_iterator;
+	class xml_attribute_iterator;
+	class xml_named_node_iterator;
+
+	class xml_tree_walker;
+
+	class xml_node;
+
+	class xml_text;
+	
+	                        
+	                 
+	                     
+	                  
+	                         
+	      
+
+	// Range-based for loop support
+	template <typename It> class xml_object_range
+	{
+	public:
+		typedef It const_iterator;
+
+		xml_object_range(It b, It e): _begin(b), _end(e)
+		{
+		}
+
+		It begin() const { return _begin; }
+		It end() const { return _end; }
+
+	private:
+		It _begin, _end;
+	};
+
+	// Writer interface for node printing (see xml_node::print)
+	class  xml_writer
+	{
+	public:
+		virtual ~xml_writer() {}
+
+		// Write memory chunk into stream/file/whatever
+		virtual void write(const void* data, size_t size) = 0;
+	};
+
+	// xml_writer implementation for FILE*
+	class  xml_writer_file: public xml_writer
+	{
+	public:
+		// Construct writer from a FILE* object; void* is used to avoid header dependencies on stdio
+		xml_writer_file(void* file);
+
+		virtual void write(const void* data, size_t size);
+
+	private:
+		void* file;
+	};
+
+	                      
+	// xml_writer implementation for streams
+	class  xml_writer_stream: public xml_writer
+	{
+	public:
+		// Construct writer from an output stream object
+		xml_writer_stream(std::basic_ostream<char, std::char_traits<char> >& stream);
+		xml_writer_stream(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& stream);
+
+		virtual void write(const void* data, size_t size);
+
+	private:
+		std::basic_ostream<char, std::char_traits<char> >* narrow_stream;
+		std::basic_ostream<wchar_t, std::char_traits<wchar_t> >* wide_stream;
+	};
+	      
+
+	// A light-weight handle for manipulating attributes in DOM tree
+	class  xml_attribute
+	{
+		friend class xml_attribute_iterator;
+		friend class xml_node;
+
+	private:
+		xml_attribute_struct* _attr;
+	
+		typedef void (*unspecified_bool_type)(xml_attribute***);
+
+	public:
+		// Default constructor. Constructs an empty attribute.
+		xml_attribute();
+		
+		// Constructs attribute from internal pointer
+		explicit xml_attribute(xml_attribute_struct* attr);
+
+		// Safe bool conversion operator
+		operator unspecified_bool_type() const;
+
+		// Borland C++ workaround
+		bool operator!() const;
+
+		// Comparison operators (compares wrapped attribute pointers)
+		bool operator==(const xml_attribute& r) const;
+		bool operator!=(const xml_attribute& r) const;
+		bool operator<(const xml_attribute& r) const;
+		bool operator>(const xml_attribute& r) const;
+		bool operator<=(const xml_attribute& r) const;
+		bool operator>=(const xml_attribute& r) const;
+
+		// Check if attribute is empty
+		bool empty() const;
+
+		// Get attribute name/value, or "" if attribute is empty
+		const char_t* name() const;
+		const char_t* value() const;
+
+		// Get attribute value, or the default value if attribute is empty
+		const char_t* as_string(const char_t* def = "") const;
+
+		// Get attribute value as a number, or the default value if conversion did not succeed or attribute is empty
+		int as_int(int def = 0) const;
+		unsigned int as_uint(unsigned int def = 0) const;
+		double as_double(double def = 0) const;
+		float as_float(float def = 0) const;
+
+		// Get attribute value as bool (returns true if first character is in '1tTyY' set), or the default value if attribute is empty
+		bool as_bool(bool def = false) const;
+
+		// Set attribute name/value (returns false if attribute is empty or there is not enough memory)
+		bool set_name(const char_t* rhs);
+		bool set_value(const char_t* rhs);
+
+		// Set attribute value with type conversion (numbers are converted to strings, boolean is converted to "true"/"false")
+		bool set_value(int rhs);
+		bool set_value(unsigned int rhs);
+		bool set_value(double rhs);
+		bool set_value(bool rhs);
+
+		// Set attribute value (equivalent to set_value without error checking)
+		xml_attribute& operator=(const char_t* rhs);
+		xml_attribute& operator=(int rhs);
+		xml_attribute& operator=(unsigned int rhs);
+		xml_attribute& operator=(double rhs);
+		xml_attribute& operator=(bool rhs);
+
+		// Get next/previous attribute in the attribute list of the parent node
+		xml_attribute next_attribute() const;
+		xml_attribute previous_attribute() const;
+
+		// Get hash value (unique for handles to the same object)
+		size_t hash_value() const;
+
+		// Get internal pointer
+		xml_attribute_struct* internal_object() const;
+	};
+
+                   
+	                         
+	                                                                     
+	                                                                     
+      
+
+	// A light-weight handle for manipulating nodes in DOM tree
+	class  xml_node
+	{
+		friend class xml_attribute_iterator;
+		friend class xml_node_iterator;
+		friend class xml_named_node_iterator;
+
+	protected:
+		xml_node_struct* _root;
+
+		typedef void (*unspecified_bool_type)(xml_node***);
+
+	public:
+		// Default constructor. Constructs an empty node.
+		xml_node();
+
+		// Constructs node from internal pointer
+		explicit xml_node(xml_node_struct* p);
+
+		// Safe bool conversion operator
+		operator unspecified_bool_type() const;
+
+		// Borland C++ workaround
+		bool operator!() const;
+	
+		// Comparison operators (compares wrapped node pointers)
+		bool operator==(const xml_node& r) const;
+		bool operator!=(const xml_node& r) const;
+		bool operator<(const xml_node& r) const;
+		bool operator>(const xml_node& r) const;
+		bool operator<=(const xml_node& r) const;
+		bool operator>=(const xml_node& r) const;
+
+		// Check if node is empty.
+		bool empty() const;
+
+		// Get node type
+		xml_node_type type() const;
+
+		// Get node name/value, or "" if node is empty or it has no name/value
+		const char_t* name() const;
+		const char_t* value() const;
+	
+		// Get attribute list
+		xml_attribute first_attribute() const;
+		xml_attribute last_attribute() const;
+
+		// Get children list
+		xml_node first_child() const;
+		xml_node last_child() const;
+
+		// Get next/previous sibling in the children list of the parent node
+		xml_node next_sibling() const;
+		xml_node previous_sibling() const;
+		
+		// Get parent node
+		xml_node parent() const;
+
+		// Get root of DOM tree this node belongs to
+		xml_node root() const;
+
+		// Get text object for the current node
+		xml_text text() const;
+
+		// Get child, attribute or next/previous sibling with the specified name
+		xml_node child(const char_t* name) const;
+		xml_attribute attribute(const char_t* name) const;
+		xml_node next_sibling(const char_t* name) const;
+		xml_node previous_sibling(const char_t* name) const;
+
+		// Get child value of current node; that is, value of the first child node of type PCDATA/CDATA
+		const char_t* child_value() const;
+
+		// Get child value of child with specified name. Equivalent to child(name).child_value().
+		const char_t* child_value(const char_t* name) const;
+
+		// Set node name/value (returns false if node is empty, there is not enough memory, or node can not have name/value)
+		bool set_name(const char_t* rhs);
+		bool set_value(const char_t* rhs);
+		
+		// Add attribute with specified name. Returns added attribute, or empty attribute on errors.
+		xml_attribute append_attribute(const char_t* name);
+		xml_attribute prepend_attribute(const char_t* name);
+		xml_attribute insert_attribute_after(const char_t* name, const xml_attribute& attr);
+		xml_attribute insert_attribute_before(const char_t* name, const xml_attribute& attr);
+
+		// Add a copy of the specified attribute. Returns added attribute, or empty attribute on errors.
+		xml_attribute append_copy(const xml_attribute& proto);
+		xml_attribute prepend_copy(const xml_attribute& proto);
+		xml_attribute insert_copy_after(const xml_attribute& proto, const xml_attribute& attr);
+		xml_attribute insert_copy_before(const xml_attribute& proto, const xml_attribute& attr);
+
+		// Add child node with specified type. Returns added node, or empty node on errors.
+		xml_node append_child(xml_node_type type = node_element);
+		xml_node prepend_child(xml_node_type type = node_element);
+		xml_node insert_child_after(xml_node_type type, const xml_node& node);
+		xml_node insert_child_before(xml_node_type type, const xml_node& node);
+
+		// Add child element with specified name. Returns added node, or empty node on errors.
+		xml_node append_child(const char_t* name);
+		xml_node prepend_child(const char_t* name);
+		xml_node insert_child_after(const char_t* name, const xml_node& node);
+		xml_node insert_child_before(const char_t* name, const xml_node& node);
+
+		// Add a copy of the specified node as a child. Returns added node, or empty node on errors.
+		xml_node append_copy(const xml_node& proto);
+		xml_node prepend_copy(const xml_node& proto);
+		xml_node insert_copy_after(const xml_node& proto, const xml_node& node);
+		xml_node insert_copy_before(const xml_node& proto, const xml_node& node);
+
+		// Remove specified attribute
+		bool remove_attribute(const xml_attribute& a);
+		bool remove_attribute(const char_t* name);
+
+		// Remove specified child
+		bool remove_child(const xml_node& n);
+		bool remove_child(const char_t* name);
+
+		// Find attribute using predicate. Returns first attribute for which predicate returned true.
+		template <typename Predicate> xml_attribute find_attribute(Predicate pred) const
+		{
+			if (!_root) return xml_attribute();
+			
+			for (xml_attribute attrib = first_attribute(); attrib; attrib = attrib.next_attribute())
+				if (pred(attrib))
+					return attrib;
+		
+			return xml_attribute();
+		}
+
+		// Find child node using predicate. Returns first child for which predicate returned true.
+		template <typename Predicate> xml_node find_child(Predicate pred) const
+		{
+			if (!_root) return xml_node();
+	
+			for (xml_node node = first_child(); node; node = node.next_sibling())
+				if (pred(node))
+					return node;
+		
+			return xml_node();
+		}
+
+		// Find node from subtree using predicate. Returns first node from subtree (depth-first), for which predicate returned true.
+		template <typename Predicate> xml_node find_node(Predicate pred) const
+		{
+			if (!_root) return xml_node();
+
+			xml_node cur = first_child();
+			
+			while (cur._root && cur._root != _root)
+			{
+				if (pred(cur)) return cur;
+
+				if (cur.first_child()) cur = cur.first_child();
+				else if (cur.next_sibling()) cur = cur.next_sibling();
+				else
+				{
+					while (!cur.next_sibling() && cur._root != _root) cur = cur.parent();
+
+					if (cur._root != _root) cur = cur.next_sibling();
+				}
+			}
+
+			return xml_node();
+		}
+
+		// Find child node by attribute name/value
+		xml_node find_child_by_attribute(const char_t* name, const char_t* attr_name, const char_t* attr_value) const;
+		xml_node find_child_by_attribute(const char_t* attr_name, const char_t* attr_value) const;
+
+	                      
+		// Get the absolute node path from root as a text string.
+		string_t path(char_t delimiter = '/') const;
+	      
+
+		// Search for a node by path consisting of node names and . or .. elements.
+		xml_node first_element_by_path(const char_t* path, char_t delimiter = '/') const;
+
+		// Recursively traverse subtree with xml_tree_walker
+		bool traverse(xml_tree_walker& walker);
+	
+	                        
+		                                                                                                
+		                                                                                            
+		                                                              
+
+		                                            
+		                                                                                          
+		                                                            
+	      
+		
+		// Print subtree using a writer object
+		void print(xml_writer& writer, const char_t* indent = "\t", unsigned int flags = format_default, xml_encoding encoding = encoding_auto, unsigned int depth = 0) const;
+
+	                      
+		// Print subtree to stream
+		void print(std::basic_ostream<char, std::char_traits<char> >& os, const char_t* indent = "\t", unsigned int flags = format_default, xml_encoding encoding = encoding_auto, unsigned int depth = 0) const;
+		void print(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& os, const char_t* indent = "\t", unsigned int flags = format_default, unsigned int depth = 0) const;
+	      
+
+		// Child nodes iterators
+		typedef xml_node_iterator iterator;
+
+		iterator begin() const;
+		iterator end() const;
+
+		// Attribute iterators
+		typedef xml_attribute_iterator attribute_iterator;
+
+		attribute_iterator attributes_begin() const;
+		attribute_iterator attributes_end() const;
+
+		// Range-based for support
+		xml_object_range<xml_node_iterator> children() const;
+		xml_object_range<xml_named_node_iterator> children(const char_t* name) const;
+		xml_object_range<xml_attribute_iterator> attributes() const;
+
+		// Get node offset in parsed file/string (in char_t units) for debugging purposes
+		ptrdiff_t offset_debug() const;
+
+		// Get hash value (unique for handles to the same object)
+		size_t hash_value() const;
+
+		// Get internal pointer
+		xml_node_struct* internal_object() const;
+	};
+
+                   
+	                         
+	                                                                
+	                                                                
+      
+
+	// A helper for working with text inside PCDATA nodes
+	class  xml_text
+	{
+		friend class xml_node;
+
+		xml_node_struct* _root;
+
+		typedef void (*unspecified_bool_type)(xml_text***);
+
+		explicit xml_text(xml_node_struct* root);
+
+		xml_node_struct* _data_new();
+		xml_node_struct* _data() const;
+
+	public:
+		// Default constructor. Constructs an empty object.
+		xml_text();
+
+		// Safe bool conversion operator
+		operator unspecified_bool_type() const;
+
+		// Borland C++ workaround
+		bool operator!() const;
+
+		// Check if text object is empty
+		bool empty() const;
+
+		// Get text, or "" if object is empty
+		const char_t* get() const;
+
+		// Get text, or the default value if object is empty
+		const char_t* as_string(const char_t* def = "") const;
+
+		// Get text as a number, or the default value if conversion did not succeed or object is empty
+		int as_int(int def = 0) const;
+		unsigned int as_uint(unsigned int def = 0) const;
+		double as_double(double def = 0) const;
+		float as_float(float def = 0) const;
+
+		// Get text as bool (returns true if first character is in '1tTyY' set), or the default value if object is empty
+		bool as_bool(bool def = false) const;
+
+		// Set text (returns false if object is empty or there is not enough memory)
+		bool set(const char_t* rhs);
+
+		// Set text with type conversion (numbers are converted to strings, boolean is converted to "true"/"false")
+		bool set(int rhs);
+		bool set(unsigned int rhs);
+		bool set(double rhs);
+		bool set(bool rhs);
+
+		// Set text (equivalent to set without error checking)
+		xml_text& operator=(const char_t* rhs);
+		xml_text& operator=(int rhs);
+		xml_text& operator=(unsigned int rhs);
+		xml_text& operator=(double rhs);
+		xml_text& operator=(bool rhs);
+
+		// Get the data node (node_pcdata or node_cdata) for this object
+		xml_node data() const;
+	};
+
+                   
+	                         
+	                                                                
+	                                                                
+      
+
+	// Child node iterator (a bidirectional iterator over a collection of xml_node)
+	class  xml_node_iterator
+	{
+		friend class xml_node;
+
+	private:
+		mutable xml_node _wrap;
+		xml_node _parent;
+
+		xml_node_iterator(xml_node_struct* ref, xml_node_struct* parent);
+
+	public:
+		// Iterator traits
+		typedef ptrdiff_t difference_type;
+		typedef xml_node value_type;
+		typedef xml_node* pointer;
+		typedef xml_node& reference;
+
+	                      
+		typedef std::bidirectional_iterator_tag iterator_category;
+	      
+
+		// Default constructor
+		xml_node_iterator();
+
+		// Construct an iterator which points to the specified node
+		xml_node_iterator(const xml_node& node);
+
+		// Iterator operators
+		bool operator==(const xml_node_iterator& rhs) const;
+		bool operator!=(const xml_node_iterator& rhs) const;
+
+		xml_node& operator*() const;
+		xml_node* operator->() const;
+
+		const xml_node_iterator& operator++();
+		xml_node_iterator operator++(int);
+
+		const xml_node_iterator& operator--();
+		xml_node_iterator operator--(int);
+	};
+
+	// Attribute iterator (a bidirectional iterator over a collection of xml_attribute)
+	class  xml_attribute_iterator
+	{
+		friend class xml_node;
+
+	private:
+		mutable xml_attribute _wrap;
+		xml_node _parent;
+
+		xml_attribute_iterator(xml_attribute_struct* ref, xml_node_struct* parent);
+
+	public:
+		// Iterator traits
+		typedef ptrdiff_t difference_type;
+		typedef xml_attribute value_type;
+		typedef xml_attribute* pointer;
+		typedef xml_attribute& reference;
+
+	                      
+		typedef std::bidirectional_iterator_tag iterator_category;
+	      
+
+		// Default constructor
+		xml_attribute_iterator();
+
+		// Construct an iterator which points to the specified attribute
+		xml_attribute_iterator(const xml_attribute& attr, const xml_node& parent);
+
+		// Iterator operators
+		bool operator==(const xml_attribute_iterator& rhs) const;
+		bool operator!=(const xml_attribute_iterator& rhs) const;
+
+		xml_attribute& operator*() const;
+		xml_attribute* operator->() const;
+
+		const xml_attribute_iterator& operator++();
+		xml_attribute_iterator operator++(int);
+
+		const xml_attribute_iterator& operator--();
+		xml_attribute_iterator operator--(int);
+	};
+
+	// Named node range helper
+	class xml_named_node_iterator
+	{
+	public:
+		// Iterator traits
+		typedef ptrdiff_t difference_type;
+		typedef xml_node value_type;
+		typedef xml_node* pointer;
+		typedef xml_node& reference;
+
+	                      
+		typedef std::forward_iterator_tag iterator_category;
+	      
+
+		// Default constructor
+		xml_named_node_iterator();
+
+		// Construct an iterator which points to the specified node
+		xml_named_node_iterator(const xml_node& node, const char_t* name);
+
+		// Iterator operators
+		bool operator==(const xml_named_node_iterator& rhs) const;
+		bool operator!=(const xml_named_node_iterator& rhs) const;
+
+		xml_node& operator*() const;
+		xml_node* operator->() const;
+
+		const xml_named_node_iterator& operator++();
+		xml_named_node_iterator operator++(int);
+
+	private:
+		mutable xml_node _node;
+		const char_t* _name;
+	};
+
+	// Abstract tree walker class (see xml_node::traverse)
+	class  xml_tree_walker
+	{
+		friend class xml_node;
+
+	private:
+		int _depth;
+	
+	protected:
+		// Get current traversal depth
+		int depth() const;
+	
+	public:
+		xml_tree_walker();
+		virtual ~xml_tree_walker();
+
+		// Callback that is called when traversal begins
+		virtual bool begin(xml_node& node);
+
+		// Callback that is called for each node traversed
+		virtual bool for_each(xml_node& node) = 0;
+
+		// Callback that is called when traversal ends
+		virtual bool end(xml_node& node);
+	};
+
+	// Parsing status, returned as part of xml_parse_result object
+	enum xml_parse_status
+	{
+		status_ok = 0,				// No error
+
+		status_file_not_found,		// File was not found during load_file()
+		status_io_error,			// Error reading from file/stream
+		status_out_of_memory,		// Could not allocate memory
+		status_internal_error,		// Internal error occurred
+
+		status_unrecognized_tag,	// Parser could not determine tag type
+
+		status_bad_pi,				// Parsing error occurred while parsing document declaration/processing instruction
+		status_bad_comment,			// Parsing error occurred while parsing comment
+		status_bad_cdata,			// Parsing error occurred while parsing CDATA section
+		status_bad_doctype,			// Parsing error occurred while parsing document type declaration
+		status_bad_pcdata,			// Parsing error occurred while parsing PCDATA section
+		status_bad_start_element,	// Parsing error occurred while parsing start element tag
+		status_bad_attribute,		// Parsing error occurred while parsing element attribute
+		status_bad_end_element,		// Parsing error occurred while parsing end element tag
+		status_end_element_mismatch // There was a mismatch of start-end tags (closing tag had incorrect name, some tag was not closed or there was an excessive closing tag)
+	};
+
+	// Parsing result
+	struct  xml_parse_result
+	{
+		// Parsing status (see xml_parse_status)
+		xml_parse_status status;
+
+		// Last parsed offset (in char_t units from start of input data)
+		ptrdiff_t offset;
+
+		// Source document encoding
+		xml_encoding encoding;
+
+		// Default constructor, initializes object to failed state
+		xml_parse_result();
+
+		// Cast to bool operator
+		operator bool() const;
+
+		// Get error description
+		const char* description() const;
+	};
+
+	// Document class (DOM tree root)
+	class  xml_document: public xml_node
+	{
+	private:
+		char_t* _buffer;
+
+		char _memory[192];
+		
+		// Non-copyable semantics
+		xml_document(const xml_document&);
+		const xml_document& operator=(const xml_document&);
+
+		void create();
+		void destroy();
+
+		xml_parse_result load_buffer_impl(void* contents, size_t size, unsigned int options, xml_encoding encoding, bool is_mutable, bool own);
+
+	public:
+		// Default constructor, makes empty document
+		xml_document();
+
+		// Destructor, invalidates all node/attribute handles to this document
+		~xml_document();
+
+		// Removes all nodes, leaving the empty document
+		void reset();
+
+		// Removes all nodes, then copies the entire contents of the specified document
+		void reset(const xml_document& proto);
+
+	                      
+		// Load document from stream.
+		xml_parse_result load(std::basic_istream<char, std::char_traits<char> >& stream, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		xml_parse_result load(std::basic_istream<wchar_t, std::char_traits<wchar_t> >& stream, unsigned int options = parse_default);
+	      
+
+		// Load document from zero-terminated string. No encoding conversions are applied.
+		xml_parse_result load(const char_t* contents, unsigned int options = parse_default);
+
+		// Load document from file
+		xml_parse_result load_file(const char* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+		xml_parse_result load_file(const wchar_t* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+
+		// Load document from buffer. Copies/converts the buffer, so it may be deleted or changed after the function returns.
+		xml_parse_result load_buffer(const void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+
+		// Load document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
+		// You should ensure that buffer data will persist throughout the document's lifetime, and free the buffer memory manually once document is destroyed.
+		xml_parse_result load_buffer_inplace(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+
+		// Load document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
+		// You should allocate the buffer with pugixml allocation function; document will free the buffer when it is no longer needed (you can't use it anymore).
+		xml_parse_result load_buffer_inplace_own(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
+
+		// Save XML document to writer (semantics is slightly different from xml_node::print, see documentation for details).
+		void save(xml_writer& writer, const char_t* indent = "\t", unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+
+	                      
+		// Save XML document to stream (semantics is slightly different from xml_node::print, see documentation for details).
+		void save(std::basic_ostream<char, std::char_traits<char> >& stream, const char_t* indent = "\t", unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+		void save(std::basic_ostream<wchar_t, std::char_traits<wchar_t> >& stream, const char_t* indent = "\t", unsigned int flags = format_default) const;
+	      
+
+		// Save XML to file
+		bool save_file(const char* path, const char_t* indent = "\t", unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+		bool save_file(const wchar_t* path, const char_t* indent = "\t", unsigned int flags = format_default, xml_encoding encoding = encoding_auto) const;
+
+		// Get document element
+		xml_node document_element() const;
+	};
+
+                        
+	                          
+	                     
+	 
+		                	                                           
+		                                                  
+		                  	           
+		                  	           
+		                  	            
+	  
+
+	                       
+	                                       
+	 
+		                                
+		                  
+
+		                                                         
+		                 
+
+		                                                          
+		                     
+
+		                        
+		                      
+
+		                        
+		                                
+	  
+
+	                          
+	                                  
+	 
+		                                
+
+	          
+		                       
+		                      
+
+		                 
+
+		                         
+		                                      
+		                                                 
+		
+	       
+		                    
+		                           
+
+		                    
+		                              
+
+		                                                                                                                                                   
+		                         
+		                          
+		                                 
+		                                           
+
+		                                                                                                
+		                     
+		                       
+		                              
+		                                      
+	  
+
+	                           
+	                                      
+	 
+	        
+		                          
+
+		                         
+		                                              
+		                                                         
+
+		                                               
+
+	       
+		                                 
+		                     
+		                      
+
+		                                                                 
+		                                                               
+
+		                                                                                                                                          
+		                                         
+		                                           
+		                                                  
+		                                                          
+
+		                                
+		                                        
+		                                                    
+	  
+
+	                                
+	                               
+	 
+	        
+		            
+		                           
+
+		                                                      
+
+		                         
+		                                
+		                                           
+
+	       
+		                                                     
+		                                                                                         
+		                                                                             
+
+		             
+		               
+
+		                                   
+		                                     
+		
+		                                                                                                        
+		                                                                                          
+		                                                 
+		
+		                                                                                                       
+		                                                                                          
+		                                                  
+		
+	                      
+		                                                                                                       
+		                                                                                          
+		                                                    
+	      
+		
+		                                                                                                       
+		                                                                                                                               
+		                                                                                          
+		                                                                   
+		                                                                                   
+
+		                                                            
+		                                                                                                                               
+		                                                                       
+		                                                            
+
+		                                                                                    
+		                                         
+
+		                                
+		                                       
+
+		                         
+		                       
+	  
+	
+	                             
+	                        
+	                                                          
+	 
+	        
+		                           
+
+	       
+		                                        
+		                                                           
+
+		                    
+		                                         
+
+		                   
+		                                         
+	  
+	      
+	
+	                                                      
+	                              
+	 
+	        
+		               
+		                         
+	
+		                                                     
+
+	       
+		                                                   
+		             
+		
+		                                               
+		                                 
+		                                                                   
+
+		                             
+		                      
+		                                
+		
+		                                         
+		                        
+
+		                                
+		                                       
+		
+		                         
+		                       
+
+		                       
+		                                           
+		                                           
+	  
+
+                   
+	                         
+	                                                                  
+	                                                                  
+      
+
+	                                         
+	                                  
+	 
+	       
+		                  
+		           
+		 
+			              			              
+			            			                                       
+			                   		                                        
+		  
+		
+		                         
+		                                         
+	
+		                                             
+		                 
+
+		                                                                                                                                       
+		                                                                                      
+
+		             
+		                  
+		
+		                                       
+		                                         
+		                                                    
+
+		                      
+		                    
+		
+		                      
+		                    
+
+		                    
+		                                                 
+		
+		                       
+		                             
+		                           
+
+		                                                                      
+		                                
+		
+		                                                     
+		                         
+		
+		                               
+		                   
+	
+	        
+		             
+		
+		                    
+		
+		                   
+		                 
+
+		                                                       
+	  
+      
+
+                      
+	// Convert wide string to UTF8
+	std::basic_string<char, std::char_traits<char>, std::allocator<char> >  as_utf8(const wchar_t* str);
+	std::basic_string<char, std::char_traits<char>, std::allocator<char> >  as_utf8(const std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >& str);
+	
+	// Convert UTF8 to wide string
+	std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >  as_wide(const char* str);
+	std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >  as_wide(const std::basic_string<char, std::char_traits<char>, std::allocator<char> >& str);
+      
+
+	// Memory allocation function interface; returns pointer to allocated memory or NULL on failure
+	typedef void* (*allocation_function)(size_t size);
+	
+	// Memory deallocation function interface
+	typedef void (*deallocation_function)(void* ptr);
+
+	// Override default memory management functions. All subsequent allocations/deallocations will be performed via supplied functions.
+	void  set_memory_management_functions(allocation_function allocate, deallocation_function deallocate);
+	
+	// Get current memory management functions
+	allocation_function  get_memory_allocation_function();
+	deallocation_function  get_memory_deallocation_function();
+}
+
+                                                                     
+             
+ 
+	                                                                                                        
+	                                                                                           
+	                                                                                                
+	                                                                                           
+ 
+      
+
+                                                    
+             
+ 
+	                                                             
+	                                                                                                     
+	                                                                                                          
+	                                                                                                     
+ 
+      
+
+      
+
+/**
+ * Copyright (c) 2006-2012 Arseny Kapoulkine
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\core\XMLprefs.h" 14
+
+                
+
+/////////////////////////////////////////////////////////////////////////////
+// CXMLprefs class
+//
+// This class wraps access to an XML file containing user preferences.
+// Usage scenarios:
+// 1. Load() followed by zero or more Get()s
+// 2. Lock(), Load(), zero or more Set()s, zero or more
+//    DeleteSetting()s, Store(), Unlock()
+/////////////////////////////////////////////////////////////////////////////
+
+class CXMLprefs
+{
+  // Construction & Destruction
+public:
+  CXMLprefs(const stringT &configFile)
+  : m_pXMLDoc(NULL), m_csConfigFile(configFile), m_bIsLocked(false) {}
+
+  ~CXMLprefs() { UnloadXML(); }
+
+  // Implementation
+  bool Load();
+  bool Store();
+  bool Lock(stringT &locker); // if fails, locker points to culprit
+  void Unlock();
+
+  int Get(const stringT &csBaseKeyName, const stringT &csValueName,
+          int iDefaultValue);
+  stringT Get(const stringT &csBaseKeyName, const stringT &csValueName,
+              const stringT &csDefaultValue);
+
+  int Set(const stringT &csBaseKeyName, const stringT &csValueName,
+          int iValue);
+  int Set(const stringT &csBaseKeyName, const stringT &csValueName,
+          const stringT &csValue);
+
+  std::vector<st_prefShortcut> GetShortcuts(const stringT &csBaseKeyName);
+  int SetShortcuts(const stringT &csBaseKeyName, 
+                   std::vector<st_prefShortcut> v_shortcuts);
+
+  bool DeleteSetting(const stringT &csBaseKeyName, const stringT &csValueName);
+  stringT getReason() const {return m_Reason;} // why something went wrong
+
+  // For migration of a host/user from one current configuration file to another
+  bool MigrateSettings(const stringT &sNewFilename, 
+                       const stringT &sHost, const stringT &sUser);
+  // Remove a host/user from current configuration file
+  bool RemoveHostnameUsername(const stringT &sHost, const stringT &sUser,
+                              bool &bNoMoreNodes);
+  
+  enum {XML_SUCCESS = 0,
+        XML_LOAD_FAILED,
+        XML_NODE_NOT_FOUND,
+        XML_PUT_TEXT_FAILED,
+        XML_SAVE_FAILED};
+
+private:
+  int SetPreference(const stringT &sPath, const stringT &sValue);
+
+  pugi::xml_document *m_pXMLDoc;
+  stringT m_csConfigFile;
+  bool m_bIsLocked;
+
+  // CreateXML - bLoad will skip creation of root element
+  bool CreateXML(bool bLoad);
+  void UnloadXML();
+  stringT m_Reason; // why something bad happenned
+};
+       /* __XMLPREFS_H */

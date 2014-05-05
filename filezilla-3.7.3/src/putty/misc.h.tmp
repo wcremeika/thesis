@@ -1,0 +1,179 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\putty\misc.h" 0
+/*
+ * Header for misc.c.
+ */
+
+                    
+                    
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\putty\puttymem.h" 0
+/*
+ * PuTTY memory-handling header.
+ */
+
+                        
+                        
+
+                  		       /* for size_t */
+                  		       /* for memcpy() */
+
+
+/* #define MALLOC_LOG  do this if you suspect putty of leaking memory */
+                 
+                                                             
+                                                                
+                                                                   
+                                                                      
+                                                       
+                       
+     
+                                  
+                           
+                                        
+                             
+                      
+      
+
+void *safemalloc(size_t, size_t);
+void *saferealloc(void *, size_t, size_t);
+void safefree(void *);
+
+/*
+ * Direct use of smalloc within the code should be avoided where
+ * possible, in favour of these type-casting macros which ensure
+ * you don't mistakenly allocate enough space for one sort of
+ * structure and assign it to a different sort of pointer.
+ */
+                                                      
+                                                            
+                                                                           
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\putty\misc.h" 8
+
+                 		       /* for FILE * */
+                  		       /* for va_list */
+                                      /* for struct tm */
+
+             
+               
+      
+            
+              
+      
+
+typedef struct Filename Filename;
+typedef struct FontSpec FontSpec;
+
+unsigned long parse_blocksize(const char *bs);
+char ctrlparse(char *s, char **next);
+
+char *dupstr(const char *s);
+char *dupcat(const char *s1, ...);
+char *dupprintf(const char *fmt, ...);
+char *dupvprintf(const char *fmt, va_list ap);
+
+char *fgetline(FILE *fp);
+
+void base64_encode_atom(unsigned char *data, int n, char *out);
+
+struct bufchain_granule;
+typedef struct bufchain_tag {
+    struct bufchain_granule *head, *tail;
+    int buffersize;		       /* current amount of buffered data */
+} bufchain;
+
+void bufchain_init(bufchain *ch);
+void bufchain_clear(bufchain *ch);
+int bufchain_size(bufchain *ch);
+void bufchain_add(bufchain *ch, const void *data, int len);
+void bufchain_prefix(bufchain *ch, void **data, int *len);
+void bufchain_consume(bufchain *ch, int len);
+void bufchain_fetch(bufchain *ch, void *data, int len);
+
+struct tm ltime(void);
+
+/*
+ * Debugging functions.
+ *
+ * Output goes to debug.log
+ *
+ * debug(()) (note the double brackets) is like printf().
+ *
+ * dmemdump() and dmemdumpl() both do memory dumps.  The difference
+ * is that dmemdumpl() is more suited for when the memory address is
+ * important (say because you'll be recording pointer values later
+ * on).  dmemdump() is more concise.
+ */
+
+            
+                                  
+                                              
+                                 
+                                                      
+                                                       
+     
+                
+                         
+                          
+      
+
+             
+                                                  
+      
+
+           
+                                          
+      
+           
+                                          
+      
+
+                                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                                                                                                                
+
+
+
+
+
+                                                                                                                            
+
+
+
+                                                                                                                        
+
+
+
+                                                                                                                                                                                                                                
+
+
+
+
+
+                                             
+
+                                                                                                                                                                                                                
+
+
+
+
+
+                                                           
+
+                                                                                                                            
+
+
+
+                                                                                                                        
+
+
+
+      

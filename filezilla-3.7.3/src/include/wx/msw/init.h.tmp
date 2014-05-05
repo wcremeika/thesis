@@ -1,0 +1,92 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\init.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/init.h
+// Purpose:     Windows-specific wxEntry() overload
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+// ----------------------------------------------------------------------------
+// Windows-specific wxEntry() overload and wxIMPLEMENT_WXWIN_MAIN definition
+// ----------------------------------------------------------------------------
+
+// we need HINSTANCE declaration to define WinMain()
+                          
+
+                     
+                           
+      
+
+// WinMain() is always ANSI, even in Unicode build, under normal Windows
+// but is always Unicode under CE
+                  
+                                      
+     
+    typedef char *wxCmdLineArgType;
+      
+
+// Windows-only overloads of wxEntry() and wxEntryStart() which take the
+// parameters passed to WinMain() instead of those passed to main()
+extern WXDLLIMPEXP_CORE bool
+    wxEntryStart(HINSTANCE hInstance,
+                HINSTANCE hPrevInstance = NULL,
+                wxCmdLineArgType pCmdLine = NULL,
+                int nCmdShow = 1);
+
+extern WXDLLIMPEXP_CORE int
+    wxEntry(HINSTANCE hInstance,
+            HINSTANCE hPrevInstance = NULL,
+            wxCmdLineArgType pCmdLine = NULL,
+            int nCmdShow = 1);
+
+                                          
+                                                                        
+                                                                             
+                                                                       
+                                                                          
+                                                                            
+                                                   
+                                                                                            
+                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+
+
+
+
+
+
+
+     
+                                                      
+       // defined(__BORLANDC__) && wxUSE_UNICODE
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       // _WX_MSW_INIT_H_

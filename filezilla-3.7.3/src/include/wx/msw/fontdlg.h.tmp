@@ -1,0 +1,47 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\fontdlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/fontdlg.h
+// Purpose:     wxFontDialog class
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+// ----------------------------------------------------------------------------
+// wxFontDialog
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxFontDialog : public wxFontDialogBase
+{
+public:
+    wxFontDialog() : wxFontDialogBase() { /* must be Create()d later */ }
+    wxFontDialog(wxWindow *parent)
+        : wxFontDialogBase(parent) { Create(parent); }
+    wxFontDialog(wxWindow *parent, const wxFontData& data)
+        : wxFontDialogBase(parent, data) { Create(parent, data); }
+
+    virtual int ShowModal();
+
+                           
+                                      
+                                                                           
+       // WXWIN_COMPATIBILITY_2_6
+
+protected:
+    DECLARE_DYNAMIC_CLASS_NO_COPY(wxFontDialog)
+};
+
+                           
+                                      
+                                                                           
+                                                                          
+       // WXWIN_COMPATIBILITY_2_6
+
+      
+    // _WX_MSW_FONTDLG_H_

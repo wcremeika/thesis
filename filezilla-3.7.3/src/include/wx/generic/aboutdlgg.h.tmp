@@ -1,0 +1,104 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\generic\aboutdlgg.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/generic/aboutdlgg.h
+// Purpose:     generic wxAboutBox() implementation
+// Author:      Vadim Zeitlin
+// Created:     2006-10-07
+// Copyright:   (c) 2006 Vadim Zeitlin <vadim@wxwindows.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                
+                                
+
+                   
+
+                  
+
+                      
+
+                                            
+                                   
+                                        
+
+                                                                              
+                                            
+                                
+                                                
+                                          
+         
+                                          
+          
+                                              
+
+                                                                               
+                                                              
+                                                                               
+
+                                                            
+ 
+       
+                                       
+                                       
+
+                                                                          
+                                      
+
+                                              
+                                                                                
+     
+               
+
+                                   
+     
+
+                                                                          
+                                                                        
+
+          
+                                                                             
+             
+      
+                                                                           
+                                                                           
+                                                               
+                                          
+
+                                                                          
+            
+                                                              
+
+                                                                     
+                                   
+
+                                                                  
+                                       
+
+                  
+                                                        
+                                                                         
+                        
+
+        
+                               
+                                       
+
+                             
+                                                                             
+                                   
+                                            
+                                     
+                                   
+
+                         
+  
+
+                                                                              
+                                             
+                                                                                               
+
+       // wxUSE_ABOUTDLG
+
+       // _WX_GENERIC_ABOUTDLGG_H_
+

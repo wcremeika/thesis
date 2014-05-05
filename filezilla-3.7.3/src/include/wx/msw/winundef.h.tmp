@@ -1,0 +1,485 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\winundef.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        winundef.h
+// Purpose:     undefine the common symbols #define'd by <windows.h>
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     16.05.99
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+/* THIS SHOULD NOT BE USED since you might include it once e.g. in window.h,
+ * then again _AFTER_ you've included windows.h, in which case it won't work
+ * a 2nd time -- JACS
+#ifndef _WX_WINUNDEF_H_
+#define _WX_WINUNDEF_H_
+ */
+
+// ----------------------------------------------------------------------------
+// windows.h #defines the following identifiers which are also used in wxWin so
+// we replace these symbols with the corresponding inline functions and
+// undefine the macro.
+//
+// This looks quite ugly here but allows us to write clear (and correct!) code
+// elsewhere because the functions, unlike the macros, respect the scope.
+// ----------------------------------------------------------------------------
+
+// CreateDialog
+
+                         
+                       
+
+                                                 
+                                               
+                                             
+                                              
+     
+                       
+                                                                             
+             
+                                                                             
+              
+     
+      
+
+// CreateFont
+
+                 
+                     
+
+                                       
+                                      
+                                           
+                                            
+                                       
+                                         
+                                            
+                                            
+                                          
+                                               
+                                                
+                                          
+                                         
+                                             
+     
+                       
+                                                                      
+                                                                             
+                                                                    
+                                                 
+             
+                                                                      
+                                                                             
+                                                                    
+                                                 
+              
+     
+       // CreateFont
+
+// CreateWindow
+
+                         
+                       
+
+                                                 
+                                                
+                                           
+                                                        
+                                             
+                                         
+                                                 
+                                            
+     
+                       
+                                                                              
+                                                                        
+             
+                                                                              
+                                                                        
+              
+     
+      
+
+// LoadMenu
+
+               
+                   
+
+                                                           
+     
+                       
+                                             
+             
+                                             
+              
+     
+      
+
+// FindText
+
+               
+                   
+
+                                                              
+     
+                       
+                                            
+             
+                                            
+              
+     
+      
+
+// GetCharWidth
+
+                   
+                      
+                                                                         
+    
+                  
+                                                    
+        
+                                                    
+         
+    
+      
+
+// FindWindow
+
+                 
+                    
+                  
+                                                                
+    
+                                                
+    
+        
+                                                              
+    
+                                                
+    
+         
+      
+
+// PlaySound
+
+                
+                   
+                  
+                                                                        
+    
+                                                  
+    
+        
+                                                                       
+    
+                                                  
+    
+         
+      
+
+// GetClassName
+
+                   
+                      
+                  
+                                                                  
+    
+                                                   
+    
+        
+                                                                 
+    
+                                                   
+    
+         
+      
+
+// GetClassInfo
+
+                   
+                      
+                  
+                                                                            
+    
+                                              
+    
+        
+                                                                           
+    
+                                              
+    
+         
+      
+
+// LoadAccelerators
+
+                       
+                          
+                  
+                                                            
+    
+                                        
+    
+        
+                                                           
+    
+                                        
+    
+         
+      
+
+// DrawText
+
+               
+                  
+                  
+                                                                               
+    
+                                                    
+    
+        
+                                                                              
+    
+                                                    
+    
+         
+      
+
+
+// StartDoc
+
+               
+                  
+
+                                                                             
+                                                             
+                          
+                                         
+                                
+                                
+            
+         
+
+                  
+                                                   
+    
+                                            
+    
+        
+                                                   
+    
+                                            
+    
+         
+      
+
+// GetObject
+
+                
+                   
+                                                        
+    
+                  
+                                      
+        
+                                      
+         
+    
+      
+
+// GetMessage
+
+                 
+                    
+                                                                                        
+    
+                  
+                                                                    
+        
+                                                                    
+         
+    
+      
+
+// LoadIcon
+               
+                   
+                                                                  
+     
+                       
+                                                    
+                     
+                                                    
+                              
+     
+       // LoadIcon
+
+// LoadBitmap
+                 
+                     
+                                                                        
+     
+                       
+                                                        
+                     
+                                                        
+                              
+     
+       // LoadBitmap
+
+// LoadLibrary
+
+                  
+                      
+                   
+                                                       
+     
+                                           
+     
+         
+                                                      
+     
+                                           
+     
+          
+      
+
+// FindResource
+                   
+                       
+                   
+                                                                              
+     
+                                                      
+     
+         
+                                                                            
+     
+                                                      
+     
+          
+      
+
+// IsMaximized
+
+                  
+                      
+                                                         
+     
+                  
+                     
+     
+                              
+      
+     
+      
+
+// GetFirstChild
+
+                    
+                        
+                                                           
+     
+                  
+                 
+     
+                                  
+      
+     
+      
+
+// GetFirstSibling
+
+                      
+                          
+                                          
+     
+                                            
+     
+      
+
+// GetLastSibling
+
+                     
+                         
+                                         
+     
+                                           
+     
+      
+
+// GetPrevSibling
+
+                     
+                         
+                                         
+     
+                                           
+     
+      
+
+// GetNextSibling
+
+                     
+                         
+                                         
+     
+                                           
+     
+      
+
+// For WINE
+
+                           
+                       
+      
+
+// For ming and cygwin
+
+// GetFirstChild
+                    
+                       
+                                    
+    
+                             
+    
+      
+
+
+// GetNextSibling
+                     
+                        
+                                     
+    
+                                      
+    
+      
+
+
+            
+                
+      
+
+
+                                                               
+                   
+                                                            
+     
+                                                                
+     
+      
+
+
+// GetWindowProc
+//ifdef GetWindowProc
+//   #undef GetWindowProc
+//endif
+//ifdef GetNextChild
+//    #undef GetNextChild
+//endif
+
+// #endif // _WX_WINUNDEF_H_
+

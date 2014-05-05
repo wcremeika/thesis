@@ -1,0 +1,191 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWSversion.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+/// \file PWSversion.cpp
+//-----------------------------------------------------------------------------
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\stdafx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWSversion.cpp" 11
+
+                      
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWSversion.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+       
+
+/// \file PWSversion.h
+//-----------------------------------------------------------------------------
+
+class PWSversion
+{
+public:
+  PWSversion();
+
+  static PWSversion *GetInstance(); // singleton
+  static void DeleteInstance();
+
+  int GetMajor() const {return m_nMajor;}
+  int GetMinor() const {return m_nMinor;}
+  int GetBuild() const {return m_nBuild;}
+  const CString &GetRevision() const {return m_Revision;}
+
+  const CString &GetSpecialBuild() const {return m_SpecialBuild;}
+  const CString &GetAppVersion() const {return m_AppVersion;}
+  const CString &GetBuiltOn() const {return m_builtOn;}
+  bool IsModified() {return m_bModified;}
+
+private:
+  static PWSversion *self; // singleton
+
+  CString m_AppVersion, m_SpecialBuild;
+  int m_nMajor, m_nMinor, m_nBuild;
+  CString m_Revision;
+  CString m_builtOn;
+  bool m_bModified;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWSversion.cpp" 13
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\version.h" 0
+/*
+ * Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+ * All rights reserved. Use of the code is allowed under the
+ * Artistic License 2.0 terms, as specified in the LICENSE file
+ * distributed with this code, or available from
+ * http://www.opensource.org/licenses/artistic-license-2.0.php
+ */
+
+                   
+                   
+
+// version.h is automatically generated from version.in by a custom
+// pre-build step that uses git's 'describe' function and
+// replaces "g1d3604e" with current git commit info.
+
+// Format: Major, Minor, Build, Revision
+//   Build  = 0 for all Formally Released versions
+//   Build != 0 for all Intermediate versions
+// Full information shown in AboutBox; only Major & Minor are displayed in initial dialog
+
+                               
+                                             
+                                 
+                                    
+
+// Only define SPECIAL_BUILD before here (in version.in) if needed!
+
+
+                     
+                         
+      
+
+       // _VERSION_H_
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWSversion.cpp" 14
+
+             
+                     
+                
+                                   
+      
+
+                        
+                          
+
+PWSversion *PWSversion::self = NULL;
+
+PWSversion *PWSversion::GetInstance()
+{
+  if (self == NULL) {
+    self = new PWSversion();
+  }
+  return self;
+}
+
+void PWSversion::DeleteInstance()
+{
+  delete self;
+  self = NULL;
+}
+
+PWSversion::PWSversion()
+  : m_nMajor(0), m_nMinor(0), m_nBuild(0), m_bModified(false)
+{
+  CString csFileVersion = L"3, 32, 0, g1d3604e\0";
+  m_SpecialBuild = L"";
+
+  m_builtOn = CString("Apr 2 2014") + CString(L" ") + CString("17:57:48");
+
+  CString resToken;
+  int curPos = 0, index = 0;
+  
+  // Tokenize the file version to get the values in order
+  // Revision is either a number or a number with '+',
+  // so we need to get it from the file version string
+  // which is of the form "MM, NN, BB, rev"
+  resToken = csFileVersion.Tokenize(L",", curPos);
+  while (resToken != L"" && curPos != -1) {
+    resToken.Trim();
+    if (resToken.IsEmpty())
+      resToken = L"0";
+    
+    // Note: if token not numeric, returned value of _wtoi is zero
+    switch (index) {
+      case 0:
+        m_nMajor = _wtoi(resToken);
+        break;
+      case 1:
+        m_nMinor = _wtoi(resToken);
+        break;
+      case 2:
+        m_nBuild = _wtoi(resToken);
+        break;
+      case 3:
+        if (resToken.Right(1) == L"+")
+          m_bModified = true;
+        m_Revision = resToken;
+        break;
+      default:
+        ;
+    }
+    index++;
+    resToken = csFileVersion.Tokenize(L",", curPos);
+  };
+}

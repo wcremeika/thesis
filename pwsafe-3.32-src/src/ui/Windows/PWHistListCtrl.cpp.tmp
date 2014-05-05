@@ -1,0 +1,248 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHistListCtrl.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\stdafx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHistListCtrl.cpp" 9
+
+                          
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHistListCtrl.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+class CPWHistListCtrl : public CListCtrl
+{
+public:
+  CPWHistListCtrl() {}
+  virtual ~CPWHistListCtrl() {}
+  void UpdateRowHeight(bool bInvalidate);
+protected:
+  //{{AFX_MSG(CPWHistListCtrl)
+   void OnCustomDraw(NMHDR *pNotifyStruct, void *pLResult);
+   void OnSetFont(WPARAM, LPARAM);
+   void MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct);
+  //}}AFX_MSG
+  virtual void DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct);
+  
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHistListCtrl.cpp" 11
+
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Fonts.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+       
+
+// Fonts.h
+//-----------------------------------------------------------------------------
+
+class Fonts
+{
+public:
+  static Fonts *GetInstance(); // singleton
+  void DeleteInstance();
+
+  void SetUpFont(CWnd *pWnd, CFont *pfont);
+
+  CFont *GetCurrentFont() const {return m_pCurrentFont;}
+  CFont *GetDragFixFont() const {return m_pDragFixFont;}
+  CFont *GetPasswordFont() const {return m_pPasswordFont;}
+  CFont *GetModifiedFont() const {return m_pModifiedFont;}
+
+  COLORREF GetModified_Color() {return MODIFIED_COLOR;}
+
+  void GetCurrentFont(LOGFONT *pLF);
+  void SetCurrentFont(LOGFONT *pLF);
+  void GetPasswordFont(LOGFONT *pLF);
+  void SetPasswordFont(LOGFONT *pLF);
+  void ApplyPasswordFont(CWnd* pLF);
+  void GetDefaultPasswordFont(LOGFONT &lf);
+
+  void ExtractFont(const CString& str, LOGFONT &lf);
+
+  LONG Fonts::CalcHeight() const;
+private:
+  Fonts();
+  ~Fonts() {}
+  static Fonts *self; // singleton
+
+  CFont *m_pCurrentFont;
+  CFont *m_pModifiedFont;
+  CFont *m_pDragFixFont;  // Fix for lack of text during drag!
+  CFont *m_pPasswordFont;
+  const COLORREF MODIFIED_COLOR;
+};
+
+//-----------------------------------------------------------------------------
+// Local variables:
+// mode: c++
+// End:
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHistListCtrl.cpp" 13
+
+using namespace std;
+
+             
+                     
+                
+                                   
+      
+
+
+  //{{AFX_MSG_MAP(CPWHistListCtrl)
+  ON_NOTIFY_REFLECT(NM_CUSTOMDRAW, OnCustomDraw)
+  
+  ON_WM_MEASUREITEM_REFLECT()
+  //}}AFX_MSG_MAP
+
+
+void CPWHistListCtrl::OnCustomDraw(NMHDR *pNotifyStruct, void *pLResult)
+{
+  NMLVCUSTOMDRAW *pNMLVCUSTOMDRAW = (NMLVCUSTOMDRAW *)pNotifyStruct;
+
+  *pLResult = CDRF_DODEFAULT;
+
+  static bool bchanged_subitem_font(false);
+  static CFont *pCurrentFont = NULL;
+  static CFont *pPasswordFont = NULL;
+  static CDC *pDC = NULL;
+
+  switch (pNMLVCUSTOMDRAW->nmcd.dwDrawStage) {
+    case CDDS_PREPAINT:
+      // PrePaint
+      bchanged_subitem_font = false;
+      pCurrentFont = Fonts::GetInstance()->GetCurrentFont();
+      pPasswordFont = Fonts::GetInstance()->GetPasswordFont();
+      pDC = CDC::FromHandle(pNMLVCUSTOMDRAW->nmcd.hdc);
+      *pLResult = CDRF_NOTIFYITEMDRAW;
+      break;
+
+    case CDDS_ITEMPREPAINT:
+      // Item PrePaint
+      *pLResult |= CDRF_NOTIFYSUBITEMDRAW;
+      break;
+
+    case CDDS_ITEMPREPAINT | CDDS_SUBITEM:
+      // Sub-item PrePaint
+      if (pNMLVCUSTOMDRAW->iSubItem == 1) {
+        bchanged_subitem_font = true;
+        pDC->SelectObject(pPasswordFont);
+        *pLResult |= (CDRF_NOTIFYPOSTPAINT | CDRF_NEWFONT);
+      }
+      break;
+
+    case CDDS_ITEMPOSTPAINT | CDDS_SUBITEM:
+      // Sub-item PostPaint - restore old font if any
+      if (bchanged_subitem_font) {
+        bchanged_subitem_font = false;
+        pDC->SelectObject(pCurrentFont);
+        *pLResult |= CDRF_NEWFONT;
+      }
+      break;
+
+    /*
+    case CDDS_PREERASE:
+    case CDDS_POSTERASE:
+    case CDDS_ITEMPREERASE:
+    case CDDS_ITEMPOSTERASE:
+    case CDDS_ITEMPOSTPAINT:
+    case CDDS_POSTPAINT:
+    */
+    default:
+      break;
+  }
+}
+
+void CPWHistListCtrl::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
+{
+  if (!Fonts::GetInstance())
+     return;
+  
+  int padding=4;
+  if (GetExtendedStyle() & LVS_EX_GRIDLINES)
+     padding+=2;
+  
+  lpMeasureItemStruct->itemHeight = Fonts::GetInstance()->CalcHeight()+padding;
+  //Remove LVS_OWNERDRAWFIXED style to apply default DrawItem
+  ModifyStyle(LVS_OWNERDRAWFIXED, 0);
+}
+
+void CPWHistListCtrl::UpdateRowHeight(bool bInvalidate){
+  // We need to change WINDOWPOS to trigger MeasureItem 
+  // http://www.codeproject.com/Articles/1401/Changing-Row-Height-in-an-owner-drawn-Control
+  CRect rc;
+  GetWindowRect(&rc);
+  WINDOWPOS wp;
+  wp.hwnd = m_hWnd;
+  wp.cx = rc.Width();
+  wp.cy = rc.Height();
+  wp.flags = SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER;
+  
+  //Add LVS_OWNERDRAWFIXED style for generating MeasureItem event
+  ModifyStyle(0, LVS_OWNERDRAWFIXED);
+
+  SendMessage(WM_WINDOWPOSCHANGED, 0, (LPARAM)&wp);
+  if (bInvalidate)
+  {
+    Invalidate();
+    int idx = GetTopIndex();
+    if (idx >=0)
+      EnsureVisible(idx, FALSE);
+  }
+}
+
+void CPWHistListCtrl::OnSetFont(WPARAM, LPARAM)
+{
+  void res = Default();
+  UpdateRowHeight(false);
+  return res;
+}
+
+void CPWHistListCtrl::DrawItem(LPDRAWITEMSTRUCT){
+  //DrawItem must be overriden for LVS_OWNERDRAWFIXED style lists
+}

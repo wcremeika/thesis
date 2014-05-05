@@ -1,0 +1,61 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\cocoa\chkconf.h" 0
+/*
+ * Name:        wx/osx/cocoa/chkconf.h
+ * Purpose:     Compiler-specific configuration checking
+ * Author:      Stefan Csomor
+ * Modified by:
+ * Created:     2008-07-30
+ * Copyright:   (c) Stefan Csomor
+ * Licence:     wxWindows licence
+ */
+
+                                
+                                
+
+/* Many wchar functions (and also strnlen(), for some reason) are only
+   available since 10.7 so don't use them if we want to build the applications
+   that would run under 10.6 and earlier. */
+                                                          
+                      
+                     
+                      
+                         
+                          
+      
+
+/*
+ * native (1) or emulated (0) toolbar
+ */
+
+                                
+                                      
+      
+
+/*
+ * leave is isFlipped and don't override
+ */
+                                
+                                      
+      
+
+/*
+ * text rendering system
+ */
+
+                             
+
+/*
+ * Audio System
+ */
+
+                             
+                                
+
+/*
+ * turning off capabilities that don't work under cocoa yet
+ */
+
+      
+    /* _WX_MAC_CHKCONF_H_ */
+

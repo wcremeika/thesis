@@ -1,0 +1,57 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\fs_arc.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/fs_arc.h
+// Purpose:     Archive file system
+// Author:      Vaclav Slavik, Mike Wetherell
+// Copyright:   (c) 1999 Vaclav Slavik, (c) 2006 Mike Wetherell
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+                   
+
+                    
+
+                       
+                       
+
+                                                          
+
+                                                                             
+                     
+                                                                             
+
+                                                                      
+ 
+       
+                         
+                                                   
+                                                                           
+                                                                    
+                                
+                   
+                                  
+
+        
+                                    
+                      
+
+                                             
+                                          
+                                         
+                                             
+                                   
+                                          
+
+                      
+
+                                                
+                                             
+  
+
+       // wxUSE_FS_ARCHIVE
+
+       // _WX_FS_ARC_H_

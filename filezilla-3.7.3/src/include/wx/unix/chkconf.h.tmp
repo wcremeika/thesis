@@ -1,0 +1,45 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\unix\chkconf.h" 0
+/*
+ * Name:        wx/unix/chkconf.h
+ * Purpose:     Unix-specific config settings consistency checks
+ * Author:      Vadim Zeitlin
+ * Created:     2007-07-14
+ * Copyright:   (c) 2007 Vadim Zeitlin <vadim@wxwidgets.org>
+ * Licence:     wxWindows licence
+ */
+
+/* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
+
+                           
+                                                       
+                              
+      
+     
+                              
+                                 
+      
+      
+       /* wxUSE_CONSOLE_EVENTLOOP */
+
+                   
+                                                     
+                              
+      
+     
+                      
+                         
+      
+      
+       /* wxUSE_FSWATCHER */
+
+                   
+                  
+                              
+      
+     
+                      
+                         
+      
+      
+       /* wxUSE_GSTREAMER */

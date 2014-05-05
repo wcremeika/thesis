@@ -1,0 +1,144 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\spinbutt.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/spinbutt.h
+// Purpose:     wxSpinButtonBase class
+// Author:      Julian Smart, Vadim Zeitlin
+// Modified by:
+// Created:     23.07.99
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+// ----------------------------------------------------------------------------
+// headers
+// ----------------------------------------------------------------------------
+
+                   
+
+                 
+
+                       
+                     
+                     
+
+                                              
+
+                                                                               
+                                                                        
+                      
+  
+           
+                                             
+                                                         
+                                                           
+                                                
+                                                                               
+
+                                                          
+ 
+       
+                                                                  
+                                                  
+
+                
+                                     
+                                                
+                                                
+                                                                     
+
+                 
+                                       
+                                                                     
+                                                                     
+                                                 
+     
+                       
+                       
+     
+                                                                                       
+
+                                               
+                                                                            
+
+          
+                      
+                
+                
+
+                                              
+  
+
+                                                                               
+                                            
+                                                                               
+
+                            
+                                 
+                        
+                                
+                          
+                                  
+                          
+                                
+                        
+                                 
+                        
+                                
+                          
+                                  
+                       
+                                
+      
+
+                                                                               
+                         
+                                                                               
+
+                                                         
+ 
+       
+                                                                    
+                                              
+     
+     
+
+                                                                   
+
+                                           
+                                                 
+                                                      
+
+                                                    
+                                                     
+
+                                                                     
+
+        
+                                                
+  
+
+                                                                
+
+                                                                                    
+
+
+                                                                              
+                                                                           
+                                                                       
+                                                                       
+                                                  
+                                                                                                     
+
+                                                                                                         
+
+                                                                                               
+
+
+       // wxUSE_SPINBTN
+
+      
+    // _WX_SPINBUTT_H_BASE_

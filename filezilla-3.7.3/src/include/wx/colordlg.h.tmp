@@ -1,0 +1,43 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\colordlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/colordlg.h
+// Purpose:     wxColourDialog
+// Author:      Vadim Zeitiln
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+                   
+
+                   
+
+                          
+
+                                                   
+                                
+                                                     
+                                
+                                                       
+                                
+     
+                                    
+
+                                                
+      
+
+                                         
+                                                                      
+                                                                                     
+                                                                                      
+                                                                         
+
+       // wxUSE_COLOURDLG
+
+      
+    // _WX_COLORDLG_H_BASE_

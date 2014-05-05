@@ -1,0 +1,23 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_ftpproxy.h" 0
+                                  
+                                  
+
+class COptionsPageFtpProxy : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_CONNECTION_FTP_PROXY"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+
+protected:
+
+	void SetCtrlState();
+
+	DECLARE_EVENT_TABLE()
+	void OnProxyTypeChanged(wxCommandEvent& event);
+	void OnLoginSequenceChanged(wxCommandEvent& event);
+};
+
+       //__OPTIONSPAGE_FTPPROXY_H__

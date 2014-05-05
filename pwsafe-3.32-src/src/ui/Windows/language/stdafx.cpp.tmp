@@ -1,0 +1,45 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\language\stdafx.cpp" 0
+// stdafx.cpp : source file that includes just the standard includes
+// pwsafeDLL.pch will be the pre-compiled header
+// stdafx.obj will contain the pre-compiled type information
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\language\stdafx.h" 0
+// stdafx.h : include file for standard system include files,
+// or project specific include files that are used frequently, but
+// are changed infrequently
+//
+
+       
+
+// Modify the following defines if you have to target a platform prior to the ones specified below.
+// Refer to MSDN for the latest info on corresponding values for different platforms.
+              
+                                                                                                          
+      
+
+                    
+                                                                                                          
+      
+
+                      
+                                                                                                    
+      
+
+                 
+                                                                                                     
+      
+
+                                                                               
+// Windows Header Files:
+                   
+
+
+
+// TODO: reference additional headers your program requires here
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\language\stdafx.cpp" 5
+
+// TODO: reference any additional headers you need in STDAFX.H
+// and not in this file

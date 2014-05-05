@@ -1,0 +1,77 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\themeprovider.h" 0
+                           
+                           
+
+                                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\option_change_event_handler.h" 0
+                                         
+                                         
+
+             
+                
+
+class COptions;
+
+class COptionChangeEventHandler
+{
+	friend class COptions;
+
+public:
+	COptionChangeEventHandler();
+	virtual ~COptionChangeEventHandler();
+
+	void RegisterOption(int option);
+	void UnregisterOption(int option);
+
+protected:
+	virtual void OnOptionChanged(int option) = 0;
+
+private:
+	std::set<int> m_handled_options;
+
+	static void DoNotify(int option);
+	static void UnregisterAll();
+
+	static std::vector<std::set<COptionChangeEventHandler*> > m_handlers;
+};
+
+       //__OPTION_CHANGE_EVENT_HANDLER_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\themeprovider.h" 4
+
+enum iconSize
+{
+	iconSizeSmall,
+	iconSizeNormal,
+	iconSizeLarge
+};
+
+class CThemeProvider : public wxArtProvider, protected COptionChangeEventHandler
+{
+public:
+	CThemeProvider();
+	virtual ~CThemeProvider() {}
+
+	static std::list<wxString> GetThemes();
+	static std::list<wxBitmap*> GetAllImages(const wxString& theme, const wxSize& size);
+	static bool GetThemeData(const wxString& themePath, wxString& name, wxString& author, wxString& email);
+	static std::list<wxString> GetThemeSizes(const wxString& themePath);
+	static wxIconBundle GetIconBundle(const wxArtID& id, const wxArtClient& client = wxART_OTHER);
+	static bool ThemeHasSize(const wxString& themePath, const wxString& size);
+
+	static wxSize GetIconSize(enum iconSize size);
+
+protected:
+	static wxString GetThemePath();
+
+	wxBitmap CreateBitmap(const wxArtID& id, const wxArtClient& /*client*/, const wxSize& size);
+
+	std::list<wxString> GetSearchDirs(const wxSize& size);
+
+	virtual void OnOptionChanged(int option);
+
+	wxString m_themePath;
+};
+
+       //__THEMEPROVIDER_H__

@@ -1,0 +1,111 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\mstream.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/mstream.h
+// Purpose:     Memory stream classes
+// Author:      Guilhem Lavaux
+// Modified by:
+// Created:     11/07/98
+// Copyright:   (c) Guilhem Lavaux
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                   
+
+                 
+
+                      
+
+                                                
+
+                                                                 
+ 
+       
+                                                         
+                                                            
+                                              
+                                                               
+     
+                                        
+     
+                                                    
+                         
+     
+                                                
+     
+
+                                   
+                                                               
+                                                    
+
+                        
+                                 
+
+                                                                          
+
+                           
+                                     
+                                                              
+                                 
+
+          
+                                  
+
+                                                  
+                                                              
+                                   
+
+        
+                                                
+                                                                     
+
+                    
+
+                                                                             
+                                               
+                                                   
+  
+
+                                                                   
+ 
+       
+                                                          
+                                                               
+                                    
+                                                                                     
+                                                    
+
+                                                  
+
+                                                                           
+
+                           
+                                     
+                                                               
+                                 
+
+          
+                                  
+
+          
+                                                         
+                                                              
+                                   
+
+                                               
+                                                  
+  
+
+                           
+                                                                                                   
+                                                                                                     
+                                 
+
+      
+  // wxUSE_STREAMS
+
+      
+  // _WX_WXMMSTREAM_H__

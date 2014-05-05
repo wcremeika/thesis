@@ -1,0 +1,98 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\apptrait.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/apptrait.h
+// Purpose:     class implementing wxAppTraits for MSW
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     21.06.2003
+// Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+// ----------------------------------------------------------------------------
+// wxGUI/ConsoleAppTraits: must derive from wxAppTraits, not wxAppTraitsBase
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_BASE wxConsoleAppTraits : public wxConsoleAppTraitsBase
+{
+public:
+    virtual wxEventLoopBase *CreateEventLoop();
+    virtual void *BeforeChildWaitLoop();
+    virtual void AfterChildWaitLoop(void *data);
+               
+                                                         
+       // wxUSE_TIMER
+                 
+                                           
+                                                               
+       // wxUSE_THREADS
+                   
+    virtual bool CanUseStderr() { return true; }
+    virtual bool WriteToStderr(const wxString& text);
+       // !__WXWINCE__
+};
+
+             
+
+                      
+
+                                                                 
+ 
+       
+                                               
+                                        
+                                                
+               
+                                                         
+                     
+                 
+                                           
+                                                               
+                       
+                                                                                     
+
+                   
+                                
+                                                     
+                      
+  
+
+                        
+
+                                                                 
+ 
+       
+                                               
+                                                        
+                                                             
+               
+                                                         
+      
+
+                                         
+                                 
+                                 
+      
+
+                 
+                                                           
+                                                                        
+                                                  
+                       
+                                                                                     
+
+                   
+                                                 
+                                                                                
+                      
+  
+
+      
+
+       // wxUSE_GUI
+
+       // _WX_MSW_APPTRAIT_H_

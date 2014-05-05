@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_tglbtn.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_tglbtn.h
+// Purpose:     XML resource handler for wxToggleButton
+// Author:      Julian Smart
+// Created:     2004-08-30
+// Copyright:   (c) 2004 Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                         
+
+                                
+
+                                                                            
+ 
+                                                   
+
+       
+                               
+                                         
+                                            
+
+          
+                                                         
+                                                                                                                              
+                                                               
+      
+  
+
+       // wxUSE_XRC && wxUSE_TOGGLEBTN
+
+       // _WX_XH_TGLBTN_H_

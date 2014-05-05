@@ -1,0 +1,52 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cocoa\dirdlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cocoa/dirdlg.h
+// Purpose:     wxDirDialog class
+// Author:      Ryan Norton
+// Modified by: Hiroyuki Nakamura(maloninc)
+// Created:     2006-01-10
+// Copyright:   (c) Ryan Norton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+DECLARE_WXCOCOA_OBJC_CLASS(NSSavePanel);
+
+                                    
+//-------------------------------------------------------------------------
+// wxDirDialog
+//-------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxCocoaDirDialog: public wxDirDialogBase
+{
+    DECLARE_DYNAMIC_CLASS(wxCocoaDirDialog)
+    wxDECLARE_NO_COPY_CLASS(wxCocoaDirDialog);
+public:
+    wxCocoaDirDialog(wxWindow *parent,
+                const wxString& message = wxDirSelectorPromptStr,
+                const wxString& defaultPath = wxT(""),
+                long style = wxDD_DEFAULT_STYLE,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                const wxString& name = wxDirDialogNameStr);
+    virtual ~wxCocoaDirDialog();
+
+    virtual int ShowModal();
+
+    inline WX_NSSavePanel GetNSSavePanel()
+    {   return (WX_NSSavePanel)m_cocoaNSWindow; }
+
+protected:
+    wxString    m_dir;
+    wxWindow *  m_parent;
+    wxString    m_fileName;
+
+private:
+    wxArrayString m_fileNames;
+};
+
+       // _WX_DIRDLG_H_
+

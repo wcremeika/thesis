@@ -1,0 +1,34 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\core\private\timer.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/core/private/timer.h
+// Purpose:     wxTimer class based on core foundation
+// Author:      Stefan Csomor
+// Created:     2008-07-16
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                     
+                                     
+
+                            
+
+struct wxOSXTimerInfo;
+
+class WXDLLIMPEXP_CORE wxOSXTimerImpl : public wxTimerImpl
+{
+public:
+    wxOSXTimerImpl(wxTimer *timer);
+    virtual ~wxOSXTimerImpl();
+
+    virtual bool Start(int milliseconds = -1, bool one_shot = false);
+    virtual void Stop();
+
+    virtual bool IsRunning() const;
+
+private:
+    wxOSXTimerInfo *m_info;
+};
+
+       // _WX_OSX_CORE_PRIVATE_TIMER_H_

@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\ioswrap.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/ioswrap.h
+// Purpose:     includes the correct iostream headers for current compiler
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     03.02.99
+// Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                      
+
+                         
+
+                   
+                     
+     
+                   
+      
+
+                        
+
+                  
+                            
+      
+
+      
+  // wxUSE_STD_IOSTREAM
+

@@ -1,0 +1,387 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\menu_bar.h" 0
+                      
+                      
+
+                                       
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\option_change_event_handler.h" 0
+                                         
+                                         
+
+             
+                
+
+class COptions;
+
+class COptionChangeEventHandler
+{
+	friend class COptions;
+
+public:
+	COptionChangeEventHandler();
+	virtual ~COptionChangeEventHandler();
+
+	void RegisterOption(int option);
+	void UnregisterOption(int option);
+
+protected:
+	virtual void OnOptionChanged(int option) = 0;
+
+private:
+	std::set<int> m_handled_options;
+
+	static void DoNotify(int option);
+	static void UnregisterAll();
+
+	static std::vector<std::set<COptionChangeEventHandler*> > m_handlers;
+};
+
+       //__OPTION_CHANGE_EVENT_HANDLER_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\menu_bar.h" 4
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\state.h" 0
+                   
+                   
+
+                      
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\local_path.h" 0
+                        
+                        
+
+// This class encapsulates local paths.
+// On Windows it uses the C:\foo\bar\ syntax and also supports
+// UNC paths.
+// On all other systems it uses /foo/bar/baz/
+
+class CLocalPath
+{
+public:
+	CLocalPath() {}
+	CLocalPath(const CLocalPath &path);
+
+	// Creates path. If the path is not syntactically
+	// correct, empty() will return true.
+	// If file is given and path not terminated by a separator,
+	// the filename portion is returned in file.
+	explicit CLocalPath(const wxString& path, wxString* file = 0);
+	bool SetPath(const wxString& path, wxString* file = 0);
+
+	// Always terminated by a separator
+	const wxString& GetPath() const { return m_path; }
+
+	bool empty() const;
+	void clear();
+
+	// On failure the path is undefined
+	bool ChangePath(const wxString& path);
+
+	// Do not call with separators in the segment
+	void AddSegment(const wxString& segment);
+
+	// HasParent() and HasLogicalParent() only return different values on
+	// MSW: C:\ is the drive root but has \ as logical parent, the drive list.
+	bool HasParent() const;
+	bool HasLogicalParent() const;
+
+	CLocalPath GetParent(wxString* last_segment = 0) const;
+
+	// If it fails, the path is undefined
+	bool MakeParent(wxString* last_segment = 0);
+
+	/* Calling GetLastSegment() only returns non-empty string if
+	 * HasParent() returns true
+	 */
+	wxString GetLastSegment() const;
+
+	bool IsSubdirOf(const CLocalPath &path) const;
+	bool IsParentOf(const CLocalPath &path) const;
+
+	/* Checks if the directory is writeable purely on a syntactical level.
+	 * Currently only works on MSW where some logical paths
+	 * are not writeable, e.g. the drive list \ or a remote computer \\foo
+	 */
+	bool IsWriteable() const;
+
+	// Checks if the directory exists.
+	bool Exists(wxString *error = 0) const;
+
+	static const wxChar path_separator;
+
+	bool operator==(const CLocalPath& op) const;
+	bool operator!=(const CLocalPath& op) const;
+
+	void Coalesce();
+protected:
+
+	wxString m_path;
+};
+
+       //__LOCAL_PATH_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\state.h" 6
+
+enum t_statechange_notifications
+{
+	STATECHANGE_NONE, // Used to unregister all notifications
+
+	STATECHANGE_REMOTE_DIR,
+	STATECHANGE_REMOTE_DIR_MODIFIED,
+	STATECHANGE_REMOTE_RECV,
+	STATECHANGE_REMOTE_SEND,
+	STATECHANGE_REMOTE_LINKNOTDIR,
+	STATECHANGE_LOCAL_DIR,
+
+	// data contains name (excluding path) of file to refresh
+	STATECHANGE_LOCAL_REFRESH_FILE,
+
+	STATECHANGE_APPLYFILTER,
+
+	STATECHANGE_REMOTE_IDLE,
+	STATECHANGE_SERVER,
+
+	STATECHANGE_SYNC_BROWSE,
+	STATECHANGE_COMPARISON,
+
+	/* Global notifications */
+	STATECHANGE_QUEUEPROCESSING,
+	STATECHANGE_NEWCONTEXT, /* New context created */
+	STATECHANGE_CHANGEDCONTEXT, /* Currently active context changed */
+	STATECHANGE_REMOVECONTEXT, /* Right before deleting a context */
+
+	STATECHANGE_MAX
+};
+
+class CDirectoryListing;
+class CFileZillaEngine;
+class CCommandQueue;
+class CMainFrame;
+class CStateEventHandler;
+class CRemoteDataObject;
+class CRecursiveOperation;
+class CComparisonManager;
+
+class CState;
+class CContextManager
+{
+	friend class CState;
+public:
+	// If current_only is set, only notifications from the current (at the time
+	// of notification emission) context is dispatched to the handler.
+	void RegisterHandler(CStateEventHandler* pHandler, enum t_statechange_notifications notification, bool current_only, bool blockable);
+	void UnregisterHandler(CStateEventHandler* pHandler, enum t_statechange_notifications notification);
+
+	size_t HandlerCount(enum t_statechange_notifications notification) const;
+
+	CState* CreateState(CMainFrame* pMainFrame);
+	void DestroyState(CState* pState);
+	void DestroyAllStates();
+
+	CState* GetCurrentContext();
+	const std::vector<CState*>* GetAllStates() { return &m_contexts; }
+
+	static CContextManager* Get();
+
+	void NotifyAllHandlers(enum t_statechange_notifications notification, const wxString& data = _T(""), const void* data2 = 0);
+	void NotifyGlobalHandlers(enum t_statechange_notifications notification, const wxString& data = _T(""), const void* data2 = 0);
+
+	void SetCurrentContext(CState* pState);
+
+protected:
+	CContextManager();
+
+	std::vector<CState*> m_contexts;
+	int m_current_context;
+
+	struct t_handler
+	{
+		CStateEventHandler* pHandler;
+		bool blockable;
+		bool current_only;
+	};
+	std::list<t_handler> m_handlers[STATECHANGE_MAX];
+
+	void NotifyHandlers(CState* pState, enum t_statechange_notifications notification, const wxString& data, const void* data2, bool blocked);
+
+	static CContextManager m_the_context_manager;
+};
+
+class CState
+{
+	friend class CCommandQueue;
+public:
+	CState(CMainFrame* pMainFrame);
+	~CState();
+
+	bool CreateEngine();
+	void DestroyEngine();
+
+	CLocalPath GetLocalDir() const;
+	bool SetLocalDir(const wxString& dir, wxString *error = 0);
+
+	// Opens specified directory in local file manager, e.g. Explorer on Windows
+	static bool OpenInFileManager(const wxString& dir);
+	
+	// Returns a file:// URL
+	static wxString GetAsURL(const wxString& dir);
+
+	bool Connect(const CServer& server, const CServerPath& path = CServerPath());
+	bool Disconnect();
+
+	bool ChangeRemoteDir(const CServerPath& path, const wxString& subdir = _T(""), int flags = 0, bool ignore_busy = false);
+	bool SetRemoteDir(const CDirectoryListing *m_pDirectoryListing, bool modified = false);
+	CSharedPointer<const CDirectoryListing> GetRemoteDir() const;
+	const CServerPath GetRemotePath() const;
+
+	const CServer* GetServer() const;
+	wxString GetTitle() const;
+
+	void RefreshLocal();
+	void RefreshLocalFile(wxString file);
+	void LocalDirCreated(const CLocalPath& path);
+
+	bool RefreshRemote();
+
+	void RegisterHandler(CStateEventHandler* pHandler, enum t_statechange_notifications notification, bool blockable = true);
+	void UnregisterHandler(CStateEventHandler* pHandler, enum t_statechange_notifications notification);
+
+	void BlockHandlers(enum t_statechange_notifications notification);
+	void UnblockHandlers(enum t_statechange_notifications notification);
+
+	CFileZillaEngine* m_pEngine;
+	CCommandQueue* m_pCommandQueue;
+	CComparisonManager* GetComparisonManager() { return m_pComparisonManager; }
+
+	void UploadDroppedFiles(const wxFileDataObject* pFileDataObject, const wxString& subdir, bool queueOnly);
+	void UploadDroppedFiles(const wxFileDataObject* pFileDataObject, const CServerPath& path, bool queueOnly);
+	void HandleDroppedFiles(const wxFileDataObject* pFileDataObject, const CLocalPath& path, bool copy);
+	bool DownloadDroppedFiles(const CRemoteDataObject* pRemoteDataObject, const CLocalPath& path, bool queueOnly = false);
+
+	static bool RecursiveCopy(CLocalPath source, const CLocalPath& targte);
+
+	bool IsRemoteConnected() const;
+	bool IsRemoteIdle() const;
+
+	CRecursiveOperation* GetRecursiveOperationHandler() { return m_pRecursiveOperation; }
+
+	void NotifyHandlers(enum t_statechange_notifications notification, const wxString& data = _T(""), const void* data2 = 0);
+
+	bool SuccessfulConnect() const { return m_successful_connect; }
+	void SetSuccessfulConnect() { m_successful_connect = true; }
+
+	void ListingFailed(int error);
+	void LinkIsNotDir(const CServerPath& path, const wxString& subdir);
+
+	bool SetSyncBrowse(bool enable, const CServerPath& assumed_remote_root = CServerPath());
+	bool GetSyncBrowse() const { return !m_sync_browse.local_root.empty(); }
+
+	CServer GetLastServer() const { return m_last_server; }
+	CServerPath GetLastServerPath() const { return m_last_path; }
+	void SetLastServer(const CServer& server, const CServerPath& path)
+	{ m_last_server = server; m_last_path = path; }
+
+	bool GetSecurityInfo(CCertificateNotification *& pInfo);
+	bool GetSecurityInfo(CSftpEncryptionNotification *& pInfo);
+	void SetSecurityInfo(CCertificateNotification const& info);
+	void SetSecurityInfo(CSftpEncryptionNotification const& info);
+
+	// If the previously selected directory was a direct child of the current directory, this
+	// returns the relative name of the subdirectory.
+	wxString GetPreviouslyVisitedLocalSubdir() const { return m_previouslyVisitedLocalSubdir; }
+	wxString GetPreviouslyVisitedRemoteSubdir() const { return m_previouslyVisitedRemoteSubdir; }
+
+protected:
+	void SetServer(const CServer* server);
+
+	CLocalPath m_localDir;
+	CSharedPointer<const CDirectoryListing> m_pDirectoryListing;
+
+	CServer* m_pServer;
+	wxString m_title;
+	bool m_successful_connect;
+
+	CServer m_last_server;
+	CServerPath m_last_path;
+
+	CMainFrame* m_pMainFrame;
+
+	CRecursiveOperation* m_pRecursiveOperation;
+
+	CComparisonManager* m_pComparisonManager;
+
+	struct t_handler
+	{
+		CStateEventHandler* pHandler;
+		bool blockable;
+	};
+	std::list<t_handler> m_handlers[STATECHANGE_MAX];
+	bool m_blocked[STATECHANGE_MAX];
+
+	CLocalPath GetSynchronizedDirectory(CServerPath remote_path);
+	CServerPath GetSynchronizedDirectory(CLocalPath local_path);
+
+	struct _sync_browse
+	{
+		CLocalPath local_root;
+		CServerPath remote_root;
+		bool is_changing;
+		bool compare;
+	} m_sync_browse;
+
+	CCertificateNotification* m_pCertificate;
+	CSftpEncryptionNotification* m_pSftpEncryptionInfo;
+
+	wxString m_previouslyVisitedLocalSubdir;
+	wxString m_previouslyVisitedRemoteSubdir;
+};
+
+class CStateEventHandler
+{
+public:
+	CStateEventHandler(CState* pState);
+	virtual ~CStateEventHandler();
+
+	CState* m_pState;
+
+	virtual void OnStateChange(CState* pState, enum t_statechange_notifications notification, const wxString& data, const void* data2) = 0;
+};
+
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\menu_bar.h" 5
+
+class CMainFrame;
+class CMenuBar : public wxMenuBar, public CStateEventHandler, public COptionChangeEventHandler
+{
+public:
+	CMenuBar();
+	virtual ~CMenuBar();
+
+	static CMenuBar* Load(CMainFrame* pMainFrame);
+
+	bool ShowItem(int id);
+	bool HideItem(int id);
+
+	void UpdateBookmarkMenu();
+	void ClearBookmarks();
+
+	std::list<int> m_bookmark_menu_ids;
+	std::map<int, wxString> m_bookmark_menu_id_map_global;
+	std::map<int, wxString> m_bookmark_menu_id_map_site;
+
+	void UpdateMenubarState();
+protected:
+	CMainFrame* m_pMainFrame;
+
+	virtual void OnStateChange(CState* pState, enum t_statechange_notifications notification, const wxString& data, const void* data2);
+	virtual void OnOptionChanged(int option);
+
+	DECLARE_DYNAMIC_CLASS(CMenuBar)
+
+	DECLARE_EVENT_TABLE()
+	void OnMenuEvent(wxCommandEvent& event);
+
+	std::map<wxMenu*, std::map<int, wxMenuItem*> > m_hidden_items;
+};
+
+       //__MENU_BAR_H__

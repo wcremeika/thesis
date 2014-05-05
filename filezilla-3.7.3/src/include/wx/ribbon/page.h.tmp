@@ -1,0 +1,107 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\ribbon\page.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/ribbon/page.h
+// Purpose:     Container for ribbon-bar-style interface panels
+// Author:      Peter Cawley
+// Modified by:
+// Created:     2009-05-25
+// Copyright:   (C) Peter Cawley
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                   
+
+                
+
+                              
+                            
+                      
+
+                  
+                               
+
+                                                              
+ 
+       
+                   
+
+                                     
+                                          
+                                                       
+                                                     
+                                 
+
+                            
+
+                                    
+                                         
+                                                      
+                                                    
+                                
+
+                                                  
+
+                                        
+                                      
+                                                                                
+                                                              
+
+                                
+
+                           
+                                        
+                          
+                                        
+                                  
+                                      
+
+                                       
+
+                                                  
+
+                          
+
+          
+                                         
+                                                                       
+
+                                                                                     
+                          
+                                              
+                                    
+                                  
+
+                                                                   
+                                                                     
+                             
+                             
+
+                                                                 
+                                                                         
+
+                                          
+                    
+                      
+                                                                                                        
+                                                
+                                                 
+                              
+                                  
+                        
+                              
+                                          
+                                  
+
+            
+                               
+                         
+      
+  
+
+       // wxUSE_RIBBON
+
+       // _WX_RIBBON_PAGE_H_

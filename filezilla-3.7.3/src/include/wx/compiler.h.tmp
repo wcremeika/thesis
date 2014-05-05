@@ -1,0 +1,175 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\compiler.h" 0
+/*
+ * Name:        wx/compiler.h
+ * Purpose:     Compiler-specific macro definitions.
+ * Author:      Vadim Zeitlin
+ * Created:     2013-07-13 (extracted from wx/platform.h)
+ * Copyright:   (c) 1997-2013 Vadim Zeitlin <vadim@wxwidgets.org>
+ * Licence:     wxWindows licence
+ */
+
+/* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
+
+                       
+                       
+
+/*
+    Compiler detection and related helpers.
+ */
+
+/*
+    Notice that Intel compiler can be used as Microsoft Visual C++ add-on and
+    so we should define both __INTELC__ and __VISUALC__ for it.
+*/
+                       
+                  
+      
+
+                     
+      
+                                                                            
+                                                              
+       
+                            
+
+      
+                                                                              
+                                                        
+      
+                      
+      
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                     
+                        
+                     
+                        
+                     
+     
+       
+      
+
+                                                       
+                    
+                          
+                     
+                     
+                          
+                 
+                             
+                   
+                     
+              
+                       
+     
+                    
+      
+        /* compiler */
+
+/*
+   Macros for checking compiler version.
+*/
+
+/*
+   This macro can be used to test the gcc version and can be used like this:
+
+#    if wxCHECK_GCC_VERSION(3, 1)
+        ... we have gcc 3.1 or later ...
+#    else
+        ... no gcc at all or gcc < 3.1 ...
+#    endif
+*/
+                                                
+                                                                                                                                                      
+
+
+     
+                                                 
+      
+
+/*
+   This macro can be used to test the Visual C++ version.
+*/
+                   
+                                  
+                                        
+     
+                                                      
+                                                                                  
+      
+
+/**
+    This is similar to wxCHECK_GCC_VERSION but for Sun CC compiler.
+ */
+                
+      
+                                                                               
+       
+                                                                                    
+     
+                                               
+      
+
+                   
+                                       
+                                             
+                                                 
+                                
+     
+                      
+      
+      
+
+                                                                         
+                                                                                            
+                                                                                               
+                                   
+      
+
+/*
+   This macro can be used to check that the version of mingw32 compiler is
+   at least maj.min
+ */
+
+/* Check for Mingw runtime version: */
+                                                                        
+                                                                                                                                                                                        
+
+
+
+  
+                                                                          
+                                                                           
+                                                                           
+                                                                             
+                                                                               
+                  
+
+                                                                          
+                                                                           
+                                                                          
+   
+                              
+                             
+                             
+      
+     
+                             
+                             
+      
+      
+     
+                                                       
+      
+
+       // _WX_COMPILER_H_

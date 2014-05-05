@@ -1,0 +1,44 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\putty\puttymem.h" 0
+/*
+ * PuTTY memory-handling header.
+ */
+
+                        
+                        
+
+                  		       /* for size_t */
+                  		       /* for memcpy() */
+
+
+/* #define MALLOC_LOG  do this if you suspect putty of leaking memory */
+                 
+                                                             
+                                                                
+                                                                   
+                                                                      
+                                                       
+                       
+     
+                                  
+                           
+                                        
+                             
+                      
+      
+
+void *safemalloc(size_t, size_t);
+void *saferealloc(void *, size_t, size_t);
+void safefree(void *);
+
+/*
+ * Direct use of smalloc within the code should be avoided where
+ * possible, in favour of these type-casting macros which ensure
+ * you don't mistakenly allocate enough space for one sort of
+ * structure and assign it to a different sort of pointer.
+ */
+                                                      
+                                                            
+                                                                           
+
+      

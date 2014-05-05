@@ -1,0 +1,74 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\panel.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/panel.h
+// Purpose:     Base header for wxPanel
+// Author:      Julian Smart
+// Modified by:
+// Created:
+// Copyright:   (c) Julian Smart
+//              (c) 2011 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows Licence
+/////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+// ----------------------------------------------------------------------------
+// headers and forward declarations
+// ----------------------------------------------------------------------------
+
+                     
+                       
+
+class WXDLLIMPEXP_FWD_CORE wxControlContainer;
+
+extern WXDLLIMPEXP_DATA_CORE(const char) wxPanelNameStr[];
+
+// ----------------------------------------------------------------------------
+// wxPanel contains other controls and implements TAB traversal between them
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxPanelBase : public wxNavigationEnabled<wxWindow>
+{
+public:
+    wxPanelBase() { }
+
+    // Derived classes should also provide this constructor:
+    /*
+    wxPanelBase(wxWindow *parent,
+                wxWindowID winid = wxID_ANY,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+                const wxString& name = wxPanelNameStr);
+    */
+
+    // Pseudo ctor
+    bool Create(wxWindow *parent,
+                wxWindowID winid = wxID_ANY,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+                const wxString& name = wxPanelNameStr);
+
+
+    // implementation from now on
+    // --------------------------
+
+    virtual void InitDialog();
+
+private:
+    wxDECLARE_NO_COPY_CLASS(wxPanelBase);
+};
+
+                            
+                              
+                        
+                             
+     
+                               
+                                 
+      
+
+       // _WX_PANELH_BASE_

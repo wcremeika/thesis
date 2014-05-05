@@ -1,0 +1,38 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\unix\fswatcher_inotify.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/unix/fswatcher_inotify.h
+// Purpose:     wxInotifyFileSystemWatcher
+// Author:      Bartosz Bekier
+// Created:     2009-05-26
+// Copyright:   (c) 2009 Bartosz Bekier <bartosz.bekier@gmail.com>
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                             
+                             
+
+                   
+
+                   
+
+                                                   
+                                      
+ 
+       
+                                 
+
+                                                      
+                                                             
+
+                                          
+
+                                            
+
+          
+                
+  
+
+      
+
+       /* _WX_FSWATCHER_UNIX_H_ */

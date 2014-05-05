@@ -1,0 +1,18 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_interface.h" 0
+                                   
+                                   
+
+class COptionsPageInterface : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_INTERFACE"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+
+	DECLARE_EVENT_TABLE()
+	void OnLayoutChange(wxCommandEvent& event);
+};
+
+       //__OPTIONSPAGE_INTERFACE_H__

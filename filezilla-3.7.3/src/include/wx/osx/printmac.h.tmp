@@ -1,0 +1,61 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\printmac.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/printmac.h
+// Purpose:     wxWindowsPrinter, wxWindowsPrintPreview classes
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                       
+
+/*
+ * Represents the printer: manages printing a wxPrintout object
+ */
+
+class WXDLLIMPEXP_CORE wxMacPrinter: public wxPrinterBase
+{
+  DECLARE_DYNAMIC_CLASS(wxMacPrinter)
+
+ public:
+    wxMacPrinter(wxPrintDialogData *data = NULL);
+    virtual ~wxMacPrinter();
+
+    virtual bool Print(wxWindow *parent,
+                       wxPrintout *printout,
+                       bool prompt = true);
+    virtual wxDC* PrintDialog(wxWindow *parent);
+  virtual bool Setup(wxWindow *parent);
+
+};
+
+/*
+ * wxPrintPreview
+ * Programmer creates an object of this class to preview a wxPrintout.
+ */
+
+class WXDLLIMPEXP_CORE wxMacPrintPreview: public wxPrintPreviewBase
+{
+  DECLARE_CLASS(wxMacPrintPreview)
+
+ public:
+    wxMacPrintPreview(wxPrintout *printout,
+                          wxPrintout *printoutForPrinting = NULL,
+                          wxPrintDialogData *data = NULL);
+    wxMacPrintPreview(wxPrintout *printout,
+                          wxPrintout *printoutForPrinting,
+                          wxPrintData *data);
+    virtual ~wxMacPrintPreview();
+
+  virtual bool Print(bool interactive);
+    virtual void DetermineScaling();
+};
+
+      
+    // _WX_PRINTWIN_H_

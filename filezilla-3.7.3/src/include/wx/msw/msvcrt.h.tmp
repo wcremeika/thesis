@@ -1,0 +1,71 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\msvcrt.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/msvcrt.h
+// Purpose:     macros to use some non-standard features of MS Visual C++
+//              C run-time library
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     31.01.1999
+// Copyright:   (c) Vadim Zeitlin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+// the goal of this file is to define wxCrtSetDbgFlag() macro which may be
+// used like this:
+//      wxCrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF);
+// to turn on memory leak checks for programs compiled with Microsoft Visual
+// C++ (5.0+). The macro will not be defined under other compilers or if it
+// can't be used with MSVC for whatever reason.
+
+                      
+                      
+
+// use debug CRT functions for memory leak detections in VC++ 5.0+ in debug
+// builds
+                      
+                                                                                              
+
+                                                                      
+                                                                                             
+                               
+          
+      
+
+                      
+                                                                            
+              
+                  
+          
+
+                       
+
+                                                                             
+                                                                          
+                                                                               
+                                                         
+                                                         
+                                                
+                       
+          
+
+                       
+
+                      
+                                                              
+
+                                                                          
+      
+                                                    
+      
+                      
+                            
+
+                                                                                                      
+
+      // !using VC CRT
+                                 
+       // wxUSE_VC_CRTDBG
+
+       // _MSW_MSVCRT_H_
+

@@ -1,0 +1,147 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\volume.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/volume.h
+// Purpose:     wxFSVolume - encapsulates system volume information
+// Author:      George Policello
+// Modified by:
+// Created:     28 Jan 02
+// Copyright:   (c) 2002 George Policello
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+// ----------------------------------------------------------------------------
+// wxFSVolume represents a volume/drive in a file system
+// ----------------------------------------------------------------------------
+
+                       
+                       
+
+                   
+
+                  
+
+                      
+
+                   
+                    
+ 
+                             
+                              
+
+                                                 
+                                
+
+                                        
+                               
+
+                        
+                            
+  
+
+                   
+                   
+ 
+                    
+                  
+                   
+                    
+                     
+                   
+                
+  
+
+                                     
+ 
+       
+                                                           
+      
+                                                
+                                                               
+                                                  
+                                                                    
+                                                        
+
+                                                                              
+                                 
+                               
+
+                                                                               
+                        
+                     
+                                         
+                                      
+
+                
+                
+
+                              
+                      
+
+                           
+                                   
+
+                            
+                         
+
+                                   
+                                                                         
+
+                                                                               
+           
+                                                  
+                                                          
+
+                                                          
+
+          
+                               
+                       
+
+                                                     
+                        
+
+                                          
+                
+  
+
+             
+
+                    
+                                                
+
+                 
+ 
+                           
+                       
+                           
+                           
+                    
+  
+
+                                              
+                                                         
+ 
+       
+                                                    
+                                                                            
+
+                                            
+
+        
+                     
+
+                                                              
+                        
+  
+
+                   
+
+                                                       
+                                  
+
+                              
+
+       // wxUSE_FSVOLUME
+
+       // _WX_FSVOLUME_H_

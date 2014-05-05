@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_statbar.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_statbar.h
+// Purpose:     XML resource handler for wxStatusBar
+// Author:      Brian Ravnsgaard Riis
+// Created:     2004/01/21
+// Copyright:   (c) 2004 Brian Ravnsgaard Riis
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+                         
+
+                                
+
+                                                                         
+ 
+                                                
+
+       
+                            
+                                         
+                                            
+  
+
+       // wxUSE_XRC && wxUSE_STATUSBAR
+
+       // _WX_XH_STATBAR_H_

@@ -1,0 +1,60 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\fontdlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/fontdlg.h
+// Purpose:     wxFontDialog class. Use generic version if no
+//              platform-specific implementation.
+// Author:      David Webster
+// Modified by:
+// Created:     10/06/99
+// Copyright:   (c) David Webster
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                     
+
+/*
+ * Font dialog
+ */
+
+class WXDLLIMPEXP_CORE wxFontDialog: public wxFontDialogBase
+{
+public:
+    wxFontDialog() : wxFontDialogBase() { /* must be Create()d later */ }
+    wxFontDialog (wxWindow* pParent) : wxFontDialogBase(pParent) { Create(pParent); }
+    wxFontDialog( wxWindow*         pParent
+                 ,const wxFontData& rData
+                )
+                : wxFontDialogBase( pParent
+                                   ,rData
+                                  )
+    {
+        Create( pParent
+               ,rData
+              );
+    }
+
+    virtual int ShowModal();
+
+                           
+      
+                                      
+      
+                                                                               
+       // WXWIN_COMPATIBILITY_2_6
+
+protected:
+    DECLARE_DYNAMIC_CLASS(wxFontDialog)
+}; // end of CLASS wxFontDialog
+
+                           
+                                      
+                                                                           
+                                                                          
+       // WXWIN_COMPATIBILITY_2_6
+
+      
+    // _WX_FONTDLG_H_

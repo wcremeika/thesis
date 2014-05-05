@@ -1,0 +1,57 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\helpwin.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/helpwin.h
+// Purpose:     Help system: WinHelp implementation
+// Author:      Julian Smart
+// Modified by:
+// Created:     04/01/98
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                 
+
+              
+
+                        
+
+                                                                       
+ 
+                                              
+
+       
+                                                                                             
+                                     
+
+                                         
+                                                  
+                                                                                                       
+
+                                                      
+                                                                
+                                   
+                                               
+                                                                                           
+                                            
+                                                    
+                                                 
+                                                                          
+                        
+
+                                                              
+
+          
+                                     
+                                                          
+
+        
+                        
+  
+
+       // wxUSE_HELP
+      
+// _WX_HELPWIN_H_

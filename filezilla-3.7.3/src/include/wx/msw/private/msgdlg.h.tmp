@@ -1,0 +1,95 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\private\msgdlg.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/private/msgdlg.h
+// Purpose:     helper functions used with native message dialog
+// Author:      Rickard Westerlund
+// Created:     2010-07-12
+// Copyright:   (c) 2010 wxWidgets team
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                 
+                                 
+
+                           
+                          
+
+// Macro to help identify if task dialogs are available: we rely on
+// TD_WARNING_ICON being defined in the headers for this as this symbol is used
+// by the task dialogs only. Also notice that task dialogs are available for
+// Unicode applications only.
+                                             
+                                
+      
+
+// Provides methods for creating a task dialog.
+namespace wxMSWMessageDialog
+{
+
+                           
+                               
+     
+           
+                                  
+
+                               
+                                                          
+                           
+                        
+                       
+                                    
+               
+
+                                                        
+                                                              
+
+                                                 
+                         
+                         
+                         
+                                 
+                    
+                   
+                             
+                             
+                            
+                            
+                                
+                              
+
+                                                                           
+                                                             
+                                                                            
+                                                              
+                                                            
+
+                                                                         
+                                              
+                                                       
+                                                 
+                                                 
+                                                              
+                                     
+
+
+                                                                            
+                                                                         
+
+                                                                             
+                                                                           
+                            
+                                                     
+       // wxHAS_MSW_TASKDIALOG
+
+
+    // Check if the task dialog is available: this simply checks the OS version
+    // as we know that it's only present in Vista and later.
+    bool HasNativeTaskDialog();
+
+    // Translates standard MSW button IDs like IDCANCEL into an equivalent
+    // wx constant such as wxCANCEL.
+    int MSWTranslateReturnCode(int msAns);
+}; // namespace wxMSWMessageDialog
+
+       // _WX_MSW_PRIVATE_MSGDLG_H_

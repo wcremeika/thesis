@@ -1,0 +1,43 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\rcdefs.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/rcdefs.h
+// Purpose:     Fallback for the generated rcdefs.h under the lib directory
+// Author:      Mike Wetherell
+// Copyright:   (c) 2005 Mike Wetherell
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                    
+                    
+
+               
+                                                                              
+                                                                              
+                                                                            
+                                                                          
+                               
+                             
+                                   
+          
+
+                        
+                          
+                              
+              
+                            
+                            
+                                
+              
+                          
+                           
+                               
+              
+          
+      
+
+// Don't do anything here for the other compilers, in particular don't define
+// WX_CPU_X86 here as we used to do. If people define wxUSE_RC_MANIFEST, they
+// must also define the architecture constant correctly.
+
+      

@@ -1,0 +1,152 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\wince\chkconf.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/wince/chkconf.h
+// Purpose:     WinCE-specific configuration options checks
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     2005-03-07
+// Copyright:   (c) 2005 Vadim Zeitlin <vadim@wxwindows.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                
+                                
+
+// ----------------------------------------------------------------------------
+// Disable features which don't work or don't make sense under CE
+// ----------------------------------------------------------------------------
+
+// please keep the list in alphabetic order except for closely related settings
+// (e.g. wxUSE_ENH_METAFILE is put immediately after wxUSE_METAFILE)
+
+                        
+                           
+
+                    
+    // not enough API and lack of ddraw.h
+                        
+                           
+      
+
+// eVC doesn't have standard streams
+               
+                             
+                                
+      
+
+// wxFSVolume currently doesn't compile under CE and it's not clear if it makes
+// sense at all there (the drives and their names are fixed on CE systems)
+                     
+                        
+
+// no .INI files API under CE
+                    
+                       
+
+// DDE doesn't exist under WinCE and wxIPC is DDE-based under MSW
+                
+                   
+
+// doesn't make sense for CE devices and doesn't compile anyhow
+                     
+                        
+
+// libtiff doesn't build with eVC but is ok with VC8
+               
+                        
+                           
+      
+
+// no AUI under CE: it's unnecessary and currently doesn't compile
+                
+                   
+
+// no MDI under CE
+                
+                   
+                             
+                                
+
+// metafiles are not supported neither
+                     
+                        
+                         
+                            
+
+// not sure if this is supported by CE but it doesn't compile currently anyhow
+                         
+                            
+
+// eVC doesn't support SEH
+                               
+                                  
+
+// no owner drawn controls (not sure if this is possible at all but in any case
+// the code doesn't currently compile)
+                        
+                           
+
+                                  
+                                     
+
+// regex doesn't build with eVC but is ok with VC8
+               
+                      
+                         
+      
+
+                     
+                        
+                      
+                         
+
+// Standard SDK lacks a few things, forcefully disable them
+                               
+                                 
+                         
+                            
+       // WCE_PLATFORM_STANDARDSDK
+
+// there is no support for balloon taskbar icons
+                                 
+                                    
+
+// not sure if this is supported by eVC but VC8 SDK lacks the tooltips control
+// related declarations
+                              
+                         
+                            
+      
+
+                         
+                            
+
+                    
+                       
+
+                        
+                           
+
+
+// Disable features which don't make sense for MS Smartphones
+// (due to pointer device usage, limited controls or dialogs, file system)
+                           
+                         
+                            
+
+                         
+                            
+
+                          
+                             
+
+                                 
+                                    
+
+                          
+                             
+       // __SMARTPHONE__
+
+       // _WX_MSW_WINCE_CHKCONF_H_
+

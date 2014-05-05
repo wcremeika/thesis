@@ -1,0 +1,99 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\gtk1\spinctrl.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/gtk1/spinctrl.h
+// Purpose:     wxSpinCtrl class
+// Author:      Robert Roebling
+// Modified by:
+// Copyright:   (c) Robert Roebling
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                   
+
+                  
+
+                       
+
+                                                                               
+             
+                                                                               
+
+                                                    
+ 
+       
+                   
+                                
+                                  
+                                                     
+                                                      
+                                                  
+                                            
+                                                           
+                                                        
+     
+                                                                             
+     
+
+                                 
+                                   
+                                                      
+                                                       
+                                                   
+                                             
+                                                            
+                                                          
+
+                                        
+                                          
+
+                                 
+                                       
+                                                    
+                               
+                               
+
+                             
+                                                                                 
+
+                     
+                                     
+
+                                             
+                            
+                           
+
+                             
+                             
+
+                                                  
+                                   
+
+           
+                                         
+
+                                                                       
+                                     
+                                                         
+
+        
+                                
+               
+     
+                    
+     
+
+               
+
+                                     
+                         
+  
+
+      
+    // wxUSE_SPINCTRL
+
+      
+    // __GTKSPINCTRLH__

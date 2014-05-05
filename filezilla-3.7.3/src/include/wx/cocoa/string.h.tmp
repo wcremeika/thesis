@@ -1,0 +1,54 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cocoa\string.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cocoa/string.h
+// Purpose:     String conversion methods
+// Author:      David Elliott
+// Modified by:
+// Created:     2003/04/13
+// Copyright:   (c) 2003 David Elliott
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                             
+                             
+
+                               
+                     
+
+// FIXME: In unicode mode we are doing the conversion twice.  wxString
+// converts to UTF-8 and NSString converts from UTF-8.
+// One possible optimization is to convert to the wxString internal
+// representation which is an unsigned short (unichar) but unfortunately
+// there is little documentation on which encoding it uses by default.
+
+// Return an autoreleased NSString
+inline NSString* wxNSStringWithWxString(const wxString &wxstring)
+{
+                 
+                                                                
+     
+    return [NSString stringWithCString: wxstring.c_str() length:wxstring.Len()];
+       // wxUSE_UNICODE
+}
+
+// Intialize an NSString which has already been allocated
+inline NSString* wxInitNSStringWithWxString(NSString *nsstring, const wxString &wxstring)
+{
+                 
+                                                              
+     
+    return [nsstring initWithCString: wxstring.c_str() length:wxstring.Len()];
+       // wxUSE_UNICODE
+}
+
+inline wxString wxStringWithNSString(NSString *nsstring)
+{
+                 
+                                                              
+     
+    return wxString([nsstring lossyCString]);
+       // wxUSE_UNICODE
+}
+
+       // __WX_COCOA_STRING_H__

@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_richtext.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_richtext.h
+// Purpose:     XML resource handler for wxRichTextCtrl
+// Author:      Julian Smart
+// Created:     2006-11-08
+// Copyright:   (c) 2006 Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                         
+
+                               
+
+                                                                                 
+ 
+                                                   
+
+       
+                               
+                                         
+                                            
+  
+
+       // wxUSE_XRC && wxUSE_RICHTEXT
+
+       // _WX_XH_RICHTEXT_H_

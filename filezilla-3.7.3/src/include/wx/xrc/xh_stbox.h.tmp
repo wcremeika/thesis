@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_stbox.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_stbox.h
+// Purpose:     XML resource handler for wxStaticBox
+// Author:      Brian Gavin
+// Created:     2000/09/00
+// Copyright:   (c) 2000 Brian Gavin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                         
+
+                              
+
+                                                                         
+ 
+                                                
+
+       
+                            
+                                         
+                                            
+  
+
+       // wxUSE_XRC && wxUSE_STATBOX
+
+       // _WX_XH_STBOX_H_

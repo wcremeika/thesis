@@ -1,0 +1,116 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\regconf.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/regconf.h
+// Purpose:     Registry based implementation of wxConfigBase
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     27.04.98
+// Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                   
+
+                                
+
+                            
+                      
+                        
+                      
+
+                                                                               
+              
+                                                                               
+
+                                                        
+ 
+       
+                
+                                                       
+                                                      
+                                                         
+                                                            
+                                                             
+                                                     
+
+                                  
+                          
+
+                                               
+                                               
+
+                    
+                                                
+                                                               
+
+                        
+                            
+                                                                
+                                                                
+                                                                
+                                                                
+
+                          
+                                                       
+                                                       
+                                                             
+
+                                                                            
+                     
+                                                                   
+                                                                  
+
+                                                                          
+
+           
+                                                                             
+                                                                             
+
+           
+                                                                               
+                                                
+                           
+
+          
+                                                                
+                                                                             
+   
+                                                         
+
+                                   
+       
+                             
+                                    
+       
+
+                              
+   
+
+                                 
+                                                                       
+                                                                     
+                                                                            
+
+                                                                           
+                                                             
+                                                                             
+
+        
+                                                                    
+                                        
+                                         
+
+                                      
+                      
+
+                                       
+                                     
+  
+
+       // wxUSE_CONFIG && wxUSE_REGKEY
+
+       // _WX_MSW_REGCONF_H_

@@ -1,0 +1,51 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_sizeformatting.h" 0
+                                        
+                                        
+
+                             
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\../sizeformatting.h" 0
+                            
+                            
+
+                               
+
+class CSizeFormat : public CSizeFormatBase
+{
+public:
+	static wxString FormatNumber(const wxLongLong& size, bool* thousands_separator = 0);
+
+	static wxString GetUnitWithBase(_unit unit, int base);
+	static wxString GetUnit(_unit unit, enum _format = formats_count);
+	static wxString FormatUnit(const wxLongLong& size, _unit unit, int base = 1024);
+
+	static wxString Format(const wxLongLong& size, bool add_bytes_suffix, enum _format format, bool thousands_separator, int num_decimal_places);
+	static wxString Format(const wxLongLong& size, bool add_bytes_suffix = false);
+};
+
+       //__SIZEFORMATTING_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_sizeformatting.h" 4
+
+class COptionsPageSizeFormatting : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_SIZEFORMATTING"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+
+	void UpdateControls();
+	void UpdateExamples();
+
+	CSizeFormat::_format GetFormat() const;
+
+	DECLARE_EVENT_TABLE()
+	void OnRadio(wxCommandEvent& event);
+	void OnCheck(wxCommandEvent& event);
+	void OnSpin(wxSpinEvent& event);
+
+	wxString FormatSize(const wxLongLong& size);
+};
+
+       //__OPTIONSPAGE_SIZEFORMATTING_H__

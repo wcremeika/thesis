@@ -1,0 +1,55 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\wince\libraries.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/wince/libraries.h
+// Purpose:     VC++ pragmas for linking against SDK libs
+// Author:      Vaclav Slavik
+// Modified by:
+// Created:     2004-04-11
+// Copyright:   (c) 2004 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+// NB: According to Microsoft, it is up to the OEM to decide whether
+//     some of libraries will be included in the system or not. For example,
+//     MS' STANDARDSDK does not include cyshell.lib and aygshell.lib, while
+//     Pocket PC 2003 SDK does. We depend on some symbols that are in these
+//     libraries in some SDKs and in different libs in others. Fortunately we
+//     can detect what SDK is used in C++ code, so we take advantage of
+//     VC++'s #pragma to link against the libraries conditionally, instead of
+//     including libraries in project files.
+
+                                                
+
+                                                
+                                              
+                                                    
+           
+      
+      
+
+                                                                              
+                          
+                                                                         
+           
+      
+
+                                  
+                  
+           
+                                                                                
+           
+           
+                             
+                                                                        
+           
+     
+          
+      
+
+       // __VISUALC__ && __WXWINCE__
+
+       // _WX_LIBRARIES_H_

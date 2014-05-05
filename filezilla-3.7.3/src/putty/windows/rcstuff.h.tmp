@@ -1,0 +1,52 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\putty\windows\rcstuff.h" 0
+/*
+ * Miscellaneous stuff to include in all .rc files.
+ */
+
+                       
+                       
+
+              
+                
+     
+
+/* Some compilers, like Borland, don't have winresrc.h */
+                     
+             
+                    
+     
+                   
+      
+      
+
+       /* end #ifdef __LCC__ */
+
+/* Some systems don't define this, so I do it myself if necessary */
+                     
+                            
+      
+
+/* Likewise */
+                   
+                      
+      
+
+/* LCC is the offender here. */
+                   
+                            
+      
+                        
+                            
+      
+                          
+                            
+      
+                      
+                            
+      
+               
+                            
+      
+
+       /* PUTTY_RCSTUFF_H */

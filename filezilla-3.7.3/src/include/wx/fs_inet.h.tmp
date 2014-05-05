@@ -1,0 +1,35 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\fs_inet.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/fs_inet.h
+// Purpose:     HTTP and FTP file system
+// Author:      Vaclav Slavik
+// Copyright:   (c) 1999 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                   
+
+                                                                       
+
+                       
+
+                                                                               
+                      
+                                                                               
+
+                                                                      
+ 
+           
+                                                       
+                                                                               
+  
+
+      
+  // wxUSE_FILESYSTEM && wxUSE_FS_INET && wxUSE_STREAMS && wxUSE_SOCKETS
+
+       // _WX_FS_INET_H_
+

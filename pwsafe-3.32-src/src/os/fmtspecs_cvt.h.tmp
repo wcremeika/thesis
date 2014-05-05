@@ -1,0 +1,74 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\fmtspecs_cvt.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+                          
+                          
+
+                                                                 
+                                 
+      
+
+/*
+ * In UNICODE builds (more specifically, the wide versions of printf functions family) Microsoft's libc
+ * and glibc interpret the %s format specifier differently. Microsoft interprets the corresponding
+ * string argument to be wide-char, while glibc interprets it as single-char.  glibc requires either %S
+ * or %ls to interpret the corresponding string argument as wide-char.
+ * 
+ * Since we *always* use single or wide char functions/strings depending on UNICODE, we convert
+ * all %s to %S while building with GNU/glibc and UNICODE defined using the functions below
+ * 
+ * http://msdn.microsoft.com/en-us/library/hf4y5e3w(v=VS.100).aspx
+ * http://msdn.microsoft.com/en-us/library/tcxf1dw6(v=VS.100).aspx
+ * http://www.gnu.org/software/libc/manual/html_node/Other-Output-Conversions.html#Other-Output-Conversions
+ * 
+ * Note that this is not a Linux vs. Windows difference.  The same issue exists if we build this on WIN32
+ * with GNU with UNICODE defined.  Also, we don't do a similar conversion for ANSI builds (i.e. %S => %s)
+ * since all our format specs are always %s anyway.
+ */
+ 
+                                
+                     
+                                        
+ 
+                                                                                           
+                        
+   
+ 
+
+                     
+                                               
+ 
+               
+                            
+               
+ 
+
+                                                          
+
+                                             
+                                                                                     
+
+     
+// Not GNU, or not UNICODE
+
+template <typename T>
+inline void ConvertFormatSpecs(T& /*specs*/) {}
+
+template <typename T>
+inline T ConvertFormatSpecs(const wchar_t* fmt) { return T(fmt); }
+
+                     
+
+inline wstringT FormatStr(const wchar_t* str) { return wstringT(str); }
+inline cstringT FormatStr(const char* str) { return cstringT(str); }
+
+      
+
+//__FMTSPECS_CVT_H__
+      

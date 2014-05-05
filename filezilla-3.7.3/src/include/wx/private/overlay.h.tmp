@@ -1,0 +1,68 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\private\overlay.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/private/overlay.h
+// Purpose:     wxOverlayImpl declaration
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     2006-10-20
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                              
+                              
+
+                      
+
+                           
+
+                      
+                                              
+                        
+                                       
+     
+          
+      
+
+      // !wxHAS_NATIVE_OVERLAY
+
+                     
+
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+
+// generic implementation of wxOverlay
+class wxOverlayImpl
+{
+public:
+    wxOverlayImpl();
+    ~wxOverlayImpl();
+
+
+    // clears the overlay without restoring the former state
+    // to be done eg when the window content has been changed and repainted
+    void Reset();
+
+    // returns true if it has been setup
+    bool IsOk();
+
+    void Init(wxDC* dc, int x , int y , int width , int height);
+
+    void BeginDrawing(wxDC* dc);
+
+    void EndDrawing(wxDC* dc);
+
+    void Clear(wxDC* dc);
+
+private:
+    wxBitmap m_bmpSaved ;
+    int m_x ;
+    int m_y ;
+    int m_width ;
+    int m_height ;
+    wxWindow* m_window ;
+};
+
+       // wxHAS_NATIVE_OVERLAY/!wxHAS_NATIVE_OVERLAY
+
+       // _WX_PRIVATE_OVERLAY_H_

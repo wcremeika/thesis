@@ -1,0 +1,24 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_themes.h" 0
+                                
+                                
+
+class COptionsPageThemes : public COptionsPage
+{
+public:
+	virtual ~COptionsPageThemes();
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_THEMES"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+
+protected:
+	bool DisplayTheme(const wxString& theme);
+
+	virtual bool OnDisplayedFirstTime();
+
+	DECLARE_EVENT_TABLE()
+	void OnThemeChange(wxCommandEvent& event);
+};
+
+       //__OPTIONSPAGE_THEMES_H__

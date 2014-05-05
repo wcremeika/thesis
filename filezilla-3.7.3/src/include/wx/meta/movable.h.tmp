@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\meta\movable.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/meta/movable.h
+// Purpose:     Test if a type is movable using memmove() etc.
+// Author:      Vaclav Slavik
+// Created:     2008-01-21
+// Copyright:   (c) 2008 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                       
+                      // for wxIsMovable<wxString> specialization
+
+// Helper to decide if an object of type T is "movable", i.e. if it can be
+// copied to another memory location using memmove() or realloc() C functions.
+// C++ only gurantees that POD types (including primitive types) are
+// movable.
+template<typename T>
+struct wxIsMovable
+{
+    wxDEFINE_TEMPLATE_BOOL_VALUE(wxIsPod<T>::value);
+};
+
+// Macro to add wxIsMovable<T> specialization for given type that marks it
+// as movable:
+                                                                                                                                                                                                                                                      
+
+
+
+
+
+// Our implementation of wxString is written in such way that it's safe to move
+// it around (unless position cache is used which unfortunately breaks this).
+// OTOH, we don't know anything about std::string.
+// (NB: we don't put this into string.h and choose to include wx/string.h from
+// here instead so that rarely-used wxIsMovable<T> code isn't included by
+// everything)
+                                                
+template<> struct wxIsMovable<wxString>                         {                                                               wxDEFINE_TEMPLATE_BOOL_VALUE(true);                     };
+      
+
+       // _WX_META_MOVABLE_H_

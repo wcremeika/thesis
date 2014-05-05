@@ -1,0 +1,28 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\wince\resources.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/wince/resources.h
+// Purpose:     identifiers shared between resource compiler and eVC
+// Author:      Wlodzimierz ABX Skiba
+// Modified by:
+// Created:     01.05.2004
+// Copyright:   (c) Wlodzimierz Skiba
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+// Windows CE dummy menu for SHCreateMenuBar()
+                                      
+
+                                      
+                                      
+                                      
+
+                                      
+
+                                      
+                                      
+
+                                      
+                                      
+                                      
+                                      

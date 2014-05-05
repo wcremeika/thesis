@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\dcmemory.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/dcmemory.h
+// Purpose:     wxMemoryDC base header
+// Author:      Julian Smart
+// Modified by:
+// Created:
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows Licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+                 
+                     
+
+//-----------------------------------------------------------------------------
+// wxMemoryDC
+//-----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxMemoryDC: public wxDC
+{
+public:
+    wxMemoryDC();
+    wxMemoryDC( wxBitmap& bitmap );
+    wxMemoryDC( wxDC *dc );
+
+    // select the given bitmap to draw on it
+    void SelectObject(wxBitmap& bmp);
+
+    // select the given bitmap for read-only
+    void SelectObjectAsSource(const wxBitmap& bmp);
+
+    // get selected bitmap
+    const wxBitmap& GetSelectedBitmap() const;
+    wxBitmap& GetSelectedBitmap();
+
+private:
+    DECLARE_DYNAMIC_CLASS(wxMemoryDC)
+};
+
+
+      
+    // _WX_DCMEMORY_H_BASE_

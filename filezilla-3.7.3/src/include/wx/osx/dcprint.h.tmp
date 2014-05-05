@@ -1,0 +1,53 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\dcprint.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/dcprint.h
+// Purpose:     wxPrinterDC class
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                 
+                      
+                      
+
+class wxNativePrinterDC ;
+
+class WXDLLIMPEXP_CORE wxPrinterDCImpl: public wxGCDCImpl
+{
+public:
+                               
+
+                                                                        
+                               
+
+                                                                
+                               
+                                  
+                                
+
+                                
+
+                                                       
+                                  
+
+          
+                                                            
+
+                                    
+                                          
+
+        
+                              
+       // wxUSE_PRINTING_ARCHITECTURE
+};
+
+      
+    // _WX_DCPRINT_H_
+

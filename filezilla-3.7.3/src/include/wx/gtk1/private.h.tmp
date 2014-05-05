@@ -1,0 +1,97 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\gtk1\private.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/gtk1/private.h
+// Purpose:     wxGTK private macros, functions &c
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     12.03.02
+// Copyright:   (c) 2002 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                   
+                   
+
+                    
+
+// fail all version tests if the GTK+ version is so ancient that it doesn't
+// even have GTK_CHECK_VERSION
+                         
+                                        
+      
+
+                               
+                            
+
+
+// child is not a member of GTK_BUTTON() any more in GTK+ 2.0
+                                              
+
+// event_window has disappeared from GtkToggleButton in GTK+ 2.0
+                                                                       
+
+// gtk_editable_{copy|cut|paste}_clipboard() had an extra argument under
+// previous GTK+ versions but no more
+                                                   
+                               
+     
+                                   
+      
+
+// _GtkEditable is private in GTK2
+                                                          
+                                                                           
+
+
+// this GtkNotebook struct field has been renamed in GTK2
+                                                   
+
+                           
+                                                        
+
+// translate a GTK+ scroll type to a wxEventType
+inline wxEventType GtkScrollTypeToWx(guint scrollType)
+{
+    wxEventType command;
+    switch ( scrollType )
+    {
+        case GTK_SCROLL_STEP_BACKWARD:
+            command = wxEVT_SCROLL_LINEUP;
+            break;
+
+        case GTK_SCROLL_STEP_FORWARD:
+            command = wxEVT_SCROLL_LINEDOWN;
+            break;
+
+        case GTK_SCROLL_PAGE_BACKWARD:
+            command = wxEVT_SCROLL_PAGEUP;
+            break;
+
+        case GTK_SCROLL_PAGE_FORWARD:
+            command = wxEVT_SCROLL_PAGEDOWN;
+            break;
+
+        default:
+            command = wxEVT_SCROLL_THUMBTRACK;
+    }
+
+    return command;
+}
+
+inline wxEventType GtkScrollWinTypeToWx(guint scrollType)
+{
+    // GtkScrollTypeToWx() returns SCROLL_XXX, not SCROLLWIN_XXX as we need
+    return GtkScrollTypeToWx(scrollType) +
+            wxEVT_SCROLLWIN_TOP - wxEVT_SCROLL_TOP;
+}
+
+// Needed for implementing e.g. combobox on wxGTK within a modal dialog.
+void wxAddGrab(wxWindow* window);
+void wxRemoveGrab(wxWindow* window);
+
+       // _WX_GTK_PRIVATE_H_
+

@@ -1,0 +1,82 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\iconloc.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/iconloc.h
+// Purpose:     declaration of wxIconLocation class
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     21.06.2003
+// Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                     
+
+// ----------------------------------------------------------------------------
+// wxIconLocation: describes the location of an icon
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_BASE wxIconLocationBase
+{
+public:
+    // ctor takes the name of the file where the icon is
+    wxEXPLICIT wxIconLocationBase(const wxString& filename = wxEmptyString)
+        : m_filename(filename) { }
+
+    // default copy ctor, assignment operator and dtor are ok
+
+
+    // returns true if this object is valid/initialized
+    bool IsOk() const { return !m_filename.empty(); }
+
+    // set/get the icon file name
+    void SetFileName(const wxString& filename) { m_filename = filename; }
+    const wxString& GetFileName() const { return m_filename; }
+
+private:
+    wxString m_filename;
+};
+
+// under Windows the same file may contain several icons so we also store the
+// index of the icon
+                        
+
+                                                                 
+ 
+       
+                                                                               
+               
+                                                                                 
+
+                             
+                                             
+                                            
+
+        
+                
+  
+
+      
+                                                             
+                                        
+ 
+                  
+ 
+
+      // !__WINDOWS__
+
+// must be a class because we forward declare it as class
+class WXDLLIMPEXP_BASE wxIconLocation : public wxIconLocationBase
+{
+public:
+    wxEXPLICIT wxIconLocation(const wxString& filename = wxEmptyString)
+        : wxIconLocationBase(filename) { }
+};
+
+       // platform
+
+       // _WX_ICONLOC_H_
+

@@ -1,0 +1,64 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\html\forcelnk.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/html/forcelnk.h
+// Purpose:     macros which force the linker to link apparently unused code
+// Author:      Vaclav Slavik
+// Copyright:   (c) Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+/*
+
+DESCRPITON:
+
+mod_*.cpp files contain handlers for tags. These files are modules - they contain
+one wxTagModule class and it's OnInit() method is called from wxApp's init method.
+The module is called even if you only link it into the executable, so everything
+seems wonderful.
+
+The problem is that we have these modules in LIBRARY and mod_*.cpp files contain
+no method nor class which is known out of the module. So the linker won't
+link these .o/.obj files into executable because it detected that it is not used
+by the program.
+
+To workaround this I introduced set of macros FORCE_LINK_ME and FORCE_LINK. These
+macros are generic and are not limited to mod_*.cpp files. You may find them quite
+useful somewhere else...
+
+How to use them:
+let's suppose you want to always link file foo.cpp and that you have module
+always.cpp that is certainly always linked (e.g. the one with main() function
+or htmlwin.cpp in wxHtml library).
+
+Place FORCE_LINK_ME(foo) somewhere in foo.cpp and FORCE_LINK(foo) somewhere
+in always.cpp
+See mod_*.cpp and htmlwin.cpp for example :-)
+
+*/
+
+
+                       
+                       
+
+                   
+
+// compatibility defines
+                                      
+                                              
+
+                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+       // _WX_FORCELNK_H_

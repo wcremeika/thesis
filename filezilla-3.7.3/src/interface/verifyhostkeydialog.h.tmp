@@ -1,0 +1,24 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\verifyhostkeydialog.h" 0
+                                 
+                                 
+
+/* Full handling is done inside fzsftp, this class is just to display the
+ * dialog and for temporary session trust, lost on restart of FileZilla.
+ */
+class CVerifyHostkeyDialog
+{
+public:
+	static bool IsTrusted(CHostKeyNotification* pNotification);
+	static void ShowVerificationDialog(wxWindow* parent, CHostKeyNotification* pNotification);
+
+protected:
+	struct t_keyData
+	{
+		wxString host;
+		wxString fingerprint;
+	};
+	static std::list<t_keyData> m_sessionTrustedKeys;
+};
+
+       //__VERIFYHOSTKEYDIALOG_H__

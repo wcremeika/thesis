@@ -1,0 +1,72 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cocoa\msgdlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cocoa/msgdlg.h
+// Purpose:     wxMessageDialog class
+// Author:      Gareth Simpson
+// Created:     2007-10-29
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                     
+
+DECLARE_WXCOCOA_OBJC_CLASS(NSAlert);
+
+                                 
+// trunk: Always use Cocoa dialog
+// 2.8: Only use Cocoa dialog if ABI incompatible features is on
+// Build both on both branches (there was no wxCocoaMessageDialog class so it's not an ABI issue)
+                                              
+                                           
+         
+                                           
+          
+      
+
+                             
+                                                
+     
+                                   
+
+                                                  
+      
+
+// ----------------------------------------------------------------------------
+// wxCocoaMessageDialog
+// ----------------------------------------------------------------------------
+
+
+class WXDLLIMPEXP_CORE wxCocoaMessageDialog
+    : public wxMessageDialogWithCustomLabels
+{
+public:
+    wxCocoaMessageDialog(wxWindow *parent,
+                    const wxString& message,
+                    const wxString& caption = wxMessageBoxCaptionStr,
+                    long style = wxOK|wxCENTRE,
+                    const wxPoint& pos = wxDefaultPosition);
+
+    virtual int ShowModal();
+
+protected:
+    // not supported for message dialog
+    virtual void DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
+                           int WXUNUSED(width), int WXUNUSED(height),
+                           int WXUNUSED(sizeFlags) = wxSIZE_AUTO) {}
+
+    // override wxMessageDialogWithCustomLabels method to get rid of
+    // accelerators in the custom label strings
+    //
+    // VZ: I have no idea _why_ do we do this but the old version did and
+    //     I didn't want to change the existing behaviour
+    virtual void DoSetCustomLabel(wxString& var, const ButtonLabel& label);
+
+    DECLARE_DYNAMIC_CLASS(wxCocoaMessageDialog)
+    wxDECLARE_NO_COPY_CLASS(wxCocoaMessageDialog);
+};
+
+       // _WX_MSGDLG_H_
+

@@ -1,0 +1,25 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\dfb\dcscreen.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/dfb/dcscreen.h
+// Purpose:     wxScreenDCImpl declaration
+// Author:      Vaclav Slavik
+// Created:     2006-08-10
+// Copyright:   (c) 2006 REA Elektronik GmbH
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                     
+
+class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxDFBDCImpl
+{
+public:
+    wxScreenDCImpl(wxScreenDC *owner);
+
+    DECLARE_DYNAMIC_CLASS(wxScreenDCImpl)
+};
+
+       // _WX_DFB_DCSCREEN_H_

@@ -1,0 +1,48 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\genrcdefs.h" 0
+/*
+ * Name:        wx/msw/genrcdefs.h
+ * Purpose:     Emit preprocessor symbols into rcdefs.h for resource compiler
+ * Author:      Mike Wetherell
+ * Copyright:   (c) 2005 Mike Wetherell
+ * Licence:     wxWindows licence
+ */
+
+                       
+
+"ifndef" _WX_RCDEFS_H
+"define" _WX_RCDEFS_H
+
+                    
+                             
+                                 
+      
+     
+"define" wxUSE_RC_MANIFEST 1
+      
+
+                                          
+                          
+      
+
+             
+                        
+      
+
+                                       
+                         
+      
+
+                                    
+                        
+      
+
+             
+                        
+      
+
+            
+                       
+      
+
+"endif"

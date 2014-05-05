@@ -1,0 +1,52 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\gtk1\fontdlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/gtk1/fontdlg.h
+// Purpose:     wxFontDialog
+// Author:      Robert Roebling
+// Created:
+// Copyright:   (c) Robert Roebling
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+//-----------------------------------------------------------------------------
+// wxFontDialog
+//-----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxFontDialog : public wxFontDialogBase
+{
+public:
+    wxFontDialog() : wxFontDialogBase() { /* must be Create()d later */ }
+    wxFontDialog(wxWindow *parent)
+        : wxFontDialogBase(parent) { Create(parent); }
+    wxFontDialog(wxWindow *parent, const wxFontData& data)
+        : wxFontDialogBase(parent, data) { Create(parent, data); }
+
+    virtual ~wxFontDialog();
+
+    // implementation only
+    void SetChosenFont(const char *name);
+
+                           
+                                      
+                                                                           
+       // WXWIN_COMPATIBILITY_2_6
+
+protected:
+    // create the GTK dialog
+    virtual bool DoCreate(wxWindow *parent);
+
+private:
+    DECLARE_DYNAMIC_CLASS(wxFontDialog)
+};
+
+                           
+                                      
+                                                                           
+                                                                          
+       // WXWIN_COMPATIBILITY_2_6
+
+      

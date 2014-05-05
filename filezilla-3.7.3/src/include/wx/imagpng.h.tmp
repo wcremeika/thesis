@@ -1,0 +1,70 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\imagpng.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/imagpng.h
+// Purpose:     wxImage PNG handler
+// Author:      Robert Roebling
+// Copyright:   (c) Robert Roebling
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                   
+
+//-----------------------------------------------------------------------------
+// wxPNGHandler
+//-----------------------------------------------------------------------------
+
+                
+
+                     
+                           
+
+                                                     
+                                                       
+                                                
+                                                               
+                                                               
+                                                               
+                                                               
+
+    
+ 
+                          
+                        
+                            
+                          
+  
+
+                                                          
+ 
+       
+                         
+     
+                                 
+                                 
+                                   
+                                  
+     
+
+                                                 
+
+                 
+                                                                                                    
+                                                                                       
+          
+                                                    
+      
+
+        
+                                       
+  
+
+      
+  // wxUSE_LIBPNG
+
+      
+  // _WX_IMAGPNG_H_
+

@@ -1,0 +1,474 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\wxcrtvararg.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/wxcrtvararg.h
+// Purpose:     Type-safe ANSI and Unicode builds compatible wrappers for
+//              printf(), scanf() and related CRT functions
+// Author:      Joel Farley, Ove Kåven
+// Modified by: Vadim Zeitlin, Robert Roebling, Ron Lee
+// Created:     2007-02-19
+// Copyright:   (c) 2007 REA Elektronik GmbH
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+// NB: User code should include wx/crt.h instead of including this
+//     header directly.
+
+                    
+                        
+
+                     
+
+// ----------------------------------------------------------------------------
+// CRT functions aliases
+// ----------------------------------------------------------------------------
+
+/* Required for wxPrintf() etc */
+                  
+
+/* printf() family saga */
+
+/*
+   For many old Unix systems [v]snprintf()/vsscanf() exists in the system
+   libraries but not in the headers, so we need to declare it ourselves to be
+   able to use it.
+ */
+               
+
+                                                            
+                  
+              
+     
+          
+      
+                                                                          
+                                 
+
+                                                          
+                  
+              
+     
+          
+      
+                                                                  
+                                
+
+                                                        
+                  
+              
+     
+          
+      
+                                                                 
+                               
+
+                                                                      
+                                                                      
+                                                 
+                                                             
+                                                                                         
+     
+                                                       
+     
+      
+
+       /* __UNIX__ */
+
+/*
+   mingw32 normally uses MSVCRT which has non-standard vswprintf() and so
+   normally _vsnwprintf() is used instead, the only exception is when mingw32
+   is used with STLPort which does have a standard vswprintf() starting from
+   version 5.1 which we can use.
+ */
+                  
+                                                              
+                              
+                                  
+              
+                                 
+                                                
+                             
+          
+       /* __MINGW32__ */
+
+                        
+                            
+      
+
+                           
+      
+                                                                           
+                                             
+
+                                                                  
+                                         
+      
+                                   
+                             
+                                                
+              
+                                         
+                                                          
+             
+                                                 
+              
+                                   
+          
+                                                                              
+                                                                           
+                                                                             
+                                                                  
+           
+                                                                                       
+                                                   
+                                                    
+              
+                                                       
+      /* !wxUSE_PRINTF_POS_PARAMS */
+    /*
+       We always want to define safe snprintf() function to be used instead of
+       sprintf(). Some compilers already have it (or rather vsnprintf() which
+       we really need...), otherwise we implement it using our own printf()
+       code.
+
+       We define function with a trailing underscore here because the real one
+       is a wrapper around it as explained below
+     */
+
+                                                                                            
+
+                                              
+                                               
+         
+                                     
+                                                   
+                                     
+                                                  
+                                  
+                                                   
+              
+
+                                                                       
+
+                                             
+                                                              
+                 
+                                                     
+                  
+              
+          
+       /* wxUSE_PRINTF_POS_PARAMS/!wxUSE_PRINTF_POS_PARAMS */
+
+                        
+    /* no (suitable) vsnprintf(), cook our own */
+    WXDLLIMPEXP_BASE int
+    wxCRT_VsnprintfW(wchar_t *buf, size_t len, const wchar_t *format, va_list argptr);
+                                
+     
+                                
+      
+
+                        
+        /* no (suitable) vsnprintf(), cook our own */
+        WXDLLIMPEXP_BASE int
+        wxCRT_VsnprintfA(char *buf, size_t len, const char *format, va_list argptr);
+                                    
+     
+                                    
+      
+
+// for wxString code, define wxUSE_WXVSNPRINTF to indicate that wx
+// implementation is used no matter what (in UTF-8 build, either *A or *W
+// version may be called):
+                  
+                                                
+                         
+                                                
+                            
+                                                
+      // UTF-8 under any locale
+                                                                        
+      
+
+                                    
+                                   
+                                     
+                                    
+                                     
+
+/*
+   In Unicode mode we need to have all standard functions such as wprintf() and
+   so on but not all systems have them so use our own implementations in this
+   case.
+ */
+                                                                             
+                          
+      
+                                                                              
+                           
+      
+
+
+                           
+      
+                                                                               
+                                                                             
+            
+       
+                                                    
+                                                                   
+                                                                           
+                                                            
+                                                                           
+      /* !wxNEED_WPRINTF */
+                                        
+                                       
+                                         
+                                        
+
+                                                        
+                                                                                      
+                                              
+          
+       /* wxNEED_WPRINTF */
+
+
+/* Required for wxScanf() etc. */
+                              
+                               
+                               
+                                
+
+                           
+                                                 
+                                                                      
+                                                                
+     
+                                                 
+                                                  
+                                                  
+      
+                      
+                                                                              
+     
+                                                   
+      
+
+// ----------------------------------------------------------------------------
+// user-friendly wrappers to CRT functions
+// ----------------------------------------------------------------------------
+
+                  
+                                                                        
+                                     
+                                      
+                                      
+                                       
+      
+
+    // FIXME-UTF8: remove this
+                 
+                                            
+                                              
+     
+                                            
+                                              
+      
+
+
+WX_DEFINE_VARARG_FUNC_SANS_N0(int, wxPrintf, 1, (const wxFormatString&),
+                              printf, printf)
+inline int wxPrintf(const wxFormatString& s)
+{
+    return wxPrintf("%s", s.InputAsString());
+}
+
+WX_DEFINE_VARARG_FUNC_SANS_N0(int, wxFprintf, 2, (FILE*, const wxFormatString&),
+                              fprintf, fprintf)
+inline int wxFprintf(FILE *f, const wxFormatString& s)
+{
+    return wxFprintf(f, "%s", s.InputAsString());
+}
+
+// va_list versions of printf functions simply forward to the respective
+// CRT function; note that they assume that va_list was created using
+// wxArgNormalizer<T>!
+                      
+                              
+                                                                                                  
+
+         
+                                                                                                                                                                            
+
+
+          
+                         
+                                                                                              
+
+      // ANSI
+                                                                                              
+
+      
+
+inline int
+wxVprintf(const wxString& format, va_list ap)
+{
+    return vprintf (wxFormatString(format), ap);
+}
+
+inline int
+wxVfprintf(FILE *f, const wxString& format, va_list ap)
+{
+    return vfprintf (f, wxFormatString(format), ap);
+}
+
+                          
+
+
+// wxSprintf() and friends have to be implemented in two forms, one for
+// writing to char* buffer and one for writing to wchar_t*:
+
+                           
+int WXDLLIMPEXP_BASE wxDoSprintfWchar(char *str, const wxChar *format, ...);
+      
+                      
+                                                                         
+      
+WX_DEFINE_VARARG_FUNC(int, wxSprintf, 2, (char*, const wxFormatString&),
+                      wxDoSprintfWchar, wxDoSprintfUtf8)
+
+int WXDLLIMPEXP_BASE
+wxVsprintf(char *str, const wxString& format, va_list argptr);
+
+                           
+int WXDLLIMPEXP_BASE wxDoSnprintfWchar(char *str, size_t size, const wxChar *format, ...);
+      
+                      
+                                                                                       
+      
+WX_DEFINE_VARARG_FUNC(int, wxSnprintf, 3, (char*, size_t, const wxFormatString&),
+                      wxDoSnprintfWchar, wxDoSnprintfUtf8)
+
+int WXDLLIMPEXP_BASE
+wxVsnprintf(char *str, size_t size, const wxString& format, va_list argptr);
+
+                 
+
+                           
+                                                                               
+      
+                      
+                                                                            
+      
+                                                                           
+                                                        
+
+                    
+                                                                 
+
+                           
+                                                                                             
+      
+                      
+                                                                                          
+      
+                                                                                    
+                                                          
+
+                    
+                                                                               
+
+       // wxUSE_UNICODE
+
+                  
+                                                                        
+      
+                                                                               
+                                                 
+                   
+                    
+                    
+                     
+
+                                                                                          
+
+                                                                                                  
+
+                                                                                                  
+
+                                                                                                          
+
+       // __WATCOMC__
+
+
+// We can't use wxArgNormalizer<T> for variadic arguments to wxScanf() etc.
+// because they are writable, so instead of providing friendly template
+// vararg-like functions, we just provide both char* and wchar_t* variants
+// of these functions. The type of output variadic arguments for %s must match
+// the type of 'str' and 'format' arguments.
+//
+// For compatibility with earlier wx versions, we also provide wxSscanf()
+// version with the first argument (input string) wxString; for this version,
+// the type of output string values is determined by the type of format string
+// only.
+
+                                          
+                                             
+                                                                             
+
+                                        
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                             
+
+
+
+
+// this is needed to normalize the format string, see src/common/strvararg.cpp
+// for more details
+                  
+                                          
+     
+    const wxScopedWCharBuffer
+    WXDLLIMPEXP_BASE wxScanfConvertFormatW(const wchar_t *format);
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Visual C++ doesn't provide vsscanf()
+                    
+int WXDLLIMPEXP_BASE wxVsscanf(const char *str, const char *format, va_list ap);
+int WXDLLIMPEXP_BASE wxVsscanf(const wchar_t *str, const wchar_t *format, va_list ap);
+int WXDLLIMPEXP_BASE wxVsscanf(const wxScopedCharBuffer& str, const char *format, va_list ap);
+int WXDLLIMPEXP_BASE wxVsscanf(const wxScopedWCharBuffer& str, const wchar_t *format, va_list ap);
+int WXDLLIMPEXP_BASE wxVsscanf(const wxString& str, const char *format, va_list ap);
+int WXDLLIMPEXP_BASE wxVsscanf(const wxString& str, const wchar_t *format, va_list ap);
+int WXDLLIMPEXP_BASE wxVsscanf(const wxCStrData& str, const char *format, va_list ap);
+int WXDLLIMPEXP_BASE wxVsscanf(const wxCStrData& str, const wchar_t *format, va_list ap);
+       // !__VISUALC__
+
+       /* _WX_WXCRTVARARG_H_ */

@@ -1,0 +1,306 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\chartype.h" 0
+/*
+ * Name:        wx/chartype.h
+ * Purpose:     Declarations of wxChar and related types
+ * Author:      Joel Farley, Ove Kåven
+ * Modified by: Vadim Zeitlin, Robert Roebling, Ron Lee
+ * Created:     1998/06/12
+ * Copyright:   (c) 1998-2006 wxWidgets dev team
+ * Licence:     wxWindows licence
+ */
+
+/* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
+
+                         
+                         
+
+/* defs.h indirectly includes this file, so don't include it here */
+                       
+
+/* check whether we have wchar_t and which size it is if we do */
+                           
+                         
+                                                                                                         
+                                   
+             
+                                   
+              
+                                                        
+                               
+                              
+                               
+                                                      
+                               
+         
+        /* add additional compiler checks if this fails */
+                               
+          
+       /* !defined(wxUSE_WCHAR_T) */
+
+/* Unicode support requires wchar_t */
+                  
+          
+       /* Unicode */
+
+/*
+   non Unix compilers which do have wchar.h (but not tchar.h which is included
+   below and which includes wchar.h anyhow).
+
+   Actually MinGW has tchar.h, but it does not include wchar.h
+ */
+                                                                          
+                        
+                            
+          
+      
+
+                   
+                                                                         
+                                                                         
+                                                                          
+                                                       
+                     
+                              
+                          
+                        
+              
+                       
+
+                      
+
+                                                   
+         
+                               
+
+                           
+                                                       
+                      
+                                                                     
+                                      
+                       
+       /* HAVE_WCHAR_H */
+
+                   
+                      
+      
+
+/* -------------------------------------------------------------------------- */
+/* define wxHAVE_TCHAR_SUPPORT for the compilers which support the TCHAR type */
+/* mapped to either char or wchar_t depending on the ASCII/Unicode mode and   */
+/* have the function mapping _tfoo() -> foo() or wfoo()                       */
+/* -------------------------------------------------------------------------- */
+
+/* VC++ and BC++ starting with 5.2 have TCHAR support */
+                  
+                                
+                                                      
+                                
+                      
+                          
+                                
+                      
+                                
+                                                            
+                                
+                       
+                       
+                      
+                                                        
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                            
+
+                                       
+                                
+       /* compilers with (good) TCHAR support */
+
+                           
+                                              
+                      
+
+                                                    
+                         
+                               
+                                        
+       /* wxHAVE_TCHAR_SUPPORT */
+
+/* ------------------------------------------------------------------------- */
+/* define wxChar type                                                        */
+/* ------------------------------------------------------------------------- */
+
+/* TODO: define wxCharInt to be equal to either int or wint_t? */
+
+                  
+    typedef char wxChar;
+    typedef signed char wxSChar;
+    typedef unsigned char wxUChar;
+     
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+                                                                                 
+                                       
+          
+
+                                                                           
+                       
+                                                                                              
+
+                           
+                               
+                                
+                                
+                                             
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+
+                                                
+                                      
+                                      
+                                       
+                                       
+                               
+       /* ASCII/Unicode */
+
+/* ------------------------------------------------------------------------- */
+/* define wxStringCharType                                                   */
+/* ------------------------------------------------------------------------- */
+
+/* depending on the platform, Unicode build can either store wxStrings as
+   wchar_t* or UTF-8 encoded char*: */
+                 
+                                                          
+                                                                       
+              
+          
+                                  
+                                        
+          
+
+                              
+                                    
+          
+
+                          
+                                     
+         
+                                     
+          
+     
+                                 
+                                 
+                                    
+      
+
+/* define char type used by wxString internal representation: */
+                       
+                                     
+      /* wxUSE_UNICODE_UTF8 || ANSI */
+    typedef char wxStringCharType;
+      
+
+
+/* ------------------------------------------------------------------------- */
+/* define wxT() and related macros                                           */
+/* ------------------------------------------------------------------------- */
+
+/* BSD systems define _T() to be something different in ctype.h, override it */
+                                               
+                      
+             
+      
+
+/*
+   wxT ("wx text") macro turns a literal string constant into a wide char
+   constant. It is mostly unnecessary with wx 2.9 but defined for
+   compatibility.
+ */
+           
+                      
+                        
+                       
+          
+                                                                              
+                                   
+           
+                                             
+                                                
+             
+                                         
+              
+           /* ASCII/Unicode */
+       /* !defined(wxT) */
+
+/*
+    wxT_2 exists only for compatibility with wx 2.x and is the same as wxT() in
+    that version but nothing in the newer ones.
+ */
+                  
+
+/*
+   wxS ("wx string") macro can be used to create literals using the same
+   representation as wxString does internally, i.e. wchar_t in Unicode build
+   under Windows or char in UTF-8-based Unicode builds and (deprecated) ANSI
+   builds everywhere (see wxStringCharType definition above).
+ */
+                       
+      
+                                                                        
+       
+                                         
+                                            
+         
+                                     
+          
+      /* wxUSE_UNICODE_UTF8 || ANSI */
+                    
+      
+
+/*
+    _T() is a synonym for wxT() familiar to Windows programmers. As this macro
+    has even higher risk of conflicting with system headers, its use is
+    discouraged and you may predefine wxNO__T to disable it. Additionally, we
+    do it ourselves for Sun CC which is known to use it in its standard headers
+    (see #10660).
+ */
+                                               
+                   
+                       
+          
+      
+
+                                     
+                        
+      
+
+/* a helper macro allowing to make another macro Unicode-friendly, see below */
+                           
+
+/* Unicode-friendly __FILE__, __DATE__ and __TIME__ analogs */
+                 
+                                         
+      
+
+                 
+                                         
+      
+
+                 
+                                         
+      
+
+       /* _WX_WXCHARTYPE_H_ */
+

@@ -1,0 +1,129 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHdrCtrlNoChng.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+// PWHdrCtrlNoChng.cpp : implementation file
+//
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\stdafx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHdrCtrlNoChng.cpp" 12
+                           
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHdrCtrlNoChng.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+// CPWHdrCtrlNoChng
+
+class CPWHdrCtrlNoChng : public CHeaderCtrl
+{
+  
+
+public:
+  CPWHdrCtrlNoChng();
+  virtual ~CPWHdrCtrlNoChng();
+
+  void SetStopChangeFlag(bool bStopChange) {m_bStopChange = bStopChange;}
+  bool GetStopChangeFlag() {return m_bStopChange;}
+
+protected:
+  //{{AFX_MSG(CPWHdrCtrlNoChng)
+   BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+   void OnLButtonDblClk(UINT nFlags, CPoint point);
+   void OnBeginTrack(NMHDR *pNotifyStruct, void *pLResult);
+   void OnItemChanging(NMHDR *pNotifyStruct, void *pLResult);
+  //}}AFX_MSG
+
+  
+
+private:
+  bool m_bStopChange;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PWHdrCtrlNoChng.cpp" 13
+
+// CPWHdrCtrlNoChng
+
+
+
+CPWHdrCtrlNoChng::CPWHdrCtrlNoChng()
+  : m_bStopChange(false)
+{
+}
+
+CPWHdrCtrlNoChng::~CPWHdrCtrlNoChng()
+{
+}
+
+
+  //{{AFX_MSG_MAP(CPWHdrCtrlNoChng)
+  ON_WM_SETCURSOR()
+  ON_WM_LBUTTONDBLCLK()
+  ON_NOTIFY_REFLECT(HDN_BEGINTRACK, OnBeginTrack) 
+  //}}AFX_MSG_MAP
+
+
+// CPWHdrCtrlNoChng message handlers
+
+BOOL CPWHdrCtrlNoChng::OnSetCursor(CWnd* /* pWnd */, UINT /* nHitTest */, UINT /* message */)
+{
+  // Disable by returning TRUE and not calling base class
+  //  return CHeaderCtrl::OnSetCursor(pWnd, nHitTest, message);
+  return TRUE;
+}
+
+void CPWHdrCtrlNoChng::OnLButtonDblClk(UINT /* nFlags */, CPoint /* point */)
+{
+  // Disable by not calling base case
+  //  CHeaderCtrl::OnLButtonDblClk(nFlags, point);
+}
+
+void CPWHdrCtrlNoChng::OnBeginTrack(NMHDR *, void *pLResult)
+{
+  // Don't allow user to change the size of any columns!
+  *pLResult = TRUE;
+}
+
+
+void CPWHdrCtrlNoChng::OnItemChanging(NMHDR *, void *pLResult)
+{
+  *pLResult = m_bStopChange ? TRUE : FALSE;
+}

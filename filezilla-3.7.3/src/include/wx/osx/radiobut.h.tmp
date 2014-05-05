@@ -1,0 +1,95 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\radiobut.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/radiobut.h
+// Purpose:     wxRadioButton class
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+class WXDLLIMPEXP_CORE wxRadioButton: public wxControl
+{
+  DECLARE_DYNAMIC_CLASS(wxRadioButton)
+ protected:
+public:
+    inline wxRadioButton() {}
+    inline wxRadioButton(wxWindow *parent, wxWindowID id,
+           const wxString& label,
+           const wxPoint& pos = wxDefaultPosition,
+           const wxSize& size = wxDefaultSize, long style = 0,
+           const wxValidator& validator = wxDefaultValidator,
+           const wxString& name = wxRadioButtonNameStr)
+    {
+        Create(parent, id, label, pos, size, style, validator, name);
+    }
+    virtual ~wxRadioButton();
+
+    bool Create(wxWindow *parent, wxWindowID id,
+           const wxString& label,
+           const wxPoint& pos = wxDefaultPosition,
+           const wxSize& size = wxDefaultSize, long style = 0,
+           const wxValidator& validator = wxDefaultValidator,
+           const wxString& name = wxRadioButtonNameStr);
+
+    virtual void SetValue(bool val);
+    virtual bool GetValue() const ;
+
+    // implementation
+
+    void Command(wxCommandEvent& event);
+    wxRadioButton *AddInCycle(wxRadioButton *cycle);
+    void RemoveFromCycle();
+    inline wxRadioButton *NextInCycle() {return m_cycle;}
+
+    // osx specific event handling common for all osx-ports
+
+    virtual bool        OSXHandleClicked( double timestampsec );
+  protected:
+
+    wxRadioButton *m_cycle;
+};
+
+// Not implemented
+     
+                                     
+
+                                                                        
+
+                                                                
+ 
+                                            
+           
+                            
+        
+                                                          
+                                                             
+                                 
+                                                  
+                                                              
+                                                             
+                                                             
+   
+                                                                   
+   
+
+                                              
+                                 
+                                                  
+                                                              
+                                                             
+                                                              
+
+                                               
+                                   
+                                 
+  
+      
+
+      
+    // _WX_RADIOBUT_H_

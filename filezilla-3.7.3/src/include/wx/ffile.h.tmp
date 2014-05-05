@@ -1,0 +1,111 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\ffile.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/ffile.h
+// Purpose:     wxFFile - encapsulates "FILE *" stream
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     14.07.99
+// Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                    
+                      
+
+                           // for wxUSE_FFILE
+
+               
+
+                       
+                       
+                         
+
+                  
+
+                                                                               
+                                              
+  
+                                                                          
+                                                                            
+                                                                               
+
+                              
+ 
+       
+          
+          
+               
+                            
+                                                     
+                                                                     
+                                      
+                                    
+
+               
+                                                                     
+                                                                       
+                                                           
+               
+
+                                                                           
+                                                              
+                                           
+                                                                   
+                                   
+
+                            
+                                                                        
+                                                                   
+                                                                              
+                      
+                                         
+                                          
+                                                
+                              
+                                                                     
+                                 
+               
+
+                                                           
+                                                                  
+                                                             
+                                           
+                                                                     
+                                       
+                            
+                              
+                              
+
+                                                                        
+                
+                      
+                                                
+                              
+                                              
+                             
+                                                  
+                        
+                                                    
+                                
+                                                            
+
+                                   
+                         
+
+        
+                                                                          
+                                                                               
+           
+                          
+                                     
+
+                                                      
+
+                                                                     
+  
+
+       // wxUSE_FFILE
+
+       // _WX_FFILE_H_
+

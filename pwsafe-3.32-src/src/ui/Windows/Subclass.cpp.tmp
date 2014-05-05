@@ -1,0 +1,373 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Subclass.cpp" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+////////////////////////////////////////////////////////////////
+// PixieLib(TM) Copyright 1997-1998 Paul DiLascia
+// If this code works, it was written by Paul DiLascia.
+// If not, I don't know who wrote it.
+//
+// CSubclassWnd is a generic class for hooking another window's messages.
+//
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\StdAfx.h" 0
+       
+
+// stdafx.h : include file for standard system include files,
+//  or project specific include files that are used frequently, but
+//      are changed infrequently
+//
+
+                                                                          
+
+                           // MFC core and standard components
+                           // MFC extensions
+                              
+                           // MFC support for Windows Common Controls
+      
+                    
+                   
+
+                    
+                   
+
+//Don't show warning for automatic inline conversion
+       
+//Don't show warning for "identifier was truncated to '255' characters" in STL.
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Subclass.cpp" 15
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Subclass.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+////////////////////////////////////////////////////////////////
+// PixieLib(TM) Copyright 1997-1998 Paul DiLascia
+// If this code works, it was written by Paul DiLascia.
+// If not, I don't know who wrote it.
+//
+       
+
+//////////////////
+// Generic class to hook messages on behalf of a CWnd.
+// Once hooked, all messages go to CSubclassWnd::WindowProc before going
+// to the window. Specific subclasses can trap messages and do something.
+//
+// To use:
+//
+// * Derive a class from CSubclassWnd.
+//
+// * Override CSubclassWnd::WindowProc to handle messages. Make sure you call
+//   CSubclassWnd::WindowProc if you don't handle the message, or your
+//   window will never get messages. If you write seperate message handlers,
+//   you can call Default() to pass the message to the window.
+//
+// * Instantiate your derived class somewhere and call HookWindow(pWnd)
+//   to hook your window, AFTER it has been created.
+//   To unhook, call Unhook or HookWindow(NULL).
+//
+// This is a very important class, crucial to many of the widgets Window
+// widgets implemented in PixieLib. To see how it works, look at the HOOK
+// sample program.
+//
+class CSubclassWnd : public CObject
+{
+public:
+  CSubclassWnd();
+  ~CSubclassWnd();
+
+  // Subclass a window. Hook(NULL) to unhook (automatic on WM_NCDESTROY)
+  BOOL HookWindow(HWND  hwnd);
+  BOOL HookWindow(CWnd* pWnd) { return HookWindow(pWnd->GetSafeHwnd()); }
+  void Unhook() { HookWindow((HWND)NULL); }
+  BOOL IsHooked() { return m_hWnd!=NULL; }
+
+  friend void  HookWndProc(HWND, UINT, WPARAM, LPARAM);
+  friend class CSubclassWndMap;
+
+  virtual void WindowProc(UINT msg, WPARAM wp, LPARAM lp);
+  void Default();  // call this at the end of handler fns
+
+             
+                                   
+                                            
+      
+
+protected:
+  HWND m_hWnd;             // the window hooked
+  LONG_PTR m_pOldWndProc;  // ... and original window proc
+  CSubclassWnd* m_pNext;   // next in chain of hooks for this window
+
+  ;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Subclass.cpp" 16
+
+             
+                     
+                
+                                   
+      
+
+//////////////////
+// The message hook map is derived from CMapPtrToPtr, which associates
+// a pointer with another pointer. It maps an HWND to a CSubclassWnd, like
+// the way MFC's internal maps map HWND's to CWnd's. The first CSubclassWnd
+// attached to a window is stored in the map; all other CSubclassWnd's for that
+// window are then chained via CSubclassWnd::m_pNext.
+//
+class CSubclassWndMap : private CMapPtrToPtr
+{
+public:
+  CSubclassWndMap();
+  ~CSubclassWndMap();
+  static CSubclassWndMap& GetHookMap();
+  void Add(HWND hwnd, CSubclassWnd* pSubclassWnd);
+  void Remove(CSubclassWnd* pSubclassWnd);
+  void RemoveAll(HWND hwnd);
+  CSubclassWnd* Lookup(HWND hwnd);
+};
+
+// This trick is used so the hook map isn't
+// instantiated until someone actually requests it.
+//
+                                                    
+
+;
+
+CSubclassWnd::CSubclassWnd()
+{
+  m_pNext = NULL;
+  m_pOldWndProc = NULL;
+  m_hWnd  = NULL;
+}
+
+CSubclassWnd::~CSubclassWnd()
+{
+  if (m_hWnd)
+    HookWindow((HWND)NULL);  // unhook window
+}
+
+//////////////////
+// Hook a window.
+// This installs a new window proc that directs messages to the CSubclassWnd.
+// pWnd=NULL to remove.
+//
+BOOL CSubclassWnd::HookWindow(HWND hwnd)
+{
+  ;
+  if (hwnd) {
+    // Hook the window
+    ;
+    ;
+    (CSubclassWndMap::GetHookMap()).Add(hwnd, this);  // Add to map of hooks
+
+  } else if (m_hWnd) {
+    // Unhook the window
+    (CSubclassWndMap::GetHookMap()).Remove(this);  // Remove from map
+    m_pOldWndProc = NULL;
+  }
+  m_hWnd = hwnd;
+  return TRUE;
+}
+
+//////////////////
+// Window proc-like virtual function which specific CSubclassWnds will
+// override to do stuff. Default passes the message to the next hook;
+// the last hook passes the message to the original window.
+// You MUST call this at the end of your WindowProc if you want the real
+// window to get the message. This is just like CWnd::WindowProc, except that
+// a CSubclassWnd is not a window.
+//
+void CSubclassWnd::WindowProc(UINT msg, WPARAM wp, LPARAM lp)
+{
+  // ASSERT_VALID(this);  // removed for speed
+  ;
+  return m_pNext ? m_pNext->WindowProc(msg, wp, lp) :
+    ::CallWindowProc(WNDPROC(m_pOldWndProc), m_hWnd, msg, wp, lp);
+}
+
+//////////////////
+// Like calling base class WindowProc, but with no args, so individual
+// message handlers can do the default thing. Like CWnd::Default
+//
+void CSubclassWnd::Default()
+{
+  // MFC stores current MSG in thread state
+  MSG& curMsg = AfxGetThreadState()->m_lastSentMsg;
+  // Note: must explicitly call CSubclassWnd::WindowProc to avoid infinte
+  // recursion on virtual function
+  return CSubclassWnd::WindowProc(curMsg.message, curMsg.wParam, curMsg.lParam);
+}
+
+             
+                                      
+ 
+                         
+                  
+                                               
+               
+                                                          
+                    
+              
+     
+                                       
+   
+ 
+
+                                               
+ 
+                    
+ 
+
+      
+
+//////////////////
+// Subclassed window proc for message hooks. Replaces AfxWndProc (or whatever
+// else was there before.)
+//
+void  HookWndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
+{
+              
+                                               
+                                              
+      
+
+  // Set up MFC message state just in case anyone wants it
+  // This is just like AfxCallWindowProc, but we can't use that because
+  // a CSubclassWnd is not a CWnd.
+  //
+  MSG& curMsg = AfxGetThreadState()->m_lastSentMsg;
+  MSG  oldMsg = curMsg;   // save for nesting
+  curMsg.hwnd = hwnd;
+  curMsg.message = msg;
+  curMsg.wParam = wp;
+  curMsg.lParam = lp;
+
+  // Get hook object for this window. Get from hook map
+  CSubclassWnd* pSubclassWnd = (CSubclassWndMap::GetHookMap()).Lookup(hwnd);
+  ;
+
+  void lr;
+  if (msg == WM_NCDESTROY) {
+    // Window is being destroyed: unhook all hooks (for this window)
+    // and pass msg to orginal window proc
+    //
+    LONG_PTR wndproc = pSubclassWnd->m_pOldWndProc;
+    (CSubclassWndMap::GetHookMap()).RemoveAll(hwnd);
+    lr = ::CallWindowProc(WNDPROC(wndproc), hwnd, msg, wp, lp);
+  } else {
+    // pass to msg hook
+    lr = pSubclassWnd->WindowProc(msg, wp, lp);
+  }
+  curMsg = oldMsg;  // pop state
+  return lr;
+}
+
+////////////////////////////////////////////////////////////////
+// CSubclassWndMap implementation
+//
+CSubclassWndMap::CSubclassWndMap()
+{
+}
+
+CSubclassWndMap::~CSubclassWndMap()
+{
+  // This assert bombs when posting WM_QUIT, so I've deleted it.
+  // ASSERT(IsEmpty());  // all hooks should be removed!
+}
+
+//////////////////
+// Get the one and only global hook map
+//
+CSubclassWndMap& CSubclassWndMap::GetHookMap()
+{
+  // By creating theMap here, C++ doesn't instantiate it until/unless
+  // it's ever used! This is a good trick to use in C++, to
+  // instantiate/initialize a static object the first time it's used.
+  //
+  static CSubclassWndMap theMap;
+  return theMap;
+}
+
+/////////////////
+// Add hook to map; i.e., associate hook with window
+//
+void CSubclassWndMap::Add(HWND hwnd, CSubclassWnd* pSubclassWnd)
+{
+  ;
+
+  // Add to front of list
+  pSubclassWnd->m_pNext = Lookup(hwnd);
+  SetAt(hwnd, pSubclassWnd);
+
+  if (pSubclassWnd->m_pNext == NULL) {
+    // If this is the first hook added, subclass the window
+    pSubclassWnd->m_pOldWndProc =
+      SetWindowLongPtr(hwnd, GWLP_WNDPROC, LONG_PTR(HookWndProc));
+  } else {
+    // just copy wndproc from next hook
+    pSubclassWnd->m_pOldWndProc = pSubclassWnd->m_pNext->m_pOldWndProc;
+  }
+  ;
+}
+
+//////////////////
+// Remove hook from map
+//
+void CSubclassWndMap::Remove(CSubclassWnd* pUnHook)
+{
+  HWND hwnd = pUnHook->m_hWnd;
+  ;
+
+  CSubclassWnd* pHook = Lookup(hwnd);
+  ;
+  if (pHook == pUnHook) {
+    // hook to remove is the one in the hash table: replace w/next
+    if (pHook->m_pNext)
+      SetAt(hwnd, pHook->m_pNext);
+    else {
+      // This is the last hook for this window: restore wnd proc
+      RemoveKey(hwnd);
+      SetWindowLongPtr(hwnd, GWLP_WNDPROC, pHook->m_pOldWndProc);
+    }
+  } else {
+    // Hook to remove is in the middle: just remove from linked list
+    while (pHook->m_pNext!=pUnHook)
+      pHook = pHook->m_pNext;
+    ;
+    pHook->m_pNext = pUnHook->m_pNext;
+  }
+}
+
+//////////////////
+// Remove all the hooks for a window
+//
+void CSubclassWndMap::RemoveAll(HWND hwnd)
+{
+  CSubclassWnd* pSubclassWnd;
+  while ((pSubclassWnd = Lookup(hwnd))!=NULL)
+    pSubclassWnd->HookWindow((HWND)NULL);  // (unhook)
+}
+
+/////////////////
+// Find first hook associate with window
+//
+CSubclassWnd* CSubclassWndMap::Lookup(HWND hwnd)
+{
+  CSubclassWnd* pFound = NULL;
+  if (!CMapPtrToPtr::Lookup(hwnd, (void*&)pFound))
+    return NULL;
+  ;
+  return pFound;
+}

@@ -1,0 +1,28 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\Minidumps\ProcessUserStreams\UserStreams\stdafx.h" 0
+// stdafx.h : include file for standard system include files,
+// or project specific include files that are used frequently, but
+// are changed infrequently
+//
+
+       
+
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\Minidumps\ProcessUserStreams\UserStreams\targetver.h" 0
+       
+
+// Including SDKDDKVer.h defines the highest available Windows platform.
+
+// If you wish to build your application for a previous Windows platform, include WinSDKVer.h and
+// set the _WIN32_WINNT macro to the platform you wish to support before including SDKDDKVer.h.
+
+                     
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\Minidumps\ProcessUserStreams\UserStreams\stdafx.h" 8
+
+                 
+                 
+
+
+
+// TODO: reference additional headers your program requires here

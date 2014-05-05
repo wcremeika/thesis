@@ -1,0 +1,674 @@
+<html>
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>[ m p 3 - e x p l o r e r ] - Read me</title>
+<style>
+	A:link, A:visited { text-decoration:none; font: 10pt Verdana, sans-serif ; color:#6F3598;}
+	A:hover { text-decoration:underline; bold 10pt Verdana, sans-serif ; 	color:#6F3598;}
+	P { font: 10pt Verdana, sans-serif; color:#000000; }
+	TD { font: 10pt Verdana, sans-serif; color:#000000; }
+	LI { font: 10pt Verdana, sans-serif; color:#000000; }
+	H1 {font: bold 10pt Verdana, sans-serif ; color:#6F3598; }
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#FFFFBD" vlink="#FFFFBD">
+<div align="center"><center>
+<table border="0" width="500">
+    <tr>
+    <tr>
+        <td align="center"><img src="logo.jpg" width="109" height="84"  align="middle">
+		<font color="#6F3598" size="4" face="Verdana"><strong> Read me</strong></p>
+		<font color="#6F3598" size="1" face="Verdana"> Copyright &#169;1998-2004 Pierre LEVY<br>
+        All rights reserved<br>
+		<a href="http://www.mp3-explorer.com/"></font>
+        <font face="Verdana" color="#6F3598" size="1">http://www.mp3-explorer.com/</font></a><br>
+        <a href="mailto:contact@mp3-explorer.com">
+        <font face="Verdana" color="#6F3598" size="1">contact@mp3-explorer.com</a></font><br></p>
+    </td>
+	</tr>
+	<tr>
+		<td>
+        <hr size="1" color="#605098">
+        <p align="right"><font size="1"><b>Version 5.0 - Last update 10/10/2004</b></font></p>
+        <h1>Table of contents<h1>
+		<p>
+        1. <a href="#licensing">License</a> (updated)<br>
+        2. <a href="#changelog">Change log</a> (updated)<br>
+        3. <a href="#known_issues">Identified issues</a> <br>
+        4. <a href="#updates">Updates</a><br>
+        5. <a href="#faq">FAQ</a><br>
+        6. <a href="#linkto">Link to [ mp3 - explorer ] homepage</a><br>
+        7. <a href="#uninstall">Uninstall</a><br>
+	8. <a href="#copyrights">Copyrights </a> (updated)</p>
+        <hr size="1" color="#605098">
+
+        <h1><a name="licensing">1. License</a></h1>
+        <p align="left">
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.<br>
+        <br>
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.<br>
+        <br>
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. <br>
+        <br>
+        <br>
+        <strong>By using this software, you agree to the
+        above terms.</strong></p>
+
+        <p align="right"><a href="#top">[ t o p ]</a></p>
+        <hr size="1" color="#605098">
+        <h1><a name="changelog">2. Change log</a></h1>
+        <div align="center"><center><table border="0" width="498">
+		<tr>
+                <td valign="top"><strong> 5.0</strong></td>
+                <td width="450"><p>
+				- [ mp3 - explorer ] is now free software. See license.txt file for more information.<br>
+				- This version doesn't support WMA format anymore (The microsoft code is not open source and not compatible with the new license).<br>
+				</p>
+	 	</td>
+		</tr>
+		<tr>
+                <td valign="top"><strong> 4.3</strong></td>
+                <td width="450"><p>
+				- [ mp3 - explorer ] uses now the open source implementation of ID3v2.<br>
+				- A ID3v1 mode has been added (new option tab ID3) for those that
+				don't need pictures and lyrics but just speed.<br>
+				- Code optimization while scanning, loading cache file, opening Properties
+				 / Intellitag.<br>
+				- Many graphical enhancements have been made to the explorer and the player.<br>
+				- Intellitag : some new format exceptions are handled. Validation could be done
+				or canceled for all selected files.<br>
+				- WMAs are now spported by [ mp3 - player ].<br><br>
+				</p>
+	 	</td>
+		</tr>
+		<tr>
+                <td valign="top"><strong> 4.2</strong></td>
+                <td width="450"><p>
+				- Intellitag is an exclusive feature that helps you tag your files
+				from their filenames.	<br>
+					More than 20 filename formats are recognized :<br>
+					<table><tr><td width="100">  &nbsp; </td><td>
+					<p>
+					<small>artist-title<br>
+					title<br>
+					(artist)-title<br>
+					artist-track-title<br>
+					artist-album-track-title<br>
+					[artist]-track-title<br>
+					track_artist_title<br>
+					artist-album-title<br>
+					[artist] title<br>
+					(artist)-album-title<br>
+					artist_track_title<br>
+					[artist]-album-title<br>
+					(artist)-track-title<br>
+					(artist)-album-track-title<br>
+					[artist]-album-track-title<br>
+					track-artist-title<br>
+					artist_title<br>
+					artist_album_title<br>
+ 					[artist]-title<br>
+					artist_album_track_title<br>
+					(artist) title<br></small></p>
+					</td></tr></table>
+				- ID3 data normalization. This feature is available for Intellitag
+				and individual or mass process <br>
+				- All combos have now an auto-completion system <br>
+				- In the properties box : Genre combo has been enhanced to quickly access
+				the desired genre and to see if it's compatible with ID3v1. <br>
+				- VBR : average bitrate and duration are now correct (thx Gordon ;-)) <br>
+				- Filename renaming format accepts one more field (4 fields with 3 separators). <br>
+				- Uninstall program provided<br>
+				- External Drag and drop from the playlist's detail content. This feature
+				could help you to burn MP3 CD. Check your selection's size while making
+				your playlist, then drag your playlist content to your CD burner or
+				copy files to your portable MP3 player! <br>
+				- Sorting enabled by column, click in the playlist content pane <br>
+				- WMAs are back but not played on [ mp3 - player ]. You will have to use
+				Winamp, Sonique or WMP to play them. As WMA files are using a proprietary tagging format,
+				lyrics and pictures are not supported for those files.
+				</p>
+	 			</td>
+			</tr>
+
+            <tr>
+                <td valign="top"><strong>4.1</strong></td>
+                <td><p>- Genre management : There is no lookup check on
+				the ID3v1 list now. You can enter any genre you want now.
+				You can still write ID3v1 tags and have the complete ID3v1 genre
+				list by selecting this option in the Advanced tab.<br>
+				- The playlist mode is now remembered and the internet
+				connection can be disabled in the Options Advanced tab.<br>
+				- Many code improvements to get best performances and better robustness
+				(regarding other ID3v2 implementations...).<br>
+				- Quite a lot very little enhancements or bugs fixes (user interface,
+				sort orders, search criteria, export, W2000 or NT specific problems, ...)<br><br>
+				</p>
+				</td>
+            </tr>
+            <tr>
+                <td valign="top"><strong>4.0</strong></td>
+                <td><p>- Support of ID3 v2.0, from where:</p>
+				<ul>
+					<li>no more limitation over the lengths of information </li>
+					<li>new information added : track number,
+					Astist's URL, notes, lyrics, picture...</li>
+				</ul>
+				<p> - Toggle between Playlist mode and web window : a new
+				way to display local pages or Internet. <br>
+				- the software now includes a player. <br>
+				- powerful multicriteria file search.<br>
+				- new customizable file view as web pages.<br><br>
+				</p>
+				</td>
+            </tr>
+            <tr>
+                <td valign="top"><strong>3.2.1</strong></td>
+                <td>- Problem
+                concerning files with no bitrate and no duration
+                has been fixed<br>
+                - The AutoRename checkbox's value is now saved.
+                No need to select it each time. Remember this
+                check box is only available if a default renaming
+                format has been defined.<br>
+                - The AutoRename feature works now with Drag &amp; Drop.<br>
+                - When a non-tagged file has a filename
+                structured like &quot;String1 - String2&quot;, [
+                mp3-explorer ] will put automatically String1 in
+                the Artist field and String2 in the Title field.<br>
+				- The scanning speed has been once again improved<br>
+				- Files that have been encoded with LAME in VBR mode (Variable Bit Rate)
+				  are now displayed with a correct bitrate.<br>
+                - Double click on a playlist detail file can now play it.<br>
+                - Maximum limit of files displayed is now 20000. <br>
+                - Some other little improvements and bug fixes</td>
+            </tr>
+            <tr>
+                <td valign="top"><strong>3.2</strong></td>
+                <td>- New Album
+                sublevel under Artist in the Genre view<br>
+                - New &quot;Find / Find next&quot; features to
+                locate Artist or Album in the tree view<br>
+                - Automatic file renaming available when editing
+                ID3 tags.<br>
+                - Artist field in ID3 tag dialog box is now a
+                drop down list that contains<br>
+                existing artists.<br>
+                - Panes dimensions are now saved.<br>
+                - Search the Internet within the application
+                using music site plugins.<br>
+                Plugins are available on [ mp3-explorer ] web
+                site and on affiliate music or<br>
+                search engine sites.<br>
+                - The cache file use is no longer limited in the
+                unregistered release.<br>
+                - Robustness improved regarding corrupted files
+                and bug fixes</td>
+            </tr>
+            <tr>
+                <td valign="top"><strong>3.1</strong></td>
+                <td>- The L.A.B.&trade;
+                (Little Audio Browser), that lets you quickly
+                browse your audio file library. The application
+                is now always minimised in the system tray. One
+                click to show the application in standard mode or
+                LAB mode, another click to hide it.<br>
+                - The very new Windows Media Audio format (WMA)
+                from Microsoft is now supported. Just activate
+                the option to scan for WMA files, and you will be
+                able to play and manage those files as well as
+                your MP3s (you should of course have a compatible
+                player, fortunately Winamp, Sonique and many
+                other support now this format). Note that the
+                software is packaged with or without WMA support.
+                The WMA release will install the Microsoft
+                runtime. This release do not handled completely
+                protected files : tags are not accessible.<br>
+                - Playlist and cache management have been
+                dramatically optimized. The program load is
+                really faster. You have now a little dialog box
+                that let you know what is going on.<br>
+                - This release can accept kind of plugin that can
+                change the appearance or the language. Check the
+                web site to have news about coming plugins.<br>
+                - Some (heu! ... many) improvements and few bugs
+                fixed in cache file, favourites addresses and
+                playlists management.<br>
+                - The refresh of the tree view is better managed
+                when updating ID3 tags (some of you are waiting
+                for this feature since version 1.0, sorry for the
+                delay ...).<br>
+                - Some new commands for playlist management :
+                Shuffle, Reset, Add all from category. <br>
+                - New web site and new price also $20 instead $15.</td>
+            </tr>
+            <tr>
+                <td valign="top"><strong>3.0</strong></td>
+                <td>- Two new panes
+                in the main window, one to browse all playlist
+                files (M3U or PLS) found at the address, the
+                other to display the detailed contents of the
+                selected playlist. It's really easy to delete,
+                add (drag'n drop from the main list), or to sort
+                files in a playlist. Path of MP3 files in the
+                playlist could be relative (no path), absolute (full
+                path) or even URL (http://....). [some will put
+                their tunes on Apache/Linux right now].<br>
+                - Take your files and drag them to any place you
+                want : <ul>
+                    <li>into the
+                        category tree to change their artist,
+                        genre or album name.</li>
+                    <li>into the
+                        playlist contents to add them to the
+                        playlist file</li>
+                    <li>into your
+                        player to play them</li>
+                    <li>into a
+                        document or a spreadsheet to copy their
+                        information</li>
+                    <li>into the
+                        Windows explorer to copy or move them</li>
+                </ul>
+                <p>- VBR (Variable
+                Bit Rate) MP3 files compressed by the Xing
+                Technologies encoder, are now detected. A default
+                average bitrate can be defined to calculate tune's
+                duration.<br>
+                - A new window lets you pick an address by
+                browsing all your folders. Press F2 to get it.<br>
+                - Play, Enqueue and (new) Delete buttons are
+                working with all panes.<br>
+                - Many little enhancements and bugs fixed<br>
+                - A setup program that creates shortcut to have
+                your <br>
+                [ mp3 - explorer ] always easily accessible.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>2.4</strong></td>
+                <td valign="top">-
+                New export system. You can use a default export
+                format or define our own export format using
+                Export Definition Files. Two EDF samples are
+                delivered now with the software. New options let
+                you define a default export filename or choose it
+                with a standard dialog box&nbsp;&nbsp;&nbsp; <br>
+                - Ability to delete physically files <br>
+                - New context menu on the treeview, that lets you
+                play, enqueue or export all files of right pane <br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>2.3</strong></td>
+                <td valign="top">-
+                Renaming features that let you define formats
+                based on ID3 tags, manage case control or spaces
+                replacement, rename all your files in one click.
+                Predefined formats are to be used for renaming
+                multiple files selection, and should defined in
+                the Options window.<font color="#FFFFFF"
+                size="1" <br>
+                Some options are to easily rename files coming
+                from UNIX or that should go to it.<br>
+                - New album
+                sublevel in the Artist view mode. <br>
+                - Toolbar modified (Only one button now to change
+                list items view, that should be enough !)<br>
+                - Selection preserved on the treeview and the
+                listview, <br>
+                - Few bugs fixed and other little things. <br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>2.2</strong></td>
+                <td valign="top">
+                - New cache system. [ mp3 - explorer
+                ] will create a cache file named &quot;mp3cache.mex&quot;
+                in each scanned address. When searching files,
+                the program will begin to search the cache file,
+                and if found it will load information from it
+                instead scanning all directories. When data are
+                modified, in one subdirectories of the address,
+                you can force [ mp3 - explorer ] to rebuild the
+                cache file with F5 key. This cache file could be
+                copied on a CD. You can now read the catalog of
+                an 640 MB MP3 CD in 2 or 3 seconds (that should
+                change your life !). Further more, it's also
+                working with 'My favorite addresses'. You only
+                need to create one file for each address by
+                scanning them individually.<br>
+                NB : the option <em>Use cache file</em> is not
+                saved if not registered, so it must be checked at
+                each startup
+                to evaluate the software.<br>
+                - New option that enable to minimize to system
+                tray.<br>
+                - This new glamorous readme format.<br>
+                - Few little bugs, of course !<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>2.1</strong></td>
+                <td valign="top">Two
+                new advanced options :<br>
+                1 - You can now define the correct shell command
+                to use with your player. Default values are
+                defined for Winamp, and works with Sonique or K-Jofol,
+                but they can be changed for NAD or Soritong.<br>
+                2 - A maximum of row displayed. If you had tried
+                to display more than 1400 files, the program
+                crashed (due to a limit of the listview control).
+                So the default value is 1000. If you want to
+                speed up the startup you can decrease this value.
+                Whatever, you can continue to encode, or download
+                with no fear !<br>
+                - 2 or 3 tiny bugs.<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>2.0.2</strong></td>
+                <td valign="top">-
+                Great sorting improvment that couldn't wait for 2.1.<br>
+                (VC++ profiler does a good job, to find my bad
+                job !).<br>
+                - A bug in ID3 tag saving introduced in 2.0.1 has
+                been quickly fixed.<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>2.0.1</strong></td>
+                <td valign="top">- I
+                could not understand the problem that appeared <br>
+                on some configuration at startup, so no more use
+                of the registry,<br>
+                back to a good old INI file located in Windows
+                directory.<br>
+                - Better exception handling.<br>
+                - Tab order modified in property box.<br>
+                - Enqueue improvement with multiple selection
+                files.<br>
+                - and other tiny bugs fixed.<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>2.0</strong></td>
+                <td valign="top">-
+                Display now MPEG information :<br>
+                time, bitrate, sample frequency, MPEG version,
+                layer number<br>
+                - New options for managing columns display (show/hide,
+                order, alignment)<br>
+                - New menu command and toolbar button to display
+                all information or a predefined set of columns (related
+                to options above).<br>
+                - New organization by Album/Artist (new toolbar
+                button too)<br>
+                - Multiple drives scanning can be handled now
+                with a new variable called 'My favorite addresses'.
+                You can search all paths defined in this variable
+                by typing * in the address bar. <br>
+                - Secondary sorting (the previous sort order) is
+                now saved.<br>
+                - Registration management.<br>
+                - Many user interface enhancements : credits
+                review, icons, status bar, ...<br>
+                - Many code optimization. The previous version
+                was quite fast, the new one goes really faster.<br>
+                - New command Select All (Ctrl+A) to select all
+                files.<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                freeware<br>
+                </td>
+                <td valign="top"><hr size="1" color="#605098">
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.5</strong></td>
+                <td>Enter and Tab
+                keys are now handled<br>
+                - New list options are available to :<br>
+                - define the Enter and Double-Click action <br>
+                - select item from any column of the row<br>
+                - left justify or center columns text<br>
+                - Redraw and sorting have been optimized<br>
+                - The sorted column is now saved between two
+                sessions<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.4.1</strong></td>
+                <td>- Copy feature
+                includes now the PC/DOS new line for standard
+                text editor. <br>
+                - All WinAmp genres are now supported and some
+                mismatch in old genres have also been fixed. (Some
+                changes may occur in your categories ! Sorry
+                about that)<br>
+                - Window's last position is now saved<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.4 </strong></td>
+                <td>- New Copy
+                feature. Be aware, this function copy only
+                informations in text format and not files
+                themself. You can now copy file informations into
+                Word, Excel or whatever. <br>
+                - If your MP3 files are write-protected, you've
+                got now a message box to indicate you that the
+                operation failed.<br>
+                - Directories color changed (yellow was no such
+                good idea)<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.3</strong></td>
+                <td>- User options
+                are now preserved between two sessions : View (Artist/Genre)<br>
+                - The five last address are saved between two
+                sessions<br>
+                - Columns sorting order is now ascendant or
+                descendant (Wow!)<br>
+                - Shell command problems are now reported by
+                message boxes.<br>
+                - Few status bar enhancements<br>
+                - Directories are now represented by a folder
+                icon (What for ? ...to put some yellow!)<br>
+                - This release has been compiled with the last C++
+                Service Pack from Microsoft - This may correct
+                some rare and odd problems.<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.2</strong></td>
+                <td>- Titles sorting
+                by columns now available<br>
+                - Multiple selection works now with other players
+                that WinAMP (but not Enqueue).<br>
+                - New Status bar<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.1.1</strong></td>
+                <td>- A bug due to
+                new winamp2's genre was fixed.<br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.1</strong></td>
+                <td>- New Address bar<br>
+                - New Toolbar with hot/cold buttons <br>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="50">
+                <strong>1.0</strong></td>
+                <td>- First release<br>
+                </td>
+            </tr>
+        </table>
+        </center></div><p align="right"><a href="#top">[ t o p ]</a></p>
+        <hr size="1" color="#605098">
+        <h1><a name="known_issues">3. Identified issues</a></h1>
+        <p>
+        <br>
+        - !!! New (4.1) !!! You may encounter a software crash on a corrupted file 
+		while scanning (it could happen). In this case, to activate the trace mode, 
+		just set in the MP3 EXPLORER.INI file located in Windows directory, 
+		in the Setup section, a "Debug" entry to 1 as follow :<br>
+		<code>
+		...<br>
+		[Setup]<br>
+		<b>Debug=1</b><br>
+		...<br>
+		</code>
+		This will create a debug.txt in the [ mp3 - explorer ] directory in which you
+		will see all files processed, and the last one should be the one with the problem.
+		Don't forget to remove this line for a normal use of the software.
+        </p>
+        <p>- !!! Important !!! On
+        some platform, the address bar does not appear and
+        the wonderful animate icon is on the left side of the
+        window. It's a known problem reported by Microsoft due to an outdated 
+		version of the comctl32.dll. The version of this DLL should be 4.71 or
+		 upper.  To get an updated version go to :<br>
+        <a href="http://support.microsoft.com/download/support/mslfiles/Com32upd.exe">
+		http://support.microsoft.com/download/support/mslfiles/Com32upd.exe</a>
+        <br>
+        <br>
+        - Due to an access conflict on the file, the current
+        playing file is not retrieved by the scanning process. To
+        refresh the list or the cache file, it's better to stop
+        your player.<br>
+        <br>
+        - The command Enqueue works only with player that support
+        the feature at the shell level. With some player as Sonique for
+        example the Play command do the same as Enqueue if you select the
+		 'Append to playlist' option.<br>
+        <br>
+        </p>
+        <p align="right"><a href="#top">[ t o p ]</a></p>
+        <hr size="1" color="#605098">
+        <h1><a name="updates">4. Updates</strong></a></h1>
+        <p>
+        All updated releases can be downloaded at :<br>
+        <a href="http://www.mp3-explorer.com/">http://www.mp3-explorer.com/</a><br>
+        <br>
+        <br>
+        </p>
+        <p align="right"><a href="#top">[ t o p ]</a></p>
+        <hr size="1" color="#605098">
+        <h1><a name="faq">5. FAQ</a></h1>
+        <p>
+        <br>
+        Q1. Problem with multiple selections play.<br>
+        <br>
+        A1. Multiple selections are handle with a temporary
+        playlist file named '~playlst.m3u' <br>
+        in the TEMP directory. Verify 'm3u' is correctly
+        associated to your player in the Shell. <br>
+        <br>
+        </p>
+        <p align="right"><a href="#top">[ t o p ]</a></p>
+        <hr size="1" color="#605098">
+        <h1><a name="linkto">7. Create a link to [ mp3 - explorer ]
+		homepage</a></h1>
+        <p>That's a great idea I will
+        really appreciate !<br>
+        <br>
+        To link to [ mp3 - explorer ] homepage, insert the
+        following code in your page :</p>
+        <p>- for a 83 x 31 banner</p>
+        <p>&lt;A HREF=&quot;http://www.mp3-explorer.com/&quot;&gt;<br>
+        &lt;IMG SRC=&quot;http://www.mp3-explorer.com/mp3-explorer.gif&quot;<br>
+        WIDTH=&quot;83&quot; HEIGHT=&quot;31&quot; BORDER=0 &gt;<br>
+        &lt;/A&gt; </p>
+        <p>- for 32 x 32 icon</p>
+        <p>&lt;A HREF=&quot;http://www.mp3-explorer.com/&quot;&gt;<br>
+        &lt;IMG SRC=&quot;http://www.mp3-explorer.com/logo32.gif&quot;<br>
+        WIDTH=&quot;32&quot; HEIGHT=&quot;32&quot; BORDER=0 &gt;<br>
+        &lt;/A&gt; </p>
+        <p align="right"><a href="#top">
+        [ t o p ]</a></p>
+        <hr size="1" color="#605098">
+        <h1><a name="uninstall">7. Uninstall</a></h1>
+		<p>Since version 4.2, the distribution provides an uninstaller</p>
+        <p>To remove completely [ mp3
+        - explorer ] manually from your system, you should delete the
+        following files :</p>
+        <ul>
+            <li>mp3 explorer.exe</li>
+            <li>readme.htm</li>
+            <li>*.edf</li>
+        </ul>
+        <p>from the installation directory which is by default :<br>
+        c:\Program Files\mp3 explorer<br>
+        and the directory itself.</p>
+        <p>You should also delete in
+        the Windows directory the file :</p>
+        <ul>
+            <li>mp3 explorer.ini</li>
+        </ul>
+        <p>If you were using cache
+        files, you can delete all mp3cache.mex located in your MP3
+        file directories.</p>
+        <p>Since v2.0.1, no information is saved in the registry base, so only
+        deleting files will leave your system totally clean.</p>
+
+        <p align="right"><a href="#top">[ t o p ]</a></p>
+        <hr size="1" color="#605098">
+
+        <h1><a name="copyrights">8. Copyrights</a></h1>
+
+        <p> [ mp3 - explorer ] uses under licence
+		some code protected by the copyright laws :<br>
+		- id3lib (ID3V2) © Dirk Mahoney (dirk@id3.org), Scott Thomas Haug (scott@id3.org)<br>
+		- ZLIB © Jean-loup Gailly (jloup@gzip.org), Mark Adler (madler@alumni.caltech.edu)<br>
+	    Versions before 5.0 may used code licensed from :
+		- XAudio © MpegTV<br>
+		- WindowsMedia © Microsoft Corp.<br>
+
+	</p>
+        <p align="right"><a href="#top">[ h a u t ]</a></p>
+        <hr size="1" color="#605098">
+
+        <p align="center">All product
+        names, trademarks and registered trademarks contained in
+        this document are the property of their respective
+        holders.</p>
+        </td>
+    </tr>
+</table>
+</center></div>
+
+<p>&nbsp;</p>
+</body>
+</html>

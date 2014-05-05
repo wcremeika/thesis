@@ -1,0 +1,35 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\datetimectrl.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/datetimectrl.h
+// Purpose:     Declaration of wxOSX-specific wxDateTimePickerCtrl class.
+// Author:      Vadim Zeitlin
+// Created:     2011-12-18
+// Copyright:   (c) 2011 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                               
+                               
+
+class wxDateTimeWidgetImpl;
+
+// ----------------------------------------------------------------------------
+// wxDateTimePickerCtrl
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_ADV wxDateTimePickerCtrl : public wxDateTimePickerCtrlBase
+{
+public:
+    // Implement the base class pure virtuals.
+    virtual void SetValue(const wxDateTime& dt);
+    virtual wxDateTime GetValue() const;
+
+    // Implementation only.
+    virtual void OSXGenerateEvent(const wxDateTime& dt) = 0;
+
+protected:
+    wxDateTimeWidgetImpl* GetDateTimePeer() const;
+};
+
+       // _WX_OSX_DATETIMECTRL_H_

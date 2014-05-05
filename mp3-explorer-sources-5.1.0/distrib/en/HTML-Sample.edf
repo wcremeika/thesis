@@ -1,0 +1,30 @@
+; Export Definition File
+;
+; Use following variables to define output format
+;
+; @FILENAME	MP3 file name
+; @ARTIST	ID3 tag artist
+; @TITLE	ID3 tag title
+; @LOCATION	MP3 file location
+; @SIZE		MP3 file size in MB
+; @ALBUM	ID3 tag album
+; @GENRE	ID3 tag genre
+; @DATE		ID3 tag date or year
+; @COMMENT	ID3 tag comment
+; @TIME		formated Time (hh:mm:ss)
+; @BITRATE	formated Bitrate (bits/s)
+; @FREQUENCY	formated Sampling frequency (kHz)
+; @MODE		Mode (Stereo, Joint Stereo, ...)
+; @LAYER	Layer (MPEG-1 LayerIII, ...)
+; @TRACKNUM	Tracknum
+; @RATING	Rating
+; @WWWARTISTURL Artist's Web Site
+; @LYRICS	Lyrics
+;
+; Use @CR and @TAB to generate new line and tabs  
+
+[Export parameter]
+Name="HTML sample"
+Header=<HTML>@CR<HEAD>@CR<TITLE>MP3 Explorer HTML export sample</TITLE>@CR</HEAD>@CR<BODY bgcolor="#000000" text="#FFFFFF" link="#FFFFB7" vlink="#FFFFBD">@CR<H1>MP3 Explorer export sample</H1><BR>@CR<TABLE>@CR<TR>@CR@TAB<TD>ARTIST</TD>@CR@TAB<TD>TITLE</TD>@CR@TAB<TD>ALBUM</TD>@CR@TAB<TD>TIME</TD>@CR</TR>@CR
+Record=@CR<TR>@CR@TAB<TD>@ARTIST</TD>@CR@TAB<TD><A HREF="@LOCATION\@FILENAME">@TITLE</A></TD>@CR@TAB<TD>@ALBUM</TD>@CR@TAB<TD>@TIME</TD>@CR</TR>
+Footer=</TABLE>@CR</BODY>@CR</HTML>

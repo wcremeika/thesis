@@ -1,0 +1,174 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\stringops.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/stringops.h
+// Purpose:     implementation of wxString primitive operations
+// Author:      Vaclav Slavik
+// Modified by:
+// Created:     2007-04-16
+// Copyright:   (c) 2007 REA Elektronik GmbH
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                       
+                         
+                      
+                     
+
+// This header contains wxStringOperations "namespace" class that implements
+// elementary operations on string data as static methods; wxString methods and
+// iterators are implemented in terms of it. Two implementations are available,
+// one for UTF-8 encoded char* string and one for "raw" wchar_t* strings (or
+// char* in ANSI build).
+
+// FIXME-UTF8: only wchar after we remove ANSI build
+                                         
+struct WXDLLIMPEXP_BASE wxStringOperationsWchar
+{
+    // moves the iterator to the next Unicode character
+    template <typename Iterator>
+    static void IncIter(Iterator& i) { ++i; }
+
+    // moves the iterator to the previous Unicode character
+    template <typename Iterator>
+    static void DecIter(Iterator& i) { --i; }
+
+    // moves the iterator by n Unicode characters
+    template <typename Iterator>
+    static Iterator AddToIter(const Iterator& i, ptrdiff_t n)
+        { return i + n; }
+
+    // returns distance of the two iterators in Unicode characters
+    template <typename Iterator>
+    static ptrdiff_t DiffIters(const Iterator& i1, const Iterator& i2)
+        { return i1 - i2; }
+
+    // encodes the character to a form used to represent it in internal
+    // representation (returns a string in UTF8 version)
+    static wxChar EncodeChar(const wxUniChar& ch) { return (wxChar)ch; }
+
+    static wxUniChar DecodeChar(const wxStringImpl::const_iterator& i)
+        { return *i; }
+};
+       // wxUSE_UNICODE_WCHAR || !wxUSE_UNICODE
+
+
+                      
+                                              
+ 
+                                           
+                                                
+                                                                   
+                                                    
+     
+                                                       
+     
+
+                                                                          
+                                                     
+
+
+                               
+                                    
+     
+                                            
+                                                 
+     
+
+                               
+                                    
+     
+                                                                           
+                                                                          
+                                                                             
+                                                                          
+                                                                       
+                                     
+            
+                                                                     
+                
+     
+
+                               
+                                                             
+     
+                        
+
+                    
+         
+                                               
+                             
+         
+                         
+         
+                                               
+                             
+         
+
+                   
+     
+
+                               
+                                                        
+     
+                           
+
+                      
+         
+                              
+             
+                            
+                       
+             
+         
+                           
+         
+                              
+             
+                            
+                       
+             
+         
+
+                    
+     
+
+                                      
+                                                     
+                                                         
+                               
+
+                                                     
+                                                                    
+
+                                                                               
+                                           
+     
+                                           
+                                                  
+     
+
+                                                       
+                                                               
+     
+                                       
+                           
+                                     
+     
+
+        
+                                                                        
+  
+       // wxUSE_UNICODE_UTF8
+
+
+                      
+                                                  
+     
+typedef wxStringOperationsWchar wxStringOperations;
+      
+
+        // _WX_WXSTRINGOPS_H_

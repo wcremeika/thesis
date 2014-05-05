@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\x11\dataobj.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/x11/dataobj.h
+// Purpose:     declaration of the wxDataObject class for Motif
+// Author:      Julian Smart
+// Copyright:   (c) 1998 Robert Roebling
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+// ----------------------------------------------------------------------------
+// wxDataObject is the same as wxDataObjectBase under wxMotif
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
+{
+public:
+    wxDataObject();
+
+                 
+                               
+      
+
+    virtual bool IsSupportedFormat( const wxDataFormat& format, Direction dir = Get ) const;
+};
+
+       //_WX_X11_DATAOBJ_H_
+

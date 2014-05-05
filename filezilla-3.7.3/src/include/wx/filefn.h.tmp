@@ -1,0 +1,844 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\filefn.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/filefn.h
+// Purpose:     File- and directory-related functions
+// Author:      Julian Smart
+// Modified by:
+// Created:     29/01/98
+// Copyright:   (c) 1998 Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                  
+                    
+
+                   
+                     
+
+                  
+                                  
+                               
+     
+                    
+      
+
+                   
+                         
+                        
+      
+
+              
+                                                       
+                                    
+                        
+                               
+                      
+                           
+          
+                   
+                  
+                           
+          
+                       
+                       
+                       
+      
+
+                                                    
+                                                                             
+                       
+                    
+                   
+                     
+       // native Win compiler
+
+                    
+                      
+                           
+                        
+                       
+          
+                    
+                       
+                           
+          
+      
+
+                   
+                                                                   
+                                                                              
+                    
+      
+
+                   
+                            // O_RDONLY &c
+      
+
+// ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+                                                    
+                       
+      
+
+                  
+                       
+     
+    // define off_t
+                                                                     
+                             
+         
+                           
+          
+      
+
+                                                 
+                         
+                           
+                       
+      
+
+enum wxSeekMode
+{
+  wxFromStart,
+  wxFromCurrent,
+  wxFromEnd
+};
+
+enum wxFileKind
+{
+  wxFILE_KIND_UNKNOWN,
+  wxFILE_KIND_DISK,     // a file supporting seeking to arbitrary offsets
+  wxFILE_KIND_TERMINAL, // a tty
+  wxFILE_KIND_PIPE      // a pipe
+};
+
+// we redefine these constants here because S_IREAD &c are _not_ standard
+// however, we do assume that the values correspond to the Unix umask bits
+enum wxPosixPermissions
+{
+    // standard Posix names for these permission flags:
+    wxS_IRUSR = 00400,
+    wxS_IWUSR = 00200,
+    wxS_IXUSR = 00100,
+
+    wxS_IRGRP = 00040,
+    wxS_IWGRP = 00020,
+    wxS_IXGRP = 00010,
+
+    wxS_IROTH = 00004,
+    wxS_IWOTH = 00002,
+    wxS_IXOTH = 00001,
+
+    // longer but more readable synonyms for the constants above:
+    wxPOSIX_USER_READ = wxS_IRUSR,
+    wxPOSIX_USER_WRITE = wxS_IWUSR,
+    wxPOSIX_USER_EXECUTE = wxS_IXUSR,
+
+    wxPOSIX_GROUP_READ = wxS_IRGRP,
+    wxPOSIX_GROUP_WRITE = wxS_IWGRP,
+    wxPOSIX_GROUP_EXECUTE = wxS_IXGRP,
+
+    wxPOSIX_OTHERS_READ = wxS_IROTH,
+    wxPOSIX_OTHERS_WRITE = wxS_IWOTH,
+    wxPOSIX_OTHERS_EXECUTE = wxS_IXOTH,
+
+    // default mode for the new files: allow reading/writing them to everybody but
+    // the effective file mode will be set after anding this value with umask and
+    // so won't include wxS_IW{GRP,OTH} for the default 022 umask value
+    wxS_DEFAULT = (wxPOSIX_USER_READ | wxPOSIX_USER_WRITE |                    wxPOSIX_GROUP_READ | wxPOSIX_GROUP_WRITE |                    wxPOSIX_OTHERS_READ | wxPOSIX_OTHERS_WRITE),
+
+
+
+    // default mode for the new directories (see wxFileName::Mkdir): allow
+    // reading/writing/executing them to everybody, but just like wxS_DEFAULT
+    // the effective directory mode will be set after anding this value with umask
+    wxS_DIR_DEFAULT = (wxPOSIX_USER_READ | wxPOSIX_USER_WRITE | wxPOSIX_USER_EXECUTE |                        wxPOSIX_GROUP_READ | wxPOSIX_GROUP_WRITE | wxPOSIX_GROUP_EXECUTE |                        wxPOSIX_OTHERS_READ | wxPOSIX_OTHERS_WRITE | wxPOSIX_OTHERS_EXECUTE)
+
+
+};
+
+// ----------------------------------------------------------------------------
+// declare our versions of low level file functions: some compilers prepend
+// underscores to the usual names, some also have Unicode versions of them
+// ----------------------------------------------------------------------------
+
+// Wrappers around Win32 api functions like CreateFile, ReadFile and such
+// Implemented in filefnwce.cpp
+                         
+                                 
+                                          
+                                                                                            
+                                                                             
+                                                                            
+                                         
+                                                   
+                                                                       
+                                                                              
+                                       
+                                                                                  
+                          
+                                                 
+
+                                 
+                                      
+                                      
+                                     
+                                       
+                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+
+
+                                                    
+                           
+                                 
+
+                                                         
+                            
+                                  
+                                                      
+                                   
+                               
+                                  
+          
+
+                                                               
+                                  
+                                      
+                                 
+                                 
+                                                                          
+                                      
+                                
+                                
+          
+
+                                                                              
+                                                                            
+
+            
+
+                           
+                                          
+                                                     
+         
+                                   
+          
+
+                                                                               
+                                                          
+                       
+                                             
+         
+                                                            
+          
+
+                                                                  
+                                                                           
+                                                                        
+      
+                                                                           
+                                                        
+                       
+                            
+                                               
+             
+                             
+                                                 
+                 
+                                                
+                  
+              
+                          
+                               
+                                                                
+                                                     
+                 
+                                                    
+                  
+             
+                                                                
+                                                  
+                 
+                                                 
+                  
+              
+                                        
+
+
+                
+
+                                                                              
+                                                                               
+                                                                               
+                                                                         
+                                                                            
+                   
+                                                                                                 
+                                             
+                                                    
+                                                
+                                                 
+          
+
+                                                                          
+                    
+                                               
+
+                                              
+                                               
+
+                           
+                           
+                                                          
+                                                          
+                                                         
+             
+                                                                   
+                                            
+                                            
+                                           
+              
+                              
+                                                   
+                                                   
+                                                  
+                                                
+
+                       
+                                                             
+                                                                       
+                                           
+
+                                                              
+                               
+                                   
+                   
+                          
+          
+
+                                             
+
+                                        
+
+                              
+                                                   
+                                                     
+                                                    
+                                                    
+                                                    
+                           
+                                                                           
+                               
+                          
+                                                
+             
+                                                              
+              
+         
+                                                 
+                                                    
+                                             
+             
+                                                           
+              
+          
+
+                          
+                     
+                                                          
+                                                                                                 
+
+                                                                        
+                                                                         
+             
+                                            
+              
+
+                                            
+                                           
+                                           
+                                           
+                               
+                                                 
+             
+                                              
+              
+                           
+
+
+                                             
+                     
+                                                                 
+                                                                      
+                                                                  
+                                                                    
+                                                                    
+                                                           
+                                                                   
+                                                           
+                                                                    
+                                                                    
+
+                                
+                                                                    
+
+                                                    
+
+                                                      
+                                                     
+                                                     
+                                                     
+                                                    
+                                    
+                                               
+                                                 
+                                                
+                                                
+                                                
+                                               
+                                                        
+                           
+                                           
+                                             
+                                            
+                                            
+                                            
+                                           
+                                          
+
+
+                                                          
+                                            
+                        
+                                           
+                                           
+                                         
+                                         
+                                          
+                                           
+              
+
+                      
+                                         
+                                          
+                                          
+              
+                                               
+
+                           
+                                                      
+                      
+                                     
+              
+                                                      
+                                                         
+                                      
+              
+          
+
+                                                                   
+                           
+                                 
+      // Unix or Windows using unknown compiler, assume POSIX supported
+    typedef off_t wxFileOffset;
+                                 
+                                                     
+                                                                     
+                                                  
+                                                     
+                      
+                                     
+              
+                                                      
+                                                                    
+                                      
+              
+                          
+                                  
+                                  
+              
+         
+                                           
+          
+    // functions
+                                
+                                 
+                                  
+                                
+                                
+                                
+                              
+                                    
+                                    
+
+                                                 
+
+                                      
+
+                                   
+                                   
+                                    
+                                     
+                                    
+
+                              
+       // platforms
+
+// if the platform doesn't have symlinks, define wxCRT_Lstat to be the same as
+// wxCRT_Stat to avoid #ifdefs in the code using it
+                          
+                                  
+      
+
+// define wxFseek/wxFtell to large file versions if available (done above) or
+// to fseek/ftell if not, to save ifdefs in using code
+               
+                         
+      
+               
+                         
+      
+
+inline int wxAccess(const wxString& path, mode_t mode)
+    { return access(path.fn_str(), mode); }
+inline int wxChmod(const wxString& path, mode_t mode)
+    { return chmod(path.fn_str(), mode); }
+inline int wxOpen(const wxString& path, int flags, mode_t mode)
+    { return open(path.fn_str(), flags, mode); }
+
+// FIXME-CE: provide our own implementations of the missing CRT functions
+                   
+inline int wxStat(const wxString& path, struct stat *buf)
+    { return stat(path.fn_str(), buf); }
+inline int wxLstat(const wxString& path, struct stat *buf)
+    { return lstat(path.fn_str(), buf); }
+inline int wxRmDir(const wxString& path)
+    { return rmdir(path.fn_str()); }
+                                                                                                        
+
+                                                                   
+                                          
+     
+inline int wxMkDir(const wxString& path, mode_t mode)
+    { return mkdir(path.fn_str(), mode); }
+      
+       // !__WXWINCE__
+
+               
+                               
+     
+                        
+      
+
+                                               
+  
+                                                                 
+                                                      
+  
+                                 
+     
+const int wxInvalidOffset = -1;
+      
+
+// ----------------------------------------------------------------------------
+// functions
+// ----------------------------------------------------------------------------
+WXDLLIMPEXP_BASE bool wxFileExists(const wxString& filename);
+
+// does the path exist? (may have or not '/' or '\\' at the end)
+WXDLLIMPEXP_BASE bool wxDirExists(const wxString& pathName);
+
+WXDLLIMPEXP_BASE bool wxIsAbsolutePath(const wxString& filename);
+
+// Get filename
+WXDLLIMPEXP_BASE wxChar* wxFileNameFromPath(wxChar *path);
+WXDLLIMPEXP_BASE wxString wxFileNameFromPath(const wxString& path);
+
+// Get directory
+WXDLLIMPEXP_BASE wxString wxPathOnly(const wxString& path);
+
+// all deprecated functions below are deprecated in favour of wxFileName's methods
+                           
+
+                                                                  
+                                                                     
+
+                                 
+                                                        
+                                 
+                                                           
+
+                               
+                                                                             
+                                                  
+                                                                     
+                                                                        
+                                                                         
+
+                           
+                                                                                                                           
+                                                                                                                   
+
+                                                  
+                                                                                                          
+                                                                                                                
+                                                                  
+
+                                                                                   
+                                                     
+                                
+             
+                                                                 
+                                                                           
+                                                                           
+                                                                                    
+
+                                            
+                                                                                  
+                                                                                        
+                                                                                               
+                                                    
+
+                                            
+                                                                                  
+                                                       
+      
+
+// Get first file name matching given wild card.
+// Flags are reserved for future use.
+                 
+                 
+WXDLLIMPEXP_BASE wxString wxFindFirstFile(const wxString& spec, int flags = 1);
+WXDLLIMPEXP_BASE wxString wxFindNextFile();
+
+// Does the pattern contain wildcards?
+WXDLLIMPEXP_BASE bool wxIsWild(const wxString& pattern);
+
+// Does the pattern match the text (usually a filename)?
+// If dot_special is true, doesn't match * against . (eliminating
+// `hidden' dot files)
+WXDLLIMPEXP_BASE bool wxMatchWild(const wxString& pattern,  const wxString& text, bool dot_special = true);
+
+// Concatenate two files to form third
+WXDLLIMPEXP_BASE bool wxConcatFiles(const wxString& file1, const wxString& file2, const wxString& file3);
+
+// Copy file1 to file2
+WXDLLIMPEXP_BASE bool wxCopyFile(const wxString& file1, const wxString& file2,
+                                 bool overwrite = true);
+
+// Remove file
+WXDLLIMPEXP_BASE bool wxRemoveFile(const wxString& file);
+
+// Rename file
+WXDLLIMPEXP_BASE bool wxRenameFile(const wxString& file1, const wxString& file2, bool overwrite = true);
+
+// Get current working directory.
+                           
+                                                  
+                   
+                                                                
+                                                
+                                                                                                  
+                                                     
+                                                                
+       // WXWIN_COMPATIBILITY_2_6
+WXDLLIMPEXP_BASE wxString wxGetCwd();
+
+// Set working directory
+WXDLLIMPEXP_BASE bool wxSetWorkingDirectory(const wxString& d);
+
+// Make directory
+WXDLLIMPEXP_BASE bool wxMkdir(const wxString& dir, int perm = wxS_DIR_DEFAULT);
+
+// Remove directory. Flags reserved for future use.
+WXDLLIMPEXP_BASE bool wxRmdir(const wxString& dir, int flags = 0);
+
+// Return the type of an open file
+WXDLLIMPEXP_BASE wxFileKind wxGetFileKind(int fd);
+WXDLLIMPEXP_BASE wxFileKind wxGetFileKind(FILE *fp);
+
+                           
+                                               
+                                                                    
+                                                   
+ 
+                                    
+ 
+       //WXWIN_COMPATIBILITY_2_6
+
+// permissions; these functions work both on files and directories:
+WXDLLIMPEXP_BASE bool wxIsWritable(const wxString &path);
+WXDLLIMPEXP_BASE bool wxIsReadable(const wxString &path);
+WXDLLIMPEXP_BASE bool wxIsExecutable(const wxString &path);
+
+// ----------------------------------------------------------------------------
+// separators in file names
+// ----------------------------------------------------------------------------
+
+// between file name and extension
+                                      
+
+// between drive/volume name and the path
+                                      
+
+// between the path components
+                                       
+                                      
+                                      
+                                                                   
+
+// separator in the path list (as in PATH environment variable)
+// there is no PATH variable in Classic Mac OS so just use the
+// semicolon (it must be different from the file name separator)
+// NB: these are strings and not characters on purpose!
+                                      
+                                      
+                                      
+
+// platform independent versions
+                                          
+                                   
+                                                  
+                                             
+                      
+                                                 
+                                            
+        // Windows and OS/2
+                                                 
+                                            
+        // Unix/Windows
+
+// this is useful for wxString::IsSameAs(): to compare two file names use
+// filename1.IsSameAs(filename2, wxARE_FILENAMES_CASE_SENSITIVE)
+                                                                  
+                                              
+        // Windows, Mac OS and OS/2
+                                               
+        // Unix/Windows
+
+// is the char a path separator?
+inline bool wxIsPathSeparator(wxChar c)
+{
+    // under DOS/Windows we should understand both Unix and DOS file separators
+                                                                 
+                                
+     
+    return c == wxT('\\') || c == wxT('/');
+      
+}
+
+// does the string ends with path separator?
+WXDLLIMPEXP_BASE bool wxEndsWithPathSeparator(const wxString& filename);
+
+                           
+                                                                              
+                                  
+                                                
+                                                                         
+                                                                   
+                                                                   
+                                                                     
+      
+
+// find a file in a list of directories, returns false if not found
+WXDLLIMPEXP_BASE bool wxFindFileInPath(wxString *pStr, const wxString& szPath, const wxString& szFile);
+
+// Get the OS directory if appropriate (such as the Windows directory).
+// On non-Windows platform, probably just return the empty string.
+WXDLLIMPEXP_BASE wxString wxGetOSDirectory();
+
+                  
+
+                             
+                                                                         
+
+       // wxUSE_DATETIME
+
+// Parses the wildCard, returning the number of filters.
+// Returns 0 if none or if there's a problem,
+// The arrays will contain an equal number of items found before the error.
+// wildCard is in the form:
+// "All files (*)|*|Image Files (*.jpeg *.png)|*.jpg;*.png"
+WXDLLIMPEXP_BASE int wxParseCommonDialogsFilter(const wxString& wildCard, wxArrayString& descriptions, wxArrayString& filters);
+
+// ----------------------------------------------------------------------------
+// classes
+// ----------------------------------------------------------------------------
+
+               
+
+                                                                           
+                                     
+ 
+       
+                                                                              
+                                                                             
+                                        
+                                
+     
+                                                                        
+     
+
+                     
+     
+                               
+                                      
+     
+
+        
+                   
+  
+
+                                                                            
+                    
+                                                                             
+
+      // !__UNIX__
+
+                         
+
+       // __UNIX__/!__UNIX__
+
+
+// Path searching
+class WXDLLIMPEXP_BASE wxPathList : public wxArrayString
+{
+public:
+    wxPathList() {}
+    wxPathList(const wxArrayString &arr)
+        { Add(arr); }
+
+    // Adds all paths in environment variable
+    void AddEnvList(const wxString& envVariable);
+
+    // Adds given path to this list
+    bool Add(const wxString& path);
+    void Add(const wxArrayString &paths);
+
+    // Find the first full path for which the file exists
+    wxString FindValidPath(const wxString& filename) const;
+
+    // Find the first full path for which the file exists; ensure it's an
+    // absolute path that gets returned.
+    wxString FindAbsoluteValidPath(const wxString& filename) const;
+
+    // Given full path and filename, add path to list
+    bool EnsureFileAccessible(const wxString& path);
+
+                           
+                                              
+                                                            
+      
+};
+
+       // _WX_FILEFN_H_

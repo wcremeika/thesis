@@ -1,0 +1,92 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\uiaction.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/uiaction.h
+// Purpose:     wxUIActionSimulator interface
+// Author:      Kevin Ollivier, Steven Lamerton, Vadim Zeitlin
+// Modified by:
+// Created:     2010-03-06
+// Copyright:   (c) Kevin Ollivier
+//              (c) 2010 Steven Lamerton
+//              (c) 2010 Vadim Zeitlin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                
+                                
+
+                   
+
+                           
+
+                                                            
+
+                                          
+ 
+       
+                             
+
+
+                                                                              
+                                                      
+
+
+                       
+                       
+
+                        
+                                   
+                                                                                
+
+                                                  
+                                                
+
+                                                         
+                                                   
+                                                      
+                                                          
+                                                      
+                                                            
+                                                     
+                                                             
+
+                          
+                          
+
+                                                                
+                                                         
+                                                 
+
+                                                       
+                                                  
+
+                                                                               
+                                                                                      
+                                                                                    
+                                                       
+
+                                
+
+        
+                                                                            
+                                                                             
+                                                                        
+                
+      
+                                                                       
+                                                     
+                                                      
+
+                                                                              
+                                                      
+
+
+                                                                          
+                                                                       
+                  
+                                                        
+  
+
+       // wxUSE_UIACTIONSIMULATOR
+
+       // _WX_UIACTIONSIMULATOR_H_

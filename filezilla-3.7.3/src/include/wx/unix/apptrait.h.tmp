@@ -1,0 +1,96 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\unix\apptrait.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/unix/apptrait.h
+// Purpose:     standard implementations of wxAppTraits for Unix
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     23.06.2003
+// Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+// ----------------------------------------------------------------------------
+// wxGUI/ConsoleAppTraits: must derive from wxAppTraits, not wxAppTraitsBase
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_BASE wxConsoleAppTraits : public wxConsoleAppTraitsBase
+{
+public:
+                           
+                                               
+       // wxUSE_CONSOLE_EVENTLOOP
+               
+                                                         
+      
+};
+
+             
+
+                                                                              
+                                                                              
+                                                  
+  
+                                                                              
+                                                                              
+                                                                      
+                                              
+                                 
+                                       
+                                   
+
+                      
+                                       
+                                    
+      
+
+                                                                 
+ 
+       
+                                               
+                                                      
+               
+                                                         
+      
+                                         
+                                 
+                                 
+      
+
+                                                                  
+                                                
+      
+                                                                                     
+
+                  
+                                                   
+                                                                    
+                                                                          
+                       
+
+                        
+                                                       
+      
+
+                 
+
+                               
+                                                
+      
+
+                            
+                                            
+      
+
+                       
+
+                                                                        
+  
+
+       // wxUSE_GUI
+
+       // _WX_UNIX_APPTRAIT_H_
+

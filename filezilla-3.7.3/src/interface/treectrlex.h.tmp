@@ -1,0 +1,21 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\treectrlex.h" 0
+                        
+                        
+
+class wxTreeCtrlEx : public wxTreeCtrl
+{
+	DECLARE_CLASS(wxTreeCtrlEx)
+
+public:
+	wxTreeCtrlEx(wxWindow *parent, wxWindowID id = wxID_ANY,
+			   const wxPoint& pos = wxDefaultPosition,
+			   const wxSize& size = wxDefaultSize,
+			   long style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT);
+	void SafeSelectItem(const wxTreeItemId& item);
+
+protected:
+	bool m_setSelection;
+};
+
+       //__TREECTRLEX_H__

@@ -1,0 +1,30 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\x11\dcprint.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/x11/dcprint.h
+// Purpose:     wxPrinterDC class
+// Author:      Julian Smart
+// Modified by:
+// Created:     17/09/98
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                 
+
+class WXDLLIMPEXP_CORE wxPrinterDC: public wxDC
+{
+public:
+    DECLARE_CLASS(wxPrinterDC)
+
+    // Create a printer DC
+    wxPrinterDC(const wxString& driver, const wxString& device, const wxString& output, bool interactive = TRUE, wxPrintOrientation orientation = wxPORTRAIT);
+
+    virtual ~wxPrinterDC();
+};
+
+      
+    // _WX_DCPRINT_H_

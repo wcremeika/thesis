@@ -1,0 +1,82 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\anidecod.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/anidecod.h
+// Purpose:     wxANIDecoder, ANI reader for wxImage and wxAnimation
+// Author:      Francesco Montorsi
+// Copyright:   (c) 2006 Francesco Montorsi
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                   
+
+                                                 
+
+                      
+                     
+                         
+                        
+
+
+                                                                                
+
+                                                                  
+                                                    
+
+                                                                             
+                     
+                                                                             
+
+                                                               
+ 
+       
+                                    
+                   
+                    
+
+
+                                                          
+                                                               
+                                                                            
+                                                    
+                                                                    
+
+                                                           
+
+                                               
+
+                                                                  
+
+                                     
+                                    
+                                   
+                                        
+
+        
+                                       
+                                                          
+                                                                                 
+
+                                                                                      
+                                                                                      
+                                                                          
+                          
+
+                                                    
+                                                                 
+                               
+
+                                                                            
+                                   
+
+
+                                          
+  
+
+
+        // wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)
+
+        // _WX_ANIDECOD_H

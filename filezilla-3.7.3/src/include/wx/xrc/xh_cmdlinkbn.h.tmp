@@ -1,0 +1,33 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_cmdlinkbn.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_cmdlinkbn.h
+// Purpose:     XML resource handler for command link buttons
+// Author:      Kinaou Herve
+// Created:     2010-10-20
+// Copyright:   (c) 2010 wxWidgets development team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                         
+
+                                        
+
+                                                                                 
+ 
+       
+                                    
+
+                                         
+                                            
+
+        
+                                                           
+  
+
+       // wxUSE_XRC && wxUSE_COMMANDLINKBUTTON
+
+       // _WX_XH_CMDLINKBN_H_

@@ -1,0 +1,4503 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\event.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/event.h
+// Purpose:     Event classes
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) wxWidgets team
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                    
+                    
+
+                   
+                  
+                     
+                       
+
+             
+                          
+                          
+                              
+      
+
+                       
+                     
+                      
+                       
+                  
+
+                       
+                                    
+      
+
+// Currently VC6 and VC7 are known to not be able to compile CallAfter() code,
+// so disable it for them.
+                                                       
+                                 
+
+                            
+      
+
+// ----------------------------------------------------------------------------
+// forward declarations
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_FWD_BASE wxList;
+class WXDLLIMPEXP_FWD_BASE wxEvent;
+class WXDLLIMPEXP_FWD_BASE wxEventFilter;
+             
+                                    
+                                      
+                                        
+                                            
+       // wxUSE_GUI
+
+// We operate with pointer to members of wxEvtHandler (such functions are used
+// as event handlers in the event tables or as arguments to Connect()) but by
+// default MSVC uses a restricted (but more efficient) representation of
+// pointers to members which can't deal with multiple base classes. To avoid
+// mysterious (as the compiler is not good enough to detect this and give a
+// sensible error message) errors in the user code as soon as it defines
+// classes inheriting from both wxEvtHandler (possibly indirectly, e.g. via
+// wxWindow) and something else (including our own wxTrackable but not limited
+// to it), we use the special MSVC keyword telling the compiler to use a more
+// general pointer to member representation for the classes inheriting from
+// wxEvtHandler.
+                  
+                                                            
+     
+                                     
+      
+
+class WXDLLIMPEXP_FWD_BASE  wxEvtHandler;
+class wxEventConnectionRef;
+
+// ----------------------------------------------------------------------------
+// Event types
+// ----------------------------------------------------------------------------
+
+typedef int wxEventType;
+
+                                             
+
+// this is used to make the event table entry type safe, so that for an event
+// handler only a function with proper parameter list can be given. See also
+// the wxEVENT_HANDLER_CAST-macro.
+                                                           
+
+                                                                                                                                                   
+
+
+                                                                                        
+
+
+// generate a new unique event type
+extern WXDLLIMPEXP_BASE wxEventType wxNewEventType();
+
+// define macros to create new event types:
+                       
+                                                                      
+                                                                  
+
+                                                                       
+                                                              
+                                                                                                      
+
+
+                                                                              
+                       
+                                                                                                                    
+
+
+                                                                       
+                                                                                                                 
+
+
+
+                                                                            
+                                                                           
+                      
+                                                                                                        
+
+
+                                                                                                                          
+
+      // !wxHAS_EVENT_BIND
+    // the macros are the same ones as above but defined differently as we only
+    // use the integer event type values to identify events in this case
+
+                                                                                           
+
+
+                                                                                                         
+
+                                                                                                                 
+
+
+                                                                                            
+
+                                                                                                               
+
+       // wxHAS_EVENT_BIND/!wxHAS_EVENT_BIND
+
+// Try to cast the given event handler to the correct handler type:
+
+                                                                                                                                   
+
+
+
+                       
+
+                                                                              
+                                                                           
+                                                                          
+                                         
+                     
+                    
+ 
+       
+                                                                             
+                         
+
+                                                       
+
+                                                                          
+                                                                           
+                   
+                                                          
+
+        
+                       
+  
+
+       // wxHAS_EVENT_BIND
+
+// These are needed for the functor definitions
+typedef void (wxEvtHandler::*wxEventFunction)(wxEvent&);
+
+// We had some trouble (specifically with eVC for ARM WinCE build) with using
+// wxEventFunction in the past so we had introduced wxObjectEventFunction which
+// used to be a typedef for a member of wxObject and not wxEvtHandler to work
+// around this but as eVC is not really supported any longer we now only keep
+// this for backwards compatibility and, despite its name, this is a typedef
+// for wxEvtHandler member now -- but if we have the same problem with another
+// compiler we can restore its old definition for it.
+typedef wxEventFunction wxObjectEventFunction;
+
+// The event functor which is stored in the static and dynamic event tables:
+class WXDLLIMPEXP_BASE wxEventFunctor
+{
+public:
+    virtual ~wxEventFunctor();
+
+    // Invoke the actual event handler:
+    virtual void operator()(wxEvtHandler *, wxEvent&) = 0;
+
+    // this function tests whether this functor is matched, for the purpose of
+    // finding it in an event table in Unbind(), by the given functor:
+    virtual bool IsMatching(const wxEventFunctor& functor) const = 0;
+
+    // If the functor holds an wxEvtHandler, then get access to it and track
+    // its lifetime with wxEventConnectionRef:
+    virtual wxEvtHandler *GetEvtHandler() const
+        { return NULL; }
+
+    // This is only used to maintain backward compatibility in
+    // wxAppConsoleBase::CallEventHandler and ensures that an overwritten
+    // wxAppConsoleBase::HandleEvent is still called for functors which hold an
+    // wxEventFunction:
+    virtual wxEventFunction GetEvtMethod() const
+        { return NULL; }
+
+private:
+    WX_DECLARE_ABSTRACT_TYPEINFO(wxEventFunctor)
+};
+
+// A plain method functor for the untyped legacy event types:
+class WXDLLIMPEXP_BASE wxObjectEventFunctor : public wxEventFunctor
+{
+public:
+    wxObjectEventFunctor(wxObjectEventFunction method, wxEvtHandler *handler)
+        : m_handler( handler ), m_method( method )
+        { }
+
+    virtual void operator()(wxEvtHandler *handler, wxEvent& event);
+
+    virtual bool IsMatching(const wxEventFunctor& functor) const
+    {
+        if ( wxTypeId(functor) == wxTypeId(*this) )
+        {
+            const wxObjectEventFunctor &other =
+                static_cast< const wxObjectEventFunctor & >( functor );
+
+            // FIXME-VC6: amazing but true: replacing "m_method == 0" here
+            // with "!m_method" makes VC6 crash with an ICE in DLL build (only!)
+            // Also notice that using "NULL" instead of "0" results in warnings
+            // about "using NULL in arithmetics" from arm-linux-androideabi-g++
+            // 4.4.3 used for wxAndroid build.
+
+            return ( m_method == other.m_method || other.m_method == 0 ) &&
+                   ( m_handler == other.m_handler || other.m_handler == NULL );
+        }
+        else
+            return false;
+    }
+
+    virtual wxEvtHandler *GetEvtHandler() const
+        { return m_handler; }
+
+    virtual wxEventFunction GetEvtMethod() const
+        { return m_method; }
+
+private:
+    wxEvtHandler *m_handler;
+    wxEventFunction m_method;
+
+    // Provide a dummy default ctor for type info purposes
+    wxObjectEventFunctor() { }
+
+    WX_DECLARE_TYPEINFO_INLINE(wxObjectEventFunctor)
+};
+
+// Create a functor for the legacy events: used by Connect()
+inline wxObjectEventFunctor *
+wxNewEventFunctor(const wxEventType& WXUNUSED(evtType),
+                  wxObjectEventFunction method,
+                  wxEvtHandler *handler)
+{
+    return new wxObjectEventFunctor(method, handler);
+}
+
+// This version is used by wxDECLARE_EVENT_TABLE_ENTRY()
+inline wxObjectEventFunctor *
+wxNewEventTableFunctor(const wxEventType& WXUNUSED(evtType),
+                       wxObjectEventFunction method)
+{
+    return new wxObjectEventFunctor(method, NULL);
+}
+
+inline wxObjectEventFunctor
+wxMakeEventFunctor(const wxEventType& WXUNUSED(evtType),
+                        wxObjectEventFunction method,
+                        wxEvtHandler *handler)
+{
+    return wxObjectEventFunctor(method, handler);
+}
+
+                       
+
+                   
+ 
+
+                                                                    
+                                        
+                                          
+
+                                                                              
+                    
+                     
+                                        
+ 
+                                                        
+  
+
+                                                                             
+                        
+           
+                                
+ 
+                         
+  
+
+
+                                                                          
+                                                                 
+                                                           
+
+                                                         
+                                 
+                              
+ 
+                              
+                        
+                                                    
+                                       
+                                                  
+                     
+                                                               
+                                              
+                                                                  
+  
+
+                                                             
+                                 
+                               
+ 
+                              
+                         
+                                                   
+                        
+                                                 
+                        
+                                                              
+                        
+  
+
+                        
+
+                                                               
+  
+                                                                            
+                                                             
+  
+                                                                              
+                                                                              
+                                                                              
+          
+        
+                                                                               
+                          
+                            
+                                    
+               
+                      
+                         
+                                                                
+               
+ 
+        
+                                                    
+
+       
+                                                          
+                                                                        
+
+
+                                                                                 
+                                                  
+     
+                                                      
+                                                                             
+                                                                     
+
+                                                                              
+                                                                               
+                                                                            
+                                                              
+     
+
+                                                                  
+     
+                                        
+                           
+         
+                                                               
+
+                                                                           
+                                                                
+         
+
+                                                                            
+                                                                              
+                          
+                                                                
+     
+
+                                                                
+     
+                                                   
+                         
+
+                                                                             
+                        
+
+                                                              
+                                                                             
+
+                                                                        
+                                                                         
+     
+
+                                               
+                                                        
+
+                                                
+                                                      
+
+        
+                            
+                                       
+
+                                                          
+                              
+
+                                                 
+                                                                   
+                                         
+  
+
+
+                                                                     
+                                               
+                                                    
+ 
+        
+                                                    
+
+       
+                                                          
+                                                                        
+
+                                                            
+                              
+     
+                                                                              
+                                                                               
+                                                                            
+                                                              
+     
+
+                                                                            
+     
+                                                                    
+                                                                      
+                                                                             
+                                  
+                                                      
+             
+                                                           
+                                                 
+     
+
+                                                                
+     
+                                                   
+                         
+
+                                                                       
+
+                                                                              
+
+                                            
+     
+
+        
+                                 
+
+                                                          
+                                
+
+                                                                 
+                                         
+  
+
+
+                                              
+                                                   
+ 
+       
+                                                   
+
+                                                 
+                                                     
+           
+
+                                                                            
+     
+                                                                        
+                                                                      
+                                                                             
+                                  
+                                                      
+             
+                                                           
+                                                 
+     
+
+                                                                
+     
+                                                   
+                         
+
+                                                                     
+
+                                                                            
+
+                                                                       
+                    
+                                                    
+     
+
+        
+                                                                      
+                          
+                      
+
+                                                                            
+                              
+
+                                                          
+                               
+
+                                                               
+                                         
+  
+
+                                                                               
+                                                                              
+                                                                               
+                                                                                
+
+
+                                      
+                                               
+                                                   
+                                                            
+ 
+                                                                
+ 
+
+                                               
+                                                 
+                                                             
+ 
+                                                            
+ 
+
+                                           
+                                              
+                                                 
+                                                       
+ 
+                                                              
+ 
+
+                                              
+                                               
+                                                        
+ 
+                                                          
+ 
+
+                                    
+        
+                                                                               
+                                                                      
+                                  
+                                                   
+                                        
+ 
+                                                                             
+                                 
+ 
+
+        
+                                                                                 
+                                                                    
+                                   
+                                                    
+                                         
+ 
+                                                                         
+                                 
+ 
+
+                                                                               
+                                                                         
+                                                                     
+                                                               
+                                                               
+                                                                         
+ 
+                                                                      
+                                  
+ 
+
+       // wxHAS_EVENT_BIND
+
+
+// many, but not all, standard event types
+
+    // some generic events
+extern WXDLLIMPEXP_BASE const wxEventType wxEVT_NULL;
+extern WXDLLIMPEXP_BASE const wxEventType wxEVT_FIRST;
+extern WXDLLIMPEXP_BASE const wxEventType wxEVT_USER_FIRST;
+
+    // Need events declared to do this
+class WXDLLIMPEXP_FWD_BASE wxIdleEvent;
+class WXDLLIMPEXP_FWD_BASE wxThreadEvent;
+class WXDLLIMPEXP_FWD_BASE wxAsyncMethodCallEvent;
+class WXDLLIMPEXP_FWD_CORE wxCommandEvent;
+class WXDLLIMPEXP_FWD_CORE wxMouseEvent;
+class WXDLLIMPEXP_FWD_CORE wxFocusEvent;
+class WXDLLIMPEXP_FWD_CORE wxChildFocusEvent;
+class WXDLLIMPEXP_FWD_CORE wxKeyEvent;
+class WXDLLIMPEXP_FWD_CORE wxNavigationKeyEvent;
+class WXDLLIMPEXP_FWD_CORE wxSetCursorEvent;
+class WXDLLIMPEXP_FWD_CORE wxScrollEvent;
+class WXDLLIMPEXP_FWD_CORE wxSpinEvent;
+class WXDLLIMPEXP_FWD_CORE wxScrollWinEvent;
+class WXDLLIMPEXP_FWD_CORE wxSizeEvent;
+class WXDLLIMPEXP_FWD_CORE wxMoveEvent;
+class WXDLLIMPEXP_FWD_CORE wxCloseEvent;
+class WXDLLIMPEXP_FWD_CORE wxActivateEvent;
+class WXDLLIMPEXP_FWD_CORE wxWindowCreateEvent;
+class WXDLLIMPEXP_FWD_CORE wxWindowDestroyEvent;
+class WXDLLIMPEXP_FWD_CORE wxShowEvent;
+class WXDLLIMPEXP_FWD_CORE wxIconizeEvent;
+class WXDLLIMPEXP_FWD_CORE wxMaximizeEvent;
+class WXDLLIMPEXP_FWD_CORE wxMouseCaptureChangedEvent;
+class WXDLLIMPEXP_FWD_CORE wxMouseCaptureLostEvent;
+class WXDLLIMPEXP_FWD_CORE wxPaintEvent;
+class WXDLLIMPEXP_FWD_CORE wxEraseEvent;
+class WXDLLIMPEXP_FWD_CORE wxNcPaintEvent;
+class WXDLLIMPEXP_FWD_CORE wxMenuEvent;
+class WXDLLIMPEXP_FWD_CORE wxContextMenuEvent;
+class WXDLLIMPEXP_FWD_CORE wxSysColourChangedEvent;
+class WXDLLIMPEXP_FWD_CORE wxDisplayChangedEvent;
+class WXDLLIMPEXP_FWD_CORE wxQueryNewPaletteEvent;
+class WXDLLIMPEXP_FWD_CORE wxPaletteChangedEvent;
+class WXDLLIMPEXP_FWD_CORE wxJoystickEvent;
+class WXDLLIMPEXP_FWD_CORE wxDropFilesEvent;
+class WXDLLIMPEXP_FWD_CORE wxInitDialogEvent;
+class WXDLLIMPEXP_FWD_CORE wxUpdateUIEvent;
+class WXDLLIMPEXP_FWD_CORE wxClipboardTextEvent;
+class WXDLLIMPEXP_FWD_CORE wxHelpEvent;
+
+
+    // Command events
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_BUTTON;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CHECKBOX;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CHOICE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_LISTBOX;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_LISTBOX_DCLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CHECKLISTBOX;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MENU;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SLIDER;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_RADIOBOX;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_RADIOBUTTON;
+
+// wxEVT_SCROLLBAR is deprecated, use wxEVT_SCROLL... events
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLBAR;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_VLBOX;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMBOBOX;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_TOOL_RCLICKED;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_TOOL_DROPDOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_TOOL_ENTER;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMBOBOX_DROPDOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMBOBOX_CLOSEUP;
+
+    // Thread and asynchronous method call events
+extern const WXDLLIMPEXP_BASE wxEventType wxEVT_THREAD;
+extern const WXDLLIMPEXP_BASE wxEventType wxEVT_ASYNC_METHOD_CALL;
+
+    // Mouse event types
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_LEFT_DOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_LEFT_UP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MIDDLE_DOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MIDDLE_UP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_RIGHT_DOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_RIGHT_UP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOTION;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_ENTER_WINDOW;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_LEAVE_WINDOW;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_LEFT_DCLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MIDDLE_DCLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_RIGHT_DCLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SET_FOCUS;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_KILL_FOCUS;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CHILD_FOCUS;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOUSEWHEEL;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_AUX1_DOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_AUX1_UP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_AUX1_DCLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_AUX2_DOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_AUX2_UP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_AUX2_DCLICK;
+
+    // Character input event type
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CHAR;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CHAR_HOOK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_NAVIGATION_KEY;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_KEY_DOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_KEY_UP;
+                
+                                                                     
+      
+// This is a private event used by wxMSW code only and subject to change or
+// disappear in the future. Don't use.
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_AFTER_CHAR;
+
+    // Set cursor event
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SET_CURSOR;
+
+    // wxScrollBar and wxSlider event identifiers
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_TOP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_BOTTOM;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_LINEUP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_LINEDOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_PAGEUP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_PAGEDOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_THUMBTRACK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_THUMBRELEASE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLL_CHANGED;
+
+// Due to a bug in older wx versions, wxSpinEvents were being sent with type of
+// wxEVT_SCROLL_LINEUP, wxEVT_SCROLL_LINEDOWN and wxEVT_SCROLL_THUMBTRACK. But
+// with the type-safe events in place, these event types are associated with
+// wxScrollEvent. To allow handling of spin events, new event types have been
+// defined in spinbutt.h/spinnbuttcmn.cpp. To maintain backward compatibility
+// the spin event types are being initialized with the scroll event types.
+
+                 
+
+                                                                                 
+                                                                                 
+                                                                                 
+
+      
+
+    // Scroll events from wxWindow
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_TOP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_BOTTOM;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_LINEUP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_LINEDOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_PAGEUP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_PAGEDOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_THUMBTRACK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SCROLLWIN_THUMBRELEASE;
+
+    // System events
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SIZE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOVE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CLOSE_WINDOW;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_END_SESSION;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_QUERY_END_SESSION;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_ACTIVATE_APP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_ACTIVATE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CREATE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_DESTROY;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SHOW;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_ICONIZE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MAXIMIZE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOUSE_CAPTURE_CHANGED;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOUSE_CAPTURE_LOST;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_PAINT;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_ERASE_BACKGROUND;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_NC_PAINT;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MENU_OPEN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MENU_CLOSE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MENU_HIGHLIGHT;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_CONTEXT_MENU;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SYS_COLOUR_CHANGED;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_DISPLAY_CHANGED;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_QUERY_NEW_PALETTE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_PALETTE_CHANGED;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_JOY_BUTTON_DOWN;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_JOY_BUTTON_UP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_JOY_MOVE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_JOY_ZMOVE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_DROP_FILES;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_INIT_DIALOG;
+extern const WXDLLIMPEXP_BASE wxEventType wxEVT_IDLE;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_UPDATE_UI;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_SIZING;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOVING;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOVE_START;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_MOVE_END;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_HIBERNATE;
+
+    // Clipboard events
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_TEXT_COPY;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_TEXT_CUT;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_TEXT_PASTE;
+
+    // Generic command events
+    // Note: a click is a higher-level event than button down/up
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMMAND_LEFT_CLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMMAND_LEFT_DCLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMMAND_RIGHT_CLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMMAND_RIGHT_DCLICK;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMMAND_SET_FOCUS;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMMAND_KILL_FOCUS;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_COMMAND_ENTER;
+
+    // Help events
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_HELP;
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_DETAILED_HELP;
+
+// these 2 events are the same
+                             
+
+// ----------------------------------------------------------------------------
+// Compatibility
+// ----------------------------------------------------------------------------
+
+// this event is also used by wxComboBox and wxSpinCtrl which don't include
+// wx/textctrl.h in all ports [yet], so declare it here as well
+//
+// still, any new code using it should include wx/textctrl.h explicitly
+extern const WXDLLIMPEXP_CORE wxEventType wxEVT_TEXT;
+
+
+// ----------------------------------------------------------------------------
+// wxEvent(-derived) classes
+// ----------------------------------------------------------------------------
+
+// the predefined constants for the number of times we propagate event
+// upwards window child-parent chain
+enum wxEventPropagation
+{
+    // don't propagate it at all
+    wxEVENT_PROPAGATE_NONE = 0,
+
+    // propagate it until it is processed
+    wxEVENT_PROPAGATE_MAX = INT_MAX
+};
+
+// The different categories for a wxEvent; see wxEvent::GetEventCategory.
+// NOTE: they are used as OR-combinable flags by wxEventLoopBase::YieldFor
+enum wxEventCategory
+{
+    // this is the category for those events which are generated to update
+    // the appearance of the GUI but which (usually) do not comport data
+    // processing, i.e. which do not provide input or output data
+    // (e.g. size events, scroll events, etc).
+    // They are events NOT directly generated by the user's input devices.
+    wxEVT_CATEGORY_UI = 1,
+
+    // this category groups those events which are generated directly from the
+    // user through input devices like mouse and keyboard and usually result in
+    // data to be processed from the application.
+    // (e.g. mouse clicks, key presses, etc)
+    wxEVT_CATEGORY_USER_INPUT = 2,
+
+    // this category is for wxSocketEvent
+    wxEVT_CATEGORY_SOCKET = 4,
+
+    // this category is for wxTimerEvent
+    wxEVT_CATEGORY_TIMER = 8,
+
+    // this category is for any event used to send notifications from the
+    // secondary threads to the main one or in general for notifications among
+    // different threads (which may or may not be user-generated)
+    wxEVT_CATEGORY_THREAD = 16,
+
+
+    // implementation only
+
+    // used in the implementations of wxEventLoopBase::YieldFor
+    wxEVT_CATEGORY_UNKNOWN = 32,
+
+    // a special category used as an argument to wxEventLoopBase::YieldFor to indicate that
+    // Yield() should leave all wxEvents on the queue while emptying the native event queue
+    // (native events will be processed but the wxEvents they generate will be queued)
+    wxEVT_CATEGORY_CLIPBOARD = 64,
+
+
+    // shortcut masks
+
+    // this category groups those events which are emitted in response to
+    // events of the native toolkit and which typically are not-"delayable".
+    wxEVT_CATEGORY_NATIVE_EVENTS = wxEVT_CATEGORY_UI|wxEVT_CATEGORY_USER_INPUT,
+
+    // used in wxEventLoopBase::YieldFor to specify all event categories should be processed:
+    wxEVT_CATEGORY_ALL =
+        wxEVT_CATEGORY_UI|wxEVT_CATEGORY_USER_INPUT|wxEVT_CATEGORY_SOCKET|         wxEVT_CATEGORY_TIMER|wxEVT_CATEGORY_THREAD|wxEVT_CATEGORY_UNKNOWN|         wxEVT_CATEGORY_CLIPBOARD
+
+
+};
+
+/*
+ * wxWidgets events, covering all interesting things that might happen
+ * (button clicking, resizing, setting text in widgets, etc.).
+ *
+ * For each completely new event type, derive a new event class.
+ * An event CLASS represents a C++ class defining a range of similar event TYPES;
+ * examples are canvas events, panel item command events.
+ * An event TYPE is a unique identifier for a particular system event,
+ * such as a button press or a listbox deselection.
+ *
+ */
+
+class WXDLLIMPEXP_BASE wxEvent : public wxObject
+{
+public:
+    wxEvent(int winid = 0, wxEventType commandType = wxEVT_NULL );
+
+    void SetEventType(wxEventType typ) { m_eventType = typ; }
+    wxEventType GetEventType() const { return m_eventType; }
+
+    wxObject *GetEventObject() const { return m_eventObject; }
+    void SetEventObject(wxObject *obj) { m_eventObject = obj; }
+
+    long GetTimestamp() const { return m_timeStamp; }
+    void SetTimestamp(long ts = 0) { m_timeStamp = ts; }
+
+    int GetId() const { return m_id; }
+    void SetId(int Id) { m_id = Id; }
+
+    // Returns the user data optionally associated with the event handler when
+    // using Connect() or Bind().
+    wxObject *GetEventUserData() const { return m_callbackUserData; }
+
+    // Can instruct event processor that we wish to ignore this event
+    // (treat as if the event table entry had not been found): this must be done
+    // to allow the event processing by the base classes (calling event.Skip()
+    // is the analog of calling the base class version of a virtual function)
+    void Skip(bool skip = true) { m_skipped = skip; }
+    bool GetSkipped() const { return m_skipped; }
+
+    // This function is used to create a copy of the event polymorphically and
+    // all derived classes must implement it because otherwise wxPostEvent()
+    // for them wouldn't work (it needs to do a copy of the event)
+    virtual wxEvent *Clone() const = 0;
+
+    // this function is used to selectively process events in wxEventLoopBase::YieldFor
+    // NOTE: by default it returns wxEVT_CATEGORY_UI just because the major
+    //       part of wxWidgets events belong to that category.
+    virtual wxEventCategory GetEventCategory() const
+        { return wxEVT_CATEGORY_UI; }
+
+    // Implementation only: this test is explicitly anti OO and this function
+    // exists only for optimization purposes.
+    bool IsCommandEvent() const { return m_isCommandEvent; }
+
+    // Determine if this event should be propagating to the parent window.
+    bool ShouldPropagate() const
+        { return m_propagationLevel != wxEVENT_PROPAGATE_NONE; }
+
+    // Stop an event from propagating to its parent window, returns the old
+    // propagation level value
+    int StopPropagation()
+    {
+        int propagationLevel = m_propagationLevel;
+        m_propagationLevel = wxEVENT_PROPAGATE_NONE;
+        return propagationLevel;
+    }
+
+    // Resume the event propagation by restoring the propagation level
+    // (returned by StopPropagation())
+    void ResumePropagation(int propagationLevel)
+    {
+        m_propagationLevel = propagationLevel;
+    }
+
+    // This method is for internal use only and allows to get the object that
+    // is propagating this event upwards the window hierarchy, if any.
+    wxEvtHandler* GetPropagatedFrom() const { return m_propagatedFrom; }
+
+    // This is for internal use only and is only called by
+    // wxEvtHandler::ProcessEvent() to check whether it's the first time this
+    // event is being processed
+    bool WasProcessed()
+    {
+        if ( m_wasProcessed )
+            return true;
+
+        m_wasProcessed = true;
+
+        return false;
+    }
+
+    // This is for internal use only and is used for setting, testing and
+    // resetting of m_willBeProcessedAgain flag.
+    void SetWillBeProcessedAgain()
+    {
+        m_willBeProcessedAgain = true;
+    }
+
+    bool WillBeProcessedAgain()
+    {
+        if ( m_willBeProcessedAgain )
+        {
+            m_willBeProcessedAgain = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    // This is also used only internally by ProcessEvent() to check if it
+    // should process the event normally or only restrict the search for the
+    // event handler to this object itself.
+    bool ShouldProcessOnlyIn(wxEvtHandler *h) const
+    {
+        return h == m_handlerToProcessOnlyIn;
+    }
+
+    // Called to indicate that the result of ShouldProcessOnlyIn() wasn't taken
+    // into account. The existence of this function may seem counterintuitive
+    // but unfortunately it's needed by wxScrollHelperEvtHandler, see comments
+    // there. Don't even think of using this in your own code, this is a gross
+    // hack and is only needed because of wx complicated history and should
+    // never be used anywhere else.
+    void DidntHonourProcessOnlyIn()
+    {
+        m_handlerToProcessOnlyIn = NULL;
+    }
+
+protected:
+    wxObject*         m_eventObject;
+    wxEventType       m_eventType;
+    long              m_timeStamp;
+    int               m_id;
+
+public:
+    // m_callbackUserData is for internal usage only
+    wxObject*         m_callbackUserData;
+
+private:
+    // If this handler
+    wxEvtHandler *m_handlerToProcessOnlyIn;
+
+protected:
+    // the propagation level: while it is positive, we propagate the event to
+    // the parent window (if any)
+    int               m_propagationLevel;
+
+    // The object that the event is being propagated from, initially NULL and
+    // only set by wxPropagateOnce.
+    wxEvtHandler*     m_propagatedFrom;
+
+    bool              m_skipped;
+    bool              m_isCommandEvent;
+
+    // initially false but becomes true as soon as WasProcessed() is called for
+    // the first time, as this is done only by ProcessEvent() it explains the
+    // variable name: it becomes true after ProcessEvent() was called at least
+    // once for this event
+    bool m_wasProcessed;
+
+    // This one is initially false too, but can be set to true to indicate that
+    // the event will be passed to another handler if it's not processed in
+    // this one.
+    bool m_willBeProcessedAgain;
+
+protected:
+    wxEvent(const wxEvent&);            // for implementing Clone()
+    wxEvent& operator=(const wxEvent&); // for derived classes operator=()
+
+private:
+    // It needs to access our m_propagationLevel and m_propagatedFrom fields.
+    friend class WXDLLIMPEXP_FWD_BASE wxPropagateOnce;
+
+    // and this one needs to access our m_handlerToProcessOnlyIn
+    friend class WXDLLIMPEXP_FWD_BASE wxEventProcessInHandlerOnly;
+
+
+    DECLARE_ABSTRACT_CLASS(wxEvent)
+};
+
+/*
+ * Helper class to temporarily change an event not to propagate.
+ */
+class WXDLLIMPEXP_BASE wxPropagationDisabler
+{
+public:
+    wxPropagationDisabler(wxEvent& event) : m_event(event)
+    {
+        m_propagationLevelOld = m_event.StopPropagation();
+    }
+
+    ~wxPropagationDisabler()
+    {
+        m_event.ResumePropagation(m_propagationLevelOld);
+    }
+
+private:
+    wxEvent& m_event;
+    int m_propagationLevelOld;
+
+    wxDECLARE_NO_COPY_CLASS(wxPropagationDisabler);
+};
+
+/*
+ * Helper used to indicate that an event is propagated upwards the window
+ * hierarchy by the given window.
+ */
+class WXDLLIMPEXP_BASE wxPropagateOnce
+{
+public:
+    // The handler argument should normally be non-NULL to allow the parent
+    // event handler to know that it's being used to process an event coming
+    // from the child, it's only NULL by default for backwards compatibility.
+    wxPropagateOnce(wxEvent& event, wxEvtHandler* handler = NULL)
+        : m_event(event),
+          m_propagatedFromOld(event.m_propagatedFrom)
+    {
+        wxASSERT_MSG( m_event.m_propagationLevel > 0,
+                        wxT("shouldn't be used unless ShouldPropagate()!") );
+
+        m_event.m_propagationLevel--;
+        m_event.m_propagatedFrom = handler;
+    }
+
+    ~wxPropagateOnce()
+    {
+        m_event.m_propagatedFrom = m_propagatedFromOld;
+        m_event.m_propagationLevel++;
+    }
+
+private:
+    wxEvent& m_event;
+    wxEvtHandler* const m_propagatedFromOld;
+
+    wxDECLARE_NO_COPY_CLASS(wxPropagateOnce);
+};
+
+// A helper object used to temporarily make wxEvent::ShouldProcessOnlyIn()
+// return true for the handler passed to its ctor.
+class wxEventProcessInHandlerOnly
+{
+public:
+    wxEventProcessInHandlerOnly(wxEvent& event, wxEvtHandler *handler)
+        : m_event(event),
+          m_handlerToProcessOnlyInOld(event.m_handlerToProcessOnlyIn)
+    {
+        m_event.m_handlerToProcessOnlyIn = handler;
+    }
+
+    ~wxEventProcessInHandlerOnly()
+    {
+        m_event.m_handlerToProcessOnlyIn = m_handlerToProcessOnlyInOld;
+    }
+
+private:
+    wxEvent& m_event;
+    wxEvtHandler * const m_handlerToProcessOnlyInOld;
+
+    wxDECLARE_NO_COPY_CLASS(wxEventProcessInHandlerOnly);
+};
+
+
+class WXDLLIMPEXP_BASE wxEventBasicPayloadMixin
+{
+public:
+    wxEventBasicPayloadMixin()
+        : m_commandInt(0),
+          m_extraLong(0)
+    {
+    }
+
+    void SetString(const wxString& s) { m_cmdString = s; }
+    const wxString& GetString() const { return m_cmdString; }
+
+    void SetInt(int i) { m_commandInt = i; }
+    int GetInt() const { return m_commandInt; }
+
+    void SetExtraLong(long extraLong) { m_extraLong = extraLong; }
+    long GetExtraLong() const { return m_extraLong; }
+
+protected:
+    // Note: these variables have "cmd" or "command" in their name for backward compatibility:
+    //       they used to be part of wxCommandEvent, not this mixin.
+    wxString          m_cmdString;     // String event argument
+    int               m_commandInt;
+    long              m_extraLong;     // Additional information (e.g. select/deselect)
+
+    wxDECLARE_NO_ASSIGN_CLASS(wxEventBasicPayloadMixin);
+};
+
+class WXDLLIMPEXP_BASE wxEventAnyPayloadMixin : public wxEventBasicPayloadMixin
+{
+public:
+    wxEventAnyPayloadMixin() : wxEventBasicPayloadMixin() {}
+
+                                                                      
+    template<typename T>
+    void SetPayload(const T& payload)
+    {
+        m_payload = payload;
+    }
+
+    template<typename T>
+    T GetPayload() const
+    {
+        return m_payload.As<T>();
+    }
+
+protected:
+    wxAny m_payload;
+       // wxUSE_ANY && (!defined(__VISUALC__) || wxCHECK_VISUALC_VERSION(7))
+
+    wxDECLARE_NO_ASSIGN_CLASS(wxEventBasicPayloadMixin);
+};
+
+
+// Idle event
+/*
+ wxEVT_IDLE
+ */
+
+// Whether to always send idle events to windows, or
+// to only send update events to those with the
+// wxWS_EX_PROCESS_IDLE style.
+
+enum wxIdleMode
+{
+        // Send idle events to all windows
+    wxIDLE_PROCESS_ALL,
+
+        // Send idle events to windows that have
+        // the wxWS_EX_PROCESS_IDLE flag specified
+    wxIDLE_PROCESS_SPECIFIED
+};
+
+class WXDLLIMPEXP_BASE wxIdleEvent : public wxEvent
+{
+public:
+    wxIdleEvent()
+        : wxEvent(0, wxEVT_IDLE),
+          m_requestMore(false)
+        { }
+    wxIdleEvent(const wxIdleEvent& event)
+        : wxEvent(event),
+          m_requestMore(event.m_requestMore)
+    { }
+
+    void RequestMore(bool needMore = true) { m_requestMore = needMore; }
+    bool MoreRequested() const { return m_requestMore; }
+
+    virtual wxEvent *Clone() const { return new wxIdleEvent(*this); }
+
+    // Specify how wxWidgets will send idle events: to
+    // all windows, or only to those which specify that they
+    // will process the events.
+    static void SetMode(wxIdleMode mode) { sm_idleMode = mode; }
+
+    // Returns the idle event mode
+    static wxIdleMode GetMode() { return sm_idleMode; }
+
+protected:
+    bool m_requestMore;
+    static wxIdleMode sm_idleMode;
+
+private:
+    DECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxIdleEvent)
+};
+
+
+// Thread event
+
+class WXDLLIMPEXP_BASE wxThreadEvent : public wxEvent,
+                                       public wxEventAnyPayloadMixin
+{
+public:
+    wxThreadEvent(wxEventType eventType = wxEVT_THREAD, int id = wxID_ANY)
+        : wxEvent(id, eventType)
+        { }
+
+    wxThreadEvent(const wxThreadEvent& event)
+        : wxEvent(event),
+          wxEventAnyPayloadMixin(event)
+    {
+        // make sure our string member (which uses COW, aka refcounting) is not
+        // shared by other wxString instances:
+        SetString(GetString().Clone());
+    }
+
+    virtual wxEvent *Clone() const
+    {
+        return new wxThreadEvent(*this);
+    }
+
+    // this is important to avoid that calling wxEventLoopBase::YieldFor thread events
+    // gets processed when this is unwanted:
+    virtual wxEventCategory GetEventCategory() const
+        { return wxEVT_CATEGORY_THREAD; }
+
+private:
+    DECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxThreadEvent)
+};
+
+
+// Asynchronous method call events: these event are processed by wxEvtHandler
+// itself and result in a call to its Execute() method which simply calls the
+// specified method. The difference with a simple method call is that this is
+// done asynchronously, i.e. at some later time, instead of immediately when
+// the event object is constructed.
+
+                       
+
+// This is a base class used to process all method calls.
+class wxAsyncMethodCallEvent : public wxEvent
+{
+public:
+    wxAsyncMethodCallEvent(wxObject* object)
+        : wxEvent(wxID_ANY, wxEVT_ASYNC_METHOD_CALL)
+    {
+        SetEventObject(object);
+    }
+
+    wxAsyncMethodCallEvent(const wxAsyncMethodCallEvent& other)
+        : wxEvent(other)
+    {
+    }
+
+    virtual void Execute() = 0;
+};
+
+// This is a version for calling methods without parameters.
+template <typename T>
+class wxAsyncMethodCallEvent0 : public wxAsyncMethodCallEvent
+{
+public:
+    typedef T ObjectType;
+    typedef void (ObjectType::*MethodType)();
+
+    wxAsyncMethodCallEvent0(ObjectType* object,
+                            MethodType method)
+        : wxAsyncMethodCallEvent(object),
+          m_object(object),
+          m_method(method)
+    {
+    }
+
+    wxAsyncMethodCallEvent0(const wxAsyncMethodCallEvent0& other)
+        : wxAsyncMethodCallEvent(other),
+          m_object(other.m_object),
+          m_method(other.m_method)
+    {
+    }
+
+    virtual wxEvent *Clone() const
+    {
+        return new wxAsyncMethodCallEvent0(*this);
+    }
+
+    virtual void Execute()
+    {
+        (m_object->*m_method)();
+    }
+
+private:
+    ObjectType* const m_object;
+    const MethodType m_method;
+};
+
+// This is a version for calling methods with a single parameter.
+template <typename T, typename T1>
+class wxAsyncMethodCallEvent1 : public wxAsyncMethodCallEvent
+{
+public:
+    typedef T ObjectType;
+    typedef void (ObjectType::*MethodType)(T1 x1);
+    typedef typename wxRemoveRef<T1>::type ParamType1;
+
+    wxAsyncMethodCallEvent1(ObjectType* object,
+                            MethodType method,
+                            const ParamType1& x1)
+        : wxAsyncMethodCallEvent(object),
+          m_object(object),
+          m_method(method),
+          m_param1(x1)
+    {
+    }
+
+    wxAsyncMethodCallEvent1(const wxAsyncMethodCallEvent1& other)
+        : wxAsyncMethodCallEvent(other),
+          m_object(other.m_object),
+          m_method(other.m_method),
+          m_param1(other.m_param1)
+    {
+    }
+
+    virtual wxEvent *Clone() const
+    {
+        return new wxAsyncMethodCallEvent1(*this);
+    }
+
+    virtual void Execute()
+    {
+        (m_object->*m_method)(m_param1);
+    }
+
+private:
+    ObjectType* const m_object;
+    const MethodType m_method;
+    const ParamType1 m_param1;
+};
+
+// This is a version for calling methods with two parameters.
+template <typename T, typename T1, typename T2>
+class wxAsyncMethodCallEvent2 : public wxAsyncMethodCallEvent
+{
+public:
+    typedef T ObjectType;
+    typedef void (ObjectType::*MethodType)(T1 x1, T2 x2);
+    typedef typename wxRemoveRef<T1>::type ParamType1;
+    typedef typename wxRemoveRef<T2>::type ParamType2;
+
+    wxAsyncMethodCallEvent2(ObjectType* object,
+                            MethodType method,
+                            const ParamType1& x1,
+                            const ParamType2& x2)
+        : wxAsyncMethodCallEvent(object),
+          m_object(object),
+          m_method(method),
+          m_param1(x1),
+          m_param2(x2)
+    {
+    }
+
+    wxAsyncMethodCallEvent2(const wxAsyncMethodCallEvent2& other)
+        : wxAsyncMethodCallEvent(other),
+          m_object(other.m_object),
+          m_method(other.m_method),
+          m_param1(other.m_param1),
+          m_param2(other.m_param2)
+    {
+    }
+
+    virtual wxEvent *Clone() const
+    {
+        return new wxAsyncMethodCallEvent2(*this);
+    }
+
+    virtual void Execute()
+    {
+        (m_object->*m_method)(m_param1, m_param2);
+    }
+
+private:
+    ObjectType* const m_object;
+    const MethodType m_method;
+    const ParamType1 m_param1;
+    const ParamType2 m_param2;
+};
+
+// This is a version for calling any functors
+template <typename T>
+class wxAsyncMethodCallEventFunctor : public wxAsyncMethodCallEvent
+{
+public:
+    typedef T FunctorType;
+
+    wxAsyncMethodCallEventFunctor(wxObject *object, const FunctorType& fn)
+        : wxAsyncMethodCallEvent(object),
+          m_fn(fn)
+    {
+    }
+
+    wxAsyncMethodCallEventFunctor(const wxAsyncMethodCallEventFunctor& other)
+        : wxAsyncMethodCallEvent(other),
+          m_fn(other.m_fn)
+    {
+    }
+
+    virtual wxEvent *Clone() const
+    {
+        return new wxAsyncMethodCallEventFunctor(*this);
+    }
+
+    virtual void Execute()
+    {
+        m_fn();
+    }
+
+private:
+    FunctorType m_fn;
+};
+
+       // wxHAS_CALL_AFTER
+
+
+             
+
+
+                           
+  
+             
+               
+             
+              
+                     
+           
+                 
+           
+             
+               
+                  
+                
+            
+               
+                   
+  
+
+                                                       
+                                                                       
+ 
+       
+                                                                        
+
+                                               
+                         
+                                          
+                                           
+                                              
+     
+                                                                              
+                                      
+                                  
+                                            
+     
+
+                                        
+                                                                       
+                                                        
+
+                                          
+                                                                                       
+                                                                    
+
+                                                                                     
+                         
+                               
+
+                                             
+                                                     
+
+                         
+                                                        
+
+                                                 
+                                                           
+
+                                                                        
+                                                                                          
+
+          
+                                                               
+                                                                 
+
+        
+                                                   
+  
+
+                                                                           
+                                                            
+                                                             
+ 
+       
+                                                                      
+                                            
+                            
+
+                                             
+                               
+                                      
+
+                                                           
+                                     
+
+                                                        
+                                     
+
+                                                              
+                                               
+
+                                                                       
+
+        
+                  
+
+        
+                                                  
+  
+
+
+                                                                      
+                                    
+  
+                 
+                    
+                    
+                      
+                    
+                      
+                        
+                          
+                     
+  
+
+                                                            
+ 
+       
+                                                       
+                                                              
+
+                                                            
+                                                    
+                                                                    
+                                                     
+
+                                                                       
+
+        
+                                                  
+  
+
+                                                                
+                        
+  
+                    
+                       
+                       
+                         
+                       
+                         
+                           
+                             
+  
+
+                                                        
+ 
+       
+                                                          
+                                                  
+                                                                    
+                                               
+                                                 
+
+                                                            
+                                                    
+                                                                    
+                                                     
+
+                                                                          
+
+          
+                                   
+                                  
+
+        
+                                                     
+  
+
+
+
+                    
+
+  
+                
+              
+                  
+                
+                 
+               
+             
+                   
+                   
+                  
+                    
+                   
+  
+
+                     
+ 
+                           
+                            
+  
+
+                                                     
+                                                         
+ 
+       
+                                                     
+                                           
+                         
+                             
+     
+                      
+     
+
+                                                                     
+                                                             
+
+                                                     
+                                                     
+
+                                                       
+                                                       
+
+                                                   
+                                                   
+
+                                                    
+                               
+
+                                                                        
+                          
+
+                                          
+                                                                      
+                                                                          
+                                                                        
+                                                                      
+                                                                      
+
+                                                                  
+                                                                      
+                                                                    
+                                                                  
+                                                                  
+
+                                                                          
+                                                                              
+                                                                            
+                                                                          
+                                                                          
+
+                                                       
+                         
+     
+                                                                              
+     
+
+                                                         
+                       
+     
+                                                                               
+     
+
+                                                    
+                                                                         
+
+                                                   
+                                                                        
+
+                                                                     
+                                                      
+
+                                                          
+                                                     
+
+                                                                      
+                                                                             
+                                                                        
+                                                                            
+                                                                             
+                                                                            
+                                              
+                                                            
+
+                                                                             
+                                                                        
+                                   
+                                                      
+
+                                                                         
+                                                                               
+                              
+                                                                 
+
+                                                                              
+                                       
+                                                              
+
+                                                                                
+                                       
+                                                                  
+
+                                              
+                                                                                      
+
+                                                                      
+                                                                                          
+
+                                                      
+     
+                           
+                          
+                     
+     
+
+       
+                               
+
+                                 
+                                  
+                               
+                                   
+                                     
+
+          
+                                         
+
+        
+                                       
+  
+
+                   
+
+  
+                   
+   
+
+                                                        
+ 
+       
+                                                  
+                                       
+                                    
+           
+
+                                                   
+                         
+                         
+                         
+                                  
+           
+
+                                        
+                                        
+
+                                                                 
+                                                          
+                                                      
+
+                                                                          
+
+        
+                      
+                      
+
+        
+                                                     
+  
+
+                             
+
+  
+           
+                
+               
+             
+             
+   
+
+                                                               
+  
+                                                          
+                                                                
+                       
+ 
+                                             
+                            
+
+                                                             
+                            
+
+                                                    
+                            
+
+                                          
+                            
+
+                                                            
+                             
+
+                                           
+                                                  
+                                                   
+                                               
+  
+
+                                                   
+                                                          
+ 
+       
+                                                 
+
+                                                                               
+                                                                           
+                                                     
+                                      
+                                                             
+
+                                                                       
+                                                     
+
+                                                                  
+                                             
+
+                 
+                                                          
+                                                      
+                       
+
+                                                
+                                                        
+
+                                                 
+                                                          
+
+                                     
+                                                        
+     
+                 
+                           
+                 
+                           
+     
+
+                                                                           
+                                                  
+     
+                 
+                           
+                 
+                           
+     
+
+                               
+                                           
+
+                     
+                         
+
+                     
+                         
+
+                                                                               
+                                                                               
+                                      
+                                                   
+
+                                                                        
+                                                           
+
+
+                                                                    
+                                                                                          
+
+                                                                       
+               
+                                                
+     
+                           
+         
+                                    
+
+                                                                      
+                                                                        
+                                                        
+
+                                 
+         
+                     
+     
+
+       
+                                                                           
+                                                       
+                           
+
+                            
+
+                 
+                                               
+                                            
+                            
+      
+
+                                                                   
+                           
+                            
+                             
+
+        
+                                                                               
+                                       
+                          
+     
+                                             
+                                                       
+
+                            
+     
+
+                                                                      
+                                     
+                                               
+     
+                      
+                      
+                                          
+
+                                  
+
+                                  
+                                    
+                 
+                                  
+      
+     
+
+                                                                        
+                 
+                                         
+
+                                                                            
+                                                                          
+                                                                     
+                     
+
+                                                                               
+                              
+                       
+
+                                     
+  
+
+                   
+  
+           
+   
+
+                                                   
+ 
+       
+                                          
+           
+                                                
+                                     
+                    
+           
+                                         
+                         
+                                                    
+           
+                                               
+                                              
+                                                  
+
+                                             
+                                                
+                                             
+                                                       
+
+                                                                     
+
+       
+                                                                       
+                  
+                                           
+
+        
+                                                
+  
+
+                   
+
+  
+           
+   
+
+                                                   
+ 
+       
+                 
+                                
+           
+                                                  
+                                     
+                    
+           
+                                         
+                         
+                            
+       
+                                               
+                                                 
+                                                  
+
+                                                 
+                                                         
+                                             
+                                                       
+
+                                                                     
+
+          
+                  
+                  
+
+        
+                                                
+  
+
+                    
+  
+            
+               
+   
+
+                                                              
+                             
+
+                                                                             
+                                             
+               
+
+                                                    
+ 
+       
+                            
+                                  
+     
+                        
+                                                              
+                       
+               
+     
+
+                                                                              
+                                          
+                        
+                                           
+                            
+     
+                       
+     
+
+                           
+     
+                       
+     
+               
+
+                                                                      
+
+        
+                                                 
+  
+
+                                                      
+ 
+       
+                                 
+                                        
+           
+
+                                                                        
+
+        
+                                                   
+  
+
+                               
+  
+                       
+   
+
+                                                    
+ 
+       
+                                             
+                                              
+                  
+           
+
+                                           
+                         
+                          
+           
+
+                                        
+
+                                                                      
+
+          
+               
+
+        
+                                                 
+  
+
+                    
+  
+                
+                 
+   
+
+                                                    
+ 
+       
+                                                              
+                              
+                         
+
+                                           
+                        
+                                
+
+                                                                          
+                                                                             
+                                             
+                                                 
+                                                  
+
+                                                                      
+
+        
+                    
+
+        
+                                                 
+  
+
+                                                                               
+                                                         
+                                                                
+ 
+       
+                                            
+
+                                                                        
+
+                                                                           
+
+        
+                                                      
+  
+
+                       
+  
+               
+                   
+                
+   
+
+                                                       
+ 
+       
+                                                                              
+                                                                     
+               
+     
+                     
+                      
+      
+
+                                                                      
+                                                                         
+                            
+                                            
+     
+                          
+     
+                                                 
+                        
+     
+                                  
+                                                      
+     
+
+                                               
+                                                                    
+
+                                                                         
+
+        
+                  
+                              
+
+        
+                                                    
+  
+
+                         
+  
+                  
+   
+
+                                                         
+ 
+       
+                                 
+                                        
+           
+
+                                                                           
+
+        
+                                                      
+  
+
+                                 
+  
+                 
+                  
+                      
+  
+
+                                                   
+ 
+       
+                                                                                  
+                              
+                                            
+                                         
+                        
+                                                         
+
+                                    
+                                              
+
+                                     
+                                                         
+
+                                     
+                                              
+
+                                                                     
+
+        
+                     
+                   
+
+                                                
+  
+
+                                            
+  
+                    
+                   
+                        
+   
+
+                                                    
+ 
+       
+                                                              
+                               
+                             
+                                                           
+                            
+
+                                           
+                         
+                                         
+                             
+                                     
+
+                                                              
+                              
+     
+                                                                          
+                                                    
+                                                        
+                                                                        
+
+                            
+     
+
+                               
+     
+                                                
+                               
+                                                                             
+
+                      
+     
+                                                          
+                                              
+                                                        
+
+                                                                      
+
+          
+                      
+                
+                   
+
+        
+                                                 
+  
+
+  
+           
+   
+
+                                                   
+ 
+       
+                                                 
+                                    
+                          
+                                         
+                        
+                              
+
+                                              
+
+                                                           
+                                           
+
+                           
+                                                              
+      
+
+                                                                     
+
+          
+                
+
+        
+                                                
+  
+
+  
+              
+   
+
+                                                      
+ 
+       
+                                                       
+                                       
+                                  
+                                               
+                        
+                                      
+
+                           
+                                                                  
+      
+                                                               
+                                                  
+
+                                                                        
+
+          
+                    
+
+        
+                                                   
+  
+  
+               
+   
+
+                                                       
+ 
+       
+                                  
+                                        
+           
+
+                                                                         
+
+        
+                                                    
+  
+
+                       
+  
+                       
+                     
+                
+                
+  
+
+                                                                  
+    
+ 
+                
+               
+  
+
+                        
+    
+ 
+                          
+                         
+                         
+                         
+                        
+  
+
+                                                       
+ 
+          
+                    
+                          
+                                                        
+                                                          
+                                                  
+
+       
+                                                  
+                                  
+                                               
+                                   
+                           
+                  
+                         
+                                 
+                               
+                              
+     
+     
+                                                 
+                         
+                             
+                                         
+                                               
+                                             
+                                      
+       
+
+                                                 
+                                                    
+                                                        
+                                                          
+                                                  
+
+                                                       
+                                                             
+                                                                 
+                                                         
+                                                       
+
+                                                                     
+                                                                                
+                                                       
+
+                           
+                                                                      
+
+                            
+                                                                        
+
+                                                         
+                                                     
+                                                          
+                                                                      
+
+                                                    
+                                                   
+                                                        
+                                                                      
+
+                                                         
+                                                        
+                                                                    
+                                              
+
+                                                                         
+
+        
+                                                    
+  
+
+                         
+  
+                 
+   
+
+                                                        
+ 
+       
+                        
+                    
+                      
+
+                                                   
+                                     
+                                            
+                           
+                             
+                  
+                        
+           
+
+                                                                  
+                                                   
+                         
+                                     
+                             
+                       
+     
+                                          
+                                             
+         
+                                          
+         
+     
+
+                               
+     
+                          
+     
+
+                                                 
+                                                      
+                                                  
+
+                                                                          
+
+        
+                                                     
+  
+
+                  
+  
+                
+   
+
+                                                      
+                                               
+                                    
+
+                   
+ 
+                                               
+                            
+
+                                                     
+                                                        
+                                 
+  
+
+                                                              
+ 
+       
+                                             
+                                                    
+     
+                   
+                   
+                 
+                      
+                    
+                   
+                             
+     
+                                                 
+                                
+                                     
+                                     
+                                 
+                                           
+                                       
+                                     
+                                           
+                              
+       
+
+                                                 
+                                                 
+                                             
+                                               
+                                                 
+                                                       
+                                                       
+                                                   
+
+                                                                      
+                                                                         
+                                                               
+                                                                           
+
+                                                         
+                                                                                 
+                                                                                              
+
+                                                                   
+                                                                 
+
+                                 
+                                             
+
+                                                              
+                            
+                                  
+
+                                                        
+                                                            
+                               
+                                                                      
+
+                                 
+                                                             
+
+                                                                         
+
+          
+                            
+                            
+                          
+                               
+                             
+                            
+                               
+                         
+                  
+                                          
+      
+                                              
+                                          
+
+        
+                                                    
+  
+
+  
+                         
+   
+
+                                                   
+                                                               
+ 
+       
+                             
+                                              
+           
+
+                                                                                 
+
+        
+                                                            
+  
+
+  
+                            
+                                                    
+                                          
+   
+
+                                                                  
+ 
+       
+                                                                                    
+                                                      
+                                        
+           
+
+                                                                       
+                         
+                                                
+           
+
+                                                                                    
+
+                                                                   
+
+        
+                              
+
+                                                               
+  
+
+  
+                         
+                                                                           
+                                                                        
+                                                                     
+   
+
+                                                               
+ 
+       
+                                                 
+                                                  
+      
+
+                                                                 
+                        
+      
+
+                                                                                 
+
+                                                            
+  
+
+  
+                      
+   
+                                                             
+ 
+        
+                                                          
+
+       
+                           
+                                           
+           
+
+                                                                               
+  
+
+  
+                      
+   
+
+                                                             
+ 
+       
+                                               
+                                                
+                               
+           
+
+                                                             
+                         
+                                                
+           
+
+                                                                   
+                                                                  
+
+                                                                               
+
+          
+                                  
+
+        
+                                                          
+  
+
+  
+                        
+                                                                             
+   
+
+                                                              
+ 
+       
+                                                
+                                                  
+                                  
+           
+                                                               
+                         
+                                                  
+       
+
+                                               
+                                                                            
+                                                                 
+
+                                                                                
+
+          
+                           
+
+        
+                                                           
+  
+
+  
+                                          
+                     
+   
+                                                                              
+                                                            
+ 
+       
+                          
+                                           
+                                                                  
+                       
+         
+                                                        
+         
+
+                                                           
+                         
+                                 
+                                
+           
+
+                                                    
+                             
+                                              
+                                    
+                                                                             
+
+                                                                            
+                   
+                               
+                                              
+                                  
+                                                                        
+
+                                                                          
+                                                                
+                          
+                                            
+                             
+                                                                    
+
+                                                                 
+                                
+                                                         
+                                                          
+
+                
+                                                  
+
+                                                                              
+
+                                  
+     
+                            
+                           
+                           
+                        
+      
+
+                 
+                      
+
+        
+                                                         
+  
+
+                                                                             
+                                                                              
+                                                                      
+                                                                            
+                                                      
+  
+             
+              
+   
+
+                                                                  
+ 
+       
+                                              
+
+                                                                        
+
+                                                                             
+
+        
+                                                        
+  
+
+                                                                   
+ 
+       
+                                               
+
+                                                                        
+
+                                                                              
+
+        
+                                                         
+  
+
+                                                                              
+  
+           
+                    
+  
+
+                                                          
+ 
+       
+                                         
+               
+     
+                                                       
+                                                               
+                                                                              
+      
+
+                                              
+                                     
+                                                      
+                                               
+                                      
+                    
+                                       
+       
+                                         
+                                
+                             
+                                   
+                               
+                                  
+       
+
+                                                
+                                                        
+                                                         
+
+                                    
+                                                      
+                                                         
+
+                                                                      
+                                                          
+                                                                 
+
+                                                                     
+
+                                              
+                                                 
+                                                        
+
+          
+                    
+                       
+                     
+                       
+
+                                                                      
+                            
+                                             
+
+        
+                                                
+  
+
+                                                                              
+                                                                             
+                                                                    
+                                                                      
+                                
+  
+               
+              
+                
+  
+
+                                                                   
+ 
+       
+                                                       
+                                          
+                                     
+       
+                                                           
+                               
+       
+
+                                                                              
+
+        
+                                                         
+  
+
+                                                                    
+                    
+                                                                   
+                                                                                  
+  
+                   
+  
+
+                                                                 
+ 
+       
+                                                     
+                                            
+                                                             
+                                      
+                   
+       
+                                                       
+                                
+                          
+       
+
+                                                
+                                                        
+                                                         
+
+                                                                            
+
+          
+                    
+
+        
+                                                       
+  
+
+
+       
+                             
+                                                                          
+                                                                                                    
+                                                                           
+                                                                                             
+                    
+                   
+  
+
+       // wxUSE_GUI
+
+
+// ============================================================================
+// event handler and related classes
+// ============================================================================
+
+
+// struct containing the members common to static and dynamic event tables
+// entries
+struct WXDLLIMPEXP_BASE wxEventTableEntryBase
+{
+    wxEventTableEntryBase(int winid, int idLast,
+                          wxEventFunctor* fn, wxObject *data)
+        : m_id(winid),
+          m_lastId(idLast),
+          m_fn(fn),
+          m_callbackUserData(data)
+    {
+        wxASSERT_MSG( idLast == wxID_ANY || winid <= idLast,
+                      "invalid IDs range: lower bound > upper bound" );
+    }
+
+    wxEventTableEntryBase( const wxEventTableEntryBase &entry )
+        : m_id( entry.m_id ),
+          m_lastId( entry.m_lastId ),
+          m_fn( entry.m_fn ),
+          m_callbackUserData( entry.m_callbackUserData )
+    {
+        // This is a 'hack' to ensure that only one instance tries to delete
+        // the functor pointer. It is safe as long as the only place where the
+        // copy constructor is being called is when the static event tables are
+        // being initialized (a temporary instance is created and then this
+        // constructor is called).
+
+        const_cast<wxEventTableEntryBase&>( entry ).m_fn = NULL;
+    }
+
+    ~wxEventTableEntryBase()
+    {
+        delete m_fn;
+    }
+
+    // the range of ids for this entry: if m_lastId == wxID_ANY, the range
+    // consists only of m_id, otherwise it is m_id..m_lastId inclusive
+    int m_id,
+        m_lastId;
+
+    // function/method/functor to call
+    wxEventFunctor* m_fn;
+
+    // arbitrary user data associated with the callback
+    wxObject* m_callbackUserData;
+
+private:
+    wxDECLARE_NO_ASSIGN_CLASS(wxEventTableEntryBase);
+};
+
+// an entry from a static event table
+struct WXDLLIMPEXP_BASE wxEventTableEntry : public wxEventTableEntryBase
+{
+    wxEventTableEntry(const int& evType, int winid, int idLast,
+                      wxEventFunctor* fn, wxObject *data)
+        : wxEventTableEntryBase(winid, idLast, fn, data),
+        m_eventType(evType)
+    { }
+
+    // the reference to event type: this allows us to not care about the
+    // (undefined) order in which the event table entries and the event types
+    // are initialized: initially the value of this reference might be
+    // invalid, but by the time it is used for the first time, all global
+    // objects will have been initialized (including the event type constants)
+    // and so it will have the correct value when it is needed
+    const int& m_eventType;
+
+private:
+    wxDECLARE_NO_ASSIGN_CLASS(wxEventTableEntry);
+};
+
+// an entry used in dynamic event table managed by wxEvtHandler::Connect()
+struct WXDLLIMPEXP_BASE wxDynamicEventTableEntry : public wxEventTableEntryBase
+{
+    wxDynamicEventTableEntry(int evType, int winid, int idLast,
+                             wxEventFunctor* fn, wxObject *data)
+        : wxEventTableEntryBase(winid, idLast, fn, data),
+          m_eventType(evType)
+    { }
+
+    // not a reference here as we can't keep a reference to a temporary int
+    // created to wrap the constant value typically passed to Connect() - nor
+    // do we need it
+    int m_eventType;
+
+private:
+    wxDECLARE_NO_ASSIGN_CLASS(wxDynamicEventTableEntry);
+};
+
+// ----------------------------------------------------------------------------
+// wxEventTable: an array of event entries terminated with {0, 0, 0, 0, 0}
+// ----------------------------------------------------------------------------
+
+struct WXDLLIMPEXP_BASE wxEventTable
+{
+    const wxEventTable *baseTable;    // base event table (next in chain)
+    const wxEventTableEntry *entries; // bottom of entry array
+};
+
+// ----------------------------------------------------------------------------
+// wxEventHashTable: a helper of wxEvtHandler to speed up wxEventTable lookups.
+// ----------------------------------------------------------------------------
+
+WX_DEFINE_ARRAY_PTR(const wxEventTableEntry*, wxEventTableEntryPointerArray);
+
+class WXDLLIMPEXP_BASE wxEventHashTable
+{
+private:
+    // Internal data structs
+    struct EventTypeTable
+    {
+        wxEventType                   eventType;
+        wxEventTableEntryPointerArray eventEntryTable;
+    };
+    typedef EventTypeTable* EventTypeTablePointer;
+
+public:
+    // Constructor, needs the event table it needs to hash later on.
+    // Note: hashing of the event table is not done in the constructor as it
+    //       can be that the event table is not yet full initialize, the hash
+    //       will gets initialized when handling the first event look-up request.
+    wxEventHashTable(const wxEventTable &table);
+    // Destructor.
+    ~wxEventHashTable();
+
+    // Handle the given event, in other words search the event table hash
+    // and call self->ProcessEvent() if a match was found.
+    bool HandleEvent(wxEvent& event, wxEvtHandler *self);
+
+    // Clear table
+    void Clear();
+
+                        
+                                                                            
+           
+                           
+       // wxUSE_MEMORY_TRACING
+
+protected:
+    // Init the hash table with the entries of the static event table.
+    void InitHashTable();
+    // Helper function of InitHashTable() to insert 1 entry into the hash table.
+    void AddEntry(const wxEventTableEntry &entry);
+    // Allocate and init with null pointers the base hash table.
+    void AllocEventTypeTable(size_t size);
+    // Grow the hash table in size and transfer all items currently
+    // in the table to the correct location in the new table.
+    void GrowEventTypeTable();
+
+protected:
+    const wxEventTable    &m_table;
+    bool                   m_rebuildHash;
+
+    size_t                 m_size;
+    EventTypeTablePointer *m_eventTypeTable;
+
+    static wxEventHashTable* sm_first;
+    wxEventHashTable* m_previous;
+    wxEventHashTable* m_next;
+
+    wxDECLARE_NO_COPY_CLASS(wxEventHashTable);
+};
+
+// ----------------------------------------------------------------------------
+// wxEvtHandler: the base class for all objects handling wxWidgets events
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_BASE wxEvtHandler : public wxObject
+                                    , public wxTrackable
+{
+public:
+    wxEvtHandler();
+    virtual ~wxEvtHandler();
+
+
+    // Event handler chain
+    // -------------------
+
+    wxEvtHandler *GetNextHandler() const { return m_nextHandler; }
+    wxEvtHandler *GetPreviousHandler() const { return m_previousHandler; }
+    virtual void SetNextHandler(wxEvtHandler *handler) { m_nextHandler = handler; }
+    virtual void SetPreviousHandler(wxEvtHandler *handler) { m_previousHandler = handler; }
+
+    void SetEvtHandlerEnabled(bool enabled) { m_enabled = enabled; }
+    bool GetEvtHandlerEnabled() const { return m_enabled; }
+
+    void Unlink();
+    bool IsUnlinked() const;
+
+
+    // Global event filters
+    // --------------------
+
+    // Add an event filter whose FilterEvent() method will be called for each
+    // and every event processed by wxWidgets. The filters are called in LIFO
+    // order and wxApp is registered as an event filter by default. The pointer
+    // must remain valid until it's removed with RemoveFilter() and is not
+    // deleted by wxEvtHandler.
+    static void AddFilter(wxEventFilter* filter);
+
+    // Remove a filter previously installed with AddFilter().
+    static void RemoveFilter(wxEventFilter* filter);
+
+
+    // Event queuing and processing
+    // ----------------------------
+
+    // Process an event right now: this can only be called from the main
+    // thread, use QueueEvent() for scheduling the events for
+    // processing from other threads.
+    virtual bool ProcessEvent(wxEvent& event);
+
+    // Process an event by calling ProcessEvent and handling any exceptions
+    // thrown by event handlers. It's mostly useful when processing wx events
+    // when called from C code (e.g. in GTK+ callback) when the exception
+    // wouldn't correctly propagate to wxEventLoop.
+    bool SafelyProcessEvent(wxEvent& event);
+        // NOTE: uses ProcessEvent()
+
+    // This method tries to process the event in this event handler, including
+    // any preprocessing done by TryBefore() and all the handlers chained to
+    // it, but excluding the post-processing done in TryAfter().
+    //
+    // It is meant to be called from ProcessEvent() only and is not virtual,
+    // additional event handlers can be hooked into the normal event processing
+    // logic using TryBefore() and TryAfter() hooks.
+    //
+    // You can also call it yourself to forward an event to another handler but
+    // without propagating it upwards if it's unhandled (this is usually
+    // unwanted when forwarding as the original handler would already do it if
+    // needed normally).
+    bool ProcessEventLocally(wxEvent& event);
+
+    // Schedule the given event to be processed later. It takes ownership of
+    // the event pointer, i.e. it will be deleted later. This is safe to call
+    // from multiple threads although you still need to ensure that wxString
+    // fields of the event object are deep copies and not use the same string
+    // buffer as other wxString objects in this thread.
+    virtual void QueueEvent(wxEvent *event);
+
+    // Add an event to be processed later: notice that this function is not
+    // safe to call from threads other than main, use QueueEvent()
+    virtual void AddPendingEvent(const wxEvent& event)
+    {
+        // notice that the thread-safety problem comes from the fact that
+        // Clone() doesn't make deep copies of wxString fields of wxEvent
+        // object and so the same wxString could be used from both threads when
+        // the event object is destroyed in this one -- QueueEvent() avoids
+        // this problem as the event pointer is not used any more in this
+        // thread at all after it is called.
+        QueueEvent(event.Clone());
+    }
+
+    void ProcessPendingEvents();
+        // NOTE: uses ProcessEvent()
+
+    void DeletePendingEvents();
+
+                 
+                                                  
+                                                                         
+      
+
+                       
+    // Asynchronous method calls: these methods schedule the given method
+    // pointer for a later call (during the next idle event loop iteration).
+    //
+    // Notice that the method is called on this object itself, so the object
+    // CallAfter() is called on must have the correct dynamic type.
+    //
+    // These method can be used from another thread.
+
+    template <typename T>
+    void CallAfter(void (T::*method)())
+    {
+        QueueEvent(
+            new wxAsyncMethodCallEvent0<T>(static_cast<T*>(this), method)
+        );
+    }
+
+    // Notice that we use P1 and not T1 for the parameter to allow passing
+    // parameters that are convertible to the type taken by the method
+    // instead of being exactly the same, to be closer to the usual method call
+    // semantics.
+    template <typename T, typename T1, typename P1>
+    void CallAfter(void (T::*method)(T1 x1), P1 x1)
+    {
+        QueueEvent(
+            new wxAsyncMethodCallEvent1<T, T1>(
+                static_cast<T*>(this), method, x1)
+        );
+    }
+
+    template <typename T, typename T1, typename T2, typename P1, typename P2>
+    void CallAfter(void (T::*method)(T1 x1, T2 x2), P1 x1, P2 x2)
+    {
+        QueueEvent(
+            new wxAsyncMethodCallEvent2<T, T1, T2>(
+                static_cast<T*>(this), method, x1, x2)
+        );
+    }
+
+    template <typename T>
+    void CallAfter(const T& fn)
+    {
+        QueueEvent(new wxAsyncMethodCallEventFunctor<T>(this, fn));
+    }
+       // wxHAS_CALL_AFTER
+
+
+    // Connecting and disconnecting
+    // ----------------------------
+
+    // These functions are used for old, untyped, event handlers and don't
+    // check that the type of the function passed to them actually matches the
+    // type of the event. They also only allow connecting events to methods of
+    // wxEvtHandler-derived classes.
+    //
+    // The template Connect() methods below are safer and allow connecting
+    // events to arbitrary functions or functors -- but require compiler
+    // support for templates.
+
+    // Dynamic association of a member function handler with the event handler,
+    // winid and event type
+    void Connect(int winid,
+                 int lastId,
+                 wxEventType eventType,
+                 wxObjectEventFunction func,
+                 wxObject *userData = NULL,
+                 wxEvtHandler *eventSink = NULL)
+    {
+        DoBind(winid, lastId, eventType,
+                  wxNewEventFunctor(eventType, func, eventSink),
+                  userData);
+    }
+
+    // Convenience function: take just one id
+    void Connect(int winid,
+                 wxEventType eventType,
+                 wxObjectEventFunction func,
+                 wxObject *userData = NULL,
+                 wxEvtHandler *eventSink = NULL)
+        { Connect(winid, wxID_ANY, eventType, func, userData, eventSink); }
+
+    // Even more convenient: without id (same as using id of wxID_ANY)
+    void Connect(wxEventType eventType,
+                 wxObjectEventFunction func,
+                 wxObject *userData = NULL,
+                 wxEvtHandler *eventSink = NULL)
+        { Connect(wxID_ANY, wxID_ANY, eventType, func, userData, eventSink); }
+
+    bool Disconnect(int winid,
+                    int lastId,
+                    wxEventType eventType,
+                    wxObjectEventFunction func = NULL,
+                    wxObject *userData = NULL,
+                    wxEvtHandler *eventSink = NULL)
+    {
+        return DoUnbind(winid, lastId, eventType,
+                            wxMakeEventFunctor(eventType, func, eventSink),
+                            userData );
+    }
+
+    bool Disconnect(int winid = wxID_ANY,
+                    wxEventType eventType = wxEVT_NULL,
+                    wxObjectEventFunction func = NULL,
+                    wxObject *userData = NULL,
+                    wxEvtHandler *eventSink = NULL)
+        { return Disconnect(winid, wxID_ANY, eventType, func, userData, eventSink); }
+
+    bool Disconnect(wxEventType eventType,
+                    wxObjectEventFunction func,
+                    wxObject *userData = NULL,
+                    wxEvtHandler *eventSink = NULL)
+        { return Disconnect(wxID_ANY, eventType, func, userData, eventSink); }
+
+                       
+                                  
+                                                   
+                                        
+                                           
+                                   
+                                    
+                                        
+     
+                                        
+                                                         
+                            
+     
+
+
+                                                   
+                                          
+                                             
+                                     
+                                      
+                                          
+     
+                                                 
+                                                                    
+                                      
+     
+
+                                 
+                                                  
+                                        
+                                     
+                                   
+                                    
+                                        
+     
+                                        
+                                                        
+                            
+     
+
+
+                                                  
+                                          
+                                       
+                                     
+                                      
+                                          
+     
+                                                 
+                                                                   
+                                      
+     
+
+
+                                                                           
+                                                        
+
+                                                                                          
+                                        
+                                                
+                                    
+                                   
+                                    
+                                        
+     
+                                        
+                                                                
+                            
+     
+
+                                                                                          
+                                          
+                                                 
+                                      
+                                     
+                                      
+                                           
+     
+                                                 
+                                                                           
+                                      
+     
+       // wxHAS_EVENT_BIND
+
+    wxList* GetDynamicEventTable() const { return m_dynamicEvents ; }
+
+    // User data can be associated with each wxEvtHandler
+    void SetClientObject( wxClientData *data ) { DoSetClientObject(data); }
+    wxClientData *GetClientObject() const { return DoGetClientObject(); }
+
+    void SetClientData( void *data ) { DoSetClientData(data); }
+    void *GetClientData() const { return DoGetClientData(); }
+
+
+    // implementation from now on
+    // --------------------------
+
+    // check if the given event table entry matches this event by id (the check
+    // for the event type should be done by caller) and call the handler if it
+    // does
+    //
+    // return true if the event was processed, false otherwise (no match or the
+    // handler decided to skip the event)
+    static bool ProcessEventIfMatchesId(const wxEventTableEntryBase& tableEntry,
+                                        wxEvtHandler *handler,
+                                        wxEvent& event);
+
+    virtual bool SearchEventTable(wxEventTable& table, wxEvent& event);
+    bool SearchDynamicEventTable( wxEvent& event );
+
+    // Avoid problems at exit by cleaning up static hash table gracefully
+    void ClearEventHashTable() { GetEventHashTable().Clear(); }
+    void OnSinkDestroyed( wxEvtHandler *sink );
+
+
+private:
+    void DoBind(int winid,
+                   int lastId,
+                   wxEventType eventType,
+                   wxEventFunctor *func,
+                   wxObject* userData = NULL);
+
+    bool DoUnbind(int winid,
+                      int lastId,
+                      wxEventType eventType,
+                      const wxEventFunctor& func,
+                      wxObject *userData = NULL);
+
+    static const wxEventTableEntry sm_eventTableEntries[];
+
+protected:
+    // hooks for wxWindow used by ProcessEvent()
+    // -----------------------------------------
+
+    // this one is called before trying our own event table to allow plugging
+    // in the event handlers overriding the default logic, this is used by e.g.
+    // validators.
+    virtual bool TryBefore(wxEvent& event);
+
+    // This one is not a hook but just a helper which looks up the handler in
+    // this object itself.
+    //
+    // It is called from ProcessEventLocally() and normally shouldn't be called
+    // directly as doing it would ignore any chained event handlers
+    bool TryHereOnly(wxEvent& event);
+
+    // Another helper which simply calls pre-processing hook and then tries to
+    // handle the event at this handler level.
+    bool TryBeforeAndHere(wxEvent& event)
+    {
+        return TryBefore(event) || TryHereOnly(event);
+    }
+
+    // this one is called after failing to find the event handle in our own
+    // table to give a chance to the other windows to process it
+    //
+    // base class implementation passes the event to wxTheApp
+    virtual bool TryAfter(wxEvent& event);
+
+                           
+                                                                  
+                                            
+                                                                            
+
+                                            
+                                                                         
+       // WXWIN_COMPATIBILITY_2_8
+
+
+    static const wxEventTable sm_eventTable;
+    virtual const wxEventTable *GetEventTable() const;
+
+    static wxEventHashTable   sm_eventHashTable;
+    virtual wxEventHashTable& GetEventHashTable() const;
+
+    wxEvtHandler*       m_nextHandler;
+    wxEvtHandler*       m_previousHandler;
+    wxList*             m_dynamicEvents;
+    wxList*             m_pendingEvents;
+
+                 
+                                                  
+                                          
+       // wxUSE_THREADS
+
+    // Is event handler enabled?
+    bool                m_enabled;
+
+
+    // The user data: either an object which will be deleted by the container
+    // when it's deleted or some raw pointer which we do nothing with - only
+    // one type of data can be used with the given window (i.e. you cannot set
+    // the void data and then associate the container with wxClientData or vice
+    // versa)
+    union
+    {
+        wxClientData *m_clientObject;
+        void         *m_clientData;
+    };
+
+    // what kind of data do we have?
+    wxClientDataType m_clientDataType;
+
+    // client data accessors
+    virtual void DoSetClientObject( wxClientData *data );
+    virtual wxClientData *DoGetClientObject() const;
+
+    virtual void DoSetClientData( void *data );
+    virtual void *DoGetClientData() const;
+
+    // Search tracker objects for event connection with this sink
+    wxEventConnectionRef *FindRefInTrackerList(wxEvtHandler *handler);
+
+private:
+    // pass the event to wxTheApp instance, called from TryAfter()
+    bool DoTryApp(wxEvent& event);
+
+    // try to process events in all handlers chained to this one
+    bool DoTryChain(wxEvent& event);
+
+    // Head of the event filter linked list.
+    static wxEventFilter* ms_filterList;
+
+    DECLARE_DYNAMIC_CLASS_NO_COPY(wxEvtHandler)
+};
+
+WX_DEFINE_ARRAY_WITH_DECL_PTR(wxEvtHandler *, wxEvtHandlerArray, class WXDLLIMPEXP_BASE);
+
+
+// Define an inline method of wxObjectEventFunctor which couldn't be defined
+// before wxEvtHandler declaration: at least Sun CC refuses to compile function
+// calls through pointer to member for forward-declared classes (see #12452).
+inline void wxObjectEventFunctor::operator()(wxEvtHandler *handler, wxEvent& event)
+{
+    wxEvtHandler * const realHandler = m_handler ? m_handler : handler;
+
+    (realHandler->*m_method)(event);
+}
+
+// ----------------------------------------------------------------------------
+// wxEventConnectionRef represents all connections between two event handlers
+// and enables automatic disconnect when an event handler sink goes out of
+// scope. Each connection/disconnect increases/decreases ref count, and
+// when it reaches zero the node goes out of scope.
+// ----------------------------------------------------------------------------
+
+class wxEventConnectionRef : public wxTrackerNode
+{
+public:
+    wxEventConnectionRef() : m_src(NULL), m_sink(NULL), m_refCount(0) { }
+    wxEventConnectionRef(wxEvtHandler *src, wxEvtHandler *sink)
+        : m_src(src), m_sink(sink), m_refCount(1)
+    {
+        m_sink->AddNode(this);
+    }
+
+    // The sink is being destroyed
+    virtual void OnObjectDestroy( )
+    {
+        if ( m_src )
+            m_src->OnSinkDestroyed( m_sink );
+        delete this;
+    }
+
+    virtual wxEventConnectionRef *ToEventConnection() { return this; }
+
+    void IncRef() { m_refCount++; }
+    void DecRef()
+    {
+        if ( !--m_refCount )
+        {
+            // The sink holds the only external pointer to this object
+            if ( m_sink )
+                m_sink->RemoveNode(this);
+            delete this;
+        }
+    }
+
+private:
+    wxEvtHandler *m_src,
+                 *m_sink;
+    int m_refCount;
+
+    friend class wxEvtHandler;
+
+    wxDECLARE_NO_ASSIGN_CLASS(wxEventConnectionRef);
+};
+
+// Post a message to the given event handler which will be processed during the
+// next event loop iteration.
+//
+// Notice that this one is not thread-safe, use wxQueueEvent()
+inline void wxPostEvent(wxEvtHandler *dest, const wxEvent& event)
+{
+    wxCHECK_RET( dest, "need an object to post event to" );
+
+    dest->AddPendingEvent(event);
+}
+
+// Wrapper around wxEvtHandler::QueueEvent(): adds an event for later
+// processing, unlike wxPostEvent it is safe to use from different thread even
+// for events with wxString members
+inline void wxQueueEvent(wxEvtHandler *dest, wxEvent *event)
+{
+    wxCHECK_RET( dest, "need an object to queue event for" );
+
+    dest->QueueEvent(event);
+}
+
+typedef void (wxEvtHandler::*wxEventFunction)(wxEvent&);
+typedef void (wxEvtHandler::*wxIdleEventFunction)(wxIdleEvent&);
+typedef void (wxEvtHandler::*wxThreadEventFunction)(wxThreadEvent&);
+
+                                                                            
+
+                                                                                    
+
+                                                                                        
+
+
+             
+
+                                                                               
+                                                                                  
+                                                                               
+
+                                                           
+ 
+       
+                                                                
+                              
+
+                                
+     
+                                        
+     
+
+                                              
+
+          
+                               
+                       
+
+                                            
+  
+
+                                                                      
+                                                                    
+                                                                          
+                                                                
+                                                                
+                                                                  
+                                                                      
+                                                                  
+                                                                  
+                                                               
+                                                                  
+                                                                            
+                                                                        
+                                                                
+                                                                        
+                                                                          
+                                                                            
+                                                                                        
+                                                                                    
+                                                                        
+                                                                  
+                                                                
+                                                                      
+                                                                        
+                                                                                  
+                                                                                    
+                                                                                      
+                                                                                
+                                                                                  
+                                                                          
+                                                                    
+                                                                
+                                                                              
+                                                                                              
+                                                                                        
+                                                                                  
+
+
+                                                                                          
+
+                                                                                        
+
+                                                                                              
+
+                                                                                    
+
+                                                                                    
+
+                                                                                      
+
+                                                                                          
+
+                                                                                      
+
+                                                                                      
+
+                                                                                    
+
+                                                        
+                                                                                      
+
+                                                                                                
+
+                                                                                            
+
+                                                                                    
+
+                                                                                            
+
+                                                                                              
+
+                                                                                                
+
+                                                                                                            
+
+                                                                                                        
+
+                                                                                            
+
+                                                                                      
+
+                                                                                    
+
+                                                                                          
+
+                                                                                            
+
+                                                                                                      
+
+                                                                                                        
+
+                                                                                                          
+
+                                                                                                    
+
+                                                                                                      
+
+                                                                                              
+
+                                                                                        
+
+                                                                                    
+
+                                                                                                  
+
+                                                                                                                  
+
+                                                                                                            
+
+                                                                                                      
+
+
+       // wxUSE_GUI
+
+// N.B. In GNU-WIN32, you *have* to take the address of a member function
+// (use &) or the compiler crashes...
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+
+
+
+
+
+
+
+// N.B.: when building DLL with Borland C++ 5.5 compiler, you must initialize
+//       sm_eventTable before using it in GetEventTable() or the compiler gives
+//       E2233 (see http://groups.google.com/groups?selm=397dcc8a%241_2%40dnews)
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                     
+
+
+/*
+ * Event table macros
+ */
+
+// helpers for writing shorter code below: declare an event macro taking 2, 1
+// or none ids (the missing ids default to wxID_ANY)
+//
+// macro arguments:
+//  - evt one of wxEVT_XXX constants
+//  - id1, id2 ids of the first/last id
+//  - fn the function (should be cast to the right type)
+                                                                                                     
+
+                                                                                 
+
+                                                                         
+
+
+
+// Generic events
+                                                                                               
+
+                                                                                                           
+
+
+// EVT_COMMAND
+                                                                                                       
+
+
+                                                                                                                   
+
+
+                                                                                                     
+
+
+                                                                                                                 
+
+
+// Miscellaneous
+                                                                              
+                                                                                  
+                                                                              
+                                                                                  
+                                                                                          
+                                                                                      
+                                                                                        
+                                                                                             
+                                                                                                         
+                                                                                 
+                                                                                         
+                                                                                                       
+                                                                              
+                                                                                     
+                                                                                 
+                
+                                                                                                
+      
+                                                                                        
+                                                                                        
+                                                                                          
+                                                                                                                
+                                                                                                      
+                                                                                         
+                                                                                           
+                                                                                                  
+                                                                                          
+                                                                                                  
+                                                                                            
+                                                                                             
+                                                                                                         
+                                                                                               
+                                                                                                  
+                                                                                                                     
+                                                                                                              
+                                                                             
+                                                                                         
+                                                                                      
+                                                                                                          
+                                                                                                             
+                                                                                                                  
+                                                                                                
+                                                                                                   
+                                                                                              
+                                                                                                                              
+                                                                                                                     
+
+// Mouse events
+                                                                                        
+                                                                                    
+                                                                                            
+                                                                                        
+                                                                                          
+                                                                                      
+                                                                                  
+                                                                                            
+                                                                                                
+                                                                                              
+                                                                                              
+                                                                                              
+                                                                                          
+                                                                                              
+                                                                                          
+                                                                                                  
+                                                                                              
+                                                                                          
+                                                                                                  
+
+// All mouse events
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Scrolling from wxWindow (sent to wxScrolledWindow)
+                                                                                                    
+                                                                                                          
+                                                                                                          
+                                                                                                              
+                                                                                                          
+                                                                                                              
+                                                                                                                  
+                                                                                                                      
+
+                                                                                                                                                                                                                                                                                              
+
+
+
+
+
+
+
+
+
+// Scrolling from wxSlider and wxScrollBar
+                                                                                           
+                                                                                                 
+                                                                                                 
+                                                                                                     
+                                                                                                 
+                                                                                                     
+                                                                                                         
+                                                                                                             
+                                                                                                   
+
+                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+
+
+
+
+
+// Scrolling from wxSlider and wxScrollBar, with an id
+                                                                                                                 
+                                                                                                                       
+                                                                                                                       
+                                                                                                                           
+                                                                                                                       
+                                                                                                                           
+                                                                                                                               
+                                                                                                                                   
+                                                                                                                         
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+                           
+                                                               
+                                                       
+                                                                   
+                                                   
+       // WXWIN_COMPATIBILITY_2_6
+
+// Convenience macros for commonly-used commands
+                                                                                                      
+                                                                                                  
+                                                                                                    
+                                                                                                                  
+                                                                                              
+                                                                                                          
+                           
+                                                     
+     
+                                                                                                  
+      
+                                                                                                  
+                                                                                                      
+                                                                                                            
+// EVT_SCROLLBAR is now obsolete since we use EVT_COMMAND_SCROLL... events
+                                                                                                        
+                                                                                                
+                                                                                                      
+                                                                                              
+                                                                                                                
+                                                                                                          
+                                                                                                                
+                                                                                                                            
+                                                                                                          
+                                                                                                              
+                                                                                                                        
+                                                                                                                      
+
+// Generic command events
+                                                                                                                          
+                                                                                                                            
+                                                                                                                            
+                                                                                                                              
+                                                                                                                        
+                                                                                                                          
+                                                                                                                
+
+// Joystick events
+
+                                                                                                       
+                                                                                                   
+                                                                                         
+                                                                                           
+
+// All joystick events
+                                                                                                                                          
+
+
+
+
+
+// Idle event
+                                                                             
+
+// Update UI event
+                                                                                                         
+                                                                                                                     
+
+// Help events
+                                                                                           
+                                                                                                       
+                                                                                                             
+                                                                                                                         
+
+// Context Menu Events
+                                                                                                    
+                                                                                                                          
+
+// Clipboard text Events
+                                                                                                            
+                                                                                                              
+                                                                                                                
+
+// Thread events
+                                                                                            
+
+// ----------------------------------------------------------------------------
+// Helper functions
+// ----------------------------------------------------------------------------
+
+// This is an ugly hack to allow the use of Bind() instead of Connect() inside
+// the library code if the library was built with support for it, here is how
+// it is used:
+//
+// class SomeEventHandlingClass : wxBIND_OR_CONNECT_HACK_BASE_CLASS
+//                                public SomeBaseClass
+// {
+// public:
+//     SomeEventHandlingClass(wxWindow *win)
+//     {
+//         // connect to the event for the given window
+//         wxBIND_OR_CONNECT_HACK(win, wxEVT_SOMETHING, wxSomeEventHandler,
+//                                SomeEventHandlingClass::OnSomeEvent, this);
+//     }
+//
+// private:
+//     void OnSomeEvent(wxSomeEvent&) { ... }
+// };
+//
+// This is *not* meant to be used by library users, it is only defined here
+// (and not in a private header) because the base class must be visible from
+// other public headers, please do NOT use this in your code, it will be
+// removed from future wx versions without warning.
+                       
+                                             
+                                                  
+                                                                                                   
+
+      // wxHAS_EVENT_BIND
+                                                                  
+                                                                        
+                                                                                                                    
+
+       // wxHAS_EVENT_BIND
+
+             
+
+                                                                               
+                                                                      
+                                                                     
+
+       // wxUSE_GUI
+
+
+// ----------------------------------------------------------------------------
+// Compatibility macro aliases
+// ----------------------------------------------------------------------------
+
+// deprecated variants _not_ requiring a semicolon after them and without wx prefix
+// (note that also some wx-prefixed macro do _not_ require a semicolon because
+//  it's not always possible to force the compire to require it)
+
+                                                                                                                             
+
+                                                                                         
+                                                                               
+                                                                               
+                                                                                           
+                                                                                             
+                                                                                               
+                                                                                                 
+                                                                                                   
+                                                                                                     
+                                                                          
+
+// other obsolete event declaration/definition macros; we don't need them any longer
+// but we keep them for compatibility as it doesn't cost us anything anyhow
+                                   
+                                 
+                                                                                                    
+
+                                                                                                      
+
+                                                                                                                   
+
+                                                                          
+                                                             
+
+// alias for backward compatibility with 2.9.0:
+                                                          
+// other old wxEVT_COMMAND_* constants
+                                                          
+                                                            
+                                                          
+                                                           
+                                                                  
+                                                                
+                                                        
+                                                        
+                                                          
+                                                            
+                                                               
+                                                             
+                                                         
+                                                            
+                                                                 
+                                                                 
+                                                              
+                                                                     
+                                                                    
+                                                             
+                                                            
+                                                              
+                                                        
+
+       // _WX_EVENT_H_

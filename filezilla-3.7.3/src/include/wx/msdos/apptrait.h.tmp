@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msdos\apptrait.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msdos/apptrait.h
+// Author:      Michael Wetherell
+// Copyright:   (c) 2006 Michael Wetherell
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                             
+                             
+
+class wxConsoleAppTraits : public wxConsoleAppTraitsBase
+{
+public:
+    virtual wxEventLoopBase *CreateEventLoop() { return NULL; }
+               
+                                                                    
+       // wxUSE_TIMER
+};
+
+             
+
+                                                
+ 
+       
+                                               
+                                                                                     
+
+               
+                                                         
+                     
+  
+
+       // wxUSE_GUI
+
+       // _WX_MSDOS_APPTRAIT_H_

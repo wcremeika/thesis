@@ -1,0 +1,53 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\affinematrix2d.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:         wx/affinematrix2d.h
+// Purpose:      wxAffineMatrix2D class.
+// Author:       Based on wxTransformMatrix by Chris Breeze, Julian Smart
+// Created:      2011-04-05
+// Copyright:    (c) wxWidgets team
+// Licence:      wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                             
+                             
+
+                   
+
+                  
+
+                                  
+
+                                                                             
+             
+                                                                     
+ 
+       
+                                          
+                                          
+                                         
+     
+     
+
+                                                 
+                                                                         
+                                                                   
+                                                       
+                          
+                                    
+                                                              
+                                                     
+                                                         
+                                           
+
+          
+                                                                             
+                                                                                
+
+        
+                                                
+  
+
+       // wxUSE_GEOMETRY
+
+       // _WX_AFFINEMATRIX2D_H_

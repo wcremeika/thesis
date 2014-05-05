@@ -1,0 +1,113 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\filedlg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/filedlg.h
+// Purpose:     wxFileDialog class
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+class WXDLLIMPEXP_FWD_CORE wxChoice;
+
+//-------------------------------------------------------------------------
+// wxFileDialog
+//-------------------------------------------------------------------------
+
+// set this system option to 1 in order to always show the filetypes popup in 
+// file open dialogs if possible
+
+                                                                                      
+
+class WXDLLIMPEXP_CORE wxFileDialog: public wxFileDialogBase
+{
+DECLARE_DYNAMIC_CLASS(wxFileDialog)
+protected:
+    wxArrayString m_fileNames;
+    wxArrayString m_paths;
+
+public:
+    wxFileDialog() { Init(); }
+    wxFileDialog(wxWindow *parent,
+                 const wxString& message = wxFileSelectorPromptStr,
+                 const wxString& defaultDir = wxEmptyString,
+                 const wxString& defaultFile = wxEmptyString,
+                 const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
+                 long style = wxFD_DEFAULT_STYLE,
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& sz = wxDefaultSize,
+                 const wxString& name = wxFileDialogNameStr)
+    {
+        Init();
+
+        Create(parent,message,defaultDir,defaultFile,wildCard,style,pos,sz,name);
+    }
+
+    void Create(wxWindow *parent,
+                 const wxString& message = wxFileSelectorPromptStr,
+                 const wxString& defaultDir = wxEmptyString,
+                 const wxString& defaultFile = wxEmptyString,
+                 const wxString& wildCard = wxFileSelectorDefaultWildcardStr,
+                 long style = wxFD_DEFAULT_STYLE,
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& sz = wxDefaultSize,
+                 const wxString& name = wxFileDialogNameStr);
+
+                   
+                    
+      
+    
+    virtual void GetPaths(wxArrayString& paths) const { paths = m_paths; }
+    virtual void GetFilenames(wxArrayString& files) const { files = m_fileNames ; }
+
+    virtual int ShowModal();
+
+                   
+                                   
+                                                                    
+      
+
+    virtual bool SupportsExtraControl() const;
+    
+    // implementation only
+    
+                   
+                                                      
+                                               
+      
+
+protected:
+    // not supported for file dialog, RR
+    virtual void DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
+                           int WXUNUSED(width), int WXUNUSED(height),
+                           int WXUNUSED(sizeFlags) = wxSIZE_AUTO) {}
+
+    void SetupExtraControls(WXWindow nativeWindow);
+    
+                   
+                                                                
+                                       
+                                                         
+
+                                     
+                                
+                             
+                            
+                             
+                              
+                                      
+                           
+                                
+      
+
+private:
+    // Common part of all ctors.
+    void Init();
+};
+
+       // _WX_FILEDLG_H_

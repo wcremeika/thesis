@@ -1,0 +1,37 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\EBListCtrl.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+
+       
+
+class CEBListCtrl : public CListCtrl
+{
+public:
+  CEBListCtrl();
+  ~CEBListCtrl();
+
+  void Initialize();
+
+protected:
+  WCHAR *m_pwchTip;
+
+  virtual BOOL PreTranslateMessage(MSG* pMsg);
+  virtual void PreSubclassWindow();
+
+  //{{AFX_MSG(CEBListCtrl)
+   void OnMouseMove(UINT nFlags, CPoint point);
+   BOOL OnToolTipText(UINT id, NMHDR *pNotifyStruct, void *pLResult);
+  //}}AFX_MSG
+
+  
+
+private:
+  CToolTipCtrl *m_pToolTipCtrl;
+  int m_LastToolTipRow;
+};

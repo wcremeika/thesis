@@ -1,0 +1,128 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\features.h" 0
+/**
+*  Name:        wx/features.h
+*  Purpose:     test macros for the features which might be available in some
+*               wxWidgets ports but not others
+*  Author:      Vadim Zeitlin
+*  Modified by: Ryan Norton (Converted to C)
+*  Created:     18.03.02
+*  Copyright:   (c) 2002 Vadim Zeitlin <vadim@wxwidgets.org>
+*  Licence:     wxWindows licence
+*/
+
+/* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
+
+                       
+                       
+
+/*  radio menu items are currently not implemented in wxMotif, use this
+    symbol (kept for compatibility from the time when they were not implemented
+    under other platforms as well) to test for this */
+                         
+                                  
+     
+                                 
+      
+
+/*  the raw keyboard codes are generated under wxGTK and wxMSW only */
+                                                                                            
+
+                               
+     
+                              
+      
+
+/*  taskbar is implemented in the major ports */
+                                                                                                                                                                            
+
+
+                               
+     
+                            
+                               
+                              
+      
+
+/*  wxIconLocation appeared in the middle of 2.5.0 so it's handy to have a */
+/*  separate define for it */
+                           
+
+/*  same for wxCrashReport */
+                
+                              
+     
+                             
+      
+
+/*  wxRE_ADVANCED is not always available, depending on regex library used
+ *  (it's unavailable only if compiling via configure against system library) */
+                            
+                                
+     
+                               
+      
+
+/* Pango-based ports and wxDFB use UTF-8 for text and font encodings
+ * internally and so their fonts can handle any encodings: */
+                                     
+                            
+      
+
+/* This is defined when the underlying toolkit handles tab traversal natively.
+   Otherwise we implement it ourselves in wxControlContainer. */
+                  
+                                      
+      
+
+/* This is defined when the compiler provides some type of extended locale
+   functions.  Otherwise, we implement them ourselves to only support the
+   'C' locale */
+                                                                                       
+
+                                 
+     
+                                
+      
+
+/* Direct access to bitmap data is not implemented in all ports yet */
+                                                                                                  
+
+
+      
+                                                                
+                            
+                      
+       
+                                                                                            
+
+                                
+          
+      
+
+/* also define deprecated synonym which exists for compatibility only */
+                       
+                             
+      
+
+/*
+   If this is defined, wxEvtHandler::Bind<>() is available (not all compilers
+   have the required template support for this and in particular under Windows
+   where only g++ and MSVC >= 7 currently support it.
+
+   Recent Sun CC versions support this but perhaps older ones can compile this
+   code too, adjust the version check if this is the case (unfortunately we
+   can't easily test for the things used in wx/event.h in configure so we have
+   to maintain these checks manually). The same applies to xlC 7: perhaps
+   earlier versions can compile this code too but they were not tested.
+ */
+                                                                                                                                                                                                   
+
+
+
+                            
+      
+
+
+       /*  _WX_FEATURES_H_ */
+

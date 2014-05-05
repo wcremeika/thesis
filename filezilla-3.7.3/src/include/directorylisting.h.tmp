@@ -1,0 +1,685 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\directorylisting.h" 0
+                              
+                              
+
+             
+
+class CDirentry
+{
+public:
+	wxString name;
+	wxLongLong size;
+	wxString permissions;
+	wxString ownerGroup;
+
+	enum _flags
+	{
+		flag_dir = 1,
+		flag_link = 2,
+		flag_unsure = 4, // May be set on cached items if any changes were made to the file
+
+		flag_timestamp_date = 0x10,
+		flag_timestamp_time = 0x20,
+		flag_timestamp_seconds = 0x40,
+
+		flag_timestamp_mask = 0x70
+	};
+	int flags;
+
+	inline bool is_dir() const
+	{
+		return (flags & flag_dir) != 0;
+	}
+	inline bool is_link() const
+	{
+		return (flags & flag_link) != 0;
+	}
+
+	inline bool is_unsure() const
+	{
+		return (flags & flag_unsure) != 0;
+	}
+
+	inline bool has_date() const
+	{
+		return (flags & flag_timestamp_date) != 0;
+	}
+	inline bool has_time() const
+	{
+		return (flags & flag_timestamp_time) != 0;
+	}
+	inline bool has_seconds() const
+	{
+		return (flags & flag_timestamp_seconds) != 0;
+	}
+
+
+	wxString target; // Set to linktarget it link is true
+
+	wxDateTime time;
+
+	wxString dump() const;
+	bool operator==(const CDirentry &op) const;
+};
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\refcount.h" 0
+                      
+                      
+
+// Simple shared pointer. Takes ownership of passed regular pointers
+template<class T> class CSharedPointer
+{
+public:
+	CSharedPointer();
+	CSharedPointer(const CSharedPointer<T>& v);
+	CSharedPointer(T *v);
+	~CSharedPointer();
+
+	void clear();
+
+	T& operator*() const;
+	T* operator->() const;
+
+	T* Value() const {return m_ptr; } // Promise to NEVER EVER call delete on the returned value
+
+	bool operator==(const CSharedPointer<T>& cmp) const { return m_ptr == cmp.m_ptr; }
+	inline bool operator!=(const CSharedPointer<T>& cmp) const { return m_ptr != cmp.m_ptr; }
+	bool operator<(const CSharedPointer<T>& cmp) const { return m_ptr < cmp.m_ptr; }
+
+	// Magic for CSharedPointer foo(bar); if (foo) ...
+	// aka safe bool idiom
+	typedef void (CSharedPointer::*bool_type)() const;
+	void uncomparable() const {}
+	operator bool_type() const { return m_ptr ? &CSharedPointer::uncomparable : 0; }
+
+	CSharedPointer<T>& operator=(const CSharedPointer<T>& v);
+	CSharedPointer<T>& operator=(T *v);
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+template<class T> class CSharedPointerArray
+{
+public:
+	CSharedPointerArray();
+	CSharedPointerArray(const CSharedPointerArray<T>& v);
+	CSharedPointerArray(T *v);
+	~CSharedPointerArray();
+
+	void clear();
+
+	T& operator*() const;
+	T* operator->() const;
+
+	T* Value() const {return m_ptr; } // Promise to NEVER EVER call delete on the returned value
+
+	bool operator==(const CSharedPointerArray<T>& cmp) const { return m_ptr == cmp.m_ptr; }
+	inline bool operator!=(const CSharedPointerArray<T>& cmp) const { return m_ptr != cmp.m_ptr; }
+	bool operator<(const CSharedPointerArray<T>& cmp) const { return m_ptr < cmp.m_ptr; }
+
+	// Magic for CSharedPointerArray foo(bar); if (foo) ...
+	// aka safe bool idiom
+	typedef void (CSharedPointerArray::*bool_type)() const;
+	void uncomparable() const {}
+	operator bool_type() const { return m_ptr ? &CSharedPointerArray::uncomparable : 0; }
+
+	CSharedPointerArray<T>& operator=(const CSharedPointerArray<T>& v);
+	CSharedPointerArray<T>& operator=(T *v);
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+// Trivial template class to refcount objects with COW semantics.
+template<class T> class CRefcountObject
+{
+public:
+	CRefcountObject();
+	CRefcountObject(const CRefcountObject<T>& v);
+	CRefcountObject(const T& v);
+	virtual ~CRefcountObject();
+
+	void clear();
+
+	T& Get();
+
+	const T& operator*() const;
+	const T* operator->() const;
+
+	bool operator==(const CRefcountObject<T>& cmp) const;
+	inline bool operator!=(const CRefcountObject<T>& cmp) const { return !(*this == cmp); }
+	bool operator<(const CRefcountObject<T>& cmp) const;
+
+	CRefcountObject<T>& operator=(const CRefcountObject<T>& v);
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+template<class T> class CRefcountObject_Uninitialized
+{
+	/* Almost same as CRefcountObject but does not allocate
+	   an object initially.
+	   You need to ensure to assign some data prior to calling
+	   operator* or ->, otherwise you'll dereference the null-pointer.
+	 */
+public:
+	CRefcountObject_Uninitialized();
+	CRefcountObject_Uninitialized(const CRefcountObject_Uninitialized<T>& v);
+	CRefcountObject_Uninitialized(const T& v);
+	virtual ~CRefcountObject_Uninitialized();
+
+	void clear();
+
+	T& Get();
+
+	const T& operator*() const;
+	const T* operator->() const;
+
+	bool operator==(const CRefcountObject_Uninitialized<T>& cmp) const;
+	inline bool operator!=(const CRefcountObject_Uninitialized<T>& cmp) const { return !(*this == cmp); }
+	bool operator<(const CRefcountObject_Uninitialized<T>& cmp) const;
+
+	CRefcountObject_Uninitialized<T>& operator=(const CRefcountObject_Uninitialized<T>& v);
+
+	bool operator!() const { return m_ptr == 0; }
+protected:
+	int* m_refcount;
+	T* m_ptr;
+};
+
+template<class T> CSharedPointer<T>::CSharedPointer()
+{
+	m_ptr = 0;
+	m_refcount = 0;
+}
+
+template<class T> CSharedPointer<T>::CSharedPointer(const CSharedPointer<T>& v)
+{
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+}
+
+template<class T> CSharedPointer<T>::CSharedPointer(T* v)
+{
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+}
+
+template<class T> CSharedPointer<T>::~CSharedPointer()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+}
+
+template<class T> void CSharedPointer<T>::clear()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> T& CSharedPointer<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> T* CSharedPointer<T>::operator->() const
+{
+	return m_ptr;
+}
+
+template<class T> CSharedPointer<T>& CSharedPointer<T>::operator=(const CSharedPointer<T>& v)
+{
+	if (this == &v)
+		return *this;
+
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+
+	return *this;
+}
+
+template<class T> CSharedPointer<T>& CSharedPointer<T>::operator=(T* v)
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+
+	return *this;
+}
+
+template<class T> CSharedPointerArray<T>::CSharedPointerArray()
+{
+	m_ptr = 0;
+	m_refcount = 0;
+}
+
+template<class T> CSharedPointerArray<T>::CSharedPointerArray(const CSharedPointerArray<T>& v)
+{
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+}
+
+template<class T> CSharedPointerArray<T>::CSharedPointerArray(T* v)
+{
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+}
+
+template<class T> CSharedPointerArray<T>::~CSharedPointerArray()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+}
+
+template<class T> void CSharedPointerArray<T>::clear()
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> T& CSharedPointerArray<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> T* CSharedPointerArray<T>::operator->() const
+{
+	return m_ptr;
+}
+
+template<class T> CSharedPointerArray<T>& CSharedPointerArray<T>::operator=(const CSharedPointerArray<T>& v)
+{
+	if (this == &v)
+		return *this;
+
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+	m_ptr = v.m_ptr;
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+
+	return *this;
+}
+
+template<class T> CSharedPointerArray<T>& CSharedPointerArray<T>::operator=(T* v)
+{
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete [] m_ptr;
+	}
+
+	if (v)
+	{
+		m_ptr = v;
+		m_refcount = new int(1);
+	}
+	else
+	{
+		m_ptr = 0;
+		m_refcount = 0;
+	}
+
+	return *this;
+}
+
+template<class T> bool CRefcountObject<T>::operator==(const CRefcountObject<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return true;
+
+	return *m_ptr == *cmp.m_ptr;
+}
+
+template<class T> CRefcountObject<T>::CRefcountObject()
+{
+	m_refcount = new int(1);
+
+	m_ptr = new T;
+}
+
+template<class T> CRefcountObject<T>::CRefcountObject(const CRefcountObject<T>& v)
+{
+	m_refcount = v.m_refcount;
+	(*m_refcount)++;
+	m_ptr = v.m_ptr;
+}
+
+template<class T> CRefcountObject<T>::CRefcountObject(const T& v)
+{
+	m_ptr = new T(v);
+	m_refcount = new int(1);
+}
+
+template<class T> CRefcountObject<T>::~CRefcountObject()
+{
+	if ((*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+}
+
+template<class T> T& CRefcountObject<T>::Get()
+{
+	if (*m_refcount != 1)
+	{
+		(*m_refcount)--;
+		m_refcount = new int(1);
+		T* ptr = new T(*m_ptr);
+		m_ptr = ptr;
+	}
+
+	return *m_ptr;
+}
+
+template<class T> CRefcountObject<T>& CRefcountObject<T>::operator=(const CRefcountObject<T>& v)
+{
+	if (m_ptr == v.m_ptr)
+		return *this;
+	if ((*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+
+	m_refcount = v.m_refcount;
+	(*m_refcount)++;
+	m_ptr = v.m_ptr;
+	return *this;
+}
+
+template<class T> bool CRefcountObject<T>::operator<(const CRefcountObject<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return false;
+
+	return *m_ptr < *cmp.m_ptr;
+}
+
+template<class T> void CRefcountObject<T>::clear()
+{
+	if (*m_refcount != 1)
+	{
+		(*m_refcount)--;
+		m_refcount = new int(1);
+	}
+	else
+		delete m_ptr;
+	m_ptr = new T;
+}
+
+template<class T> const T& CRefcountObject<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> const T* CRefcountObject<T>::operator->() const
+{
+	return m_ptr;
+}
+
+// The same for the uninitialized version
+template<class T> bool CRefcountObject_Uninitialized<T>::operator==(const CRefcountObject_Uninitialized<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return true;
+
+	return *m_ptr == *cmp.m_ptr;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::CRefcountObject_Uninitialized()
+{
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::CRefcountObject_Uninitialized(const CRefcountObject_Uninitialized<T>& v)
+{
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+	m_ptr = v.m_ptr;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::CRefcountObject_Uninitialized(const T& v)
+{
+	m_ptr = new T(v);
+	m_refcount = new int(1);
+}
+
+template<class T> CRefcountObject_Uninitialized<T>::~CRefcountObject_Uninitialized()
+{
+	if (!m_refcount)
+		return;
+
+	if (*m_refcount == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+	else
+		(*m_refcount)--;
+}
+
+template<class T> T& CRefcountObject_Uninitialized<T>::Get()
+{
+	if (!m_refcount)
+	{
+		m_refcount= new int(1);
+		m_ptr = new T;
+	}
+	else if (*m_refcount != 1)
+	{
+		(*m_refcount)--;
+		m_refcount = new int(1);
+		T* ptr = new T(*m_ptr);
+		m_ptr = ptr;
+	}
+
+	return *m_ptr;
+}
+
+template<class T> CRefcountObject_Uninitialized<T>& CRefcountObject_Uninitialized<T>::operator=(const CRefcountObject_Uninitialized<T>& v)
+{
+	if (m_ptr == v.m_ptr)
+		return *this;
+	if (m_refcount && (*m_refcount)-- == 1)
+	{
+		delete m_refcount;
+		delete m_ptr;
+	}
+
+	m_refcount = v.m_refcount;
+	if (m_refcount)
+		(*m_refcount)++;
+	m_ptr = v.m_ptr;
+	return *this;
+}
+
+template<class T> bool CRefcountObject_Uninitialized<T>::operator<(const CRefcountObject_Uninitialized<T>& cmp) const
+{
+	if (m_ptr == cmp.m_ptr)
+		return false;
+	if (!m_ptr)
+		return true;
+	if (!cmp.m_ptr)
+		return false;
+
+	return *m_ptr < *cmp.m_ptr;
+}
+
+template<class T> void CRefcountObject_Uninitialized<T>::clear()
+{
+	if (!m_refcount)
+		return;
+	else if (*m_refcount != 1)
+		(*m_refcount)--;
+	else
+	{
+		delete m_ptr;
+		delete m_refcount;
+	}
+	m_refcount = 0;
+	m_ptr = 0;
+}
+
+template<class T> const T& CRefcountObject_Uninitialized<T>::operator*() const
+{
+	return *m_ptr;
+}
+
+template<class T> const T* CRefcountObject_Uninitialized<T>::operator->() const
+{
+	return m_ptr;
+}
+
+template<typename T> class CScopedArray
+{
+public:
+	CScopedArray() : v_() {}
+	CScopedArray(T* v) : v_(v) {}
+	~CScopedArray() { delete [] v_; }
+
+private:
+	T* v_;
+};
+
+       //__REFCOUNT_H__
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\directorylisting.h" 64
+
+class CDirectoryListing
+{
+public:
+	CDirectoryListing();
+	CDirectoryListing(const CDirectoryListing& listing);
+
+	CServerPath path;
+	CDirectoryListing& operator=(const CDirectoryListing &a);
+
+	const CDirentry& operator[](unsigned int index) const;
+
+	// Word of caution: You MUST NOT change the name of the returned
+	// entry if you do not call ClearFindMap afterwards
+	CDirentry& operator[](unsigned int index);
+
+	void SetCount(unsigned int count);
+	unsigned int GetCount() const { return m_entryCount; }
+
+	int FindFile_CmpCase(const wxString& name) const;
+	int FindFile_CmpNoCase(wxString name) const;
+
+	void ClearFindMap();
+
+	enum
+	{
+		unsure_file_added = 0x01,
+		unsure_file_removed = 0x02,
+		unsure_file_changed = 0x04,
+		unsure_file_mask = 0x07,
+		unsure_dir_added = 0x08,
+		unsure_dir_removed = 0x10,
+		unsure_dir_changed = 0x20,
+		unsure_dir_mask = 0x38,
+		unsure_unknown = 0x40,
+		unsure_invalid = 0x80 // Recommended action: Do a full refresh
+	};
+	// Lowest bit indicates a file got added
+	// Next bit indicates a file got removed
+	// 3rd bit indicates a file got changed.
+	// 4th bit is set if an update cannot be applied to
+	// one of the other categories.
+	//
+	// These bits should help the user interface to choose an appropriate sorting
+	// algorithm for modified listings
+	int m_hasUnsureEntries;
+	bool m_failed;
+	bool m_hasDirs;
+
+	bool m_has_perms;
+	bool m_has_usergroup;
+
+	CTimeEx m_firstListTime;
+
+	void Assign(const std::list<CDirentry> &entries);
+
+	bool RemoveEntry(unsigned int index);
+
+	void GetFilenames(std::vector<wxString> &names) const;
+
+protected:
+
+	CRefcountObject_Uninitialized<std::vector<CRefcountObject<CDirentry> > > m_entries;
+
+	mutable CRefcountObject_Uninitialized<std::multimap<wxString, unsigned int> > m_searchmap_case;
+	mutable CRefcountObject_Uninitialized<std::multimap<wxString, unsigned int> > m_searchmap_nocase;
+
+	unsigned int m_entryCount;
+};
+
+      

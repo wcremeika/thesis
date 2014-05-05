@@ -1,0 +1,236 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\commands.h" 0
+                      
+                      
+
+// See below for actual commands and their parameters
+
+// Command IDs
+// -----------
+enum Command
+{
+	cmd_none = 0,
+	cmd_connect,
+	cmd_disconnect,
+	cmd_cancel,
+	cmd_list,
+	cmd_transfer,
+	cmd_delete,
+	cmd_removedir,
+	cmd_mkdir,
+	cmd_rename,
+	cmd_chmod,
+	cmd_raw,
+
+	// Only used internally
+	cmd_cwd,
+	cmd_rawtransfer
+};
+
+// Reply codes
+// -----------
+                   				        
+                           		        
+                      			        
+                              	                                                                             
+														  // code is returned.
+                         		                         
+                            	                         
+                             	                         
+                             	        
+                              	                                                                                 
+														  // given by the last Debug_Warning log message. This
+														  // should not happen unless there is a bug in FileZilla 3.
+                     			                         
+                                 	                                                                             
+                               	                                                             
+                        		                         
+                             	                                                                                       
+                            	                                                                                       
+                           		        
+
+// Small macro to simplify command class declaration
+// Basically all this macro does, is to declare the class and add the required
+// standard functions to it.
+                                  	                             	  	        		                                                  		                                                           
+
+
+
+
+
+
+// --------------- //
+// Actual commands //
+// --------------- //
+
+class CCommand
+{
+public:
+	CCommand() {}
+	virtual ~CCommand() {}
+	virtual enum Command GetId() const = 0;
+	virtual CCommand *Clone() const = 0;
+};
+
+class CConnectCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_connect; } 		virtual CCommand* Clone() const { return new CConnectCommand(*this); }
+	CConnectCommand(const CServer &server, bool retry_conncting = true);
+
+	const CServer GetServer() const;
+	bool RetryConnecting() const { return m_retry_connecting; }
+protected:
+	CServer m_Server;
+	bool m_retry_connecting;
+};
+
+class CDisconnectCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_disconnect; } 		virtual CCommand* Clone() const { return new CDisconnectCommand(*this); }
+};
+
+class CCancelCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_cancel; } 		virtual CCommand* Clone() const { return new CCancelCommand(*this); }
+};
+
+                           
+                         
+                                    
+                        
+class CListCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_list; } 		virtual CCommand* Clone() const { return new CListCommand(*this); }
+	// Without a given directory, the current directory will be listed.
+	// Directories can either be given as absolute path or as
+	// pair of an absolute path and the very last path segments.
+
+	// Set LIST_FLAG_REFRESH to get a directory listing even if a cache
+	// lookup can be made after finding out true remote directory.
+	//
+	// Set LIST_FLAG_AVOID to get a directory listing only if cache lookup
+	// fails or contains unsure entries, otherwise don't send listing.
+	//
+	// If LIST_FLAG_FALLBACK_CURRENT is set and CWD fails, list whatever
+	// directory we are currently in. Useful for initial reconnect to the
+	// server when we don't know if remote directory still exists
+	//
+	// LIST_FLAG_LINK is used for symlink discovery. There's unfortunately
+	// no sane way to distinguish between symlinks to files and symlinks to
+	// directories.
+	CListCommand(int flags = 0);
+	CListCommand(CServerPath path, wxString subDir = _T(""), int flags = 0);
+
+	CServerPath GetPath() const;
+	wxString GetSubDir() const;
+
+	int GetFlags() const { return m_flags; }
+
+protected:
+	CServerPath m_path;
+	wxString m_subDir;
+	int m_flags;
+};
+
+class CFileTransferCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_transfer; } 		virtual CCommand* Clone() const { return new CFileTransferCommand(*this); }
+
+	class t_transferSettings
+	{
+	public:
+		t_transferSettings()
+			: binary(true)
+		{}
+
+		bool binary;
+	};
+
+	// For uploads, set download to false.
+	// For downloads, localFile can be left empty if supported by protocol.
+	// Check for nId_data notification.
+	// FIXME: localFile empty iff protocol is HTTP.
+	CFileTransferCommand(const wxString &localFile, const CServerPath& remotePath, const wxString &remoteFile, bool download, const t_transferSettings& m_transferSettings);
+
+	wxString GetLocalFile() const;
+	CServerPath GetRemotePath() const;
+	wxString GetRemoteFile() const;
+	bool Download() const;
+	const t_transferSettings& GetTransferSettings() const { return m_transferSettings; }
+
+protected:
+	wxString m_localFile;
+	CServerPath m_remotePath;
+	wxString m_remoteFile;
+	bool m_download;
+	t_transferSettings m_transferSettings;
+};
+
+class CRawCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_raw; } 		virtual CCommand* Clone() const { return new CRawCommand(*this); }
+	CRawCommand(const wxString &command);
+
+	wxString GetCommand() const;
+
+protected:
+	wxString m_command;
+};
+
+class CDeleteCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_delete; } 		virtual CCommand* Clone() const { return new CDeleteCommand(*this); }
+	CDeleteCommand(const CServerPath& path, const std::list<wxString>& files);
+
+	CServerPath GetPath() const { return m_path; }
+	const std::list<wxString>& GetFiles() const { return m_files; }
+
+protected:
+
+	const CServerPath m_path;
+	const std::list<wxString> m_files;
+};
+
+class CRemoveDirCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_removedir; } 		virtual CCommand* Clone() const { return new CRemoveDirCommand(*this); }
+	// Directories can either be given as absolute path or as
+	// pair of an absolute path and the very last path segments.
+	CRemoveDirCommand(const CServerPath& path, const wxString& subdDir);
+
+	CServerPath GetPath() const { return m_path; }
+	wxString GetSubDir() const { return m_subDir; }
+
+protected:
+
+	CServerPath m_path;
+	wxString m_subDir;
+};
+
+class CMkdirCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_mkdir; } 		virtual CCommand* Clone() const { return new CMkdirCommand(*this); }
+	CMkdirCommand(const CServerPath& path);
+
+	CServerPath GetPath() const { return m_path; }
+
+protected:
+
+	CServerPath m_path;
+};
+
+class CRenameCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_rename; } 		virtual CCommand* Clone() const { return new CRenameCommand(*this); }
+	CRenameCommand(const CServerPath& fromPath, const wxString& fromFile,
+				   const CServerPath& toPath, const wxString& toFile);
+
+	CServerPath GetFromPath() const { return m_fromPath; }
+	CServerPath GetToPath() const { return m_toPath; }
+	wxString GetFromFile() const { return m_fromFile; }
+	wxString GetToFile() const { return m_toFile; }
+
+protected:
+	CServerPath m_fromPath;
+	CServerPath m_toPath;
+	wxString m_fromFile;
+	wxString m_toFile;
+};
+
+class CChmodCommand : public CCommand 	{ 	public: 		virtual enum Command GetId() const { return cmd_chmod; } 		virtual CCommand* Clone() const { return new CChmodCommand(*this); }
+	// The permission string should be given in a format understandable by the server.
+	// Most likely it's the defaut octal representation used by the unix chmod command,
+	// i.e. chmod 755 foo.bar
+	CChmodCommand(const CServerPath& path, const wxString& file, const wxString& permission);
+
+	CServerPath GetPath() const { return m_path; }
+	wxString GetFile() const { return m_file; }
+	wxString GetPermission() const { return m_permission; }
+
+protected:
+	CServerPath m_path;
+	wxString m_file;
+	wxString m_permission;
+};
+
+      

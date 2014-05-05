@@ -1,0 +1,76 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\icon.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/icon.h
+// Purpose:     wxIcon base header
+// Author:      Julian Smart
+// Modified by:
+// Created:
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                      
+
+
+// a more readable way to tell
+                                    
+
+
+// the wxICON_DEFAULT_TYPE (the wxIcon equivalent of wxBITMAP_DEFAULT_TYPE)
+// constant defines the default argument value for wxIcon ctor and wxIcon::LoadFile()
+// functions.
+
+                      
+                                                          
+                          
+                          
+                                                 
+                            
+                          
+                    
+                                                            
+       
+                                                   
+        
+                              
+                        
+                                                 
+                              
+                        
+                                                 
+                              
+                        
+                                                 
+                              
+                        
+                             
+                                                           
+                          
+     
+                                                          
+                              
+      
+                          
+                                                           
+                            
+                       
+                                                          
+                          
+      
+
+//-----------------------------------------------------------------------------
+// wxVariant support
+//-----------------------------------------------------------------------------
+
+                 
+                       
+                                                        
+      
+
+
+      
+    // _WX_ICON_H_BASE_

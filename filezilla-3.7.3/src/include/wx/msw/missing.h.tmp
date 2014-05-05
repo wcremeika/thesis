@@ -1,0 +1,703 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\missing.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/missing.h
+// Purpose:     Declarations for parts of the Win32 SDK that are missing in
+//              the versions that come with some compilers
+// Created:     2002/04/23
+// Copyright:   (c) 2002 Mattia Barbon
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+/*
+ * The following are required for VC++ 6.
+ */
+
+// Needed by cursor.cpp
+                
+                                           
+      
+
+// Needed by strconv.cpp
+                            
+                                      
+      
+
+                      
+                                      
+      
+
+                        
+                                      
+      
+
+                        
+                                      
+      
+
+                       
+                                      
+      
+
+                      
+                                
+      
+
+                     
+                                    
+      
+
+// Needed by toplevel.cpp
+               
+                             
+                             
+                             
+      
+
+                      
+                             
+      
+
+                      
+                            
+      
+
+                    
+                                   
+      
+
+                        
+                                       
+      
+
+// Needed by window.cpp
+                    
+                         
+                                              
+          
+                          
+                                              
+          
+                       
+                                           
+          
+                                   
+                                           
+          
+                                   
+                                           
+          
+       // wxUSE_MOUSEWHEEL
+
+// Needed by window.cpp
+                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+      
+
+                    
+                                
+                                
+                                
+                                
+      
+
+                   
+                          
+      
+
+                     
+                                  
+              
+                                      
+     
+                                 
+      
+      
+
+                           
+                                              
+      
+
+                              
+                                                
+      
+
+                   
+                     
+      
+
+
+                       
+                                  
+      
+
+                        
+                                    
+      
+
+                     
+                                
+      
+
+                 
+                   
+      
+
+                         
+                           
+      
+
+/*
+ * The following are required for VC++ 5 when the PSDK is not available.
+ */
+
+                                              
+
+                          
+
+                                  
+                              
+                         
+                         
+                        
+                       
+                           
+                           
+                           
+                    
+                      
+                   
+                                                            
+                                  
+                              
+                         
+                         
+                        
+                       
+                            
+                           
+                           
+                    
+                      
+                   
+                                                            
+
+              
+                                                                      
+                                                                              
+     
+                                                                      
+                                                                              
+      
+
+                                    
+
+                 
+                        
+      
+
+                                                                          
+                                                          
+  
+                 
+
+                                     
+                      
+                         
+                           
+                          
+                                          
+
+                                        
+                                            
+
+                           
+
+       // defined __VISUALC__ && __VISUALC__ <= 1100
+
+// ----------------------------------------------------------------------------
+// menu stuff
+// ----------------------------------------------------------------------------
+
+                   
+                                       
+                                       
+                                       
+                                                      
+
+    typedef struct tagMENUINFO
+    {
+        DWORD   cbSize;
+        DWORD   fMask;
+        DWORD   dwStyle;
+        UINT    cyMax;
+        HBRUSH  hbrBack;
+        DWORD   dwContextHelpID;
+        DWORD   dwMenuData;
+    }   MENUINFO, FAR *LPMENUINFO;
+       // MIIM_BITMAP &c
+
+// ----------------------------------------------------------------------------
+// definitions related to ListView and Header common controls, needed by
+// msw/listctrl.cpp and msw/headerctrl.cpp
+// ----------------------------------------------------------------------------
+
+                   
+                            
+      
+
+                            
+                                           
+      
+
+// LVS_EX_LABELTIP is not supported by Windows CE, don't define it there
+                                                      
+                                      
+      
+
+                            
+                                           
+      
+
+                        
+                                           
+      
+
+                    
+                          
+      
+                
+                           
+      
+
+                  
+                               
+                               
+      
+
+ /*
+  * In addition to the above, the following are required for several compilers.
+  */
+
+                      
+                                           
+      
+
+                       
+                                                     
+      
+
+                                     
+                                                  
+       // !defined(TB_SETDISABLEDIMAGELIST)
+
+                     
+                                    
+      
+
+                      
+                              
+      
+
+                            
+                                     
+      
+
+// ----------------------------------------------------------------------------
+// Tree control
+// ----------------------------------------------------------------------------
+
+                
+                                          
+      
+
+                         
+                                          
+      
+
+                      
+                                                   
+                                                   
+      
+
+ /*
+  * The following are required for BC++ 5.5 (none at present.)
+  */
+
+ /*
+  * The following are specifically required for Digital Mars C++
+  */
+
+              
+
+                          
+                                 
+                              
+                         
+                         
+                        
+                       
+                              
+                            
+                            
+                     
+                       
+                    
+                  
+                                      
+
+                        
+                                            
+      
+
+                                    
+                                                      
+      
+
+                          
+                                                      
+      
+
+                  
+                                         
+      
+
+                          
+                                                                                                                
+
+      
+
+                       
+                                         
+      
+
+                          
+                                                                          
+      
+
+                               
+                                                                                                                                                                                               
+      
+
+                     
+                                        
+      
+
+                
+                              
+      
+
+              
+                          
+      
+
+                
+                              
+      
+
+                    
+                               
+      
+                    
+                               
+      
+
+
+                     
+                                          
+      
+
+                   
+                                        
+      
+
+                       
+                                          
+                                          
+      
+
+                 
+                        
+      
+
+                                                                               
+            
+                                                                               
+
+                                                            
+                                                                   
+                                                    
+                                                    
+                                                                           
+                                                   
+
+                             
+
+                             
+                             
+                                                                           
+                                              
+                                      
+                     
+                       
+                    
+                      
+                                       
+                                      
+                                          
+
+                                                              
+     
+                                            
+                                            
+                                          
+                                              
+
+                                 
+                                       
+                                   
+
+                                
+                                      
+                                  
+
+                                           
+                                                 
+          
+
+                               
+
+                                                                               
+               
+                                                                               
+
+                    
+                                          
+      
+
+                      
+                                          
+      
+
+              
+                          
+      
+
+      
+    // DMC++
+
+ /*
+  * The following are specifically required for OpenWatcom C++ (none at present)
+  */
+
+                        
+      
+
+ /*
+  * The following are specifically required for MinGW (none at present)
+  */
+
+                         
+
+                                
+
+                    
+                            
+
+              
+ 
+                       
+                     
+                                          
+
+      
+
+      
+
+//Various defines that will be needed by mingw and possibly VC++6
+//Used by the webview library
+
+                                 
+                                     
+      
+
+                                
+                                    
+      
+
+                            
+                                
+      
+
+                         
+                             
+      
+
+                          
+                                      
+      
+
+                          
+                                      
+      
+
+                         
+                                     
+      
+
+                             
+                                         
+      
+
+                                 
+                                             
+      
+
+                               
+                                           
+      
+
+                                 
+                                             
+      
+
+                               
+                                           
+      
+
+                                      
+                                                  
+      
+
+                             
+                                         
+      
+
+                                 
+                                             
+      
+
+                              
+                                          
+      
+
+                               
+                                           
+      
+
+                               
+                                           
+      
+
+                               
+                                           
+      
+
+                                        
+                                                    
+      
+
+                                  
+                                              
+      
+
+                              
+                                          
+      
+
+                              
+                                          
+      
+
+                                  
+                                              
+      
+
+                                 
+                                             
+      
+
+                              
+                                          
+      
+
+                                  
+                                              
+      
+
+                                     
+                                                 
+      
+
+                                
+                                            
+      
+
+                                      
+                                                  
+      
+
+                                                  
+                                                              
+      
+
+                                      
+                                                  
+      
+
+                         
+                             
+      
+
+//We need to check if we are using MinGW or mingw-w64 as their
+//definitions are different
+
+                  
+                   
+      
+
+                            
+                                          
+                                          
+                              
+                          
+                              
+      
+
+ /*
+  * In addition to the declarations for VC++, the following are required for WinCE
+  */
+
+                  
+                                     
+      
+
+ /*
+  * The following are specifically required for Wine
+  */
+
+               
+                                 
+                                                   
+          
+                                
+                                                  
+          
+        // defined __WINE__
+
+                               
+                                               
+      
+
+      
+    // _WX_MISSING_H_

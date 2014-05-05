@@ -1,0 +1,236 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\microwin.h" 0
+/*
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/microwin.h
+// Purpose:     Extra implementation for MicroWindows
+// Author:      Julian Smart
+// Created:     2001-05-31
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+*/
+
+                       
+                       
+
+/* Implemented by microwin.cpp */
+
+                  
+extern "C" {
+      
+
+BOOL SetCursorPos(int x, int y);
+
+HCURSOR SetCursor(HCURSOR hCursor);
+
+/* Implemented with wrong number of args by MicroWindows */
+/* so we need to use a different name */
+int GetScrollPosWX (HWND hWnd, int iSBar);
+
+BOOL ScrollWindow(HWND, int xAmount, int yAmount,
+                 CONST RECT* lpRect, CONST RECT* lpClipRect);
+
+HWND WindowFromPoint(POINT pt);
+SHORT GetKeyState(int nVirtKey);
+HWND  SetParent(HWND hWndChild, HWND hWndNewParent);
+VOID DragAcceptFiles(HWND, BOOL);
+BOOL IsDialogMessage(HWND hWnd, MSG* msg);
+DWORD GetMessagePos(VOID);
+BOOL IsIconic(HWND hWnd);
+int SetMapMode(HDC hDC, int mode);
+int GetMapMode(HDC hDC);
+HCURSOR LoadCursor(HINSTANCE hInst, int cursor);
+DWORD GetModuleFileName(HINSTANCE hInst, LPSTR name, DWORD sz);
+VOID DestroyIcon(HICON hIcon);
+COLORREF GetTextColor(HDC hdc);
+COLORREF GetBkColor(HDC hdc);
+HPALETTE SelectPalette(HDC hdc, HPALETTE hPalette, BOOL b);
+BOOL IntersectClipRect(HDC hdc, int x, int y,
+               int w, int h);
+BOOL GetClipBox(HDC hdc, RECT* rect);
+BOOL DrawIconEx(HDC hdc, int x, int y, HICON hIcon, int w, int h, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags);
+BOOL SetViewportExtEx(HDC hdc, int x, int y, LPSIZE lpSize);
+BOOL SetViewportOrgEx(HDC hdc, int x, int y, LPPOINT lpPoint);
+BOOL SetWindowExtEx(HDC hdc, int x, int y, LPSIZE lpSize);
+BOOL SetWindowOrgEx(HDC hdc, int x, int y, LPPOINT lpSize);
+BOOL ExtFloodFill(HDC hdc, int x, int y, COLORREF col, UINT flags);
+int SetPolyFillMode(HDC hdc, int mode);
+BOOL RoundRect(HDC hdc, int left, int top, int right, int bottom, int r1, int r2);
+BOOL MaskBlt(HDC hdc, int x, int y, int w, int h,
+              HDC hDCSource, int xSrc, int ySrc, HBITMAP hBitmapMask, int xMask, int yMask, DWORD rop);
+UINT RealizePalette(HDC hDC);
+BOOL SetBrushOrgEx(HDC hdc, int xOrigin, int yOrigin, LPPOINT lpPoint);
+int GetObject(HGDIOBJ hObj, int sz, LPVOID logObj);
+
+/* For some reason these aren't defined in the headers */
+BOOL  EnableScrollBar (HWND hWnd, int iSBar, BOOL bEnable) ;
+BOOL  GetScrollPos (HWND hWnd, int iSBar, int* pPos);
+BOOL  GetScrollRange (HWND hWnd, int iSBar, int* pMinPos, int* pMaxPos);
+BOOL  SetScrollPos (HWND hWnd, int iSBar, int iNewPos);
+BOOL  SetScrollRange (HWND hWnd, int iSBar, int iMinPos, int iMaxPos);
+BOOL  SetScrollInfo (HWND hWnd, int iSBar,
+             LPCSCROLLINFO lpsi, BOOL fRedraw);
+BOOL  GetScrollInfo(HWND hWnd, int iSBar, LPSCROLLINFO lpsi);
+BOOL  ShowScrollBar (HWND hWnd, int iSBar, BOOL bShow);
+HBITMAP WINAPI
+CreateBitmap( int width, int height, int nPlanes, int bPP, LPCVOID lpData);
+
+                  
+}
+      
+
+/*
+ * Key State Masks for Mouse Messages
+ */
+                  
+                                  
+                                  
+                                  
+                                  
+                                  
+      
+
+/*
+ * DrawIcon flags
+ */
+
+               
+                              
+                              
+                              
+                              
+                              
+      
+
+/* TODO: May have to fake these message */
+                     
+                                  
+      
+                          
+                                              
+      
+                     
+                                              
+      
+                    
+                                              
+      
+                        
+                                              
+typedef struct tagMINMAXINFO {
+    POINT ptReserved;
+    POINT ptMaxSize;
+    POINT ptMaxPosition;
+    POINT ptMinTrackSize;
+    POINT ptMaxTrackSize;
+} MINMAXINFO, *PMINMAXINFO, *LPMINMAXINFO;
+
+      
+                     
+                                              
+      
+                         
+                                              
+      
+                          
+                                              
+      
+                            
+                                              
+      
+                         
+                                              
+      
+                 
+                                              
+      
+                    
+                                              
+      
+
+                  
+                      
+      
+
+               
+                 
+                     
+                     
+                      
+                      
+                  
+                      
+                        
+      
+
+                   
+                          
+                          
+      
+
+// TODO: all of them
+                 
+                   
+      
+
+/*
+ * Standard Cursor IDs
+ */
+                       
+                            
+      
+
+                 
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                                                  
+                                                                                
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                                      
+                     
+                                                  
+                             
+                                                                      
+                     
+                                                  
+                             
+      
+
+/* ExtFloodFill style flags */
+                            
+                            
+
+/* PolyFill() Modes */
+                                      
+                                      
+                                      
+
+/* Quaternary raster codes */
+                                                                          
+
+/* Device Parameters for GetDeviceCaps() */
+                                                                          
+                                                                          
+                                                                          
+                                                                          
+
+/* Ternary raster operations */
+/* Now defined by MicroWindows */
+     
+                                                                                   
+                                                                                   
+                                                                                   
+                                                                                   
+                                                                                   
+                                                                                   
+      
+
+       /* _WX_MICROWIN_H_ */

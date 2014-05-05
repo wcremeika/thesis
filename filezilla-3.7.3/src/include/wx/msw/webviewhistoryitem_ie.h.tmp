@@ -1,0 +1,32 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\webviewhistoryitem_ie.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        include/wx/msw/webviewhistoryitem.h
+// Purpose:     wxWebViewHistoryItem header for MSW
+// Author:      Steven Lamerton
+// Copyright:   (c) 2011 Steven Lamerton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                     
+                                     
+
+                    
+
+                                                           
+
+                                              
+ 
+       
+                                                                      
+                                                  
+                                       
+                                           
+
+        
+                            
+  
+
+       // wxUSE_WEBVIEW && wxUSE_WEBVIEW_IE && defined(__WXMSW__)
+
+       // _WX_MSW_WEBVIEWHISTORYITEM_H_

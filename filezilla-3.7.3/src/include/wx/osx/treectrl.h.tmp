@@ -1,0 +1,308 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\treectrl.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/treectrl.h
+// Purpose:     wxTreeCtrl class
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                      
+                    
+                       
+
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+
+                                                                         
+                                                                         
+                                                                                              
+                                                                                         
+                                                                                         
+                                                                                              
+                                                                                                 
+                                                                                       
+                                                                                                                          
+                                                                                   
+                                                                                  
+
+                                                                                                                       
+
+// Flags for GetNextItem
+enum {
+    wxTREE_NEXT_CARET,                 // Retrieves the currently selected item.
+    wxTREE_NEXT_CHILD,                 // Retrieves the first child item. The hItem parameter must be NULL.
+    wxTREE_NEXT_DROPHILITE,            // Retrieves the item that is the target of a drag-and-drop operation.
+    wxTREE_NEXT_FIRSTVISIBLE,          // Retrieves the first visible item.
+    wxTREE_NEXT_NEXT,                  // Retrieves the next sibling item.
+    wxTREE_NEXT_NEXTVISIBLE,           // Retrieves the next visible item that follows the specified item.
+    wxTREE_NEXT_PARENT,                // Retrieves the parent of the specified item.
+    wxTREE_NEXT_PREVIOUS,              // Retrieves the previous sibling item.
+    wxTREE_NEXT_PREVIOUSVISIBLE,       // Retrieves the first visible item that precedes the specified item.
+    wxTREE_NEXT_ROOT                   // Retrieves the first child item of the root item of which the specified item is a part.
+};
+
+                           
+                           
+          
+                                
+                                 
+                               
+      
+      
+
+class WXDLLIMPEXP_CORE wxTreeItem: public wxObject
+{
+    DECLARE_DYNAMIC_CLASS(wxTreeItem)
+
+public:
+
+    long            m_mask;
+    long            m_itemId;
+    long            m_state;
+    long            m_stateMask;
+    wxString        m_text;
+    int             m_image;
+    int             m_selectedImage;
+    int             m_children;
+    long            m_data;
+
+    wxTreeItem();
+
+// Accessors
+    inline long GetMask() const { return m_mask; }
+    inline long GetItemId() const { return m_itemId; }
+    inline long GetState() const { return m_state; }
+    inline long GetStateMask() const { return m_stateMask; }
+    inline wxString GetText() const { return m_text; }
+    inline int GetImage() const { return m_image; }
+    inline int GetSelectedImage() const { return m_selectedImage; }
+    inline int GetChildren() const { return m_children; }
+    inline long GetData() const { return m_data; }
+
+    inline void SetMask(long mask) { m_mask = mask; }
+    inline void SetItemId(long id) { m_itemId = m_itemId = id; }
+    inline void SetState(long state) { m_state = state; }
+    inline void SetStateMask(long stateMask) { m_stateMask = stateMask; }
+    inline void GetText(const wxString& text) { m_text = text; }
+    inline void SetImage(int image) { m_image = image; }
+    inline void GetSelectedImage(int selImage) { m_selectedImage = selImage; }
+    inline void SetChildren(int children) { m_children = children; }
+    inline void SetData(long data) { m_data = data; }
+};
+
+class WXDLLIMPEXP_CORE wxTreeCtrl: public wxControl
+{
+public:
+   /*
+    * Public interface
+    */
+
+    // creation
+    // --------
+    wxTreeCtrl();
+
+    inline wxTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
+        const wxPoint& pos = wxDefaultPosition,
+        const wxSize& size = wxDefaultSize,
+        long style = wxTR_HAS_BUTTONS|wxTR_LINES_AT_ROOT,
+        const wxValidator& validator = wxDefaultValidator,
+        const wxString& name = "wxTreeCtrl")
+    {
+        Create(parent, id, pos, size, style, validator, name);
+    }
+    virtual ~wxTreeCtrl();
+
+    bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                long style = wxTR_HAS_BUTTONS|wxTR_LINES_AT_ROOT,
+                const wxValidator& validator = wxDefaultValidator,
+                const wxString& name = "wxTreeCtrl");
+
+    // accessors
+    // ---------
+      //
+    virtual unsigned int GetCount() const;
+
+      // indent
+    int GetIndent() const;
+    void SetIndent(int indent);
+      // image list
+    wxImageList *GetImageList(int which = wxIMAGE_LIST_NORMAL) const;
+
+      // navigation inside the tree
+    long GetNextItem(long item, int code) const;
+    bool ItemHasChildren(long item) const;
+    long GetChild(long item) const;
+    long GetItemParent(long item) const;
+    long GetFirstVisibleItem() const;
+    long GetNextVisibleItem(long item) const;
+    long GetSelection() const;
+    long GetRootItem() const;
+
+      // generic function for (g|s)etting item attributes
+    bool GetItem(wxTreeItem& info) const;
+    bool SetItem(wxTreeItem& info);
+      // item state
+    int  GetItemState(long item, long stateMask) const;
+    bool SetItemState(long item, long state, long stateMask);
+      // item image
+    bool SetItemImage(long item, int image, int selImage);
+      // item text
+    wxString GetItemText(long item) const;
+    void SetItemText(long item, const wxString& str);
+      // custom data associated with the item
+    long GetItemData(long item) const;
+    bool SetItemData(long item, long data);
+      // convenience function
+    bool IsItemExpanded(long item)
+    {
+        return (GetItemState(item, 0x0004) &
+                             0x0004) != 0;
+    }
+
+      // bounding rect
+    bool GetItemRect(long item, wxRect& rect, bool textOnly = false) const;
+      //
+    wxTextCtrl* GetEditControl() const;
+
+    // operations
+    // ----------
+      // adding/deleting items
+    bool DeleteItem(long item);
+
+                           
+                                                                
+                                                           
+                                                                       
+                                              
+                                                                     
+                                                                    
+                                                                           
+
+                                                           
+                                                           
+                                                                                               
+       // WXWIN_COMPATIBILITY_2_6
+
+      // changing item state
+    bool ExpandItem(long item)   { return ExpandItem(item, wxTREE_EXPAND_EXPAND);   }
+    bool CollapseItem(long item) { return ExpandItem(item, wxTREE_EXPAND_COLLAPSE); }
+    bool ToggleItem(long item)   { return ExpandItem(item, wxTREE_EXPAND_TOGGLE);   }
+
+      //
+    bool SelectItem(long item);
+    bool ScrollTo(long item);
+    bool DeleteAllItems();
+
+    // Edit the label (tree must have the focus)
+    wxTextCtrl* EditLabel(long item, wxClassInfo* textControlClass = wxCLASSINFO(wxTextCtrl));
+
+    // End label editing, optionally cancelling the edit
+    bool EndEditLabel(bool cancel);
+
+    long HitTest(const wxPoint& point, int& flags);
+    //  wxImageList *CreateDragImage(long item);
+    bool SortChildren(long item);
+    bool EnsureVisible(long item);
+
+    void Command(wxCommandEvent& event) { ProcessCommand(event); }
+
+protected:
+    wxTextCtrl*  m_textCtrl;
+    wxImageList* m_imageListNormal;
+    wxImageList* m_imageListState;
+
+    DECLARE_DYNAMIC_CLASS(wxTreeCtrl)
+};
+
+/*
+ wxEVT_TREE_BEGIN_DRAG,
+ wxEVT_TREE_BEGIN_RDRAG,
+ wxEVT_TREE_BEGIN_LABEL_EDIT,
+ wxEVT_TREE_END_LABEL_EDIT,
+ wxEVT_TREE_DELETE_ITEM,
+ wxEVT_TREE_GET_INFO,
+ wxEVT_TREE_SET_INFO,
+ wxEVT_TREE_ITEM_EXPANDED,
+ wxEVT_TREE_ITEM_EXPANDING,
+ wxEVT_TREE_ITEM_COLLAPSED,
+ wxEVT_TREE_ITEM_COLLAPSING,
+ wxEVT_TREE_SEL_CHANGED,
+ wxEVT_TREE_SEL_CHANGING,
+ wxEVT_TREE_KEY_DOWN
+*/
+
+class WXDLLIMPEXP_CORE wxTreeEvent: public wxCommandEvent
+{
+    DECLARE_DYNAMIC_CLASS(wxTreeEvent)
+
+public:
+    wxTreeEvent(wxEventType commandType = wxEVT_NULL, int id = 0);
+
+    int           m_code;
+    wxTreeItem    m_item;
+    long          m_oldItem;
+    wxPoint       m_pointDrag;
+
+    inline long GetOldItem() const { return m_oldItem; }
+    inline wxTreeItem& GetItem() const { return (wxTreeItem&) m_item; }
+    inline wxPoint GetPoint() const { return m_pointDrag; }
+    inline int GetCode() const { return m_code; }
+};
+
+typedef void (wxEvtHandler::*wxTreeEventFunction)(wxTreeEvent&);
+
+                                                                                                                                                  
+                                                                                                                                                    
+                                                                                                                                                              
+                                                                                                                                                          
+                                                                                                                                                    
+                                                                                                                                              
+                                                                                                                                              
+                                                                                                                                                        
+                                                                                                                                                          
+                                                                                                                                                          
+                                                                                                                                                            
+                                                                                                                                                    
+                                                                                                                                                      
+                                                                                                                                              
+
+// old wxEVT_COMMAND_* constants
+                                                                   
+                                                                    
+                                                                         
+                                                                       
+                                                                    
+                                                                 
+                                                                 
+                                                                      
+                                                                       
+                                                                       
+                                                                        
+                                                                    
+                                                                     
+                                                                 
+
+      
+    // _WX_TREECTRL_H_

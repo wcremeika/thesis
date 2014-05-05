@@ -1,0 +1,149 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\typeinfo.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/typeinfo.h
+// Purpose:     wxTypeId implementation
+// Author:      Jaakko Salli
+// Created:     2009-11-19
+// Copyright:   (c) wxWidgets Team
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+//
+// This file defines wxTypeId macro that should be used internally in
+// wxWidgets instead of typeid(), for compatibility with builds that do
+// not implement C++ RTTI. Also, type defining macros in this file are
+// intended for internal use only at this time and may change in future
+// versions.
+//
+// The reason why we need this simple RTTI system in addition to the older
+// wxObject-based one is that the latter does not work in template
+// classes.
+//
+
+                   
+
+                 
+
+//
+// Let's trust that Visual C++ versions 9.0 and later implement C++
+// RTTI well enough, so we can use it and work around harmless memory
+// leaks reported by the static run-time libraries.
+//
+                              
+                                 
+     
+                                 
+      
+
+                  
+                  
+
+                                                   
+                                       
+                                
+                               
+                                         
+
+                    
+
+                          
+
+      /*  !wxTRUST_CPP_RTTI */
+
+//
+// For improved type-safety, let's make the check using class name
+// comparison. Most modern compilers already do this, but we cannot
+// rely on all supported compilers to work this well. However, in
+// cases where we'd know that typeid() would be flawless (as such),
+// wxTypeId could of course simply be defined as typeid.
+//
+
+class wxTypeIdentifier
+{
+public:
+    wxTypeIdentifier(const char* className)
+    {
+        m_className = className;
+    }
+
+    bool operator==(const wxTypeIdentifier& other)
+    {
+        return strcmp(m_className, other.m_className) == 0;
+    }
+
+    bool operator!=(const wxTypeIdentifier& other)
+    {
+        return strcmp(m_className, other.m_className) != 0;
+    }
+private:
+    const char* m_className;
+};
+
+                                                          
+
+       /*  wxTRUST_CPP_RTTI/!wxTRUST_CPP_RTTI */
+
+                      
+
+                             
+
+  
+                                                                           
+                                                                     
+                                                              
+                                                                 
+                                                                          
+                                                                          
+         
+  
+
+                                   
+
+                                                                     
+                                                                 
+                                                                 
+                                                                                                                                                                                                    
+
+
+
+
+
+
+
+                                                                
+                                                      
+                                                                                                                           
+
+
+
+
+                                                                   
+                         
+                                                            
+                                                         
+                                                                           
+
+
+                                                             
+                                                            
+                                                         
+                                                                                                                                                   
+
+
+
+
+                                         
+
+                                                          
+                                                             
+                                                                                                       
+
+
+
+       // wxNO_RTTI/!wxNO_RTTI
+
+       // _WX_TYPEINFO_H_

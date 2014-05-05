@@ -1,0 +1,77 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\x11\clipbrd.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/x11/clipbrd.h
+// Purpose:     Clipboard functionality.
+// Author:      Robert Roebling
+// Created:     17/09/98
+// Copyright:   (c) Robert Roebling
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                   
+
+                      
+                    
+                       
+                       
+                      
+
+                                                                               
+              
+                                                                               
+
+                                                           
+ 
+       
+                  
+                           
+
+                                                        
+                        
+
+                                                        
+                         
+
+                                            
+                                  
+
+                                                                 
+                                               
+
+                                 
+                                               
+
+                                                 
+                                                           
+
+                                                          
+                                               
+
+                                                                   
+                         
+
+                                 
+                             
+                                      
+                                             
+                             
+
+                                                                             
+                                                                                     
+                                                                                        
+
+                                        
+                                        
+                                     
+
+        
+                                      
+  
+
+       // wxUSE_CLIPBOARD
+
+       // _WX_X11_CLIPBRD_H_

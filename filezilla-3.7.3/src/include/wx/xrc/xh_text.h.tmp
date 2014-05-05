@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_text.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_text.h
+// Purpose:     XML resource handler for wxTextCtrl
+// Author:      Aleksandras Gluchovas
+// Created:     2000/03/21
+// Copyright:   (c) 2000 Aleksandras Gluchovas
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                         
+
+                               
+
+                                                                        
+ 
+                                               
+
+       
+                           
+                                         
+                                            
+  
+
+       // wxUSE_XRC && wxUSE_TEXTCTRL
+
+       // _WX_XH_TEXT_H_

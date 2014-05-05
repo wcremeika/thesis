@@ -1,0 +1,45 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\help.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/help.h
+// Purpose:     wxHelpController base header
+// Author:      wxWidgets Team
+// Modified by:
+// Created:
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                        
+                        
+
+                   
+
+              
+
+                        
+
+                  
+                                     
+
+                                                  
+                        
+                               
+
+                                                
+             
+
+                     
+                                 
+                                                 
+     
+                                   
+                                                
+      
+
+                  
+
+       // wxUSE_HELP
+
+      
+    // _WX_HELP_H_BASE_

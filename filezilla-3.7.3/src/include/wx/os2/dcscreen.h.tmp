@@ -1,0 +1,35 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\dcscreen.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/dcscreen.h
+// Purpose:     wxScreenDC class
+// Author:      David Webster
+// Modified by:
+// Created:     10/14/99
+// Copyright:   (c) David Webster
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                       
+                     
+
+class WXDLLIMPEXP_CORE wxScreenDCImpl: public wxPMDCImpl
+{
+ public:
+    // Create a DC representing the whole screen
+    wxScreenDCImpl( wxScreenDC *owner );
+
+    virtual void DoGetSize( int* pnWidth
+                           ,int* pnHeight
+                          ) const;
+
+private:
+    DECLARE_CLASS(wxScreenDCImpl)
+    wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
+}; // end of CLASS wxScreenDC
+
+      
+    // _WX_DCSCREEN_H_

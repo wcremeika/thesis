@@ -1,0 +1,50 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_spin.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_spin.h
+// Purpose:     XML resource handler for wxSpinButton and wxSpinCtrl
+// Author:      Bob Mitchell
+// Created:     2000/03/21
+// Copyright:   (c) 2000 Bob Mitchell and Verant Interactive
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                         
+
+             
+
+                 
+
+                                                                          
+ 
+       
+                             
+                                         
+                                            
+
+                                                 
+  
+
+                       
+
+
+                  
+
+                                                                        
+ 
+       
+                           
+                                         
+                                            
+
+                                               
+  
+
+                        
+
+       // wxUSE_XRC
+
+       // _WX_XH_SPIN_H_

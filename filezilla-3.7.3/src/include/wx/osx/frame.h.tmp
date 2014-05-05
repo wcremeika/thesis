@@ -1,0 +1,120 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\frame.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/frame.h
+// Purpose:     wxFrame class
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     1998-01-01
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                    
+                    
+
+                      
+                    
+                   
+
+class WXDLLIMPEXP_FWD_CORE wxMacToolTip ;
+
+class WXDLLIMPEXP_CORE wxFrame: public wxFrameBase
+{
+public:
+    // construction
+    wxFrame() { Init(); }
+    wxFrame(wxWindow *parent,
+            wxWindowID id,
+            const wxString& title,
+            const wxPoint& pos = wxDefaultPosition,
+            const wxSize& size = wxDefaultSize,
+            long style = wxDEFAULT_FRAME_STYLE,
+            const wxString& name = wxFrameNameStr)
+    {
+        Init();
+
+        Create(parent, id, title, pos, size, style, name);
+    }
+
+    bool Create(wxWindow *parent,
+                wxWindowID id,
+                const wxString& title,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                long style = wxDEFAULT_FRAME_STYLE,
+                const wxString& name = wxFrameNameStr);
+
+    virtual ~wxFrame();
+
+    // implementation only from now on
+    // -------------------------------
+
+    // get the origin of the client area (which may be different from (0, 0)
+    // if the frame has a toolbar) in client coordinates
+    virtual wxPoint GetClientAreaOrigin() const;
+
+    // override some more virtuals
+    virtual bool Enable(bool enable = true) ;
+
+    // event handlers
+    void OnActivate(wxActivateEvent& event);
+    void OnSysColourChanged(wxSysColourChangedEvent& event);
+
+    // Toolbar
+                 
+                                                     
+                                                        
+                                                                              
+
+                                                
+       // wxUSE_TOOLBAR
+
+    // Status bar
+                   
+                                                          
+                                                                            
+                                                             
+                                                                                       
+       // wxUSE_STATUSBAR
+
+    // called by wxWindow whenever it gets focus
+    void SetLastFocus(wxWindow *win) { m_winLastFocused = win; }
+    wxWindow *GetLastFocus() const { return m_winLastFocused; }
+
+    void PositionBars();
+
+    // internal response to size events
+    virtual void MacOnInternalSize() { PositionBars(); }
+
+protected:
+    // common part of all ctors
+    void Init();
+
+                 
+                                   
+      
+                   
+                                     
+      
+
+    // override base class virtuals
+    virtual void DoGetClientSize(int *width, int *height) const;
+    virtual void DoSetClientSize(int width, int height);
+
+               
+                                 
+                                                   
+      
+
+    // the last focused child: we restore focus to it on activation
+    wxWindow             *m_winLastFocused;
+
+    virtual bool        MacIsChildOfClientArea( const wxWindow* child ) const ;
+
+    DECLARE_EVENT_TABLE()
+    DECLARE_DYNAMIC_CLASS(wxFrame)
+};
+
+      
+    // _WX_FRAME_H_

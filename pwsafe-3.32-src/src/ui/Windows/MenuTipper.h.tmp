@@ -1,0 +1,184 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\MenuTipper.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+////////////////////////////////////////////////////////////////
+// Based on MSDN Magazine -- November 2003
+// If this code works, it was written by Paul DiLascia.
+// If not, I don't know who wrote it.
+// Compiles with Visual Studio .NET on Windows XP. Tab size=3.
+//
+       
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\PupText.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+////////////////////////////////////////////////////////////////
+// MSDN Magazine -- November 2003
+// If this code works, it was written by Paul DiLascia.
+// If not, I don't know who wrote it.
+// Compiles with Visual Studio .NET on Windows XP. Tab size=3.
+//
+       
+
+                          
+
+//////////////////
+// Get NONCLIENTMETRICS info: ctor calls SystemParametersInfo.
+//
+class CNonClientMetrics : public NONCLIENTMETRICS
+{
+public:
+  CNonClientMetrics() {
+    cbSize = sizeof(NONCLIENTMETRICS);
+    SystemParametersInfo(SPI_GETNONCLIENTMETRICS,0,this,0);
+  }
+};
+
+//////////////////
+// Popup text window, like tooltip.
+// Can be right or left justified relative to creation point.
+//
+class CPopupText : public CWnd
+{
+public:
+  CSize m_szMargins;  // extra space around text: change if you like
+  CFont m_font;       // font: change if you like
+
+  CPopupText();
+  virtual ~CPopupText();
+
+  BOOL Create(CPoint pt, CWnd* pParentWnd, UINT nID=0);
+  void ShowDelayed(UINT msec);
+  void Cancel();
+
+protected:
+  virtual void PostNcDestroy();
+  virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
+  void DrawText(CDC& dc, LPCWSTR lpText, CRect& rc, UINT flags);
+
+   void OnPaint();
+   void OnTimer(UINT_PTR nIDEvent);
+   void OnSetText(WPARAM wp, LPARAM lp);
+  ;
+  ;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\MenuTipper.h" 15
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\Subclass.h" 0
+/*
+* Copyright (c) 2003-2013 Rony Shapiro <ronys@users.sourceforge.net>.
+* All rights reserved. Use of the code is allowed under the
+* Artistic License 2.0 terms, as specified in the LICENSE file
+* distributed with this code, or available from
+* http://www.opensource.org/licenses/artistic-license-2.0.php
+*/
+////////////////////////////////////////////////////////////////
+// PixieLib(TM) Copyright 1997-1998 Paul DiLascia
+// If this code works, it was written by Paul DiLascia.
+// If not, I don't know who wrote it.
+//
+       
+
+//////////////////
+// Generic class to hook messages on behalf of a CWnd.
+// Once hooked, all messages go to CSubclassWnd::WindowProc before going
+// to the window. Specific subclasses can trap messages and do something.
+//
+// To use:
+//
+// * Derive a class from CSubclassWnd.
+//
+// * Override CSubclassWnd::WindowProc to handle messages. Make sure you call
+//   CSubclassWnd::WindowProc if you don't handle the message, or your
+//   window will never get messages. If you write seperate message handlers,
+//   you can call Default() to pass the message to the window.
+//
+// * Instantiate your derived class somewhere and call HookWindow(pWnd)
+//   to hook your window, AFTER it has been created.
+//   To unhook, call Unhook or HookWindow(NULL).
+//
+// This is a very important class, crucial to many of the widgets Window
+// widgets implemented in PixieLib. To see how it works, look at the HOOK
+// sample program.
+//
+class CSubclassWnd : public CObject
+{
+public:
+  CSubclassWnd();
+  ~CSubclassWnd();
+
+  // Subclass a window. Hook(NULL) to unhook (automatic on WM_NCDESTROY)
+  BOOL HookWindow(HWND  hwnd);
+  BOOL HookWindow(CWnd* pWnd) { return HookWindow(pWnd->GetSafeHwnd()); }
+  void Unhook() { HookWindow((HWND)NULL); }
+  BOOL IsHooked() { return m_hWnd!=NULL; }
+
+  friend void  HookWndProc(HWND, UINT, WPARAM, LPARAM);
+  friend class CSubclassWndMap;
+
+  virtual void WindowProc(UINT msg, WPARAM wp, LPARAM lp);
+  void Default();  // call this at the end of handler fns
+
+             
+                                   
+                                            
+      
+
+protected:
+  HWND m_hWnd;             // the window hooked
+  LONG_PTR m_pOldWndProc;  // ... and original window proc
+  CSubclassWnd* m_pNext;   // next in chain of hooks for this window
+
+  ;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\MenuTipper.h" 16
+
+//////////////////
+// Implement menu tips for any MFC main window. To use:
+//
+// - instantiate CMenuTipManager in your CMainFrm
+// - call Install
+// - implement prompt strings the normal way: as resource strings w/ID=command ID.
+//
+class CMenuTipManager : public CSubclassWnd
+{
+protected:
+  CPopupText m_wndTip;  // home-grown "tooltip"
+  BOOL m_bMouseSelect;  // whether menu invoked by mouse
+  BOOL m_bSticky;       // after first tip appears, show rest immediately
+
+public:
+  int m_iDelay;         // tooltip delay: you can change
+
+  CMenuTipManager() : m_iDelay(2000), m_bSticky(FALSE), m_bMouseSelect(FALSE) {}
+  ~CMenuTipManager() {}
+
+  // call this to install tips
+  void Install(CWnd* pWnd) { HookWindow(pWnd); }
+
+  // Useful helpers to get window/rect of current active menu
+  static CWnd* GetRunningMenuWnd();
+  CRect GetMenuTipRect(HMENU hmenu, UINT nID);
+
+  // hook fn to trap main window's messages
+  virtual void WindowProc(UINT msg, WPARAM wp, LPARAM lp);
+
+  // Call these handlers from your main window
+  void OnMenuSelect(UINT nItemID, UINT nFlags, HMENU hMenu);
+  void OnEnterIdle(WPARAM nWhy, HWND hwndWho);
+};
+

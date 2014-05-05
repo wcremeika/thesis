@@ -1,0 +1,282 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\resource2.h" 0
+//{{NO_DEPENDENCIES}}
+
+// Non-editable by VS2005
+
+// Menus and Toolbars
+
+/*
+
+*** WARNING *** *** WARNING *** *** WARNING *** *** WARNING *** *** WARNING ***
+*** WARNING *** *** WARNING *** *** WARNING *** *** WARNING *** *** WARNING ***
+*** WARNING *** *** WARNING *** *** WARNING *** *** WARNING *** *** WARNING ***
+
+Do NOT change the value of any resource used in a menu from V3.17 onwards.
+
+*** WARNING *** *** WARNING *** *** WARNING *** *** WARNING *** *** WARNING ***
+*** WARNING *** *** WARNING *** *** WARNING *** *** WARNING *** *** WARNING ***
+*** WARNING *** *** WARNING *** *** WARNING *** *** WARNING *** *** WARNING ***
+
+  These values may be in the user's config file, if they define their own
+  shortcuts.
+
+  You may delete an entry or add new ones with new IDs or change the order of
+  menu items in any menu or move a menu item to a new menu,
+
+  BUT THE VALUE FOR A PARTICULAR FUNCTION MUST NOT CHANGE
+    e.g. ID_MENUITEM_OPEN must remain 32002
+  (Otherwise, a user may be unpleasantly surprised, when his shortcut for, say,
+   copying a password ends up deleting the current entry...)
+*/
+
+                                             
+                                             
+
+// File menu
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+// Edit menu
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+// View menu
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+// Manage menu
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+// Help menu
+                                             
+                                             
+                                             
+                                             
+                                             
+
+// Listview Header menu
+                                             
+                                             
+
+// OptionsShortcuts ListView header menu
+                                             
+
+// Compare Entry menu
+                                             
+                                             
+                                                                                     
+                                             
+                                             
+
+// System Tray Menu
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+// Main Toolbar - only those items not also menu items
+// or only on mouse right-click popup menu
+                                             
+                                             
+
+// Right Mouse Drag
+                                             
+                                             
+                                             
+                                             
+
+                                             
+                                             
+
+// Find Toolbar - also dummy menu for shortcuts
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+                                             
+
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+                                             
+
+// System menu
+                                             
+
+// Menu item ranges
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+                                             
+                                             
+
+// Following for CEditExtn context menu
+// Really string constants, but "logically" they're menus...
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        

@@ -1,0 +1,25 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\ResPWSL.h" 0
+       
+
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\resource.h" 0
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// Used by ResPWSL.rc
+//
+
+// Next default values for new objects
+// 
+                       
+                                 
+                                           
+                                             
+                                            
+                                           
+      
+      
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResPWSL\ResPWSL.h" 3
+
+bool UpdateRODLL(const CString csInFilePath, const LCID locale);

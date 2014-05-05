@@ -1,0 +1,107 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\statline.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/statline.h
+// Purpose:     wxStaticLine class interface
+// Author:      Vadim Zeitlin
+// Created:     28.06.99
+// Copyright:   (c) 1999 Vadim Zeitlin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+// ----------------------------------------------------------------------------
+// headers
+// ----------------------------------------------------------------------------
+
+// this defines wxUSE_STATLINE
+                   
+
+                  
+
+                             
+                       
+
+                                                                               
+                   
+                                                                               
+
+                                                     
+                                                               
+
+                                                                               
+                                    
+                                                                               
+
+                                                          
+ 
+       
+                  
+                          
+
+                            
+                                                                               
+
+                                                                         
+                                             
+
+                                     
+                                                       
+
+          
+                                                
+                                                                       
+
+                                                 
+                                               
+     
+                              
+                           
+         
+                                           
+                                              
+         
+            
+         
+                                           
+                                              
+         
+
+                        
+     
+
+                                        
+     
+                                         
+     
+
+                                              
+  
+
+                                                                               
+                                           
+                                                                               
+
+                            
+                                 
+                        
+                                
+                          
+                                
+                        
+                                 
+                       
+                                
+                        
+                                
+                          
+                                  
+                                                           
+                                    
+      
+
+       // wxUSE_STATLINE
+
+       // _WX_STATLINE_H_BASE_

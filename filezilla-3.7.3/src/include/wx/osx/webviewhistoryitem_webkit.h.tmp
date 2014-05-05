@@ -1,0 +1,38 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\webviewhistoryitem_webkit.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        include/wx/osx/webviewhistoryitem.h
+// Purpose:     wxWebViewHistoryItem header for OSX
+// Author:      Steven Lamerton
+// Copyright:   (c) 2011 Steven Lamerton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                     
+                                     
+
+                    
+
+                                                                                                                                               
+
+
+                               
+
+                                              
+ 
+       
+                                                                      
+                                                  
+                                       
+                                           
+
+                                 
+
+        
+                            
+                        
+  
+
+       // wxUSE_WEBVIEW && wxUSE_WEBVIEW_WEBKIT
+
+       // _WX_OSX_WEBVIEWHISTORYITEM_H_

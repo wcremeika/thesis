@@ -1,0 +1,84 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\dcprint.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/dcprint.h
+// Purpose:     wxPrinterDC class
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                          
+                          
+
+                               
+
+                       
+                       
+                      
+
+                                                                           
+                     
+  
+
+                                                           
+ 
+       
+                             
+                                                                   
+                                                       
+
+                                        
+                                                   
+                          
+                             
+                           
+
+                                        
+
+          
+                                                                        
+                                                    
+                                                     
+                                                      
+                                                                 
+                                                                                 
+                                                                                              
+                                                
+     
+                            
+     
+
+
+                  
+                
+
+                            
+
+        
+                                  
+                                             
+  
+
+                                                      
+                                                               
+
+                                                                           
+                       
+  
+
+                                                             
+ 
+       
+                                     
+                                                       
+     
+     
+  
+
+       // wxUSE_PRINTING_ARCHITECTURE
+
+       // _WX_MSW_DCPRINT_H_
+

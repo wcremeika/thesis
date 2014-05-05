@@ -1,0 +1,56 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\language\languageDLL.cpp" 0
+// languageDLL.cpp : Defines the entry point for the DLL application.
+//
+
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\language\stdafx.h" 0
+// stdafx.h : include file for standard system include files,
+// or project specific include files that are used frequently, but
+// are changed infrequently
+//
+
+       
+
+// Modify the following defines if you have to target a platform prior to the ones specified below.
+// Refer to MSDN for the latest info on corresponding values for different platforms.
+              
+                                                                                                          
+      
+
+                    
+                                                                                                          
+      
+
+                      
+                                                                                                    
+      
+
+                 
+                                                                                                     
+      
+
+                                                                               
+// Windows Header Files:
+                   
+
+
+
+// TODO: reference additional headers your program requires here
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\ui\Windows\language\languageDLL.cpp" 4
+
+               
+       
+      
+
+BOOL APIENTRY DllMain(HMODULE /* hModule */,
+                      DWORD /* ul_reason_for_call */,
+                      LPVOID /* lpReserved */)
+{
+  return TRUE;
+}
+
+               
+       
+      

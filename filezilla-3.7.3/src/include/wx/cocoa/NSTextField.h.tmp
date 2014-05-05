@@ -1,0 +1,28 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cocoa\NSTextField.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cocoa/NSTextField.h
+// Purpose:     wxCocoaNSTextField class
+// Author:      David Elliott
+// Modified by:
+// Created:     2002/12/09
+// Copyright:   (c) 2002 David Elliott
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                  
+                                  
+
+                      
+                                  
+
+WX_DECLARE_OBJC_HASHMAP(NSTextField);
+class wxCocoaNSTextField
+{
+    WX_DECLARE_OBJC_INTERFACE(NSTextField)
+protected:
+    virtual void Cocoa_didChangeText(void) = 0;
+    virtual ~wxCocoaNSTextField() { }
+};
+
+       // _WX_COCOA_NSTEXTFIELD_H_

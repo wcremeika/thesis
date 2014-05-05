@@ -1,0 +1,94 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\carbon\private\print.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/osx/carbon/private/print.h
+// Purpose:     private implementation for printing on OS X
+// Author:      Stefan Csomor
+// Modified by:
+// Created:     03/02/99
+// Copyright:   (c) Stefan Csomor
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                                
+                                
+
+                      
+                    
+
+// for PrintingManager
+                                                   
+
+class WXDLLIMPEXP_CORE wxOSXPrintData : public wxPrintNativeDataBase
+{
+public:
+                            wxOSXPrintData();
+    virtual                 ~wxOSXPrintData();
+
+    virtual bool            TransferTo( wxPrintData &data );
+    virtual bool            TransferFrom( const wxPrintData &data );
+
+    virtual bool            IsOk() const ;
+
+    virtual void            TransferFrom( wxPageSetupDialogData * );
+    virtual void            TransferTo( wxPageSetupDialogData * );
+
+    virtual void            TransferFrom( wxPrintDialogData * );
+    virtual void            TransferTo( wxPrintDialogData * );
+
+    PMPrintSession          GetPrintSession() { return m_macPrintSession; }
+    PMPageFormat            GetPageFormat() { return m_macPageFormat; }
+    PMPrintSettings         GetPrintSettings() { return m_macPrintSettings; }
+protected :
+    virtual void            TransferPrinterNameFrom( const wxPrintData &data );
+    virtual void            TransferPaperInfoFrom( const wxPrintData &data );
+    virtual void            TransferResolutionFrom( const wxPrintData &data );
+
+    virtual void            TransferPrinterNameTo( wxPrintData &data );
+    virtual void            TransferPaperInfoTo( wxPrintData &data );
+    virtual void            TransferResolutionTo( wxPrintData &data );
+
+
+    virtual void            UpdateFromPMState();
+    virtual void            UpdateToPMState();
+
+    PMPrintSession          m_macPrintSession ;
+    PMPageFormat            m_macPageFormat ;
+    PMPrintSettings         m_macPrintSettings ;
+    PMPaper                 m_macPaper;
+private:
+    DECLARE_DYNAMIC_CLASS(wxOSXPrintData)
+} ;
+
+WXDLLIMPEXP_CORE wxPrintNativeDataBase* wxOSXCreatePrintData();
+
+                    
+                                                                   
+ 
+       
+                                                   
+                                                    
+        
+                                               
+   
+      
+
+                   
+                                                                  
+ 
+       
+                                                  
+                                                   
+
+                                                                       
+          
+                                                
+                                              
+
+                                           
+        
+                                              
+   
+      
+
+       // _WX_MAC_PRIVATE_PRINT_H_

@@ -1,0 +1,303 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\cppunit.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/cppunit.h
+// Purpose:     wrapper header for CppUnit headers
+// Author:      Vadim Zeitlin
+// Created:     15.02.04
+// Copyright:   (c) 2004 Vadim Zeitlin
+// Licence:     wxWindows Licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+///////////////////////////////////////////////////////////////////////////////
+// using CPPUNIT_TEST() macro results in this warning, disable it as there is
+// no other way to get rid of it and it's not very useful anyhow
+                  
+                                                              
+           
+
+                                                                        
+           
+
+                                                                           
+           
+       // __VISUALC__
+
+                   
+           
+      
+
+                                  
+                                        
+      
+
+///////////////////////////////////////////////////////////////////////////////
+// Set the default format for the errors, which can be used by an IDE to jump
+// to the error location. This default gets overridden by the cppunit headers
+// for some compilers (e.g. VC++).
+
+                                        
+                                                     
+      
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Include all needed cppunit headers.
+//
+
+                        
+                  
+           
+
+                                                                               
+                                                            
+           
+
+                                                                   
+                                   
+           
+      
+
+                                                  
+                                      
+                            
+                                           
+                                     
+
+                  
+           
+      
+                       
+
+                     
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Set of helpful test macros.
+//
+
+// Base macro for wrapping CPPUNIT_TEST macros and so making them conditional
+// tests, meaning that the test only get registered and thus run when a given
+// runtime condition is true.
+// In case the condition is evaluated as false a skip message is logged
+// (the message will only be shown in verbose mode).
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+
+
+
+
+
+
+
+// Conditional CPPUNIT_TEST macro.
+                                                                                                                                                         
+
+// Conditional CPPUNIT_TEST_FAIL macro.
+                                                                                                                                                                   
+
+
+CPPUNIT_NS_BEGIN
+
+// provide an overload of cppunit assertEquals(T, T) which can be used to
+// compare wxStrings directly with C strings
+inline void
+assertEquals(const char *expected,
+             const char *actual,
+             CppUnit::SourceLine sourceLine,
+             const std::string& message)
+{
+    assertEquals(wxString(expected), wxString(actual), sourceLine, message);
+}
+
+inline void
+assertEquals(const char *expected,
+             const wxString& actual,
+             CppUnit::SourceLine sourceLine,
+             const std::string& message)
+{
+    assertEquals(wxString(expected), actual, sourceLine, message);
+}
+
+inline void
+assertEquals(const wxString& expected,
+             const char *actual,
+             CppUnit::SourceLine sourceLine,
+             const std::string& message)
+{
+    assertEquals(expected, wxString(actual), sourceLine, message);
+}
+
+inline void
+assertEquals(const wchar_t *expected,
+             const wxString& actual,
+             CppUnit::SourceLine sourceLine,
+             const std::string& message)
+{
+    assertEquals(wxString(expected), actual, sourceLine, message);
+}
+
+inline void
+assertEquals(const wxString& expected,
+             const wchar_t *actual,
+             CppUnit::SourceLine sourceLine,
+             const std::string& message)
+{
+    assertEquals(expected, wxString(actual), sourceLine, message);
+}
+
+CPPUNIT_NS_END
+
+// define an assertEquals() overload for the given types, this is a helper and
+// shouldn't be used directly because of VC6 complications, see below
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// this macro allows us to specify (usually literal) ints as expected values
+// for functions returning integral types different from "int"
+//
+// FIXME-VC6: due to incorrect resolution of overloaded/template functions in
+//            this compiler (it basically doesn't use the template version at
+//            all if any overloaded function matches partially even if none of
+//            them matches fully) we also need to provide extra overloads
+
+                   
+                                                                                                                                                                                                                                  
+
+
+
+
+
+
+                    
+                                          
+                  
+      // !VC6
+                                                                                                                                                                                       
+
+
+
+
+       // VC6/!VC6
+
+CPPUNIT_NS_BEGIN             inline void                                                                   assertEquals(int expected,                                                                  long actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<int>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<int>::toString(expected),                                     assertion_traits<long>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }             inline void                                                                   assertEquals(long expected,                                                                  int actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<long>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<long>::toString(expected),                                     assertion_traits<int>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }         CPPUNIT_NS_END
+CPPUNIT_NS_BEGIN             inline void                                                                   assertEquals(int expected,                                                                  short actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<int>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<int>::toString(expected),                                     assertion_traits<short>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }             inline void                                                                   assertEquals(short expected,                                                                  int actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<short>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<short>::toString(expected),                                     assertion_traits<int>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }         CPPUNIT_NS_END
+CPPUNIT_NS_BEGIN             inline void                                                                   assertEquals(int expected,                                                                  unsigned actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<int>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<int>::toString(expected),                                     assertion_traits<unsigned>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }             inline void                                                                   assertEquals(unsigned expected,                                                                  int actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<unsigned>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<unsigned>::toString(expected),                                     assertion_traits<int>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }         CPPUNIT_NS_END
+CPPUNIT_NS_BEGIN             inline void                                                                   assertEquals(int expected,                                                                  unsigned long actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<int>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<int>::toString(expected),                                     assertion_traits<unsigned long>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }             inline void                                                                   assertEquals(unsigned long expected,                                                                  int actual,                                                                    CppUnit::SourceLine sourceLine,                                               const std::string& message)                                      {                                                                                 if ( !assertion_traits<unsigned long>::equal(expected,actual) )                          {                                                                                 Asserter::failNotEqual( assertion_traits<unsigned long>::toString(expected),                                     assertion_traits<int>::toString(actual),                                       sourceLine,                                                                   message );                                        }                                                                         }         CPPUNIT_NS_END
+
+                                         
+                                                                     
+      
+
+                                            
+                                            
+                                                     
+       // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
+
+// Use this macro to compare a wxArrayString with the pipe-separated elements
+// of the given string
+//
+// NB: it's a macro and not a function to have the correct line numbers in the
+//     test failure messages
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+
+
+
+
+
+
+
+
+
+
+// Use this macro to assert with the given formatted message (it should contain
+// the format string and arguments in a separate pair of parentheses)
+                                                                                                                    
+
+
+                                                                                                                                                                                           
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// define stream inserter for wxString if it's not defined in the main library,
+// we need it to output the test failures involving wxString
+                       
+
+                     
+
+                  
+
+inline std::ostream& operator<<(std::ostream& o, const wxString& s)
+{
+                 
+                                                             
+     
+    return o << s.c_str();
+      
+}
+
+       // !wxUSE_STD_IOSTREAM
+
+// VC6 doesn't provide overloads for operator<<(__int64) in its stream classes
+// so do it ourselves
+                                                  
+
+                        
+
+                                                                    
+ 
+                                      
+
+                
+ 
+
+                                                                              
+ 
+                                        
+
+                
+ 
+
+       // VC6 && wxLongLong_t
+
+///////////////////////////////////////////////////////////////////////////////
+// Some more compiler warning tweaking and auto linking.
+//
+
+                   
+           
+      
+
+               
+         
+       // _MSC_VER
+
+// for VC++ automatically link in cppunit library
+                  
+               
+           
+                
+           
+                         
+      
+
+       // _WX_CPPUNIT_H_
+

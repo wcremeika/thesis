@@ -1,0 +1,623 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.cpp" 0
+﻿// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2008 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\StdAfx.h" 0
+// stdafx.h : include file for standard system include files,
+// or project specific include files that are used frequently, but
+// are changed infrequently
+//
+
+       
+
+       
+       
+                  
+                 
+                   
+       
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.cpp" 18
+                   
+                 
+                   
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\codecvt.h" 0
+
+/**	Several code conversions facets.
+
+	E.g. this is how to convert UCS-2 to UTF-8
+
+	@code
+	wifstream ifs("input", ios_base::binary);
+	wofstream ofs("output", ios_base::binary);
+
+	ifs.rdbuf()->pubimbue(locale(locale(), new ucs2_conversion()));
+	ofs.rbbuf()->pubimbue(locale(locale(), new utf8_conversion()));
+	ofs << ifs.rdbuf();
+	@endcode
+
+	@author Vladimir Prus <ghost@cs.msu.su>
+
+	@file
+*/
+
+                
+       
+       
+       
+
+/**	Conversion facet that allows to use Unicode files in UCS-2 encoding */
+class ucs2_conversion
+: public std::codecvt<wchar_t, char, std::mbstate_t>
+{
+protected:
+
+	result do_in(std::mbstate_t& state,
+				 const char* from, const char* from_end, const char*& from_next,
+				 wchar_t* to, wchar_t* to_limit, wchar_t*& to_next) const;
+
+	result do_out(std::mbstate_t& state,
+				  const wchar_t* from, const wchar_t* from_end, const wchar_t*& from_next,
+				  char* to, char* to_limit, char*& to_next) const;
+
+    bool do_always_noconv() const throw() { return false; }
+    int  do_encoding() const throw() { return 2; }
+};
+
+
+/**	Conversion facet that allows to read Unicode files in UTF-8 encoding */
+class utf8_conversion
+: public std::codecvt<wchar_t, char, std::mbstate_t>
+{
+protected:
+
+	result do_in(std::mbstate_t& state,
+				 const char* from, const char* from_end, const char*& from_next,
+				 wchar_t* to, wchar_t* to_limit, wchar_t*& to_next) const;
+
+	result do_out(std::mbstate_t& state,
+				  const wchar_t* from, const wchar_t* from_end, const wchar_t*& from_next,
+				  char* to, char* to_limit, char*& to_next) const;
+
+    bool do_always_noconv() const throw() { return false; }
+    int  do_encoding() const throw() { return 2; }
+};
+       
+
+
+
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.cpp" 21
+                 
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\Utils.h" 0
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2007 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+       
+
+/**
+ * \ingroup ResText
+ * static helper methods for ResText.
+ */
+class CUtils
+{
+public:
+	CUtils(void);
+	~CUtils(void);
+	static void StringExtend(LPTSTR str);
+	static void StringCollapse(LPTSTR str);
+	static void Error();
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.cpp" 22
+                     
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\ResModule.h" 0
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2007 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+       
+                
+                
+             
+                  
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.h" 0
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2007 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+       
+                
+             
+             
+                
+
+typedef struct tagResourceEntry
+{
+	WORD						menuID;
+	std::vector<std::wstring>	translatorcomments;
+	std::vector<std::wstring>	automaticcomments;
+	std::set<DWORD>				resourceIDs;
+	std::wstring				flag;
+	std::wstring				msgstr;
+} RESOURCEENTRY, * LPRESOURCEENTRY;
+
+/**
+ * \ingroup ResText
+ * Class to handle po-files. Inherits from an std::map which assigns
+ * string IDs to additional information, including the translated strings.
+ *
+ * Provides methods to load and save a po-file with the translation information
+ * we need for ResText.
+ */
+class CPOFile : public std::map<std::wstring, RESOURCEENTRY>
+{
+public:
+	CPOFile();
+	~CPOFile(void);
+
+	BOOL ParseFile(LPCTSTR szPath, BOOL bUpdateExisting = TRUE);
+	BOOL SaveFile(LPCTSTR szPath);
+	void SetQuiet(BOOL bQuiet = TRUE) {m_bQuiet = bQuiet;}
+private:
+	BOOL m_bQuiet;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\ResModule.h" 36
+
+                                              
+                                              
+                                                          
+
+                         	         
+
+// DIALOG CONTROL INFORMATION
+typedef struct tagDlgItemInfo
+{
+	DWORD   style;
+	DWORD   exStyle;
+	DWORD   helpId;
+	short   x;
+	short   y;
+	short   cx;
+	short   cy;
+	WORD    id;
+	LPCTSTR className;
+	LPCTSTR windowName;
+	LPVOID  data;
+} DLGITEMINFO, * LPDLGITEMINFO;
+
+// DIALOG TEMPLATE
+typedef struct tagDialogInfo
+{
+	DWORD   style;
+	DWORD   exStyle;
+	DWORD   helpId;
+	WORD    nbItems;
+	short   x;
+	short   y;
+	short   cx;
+	short   cy;
+	LPCTSTR menuName;
+	LPCTSTR className;
+	LPCTSTR caption;
+	WORD    pointSize;
+	WORD    weight;
+	BOOL    italic;
+	LPCTSTR faceName;
+	BOOL    dialogEx;
+} DIALOGINFO, * LPDIALOGINFO;
+// MENU resource
+typedef struct tagMenuEntry
+{
+	WORD            wID;
+	std::wstring	reference;
+	std::wstring	msgstr;
+} MENUENTRY, * LPMENUENTRY;
+
+/**
+ * \ingroup ResText
+ * Class to handle a resource module (*.exe or *.dll file).
+ *
+ * Provides methods to extract and apply resource strings.
+ */
+class CResModule
+{
+public:
+	CResModule(void);
+	~CResModule(void);
+
+	BOOL	ExtractResources(LPCTSTR lpszSrcLangDllPath, LPCTSTR lpszPOFilePath, BOOL bNoUpdate);
+	BOOL	ExtractResources(std::vector<std::wstring> filelist, LPCTSTR lpszPOFilePath, BOOL bNoUpdate);
+	BOOL	CreateTranslatedResources(LPCTSTR lpszSrcLangDllPath, LPCTSTR lpszDestLangDllPath, LPCTSTR lpszPOFilePath);
+	void	SetQuiet(BOOL bQuiet = TRUE) {m_bQuiet = bQuiet; m_StringEntries.SetQuiet(bQuiet);}
+	void	SetLanguage(WORD wLangID) {m_wTargetLang = wLangID;}
+	void	SetRTL(bool bRTL = true) {m_bRTL = bRTL;}
+   void	SetShowDefault(bool bShowDefault = true) {m_bShowDefault = bShowDefault;}
+
+private:
+	static  BOOL  EnumResNameCallback(HMODULE hModule, LPCTSTR lpszType, LPTSTR lpszName, LONG_PTR lParam);
+	static  BOOL  EnumResNameWriteCallback(HMODULE hModule, LPCTSTR lpszType, LPTSTR lpszName, LONG_PTR lParam);
+	static  BOOL  EnumResWriteLangCallback(HMODULE hModule, LPCTSTR lpszType, LPTSTR lpszName, WORD wLanguage, LONG_PTR lParam);
+	BOOL	ExtractString(UINT nID);
+	BOOL	ExtractDialog(UINT nID);
+	BOOL	ExtractMenu(UINT nID);
+	BOOL	ReplaceString(UINT nID, WORD wLanguage);
+	BOOL	ReplaceDialog(UINT nID, WORD wLanguage);
+	BOOL	ReplaceMenu(UINT nID, WORD wLanguage);
+	BOOL	ExtractAccelerator(UINT nID);
+	BOOL	ReplaceAccelerator(UINT nID, WORD wLanguage);
+
+	const WORD*	ParseMenuResource(const WORD * res);
+	const WORD*	CountMemReplaceMenuResource(const WORD * res, size_t * wordcount, WORD * newMenu);
+	const WORD*	ParseMenuExResource(const WORD * res);
+	const WORD*	CountMemReplaceMenuExResource(const WORD * res, size_t * wordcount, WORD * newMenu);
+	const WORD* GetControlInfo(const WORD* p, LPDLGITEMINFO lpDlgItemInfo, BOOL dialogEx, LPBOOL bIsID);
+	const WORD*	GetDialogInfo(const WORD * pTemplate, LPDIALOGINFO lpDlgInfo);
+	const WORD*	CountMemReplaceDialogResource(const WORD * res, size_t * wordcount, WORD * newMenu);
+	const WORD* ReplaceControlInfo(const WORD * res, size_t * wordcount, WORD * newDialog, BOOL bEx);
+
+	void	ReplaceStr(LPCWSTR src, WORD * dest, size_t * count, int * translated, int * def);
+
+	HMODULE			m_hResDll;
+	HANDLE			m_hUpdateRes;
+	CPOFile			m_StringEntries;
+	std::map<WORD, MENUENTRY> m_MenuEntries;
+	std::map<WORD, MENUENTRY>::iterator pME_iter;
+	std::wstring	sDestFile;
+
+  struct TypeName_s {LPCTSTR m_Type; LPTSTR m_Name;
+  TypeName_s(LPCTSTR t, LPTSTR n) : m_Type(t), m_Name(n) {}
+  };
+  struct LangWriter {
+    CResModule *m_module;
+  LangWriter(CResModule *m) : m_module(m) {}
+    void operator()(TypeName_s &tn);
+  };
+  
+  std::vector<TypeName_s> m_TypeNames;
+
+  BOOL			m_bQuiet;
+
+	bool			m_bRTL;
+
+   bool			m_bShowDefault;
+
+	int				m_bTranslatedStrings;
+	int				m_bDefaultStrings;
+	int				m_bTranslatedDialogStrings;
+	int				m_bDefaultDialogStrings;
+	int				m_bTranslatedMenuStrings;
+	int				m_bDefaultMenuStrings;
+	int				m_bTranslatedAcceleratorStrings;
+	int				m_bDefaultAcceleratorStrings;
+
+	WORD			m_wTargetLang;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.cpp" 23
+                    
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\.\pofile.h" 0
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2007 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+       
+                
+             
+             
+                
+
+typedef struct tagResourceEntry
+{
+	WORD						menuID;
+	std::vector<std::wstring>	translatorcomments;
+	std::vector<std::wstring>	automaticcomments;
+	std::set<DWORD>				resourceIDs;
+	std::wstring				flag;
+	std::wstring				msgstr;
+} RESOURCEENTRY, * LPRESOURCEENTRY;
+
+/**
+ * \ingroup ResText
+ * Class to handle po-files. Inherits from an std::map which assigns
+ * string IDs to additional information, including the translated strings.
+ *
+ * Provides methods to load and save a po-file with the translation information
+ * we need for ResText.
+ */
+class CPOFile : public std::map<std::wstring, RESOURCEENTRY>
+{
+public:
+	CPOFile();
+	~CPOFile(void);
+
+	BOOL ParseFile(LPCTSTR szPath, BOOL bUpdateExisting = TRUE);
+	BOOL SaveFile(LPCTSTR szPath);
+	void SetQuiet(BOOL bQuiet = TRUE) {m_bQuiet = bQuiet;}
+private:
+	BOOL m_bQuiet;
+};
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\Tools\Windows\I18N\ResText\POFile.cpp" 24
+
+               	                                
+
+CPOFile::CPOFile()
+{
+}
+
+CPOFile::~CPOFile(void)
+{
+}
+
+BOOL CPOFile::ParseFile(LPCTSTR szPath, BOOL bUpdateExisting /* = TRUE */)
+{
+	if (!PathFileExists(szPath))
+		return FALSE;
+
+	if (!m_bQuiet)
+		_ftprintf(stdout, _T("parsing file %s...\n"), szPath);
+
+	int nEntries = 0;
+	int nDeleted = 0;
+	int nTranslated = 0;
+	//since stream classes still expect the filepath in char and not wchar_t
+	//we need to convert the filepath to multibyte
+	char filepath[MAX_PATH+1];
+	SecureZeroMemory(filepath, sizeof(filepath));
+	WideCharToMultiByte(CP_ACP, NULL, szPath, -1, filepath, MAX_PATH, NULL, NULL);
+
+	std::wifstream File;
+	File.imbue(std::locale(std::locale(), new utf8_conversion()));
+	File.open(filepath);
+	if (!File.good())
+	{
+		_ftprintf(stderr, _T("can't open input file %s\n"), szPath);
+		return FALSE;
+	}
+	TCHAR line[2*(32*1024)];
+	std::vector<std::wstring> entry;
+	do
+	{
+		File.getline(line, sizeof(line)/sizeof(TCHAR));
+		if (line[0]==0)
+		{
+			//empty line means end of entry!
+			RESOURCEENTRY resEntry;
+			std::wstring msgid;
+			int type = 0;
+			for (std::vector<std::wstring>::iterator I = entry.begin(); I != entry.end(); ++I)
+			{
+				if (_tcsncmp(I->c_str(), _T("# "), 2)==0)
+				{
+					//user comment
+					resEntry.translatorcomments.push_back(I->c_str());
+					type = 0;
+				}
+				if (_tcsncmp(I->c_str(), _T("#."), 2)==0)
+				{
+					//automatic comments
+					resEntry.automaticcomments.push_back(I->c_str());
+					type = 0;
+				}
+				if (_tcsncmp(I->c_str(), _T("#,"), 2)==0)
+				{
+					//flag
+					resEntry.flag = I->c_str();
+					type = 0;
+				}
+				if (_tcsncmp(I->c_str(), _T("msgid"), 5)==0)
+				{
+					//message id
+					msgid = I->c_str();
+					msgid = std::wstring(msgid.substr(7, msgid.size() - 8));
+					nEntries++;
+					type = 1;
+				}
+				if (_tcsncmp(I->c_str(), _T("msgstr"), 6)==0)
+				{
+					//message string
+					resEntry.msgstr = I->c_str();
+					resEntry.msgstr = resEntry.msgstr.substr(8, resEntry.msgstr.length() - 9);
+					if (resEntry.msgstr.size()>0)
+						nTranslated++;
+					type = 2;
+				}
+				if (_tcsncmp(I->c_str(), _T("\""), 1)==0)
+				{
+					if (type == 1)
+					{
+						std::wstring temp = I->c_str();
+						temp = temp.substr(1, temp.length()-2);
+						msgid += temp;
+					}
+					if (type == 2)
+					{
+						if (resEntry.msgstr.size() == 0)
+							nTranslated++;
+						std::wstring temp = I->c_str();
+						temp = temp.substr(1, temp.length()-2);
+						resEntry.msgstr += temp;
+					}
+				}
+			}
+			entry.clear();
+			if ((bUpdateExisting)&&(this->count(msgid) == 0))
+				nDeleted++;
+			else
+				(*this)[msgid] = resEntry;
+			msgid.clear();
+		}
+		else
+		{
+			entry.push_back(line);
+		}
+	} while (File.gcount() > 0);
+	printf(File.getloc().name().c_str());
+	File.close();
+	RESOURCEENTRY emptyentry;
+	(*this)[std::wstring(_T(""))] = emptyentry;
+	if (!m_bQuiet)
+		_ftprintf(stdout, _T("%d Entries found, %d were already translated and %d got deleted\n"), nEntries, nTranslated, nDeleted);
+	return TRUE;
+}
+
+BOOL CPOFile::SaveFile(LPCTSTR szPath)
+{
+	//since stream classes still expect the filepath in char and not wchar_t
+	//we need to convert the filepath to multibyte
+	char filepath[MAX_PATH+1];
+	int nEntries = 0;
+	SecureZeroMemory(filepath, sizeof(filepath));
+	WideCharToMultiByte(CP_ACP, NULL, szPath, -1, filepath, MAX_PATH, NULL, NULL);
+
+	std::wofstream File;
+//	File.open(filepath, std::ios_base::binary);
+//	File << _T("\xEF\xBB\xBF");
+//	File.close();
+	File.imbue(std::locale(std::locale(), new utf8_conversion()));
+	File.open(filepath, std::ios_base::binary);
+	File << _T("# SOME DESCRIPTIVE TITLE.\n");
+	File << _T("# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER\n");
+	File << _T("# This file is distributed under the same license as the PACKAGE package.\n");
+	File << _T("# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n");
+	File << _T("#\n");
+	File << _T("#, fuzzy\n");
+	File << _T("msgid \"\"\n");
+	File << _T("msgstr \"\"\n");
+	File << _T("\"Project-Id-Version: PACKAGE VERSION\\n\"\n");
+	File << _T("\"Report-Msgid-Bugs-To: \\n\"\n");
+	File << _T("\"POT-Creation-Date: 1900-01-01 00:00+0000\\n\"\n");
+	File << _T("\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n");
+	File << _T("\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"\n");
+	File << _T("\"Language-Team: LANGUAGE <LL@li.org>\\n\"\n");
+	File << _T("\"MIME-Version: 1.0\\n\"\n");
+	File << _T("\"Content-Type: text/plain; charset=UTF-8\\n\"\n");
+	File << _T("\"Content-Transfer-Encoding: 8bit\\n\"\n\n");
+	File << _T("\n");
+	File << _T("# msgid/msgstr fields for Accelerator keys\n");
+	File << _T("# Format is: \"ID:xxxxxx:VACS+X\" where:\n");
+	File << _T("#    ID:xxxxx = the menu ID corresponding to the accelerator\n");
+	File << _T("#    V = Virtual key (or blank if not used) - nearly always set!\n");
+	File << _T("#    A = Alt key     (or blank if not used)\n");
+	File << _T("#    C = Ctrl key    (or blank if not used)\n");
+	File << _T("#    S = Shift key   (or blank if not used)\n");
+	File << _T("#    X = upper case character\n");
+	File << _T("# e.g. \"V CS+Q\" == Ctrl + Shift + 'Q'\n");
+	File << _T("\n");
+	File << _T("# ONLY Accelerator Keys with corresponding alphanumeric characters can be\n");
+	File << _T("# updated i.e. function keys (F2), special keys (Delete, HoMe) etc. will not.\n");
+	File << _T("\n");
+	File << _T("# ONLY change the msgstr field. Do NOT change any other.\n");
+	File << _T("# If you do not want to change an Accelerator Key, copy msgid to msgstr\n");
+	File << _T("\n");
+
+	for (std::map<std::wstring, RESOURCEENTRY>::iterator I = this->begin(); I != this->end(); ++I)
+	{
+		if (I->first.size() == 0)
+			continue;
+		RESOURCEENTRY entry = I->second;
+		for (std::vector<std::wstring>::iterator II = entry.automaticcomments.begin(); II != entry.automaticcomments.end(); ++II)
+		{
+			File << II->c_str() << _T("\n");
+		}
+		for (std::vector<std::wstring>::iterator II = entry.translatorcomments.begin(); II != entry.translatorcomments.end(); ++II)
+		{
+			File << II->c_str() << _T("\n");
+		}
+		if (I->second.resourceIDs.size() > 0)
+		{
+			File << _T("#. Resource IDs: (");
+
+			std::set<DWORD>::const_iterator II = I->second.resourceIDs.begin();
+			File << (*II);
+			++II;
+			while (II != I->second.resourceIDs.end())
+			{
+				File << _T(", ");
+				File << (*II);
+				++II;
+			};
+			File << _T(")\n");
+		}
+		if (I->second.flag.length() > 0)
+			File << (I->second.flag.c_str()) << _T("\n");
+		File << (_T("msgid \"")) << (I->first.c_str()) << _T("\"\n");
+		File << (_T("msgstr \"")) << (I->second.msgstr.c_str()) << _T("\"\n\n");
+		nEntries++;
+	}
+	File.close();
+	if (!m_bQuiet)
+		_ftprintf(stdout, _T("File %s saved, containing %d entries\n"), szPath, nEntries);
+	return TRUE;
+}

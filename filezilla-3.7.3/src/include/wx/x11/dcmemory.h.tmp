@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\x11\dcmemory.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/x11/dcmemory.h
+// Purpose:     wxMemoryDC class
+// Author:      Julian Smart
+// Modified by:
+// Created:     17/09/98
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                 
+                       
+                           
+
+class WXDLLIMPEXP_CORE wxMemoryDCImpl : public wxWindowDCImpl
+{
+public:
+    wxMemoryDCImpl( wxDC* owner );
+    wxMemoryDCImpl( wxDC* owner, wxBitmap& bitmap);
+    wxMemoryDCImpl( wxDC* owner, wxDC *dc );
+    virtual ~wxMemoryDCImpl();
+
+    virtual const wxBitmap& GetSelectedBitmap() const;
+    virtual wxBitmap& GetSelectedBitmap();
+
+    // implementation
+    wxBitmap  m_selected;
+
+protected:
+    virtual void DoGetSize( int *width, int *height ) const;
+    virtual void DoSelect(const wxBitmap& bitmap);
+
+private:
+    void Init();
+
+private:
+    DECLARE_CLASS(wxMemoryDCImpl)
+};
+
+      
+// _WX_DCMEMORY_H_

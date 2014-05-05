@@ -1,0 +1,24 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\fs_zip.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/fs_zip.h
+// Purpose:     wxZipFSHandler typedef for compatibility
+// Author:      Mike Wetherell
+// Copyright:   (c) 2006 Mike Wetherell
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+                   
+
+                
+
+                      
+
+                                          
+
+       // wxUSE_FS_ZIP
+
+       // _WX_FS_ZIP_H_

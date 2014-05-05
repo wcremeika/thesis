@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\osx\carbon\chkconf.h" 0
+/*
+ * Name:        wx/osx/carbon/chkconf.h
+ * Purpose:     Compiler-specific configuration checking
+ * Author:      Julian Smart
+ * Modified by:
+ * Created:     01/02/97
+ * Copyright:   (c) Julian Smart
+ * Licence:     wxWindows licence
+ */
+
+                                 
+                                 
+
+/*
+ * native (1) or emulated (0) toolbar
+ * also support old notation wxMAC_USE_NATIVE_TOOLBAR
+ */
+
+
+
+                               
+                                                             
+      
+
+                                
+                                      
+      
+
+/*
+ * text rendering system
+ */
+
+                             
+
+/*
+ * Audio System
+ */
+
+                             
+                                
+
+      
+    /* _WX_OSX_CARBON_CHKCONF_H_ */
+

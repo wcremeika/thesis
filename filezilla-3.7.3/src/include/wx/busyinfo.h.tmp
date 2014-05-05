@@ -1,0 +1,22 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\busyinfo.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/busyinfo.h
+// Purpose:     Information window (when app is busy)
+// Author:      Vaclav Slavik
+// Copyright:   (c) 1999 Vaclav Slavik
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                   
+
+                  
+
+                                
+
+       // wxUSE_BUSYINFO
+
+       // __BUSYINFO_H_BASE__

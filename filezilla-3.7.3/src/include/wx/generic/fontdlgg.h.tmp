@@ -1,0 +1,111 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\generic\fontdlgg.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/generic/fontdlgg.h
+// Purpose:     wxGenericFontDialog
+// Author:      Julian Smart
+// Modified by:
+// Created:     01/02/97
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                              
+                              
+
+                     
+                   
+
+                  
+                                     
+                                       
+     
+                                     
+      
+
+/*
+ * FONT DIALOG
+ */
+
+class WXDLLIMPEXP_FWD_CORE wxChoice;
+class WXDLLIMPEXP_FWD_CORE wxText;
+class WXDLLIMPEXP_FWD_CORE wxCheckBox;
+class WXDLLIMPEXP_FWD_CORE wxFontPreviewer;
+
+enum
+{
+    wxID_FONT_UNDERLINE = 3000,
+    wxID_FONT_STYLE,
+    wxID_FONT_WEIGHT,
+    wxID_FONT_FAMILY,
+    wxID_FONT_COLOUR,
+    wxID_FONT_SIZE
+};
+
+class WXDLLIMPEXP_CORE wxGenericFontDialog : public wxFontDialogBase
+{
+public:
+    wxGenericFontDialog() { Init(); }
+    wxGenericFontDialog(wxWindow *parent)
+        : wxFontDialogBase(parent) { Init(); }
+    wxGenericFontDialog(wxWindow *parent, const wxFontData& data)
+        : wxFontDialogBase(parent, data) { Init(); }
+    virtual ~wxGenericFontDialog();
+
+    virtual int ShowModal();
+
+                           
+                                                   
+                                                                                  
+       // WXWIN_COMPATIBILITY_2_6
+
+    // Internal functions
+    void OnCloseWindow(wxCloseEvent& event);
+
+    virtual void CreateWidgets();
+    virtual void InitializeFont();
+
+    void OnChangeFont(wxCommandEvent& event);
+
+                               
+                                          
+      
+
+protected:
+
+    virtual bool DoCreate(wxWindow *parent);
+
+private:
+
+    // common part of all ctors
+    void Init();
+
+    void DoChangeFont();
+
+    wxFont m_dialogFont;
+
+    wxChoice *m_familyChoice;
+    wxChoice *m_styleChoice;
+    wxChoice *m_weightChoice;
+    wxChoice *m_colourChoice;
+    wxCheckBox *m_underLineCheckBox;
+
+                                
+    wxChoice   *m_pointSizeChoice;
+      
+
+    wxFontPreviewer *m_previewer;
+    bool       m_useEvents;
+
+    //  static bool fontDialogCancelled;
+    DECLARE_EVENT_TABLE()
+    DECLARE_DYNAMIC_CLASS(wxGenericFontDialog)
+};
+
+                           
+                                                   
+                                                                                         
+                                                                                                    
+       // WXWIN_COMPATIBILITY_2_6
+
+       // _WX_GENERIC_FONTDLGG_H

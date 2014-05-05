@@ -1,0 +1,142 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\wince\choicece.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/wince/choicece.h
+// Purpose:     wxChoice implementation for smart phones driven by WinCE
+// Author:      Wlodzimierz ABX Skiba
+// Modified by:
+// Created:     29.07.2004
+// Copyright:   (c) Wlodzimierz Skiba
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+// ----------------------------------------------------------------------------
+// headers
+// ----------------------------------------------------------------------------
+
+                   
+
+                
+
+                        
+
+                                    
+                                                             
+
+                                                                               
+              
+                                                                               
+
+                                                     
+ 
+       
+            
+                  
+                        
+
+                              
+                           
+                                                    
+                                                
+                                                        
+                            
+                                                               
+                                                    
+     
+                                                                          
+     
+                              
+                           
+                                
+                                
+                                          
+                            
+                                                               
+                                                    
+     
+                                                                       
+     
+
+                                 
+                              
+                                                       
+                                                   
+                                                           
+                               
+                                                                  
+                                                        
+
+                                 
+                              
+                                   
+                                   
+                                             
+                               
+                                                                  
+                                                        
+
+                                         
+                                                 
+                           
+
+                                          
+                                     
+                                     
+
+                                                                        
+                                                     
+                                                              
+
+                                                                  
+                                                                
+
+                                                                       
+                                                           
+
+                                                     
+
+          
+                                                                 
+                                               
+                                                                        
+
+                                                                       
+                                                            
+
+                                                                  
+
+                         
+                                                     
+                                                                   
+                                         
+                                                          
+
+                                                                    
+
+                                        
+                                                       
+                                          
+                                          
+                                                       
+                                  
+                                                    
+                                             
+
+                                    
+                           
+                              
+
+                                                                           
+                                                    
+                                                
+
+        
+                                           
+  
+
+       // wxUSE_CHOICE
+
+       // _WX_CHOICECE_H_BASE_

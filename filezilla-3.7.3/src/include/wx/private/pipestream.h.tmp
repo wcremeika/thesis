@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\private\pipestream.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/private/pipestream.h
+// Purpose:     Declares wxPipeInputStream and wxPipeOutputStream.
+// Author:      Vadim Zeitlin
+// Modified by: Rob Bresalier
+// Created:     2013-04-27
+// Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
+//              (c) 2013 Rob Bresalier
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                 
+                                 
+
+                       
+
+// wxPipeInputStream is a platform-dependent input stream class (i.e. deriving,
+// possible indirectly, from wxInputStream) for reading from a pipe, i.e. a
+// pipe FD under Unix or a pipe HANDLE under MSW. It provides a single extra
+// IsOpened() method.
+//
+// wxPipeOutputStream is similar but has no additional methods at all.
+               
+                                           
+                                                   
+                                          
+      
+
+       // _WX_PRIVATE_PIPESTREAM_H_

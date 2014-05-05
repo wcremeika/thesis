@@ -1,0 +1,129 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\univ\chkconf.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/univ/chkconf.h
+// Purpose:     wxUniversal-specific configuration options checks
+// Author:      Vadim Zeitlin
+// Created:     2006-09-28 (extracted from wx/chkconf.h)
+// Copyright:   (c) 2006 Vadim Zeitlin <vadim@wxwindows.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+                     
+      
+                                                                              
+                                                                             
+                                                                        
+                                                              
+      
+                            
+                               
+       /* wxUSE_OWNER_DRAWN */
+
+                                                      
+                              
+      
+     
+                     
+                        
+      
+      
+
+                  
+                  
+                              
+      
+     
+                    
+                       
+      
+      
+       /* wxUSE_COMBOBOX */
+
+                  
+                   
+                              
+      
+     
+                     
+                        
+      
+      
+       /* wxUSE_RADIOBTN */
+
+                  
+                
+                              
+      
+     
+                  
+                     
+      
+                        
+
+                    
+                              
+      
+     
+                      
+                         
+      
+                            
+       /* wxUSE_TEXTCTRL */
+
+
+/* Themes checks */
+                        
+                              
+      
+     
+                          
+      
+       /* wxUSE_ALL_THEMES */
+
+                       
+                              
+      
+     
+                         
+      
+       /* wxUSE_THEME_GTK */
+
+                         
+                              
+      
+     
+                           
+      
+       /* wxUSE_THEME_METAL */
+
+                        
+                              
+      
+     
+                          
+      
+       /* wxUSE_THEME_MONO */
+
+                         
+                              
+      
+     
+                           
+      
+       /* wxUSE_THEME_WIN32 */
+
+                                                                
+                              
+      
+     
+                        
+                           
+      
+       /* wxUSE_THEME_METAL && !wxUSE_THEME_WIN32 */
+
+       /* _WX_UNIV_CHKCONF_H_ */
+

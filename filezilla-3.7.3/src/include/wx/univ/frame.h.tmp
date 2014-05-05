@@ -1,0 +1,90 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\univ\frame.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/univ/frame.h
+// Purpose:     wxFrame class for wxUniversal
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     19.05.01
+// Copyright:   (c) 2001 SciTech Software, Inc. (www.scitechsoft.com)
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+// ----------------------------------------------------------------------------
+// wxFrame
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
+{
+public:
+    wxFrame() {}
+    wxFrame(wxWindow *parent,
+            wxWindowID id,
+            const wxString& title,
+            const wxPoint& pos = wxDefaultPosition,
+            const wxSize& size = wxDefaultSize,
+            long style = wxDEFAULT_FRAME_STYLE,
+            const wxString& name = wxFrameNameStr)
+    {
+        Create(parent, id, title, pos, size, style, name);
+    }
+
+    bool Create(wxWindow *parent,
+                wxWindowID id,
+                const wxString& title,
+                const wxPoint& pos = wxDefaultPosition,
+                const wxSize& size = wxDefaultSize,
+                long style = wxDEFAULT_FRAME_STYLE,
+                const wxString& name = wxFrameNameStr);
+
+    virtual wxPoint GetClientAreaOrigin() const;
+    virtual bool Enable(bool enable = true);
+
+                   
+                                                        
+                                                                          
+                                                           
+                                                                                     
+       // wxUSE_STATUSBAR
+
+                 
+                                                      
+                                                     
+                                                              
+                                                                              
+       // wxUSE_TOOLBAR
+
+    virtual wxSize GetMinSize() const;
+
+protected:
+    void OnSize(wxSizeEvent& event);
+    void OnSysColourChanged(wxSysColourChangedEvent& event);
+
+    virtual void DoGetClientSize(int *width, int *height) const;
+    virtual void DoSetClientSize(int width, int height);
+
+               
+                                                                       
+                                   
+                                 
+                                                   
+       // wxUSE_MENUS
+
+                   
+                                                                        
+                                     
+       // wxUSE_MENUS
+
+protected:
+                 
+                                   
+       // wxUSE_TOOLBAR
+
+    DECLARE_EVENT_TABLE()
+    DECLARE_DYNAMIC_CLASS(wxFrame)
+};
+
+       // _WX_UNIV_FRAME_H_

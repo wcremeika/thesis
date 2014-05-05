@@ -1,0 +1,3026 @@
+2013-06-08  [Paul] 3.9.1-36-g10d2dc8
+
+	* NEWS
+	* README
+	* RELEASE_NOTES		
+		3.9.2 unleashed
+
+2013-05-30  [Colin Leroy] 3.9.1-18-g376f872
+
+	* Makefile.am
+	* configure.ac		
+		Get rid of version.in - forgotten files (cherry picked from commit
+		9375966944e6fef9cc85820b329c46125a93b3f3)
+
+2013-05-23  [Colin Leroy] 3.9.1-11-g5f68235
+
+	* src/Makefile.am
+	* src/gtk/gtkutils.c
+	* src/pixmaps/claws-mail_compose_logo.xpm
+	* src/stock_pixmap.c
+	* src/stock_pixmap.h		
+		New big icon for compose windows, by Simon Steinbeiss (cherry picked
+		from commit 94ed99e1acdf6a07c6cb3c01f764ab9f6e97fa77)
+
+2013-05-30  [Colin Leroy] 3.9.1-20-g9375966
+
+	* Makefile.am
+	* configure.ac		
+		Get rid of version.in - forgotten files
+
+2013-05-23  [Colin Leroy] 3.9.1-13-g94ed99e
+
+	* src/Makefile.am
+	* src/gtk/gtkutils.c
+	* src/pixmaps/claws-mail_compose_logo.xpm
+	* src/stock_pixmap.c
+	* src/stock_pixmap.h		
+		New big icon for compose windows, by Simon Steinbeiss
+
+2013-05-20  [Ricardo Mones] 3.9.1-11-g4b8a56c
+
+	* src/matcher.c
+	* src/matcher.h
+	* src/plugins/address_keeper/address_keeper.c
+	* src/plugins/attachwarner/attachwarner.c
+	* src/plugins/attachwarner/attachwarner_prefs.c
+	* src/plugins/attachwarner/attachwarner_prefs.h		
+		Fix #2927 'Optional case insensitivity for the attach-warner-plugin' 
+		Based on original patch provided by Henri Bauer
+		<henri.bauer@voila.fr>
+
+2013-05-07  [Colin Leroy] 3.9.1-2-g66aa06c
+
+	* src/plugins/address_keeper/claws.def
+	* src/plugins/attachwarner/claws.def
+	* src/plugins/pgpcore/claws.def
+	* src/plugins/pgpcore/sgpgme.c		
+		Usual Windows fixes
+
+2013-05-06  [Paul] 3.9.1
+
+	* NEWS
+	* README
+	* RELEASE_NOTES		
+		for release 3.9.1
+
+2013-05-06  [Paul] 3.9.0-213-g1b0d559
+
+	* po/cs.po
+	* po/de.po
+	* po/es.po
+	* po/he.po
+	* po/hu.po
+	* po/lt.po
+	* po/pt_BR.po
+	* po/sk.po
+	* po/sv.po		
+		translation updates by David Vachulka, Thomas Bellmann, Ricardo
+		Mones, Genghis Khan, Páder Rezső, Mindaugas Baranauskas, Frederico
+		Goncalves Guimaraes, Slavko, Andreas Rönnquist
+
+2013-05-06  [Paul] 3.9.0-212-g50f73d3
+
+	* po/zh_CN.po
+	* po/zh_TW.po		
+		fix bug #2884, 'zh_CN translation crashes src/prefs_filtering.c via
+		alertpanel_error g_vsnprintf'
+
+2013-04-27  [Paul] 3.9.0-201-g3960570
+
+	* src/addressbook.c
+	* src/compose.c
+	* src/folderview.c
+	* src/imap.c
+	* src/imap_gtk.c
+	* src/inc.c
+	* src/mainwindow.c
+	* src/mbox.c
+	* src/mh_gtk.c
+	* src/news.c
+	* src/plugins/bogofilter/bogofilter_gtk.c
+	* src/plugins/bsfilter/bsfilter_gtk.c
+	* src/plugins/mailmbox/plugin_gtk.c
+	* src/plugins/rssyl/rssyl_cb_menu.c
+	* src/plugins/spamassassin/spamassassin_gtk.c
+	* src/prefs_filtering_action.c
+	* src/prefs_matcher.c
+	* src/setup.c		
+		fix some string inconsistencies
+
+2013-04-26  [Paul] 3.9.0-199-gf709f3e
+
+	* src/mainwindow.c
+	* src/send_message.h		
+		fix implicit declaration warnings
+
+2013-04-21  [Paul] 3.9.0-189-g235de21
+
+	* src/folderview.c
+	* src/plugins/att_remover/att_remover.c
+	* src/plugins/vcalendar/vcalendar.c
+	* src/summaryview.c		
+		fix errors in strings
+
+2013-04-19  [Ricardo Mones] 3.9.0-185-gc282d90
+
+	* manual/claws-mail-manual.xml
+	* manual/de/claws-mail-manual.xml
+	* manual/es/claws-mail-manual.xml
+	* manual/fr/claws-mail-manual.xml
+	* manual/it/claws-mail-manual.xml
+	* manual/pl/claws-mail-manual.xml		
+		Update year in manual copyright notices
+
+2013-04-13  [Paul] 3.9.0-181-gbaeee39
+
+	* src/common/session.c
+	* src/common/session.h
+	* src/common/socket.h
+	* src/common/ssl.c
+	* src/prefs_account.c
+	* src/prefs_account.h
+	* src/send_message.c		
+		Add support for GnuTLS priority string. Patch by Darko Koruga
+
+2013-04-10  [Colin Leroy] 3.9.0-178-gcb4a06a
+
+	* src/messageview.c
+	* src/mimeview.c		
+		Fib bug #2903, "key 'C' mention harcoded in string"
+
+2013-04-07  [Holger Berndt] 3.9.0-173-ge4f8cd0
+
+	* .gitignore
+	* configure.ac
+	* src/plugins/python/Makefile.am
+	* src/plugins/python/examples/Makefile.am
+	* src/plugins/python/examples/README.examples
+	* src/plugins/python/examples/auto/compose_any
+	* src/plugins/python/examples/auto/shutdown
+	* src/plugins/python/examples/auto/startup
+	* .../python/examples/compose/Macro-Expansion
+	* .../python/examples/main/Create-Tomboy-Note
+	* src/plugins/python/examples/main/Mass-mail
+	* src/plugins/python/examples/main/Open-Tomboy-Notes
+	* .../examples/main/Print-action-names-to-stdout
+	* .../examples/main/Recusively-mark-messages-as-read		
+		Python plugin: Add examples
+
+2013-04-06  [Holger Berndt] 3.9.0-171-g3e1e674
+
+	* .gitignore
+	* configure.ac
+	* src/plugins/Makefile.am
+	* src/plugins/geolocation/Makefile.am
+	* src/plugins/geolocation/geolocation_plugin.c
+	* src/plugins/geolocation/pixmap_earth.h		
+		Add geolocation plugin
+
+2013-04-04  [Holger Berndt] 3.9.0-170-g4f1b728
+
+	* tools/jhbuild/README
+	* tools/jhbuild/claws-mail.modules
+	* tools/jhbuild/sample.jhbuildrc-claws-mail		
+		Add jhbuild module files and sample config
+
+2013-03-27  [Ricardo Mones] 3.9.0-164-gaa8ccdb
+
+	* src/plugins/address_keeper/address_keeper.c
+	* src/plugins/address_keeper/address_keeper_prefs.c
+	* src/plugins/address_keeper/address_keeper_prefs.h		
+		Add block address matching pattern feature  Should fix bug #2340
+		'Create block list'.
+
+2013-03-27  [Ricardo Mones] 3.9.0-162-gfe709cc
+
+	* src/matcher.c
+	* src/matcher.h		
+		Generalize matcher list building from lines  New function
+		"matcherlist_new_from_lines" to build the MatcherList required to
+		match one or more regexps from a newline-separated string.  Seen
+		previously a specific internal function of AttachWarner plugin.
+
+2013-03-21  [Colin Leroy] 3.9.0-157-g2ea5d34
+
+	* .gitignore
+	* ChangeLog
+	* ChangeLog.3.0.0-3.9.0
+	* Makefile.am
+	* tools/gitlog2changelog.py		
+		Generate a ChangeLog before make dist
+
+2013-03-21  [Ricardo Mones] 3.9.0-156-gf9f7934
+
+	* .gitignore
+	* Makefile.am
+	* configure.ac
+	* version.in		
+		Fix build of 'make dist' generated tarballs  The version is set in
+		stone before the 'make dist' run. In the cases where no .git
+		directory is found, like generated tarballs, the stone is summoned
+		instead.
+
+2013-03-20  [Colin Leroy] 3.9.0-151-gfe4582c
+
+	* configure.ac
+	* src/common/version.h.in
+	* src/mainwindow.c		
+		Make the mainwindow's version string shorter when not using
+		maintainer mode
+
+2013-03-20  [Colin Leroy] 3.9.0-146-g9570a00
+
+	* doc/man/claws-mail.1
+	* src/main.c		
+		Fix bug #2891, "Ability to toggle debug mode for a running instance"
+		Patch by Darko Coruga
+
+2013-03-20  [Colin Leroy] 3.9.0-144-g2d14ba8
+
+	* src/main.c
+	* src/plugins/fancy/fancy_viewer.c		
+		Fix format string error in win32 logging, and uncomment logging in
+		fancy
+
+2013-03-20  [Colin Leroy] 3.9.0-142-gaed688a
+
+	* tools/OOo2claws-mail.pl
+	* tools/acroread2claws-mail.pl
+	* tools/calypso_convert.pl
+	* tools/claws-mail-compose-insert-files.pl
+	* tools/convert_mbox.pl
+	* tools/csv2addressbook.pl
+	* tools/eud2gc.py
+	* tools/filter_conv.pl
+	* tools/filter_conv_new.pl
+	* tools/fix_date.sh
+	* tools/freshmeat_search.pl
+	* tools/gif2xface.pl
+	* tools/google_msgid.pl
+	* tools/google_search.pl
+	* tools/kdeservicemenu/claws-mail-kdeservicemenu.pl
+	* tools/kdeservicemenu/install.sh
+	* tools/kmail-mailbox2claws-mail.pl
+	* tools/kmail2claws-mail.pl
+	* tools/kmail2claws-mail_v2.pl
+	* tools/mairix.sh
+	* tools/mew2claws-mail.pl
+	* tools/multiwebsearch.pl
+	* tools/nautilus2claws-mail.sh
+	* tools/outlook2claws-mail.pl
+	* tools/popfile-link.sh
+	* tools/tb2claws-mail
+	* tools/tbird2claws.py
+	* tools/textviewer.pl
+	* tools/textviewer.sh
+	* tools/thunderbird-filters-convertor.pl
+	* tools/update-po
+	* tools/uudec
+	* tools/uuooffice
+	* tools/vcard2xml.py		
+		Make tools mode 775
+
+2013-03-20  [Ricardo Mones] 3.9.0-141-g3da40e5
+
+	* configure.ac
+	* src/common/version.h.in
+	* src/gtk/about.c		
+		Get configure.ac version values from git  Computes the VERSION,
+		MAJOR_VERSION, MINOR_VERSION and MICRO_VERSION values in configure.ac
+		from 'git describe' output.  Adds new HASH_VERSION and GIT_VERSION,
+		available as VERSION_GIT_HASH and VERSION_GIT_FULL defines. On
+		releases HASH_VERSION is empty and GIT_VERSION is equal to VERSION
+		(modulo EXTRA values). Full git version is shown in about.  Requires
+		latest release version to be tagged with an annotated tag.  Untested
+		on win32 platforms, but should work as long as git and cut binaries
+		are on %PATH%.
+
+2013-03-18  [Ricardo Mones] 3.9.0-140-g4580575
+
+	* debian/README.Debian
+	* debian/changelog
+	* debian/claws-mail.desktop
+	* debian/claws-mail.menu
+	* debian/claws-mail.postinst.debhelper
+	* debian/claws-mail.postrm.debhelper
+	* debian/compat
+	* debian/control
+	* debian/copyright
+	* debian/docs
+	* debian/files
+	* debian/rules		
+		Remove obsolete, and probably unusable nowadays, debian directory.
+		This also serves as a first git commit test :)
+
+2013-03-17  [Ricardo Mones] 3.9.0-139-gf2493c6
+
+	* .cvsignore
+	* .gitignore
+	* PATCHSETS
+	* autogen.sh
+	* commitHelper
+	* config/.cvsignore
+	* doc/.cvsignore
+	* doc/man/.cvsignore
+	* m4/.cvsignore
+	* manual/.cvsignore
+	* manual/de/.cvsignore
+	* manual/de/dist/.cvsignore
+	* manual/de/dist/html/.cvsignore
+	* manual/de/dist/pdf/.cvsignore
+	* manual/de/dist/ps/.cvsignore
+	* manual/de/dist/txt/.cvsignore
+	* manual/dist/.cvsignore
+	* manual/dist/html/.cvsignore
+	* manual/dist/pdf/.cvsignore
+	* manual/dist/ps/.cvsignore
+	* manual/dist/txt/.cvsignore
+	* manual/dtd/.cvsignore
+	* manual/es/.cvsignore
+	* manual/es/dist/.cvsignore
+	* manual/es/dist/html/.cvsignore
+	* manual/es/dist/pdf/.cvsignore
+	* manual/es/dist/ps/.cvsignore
+	* manual/es/dist/txt/.cvsignore
+	* manual/fr/.cvsignore
+	* manual/fr/dist/.cvsignore
+	* manual/fr/dist/html/.cvsignore
+	* manual/fr/dist/pdf/.cvsignore
+	* manual/fr/dist/ps/.cvsignore
+	* manual/fr/dist/txt/.cvsignore
+	* manual/pl/.cvsignore
+	* manual/pl/dist/.cvsignore
+	* manual/pl/dist/html/.cvsignore
+	* manual/pl/dist/pdf/.cvsignore
+	* manual/pl/dist/ps/.cvsignore
+	* manual/pl/dist/txt/.cvsignore
+	* po/.cvsignore
+	* src/.cvsignore
+	* src/common/.cvsignore
+	* src/etpan/.cvsignore
+	* src/gtk/.cvsignore
+	* src/plugins/.cvsignore
+	* src/plugins/acpi_notifier/.cvsignore
+	* src/plugins/address_keeper/.cvsignore
+	* src/plugins/archive/.cvsignore
+	* src/plugins/att_remover/.cvsignore
+	* src/plugins/attachwarner/.cvsignore
+	* src/plugins/bogofilter/.cvsignore
+	* src/plugins/bsfilter/.cvsignore
+	* src/plugins/clamd/.cvsignore
+	* src/plugins/clamd/libclamd/.cvsignore
+	* src/plugins/demo/.cvsignore
+	* src/plugins/fancy/.cvsignore
+	* src/plugins/fetchinfo/.cvsignore
+	* src/plugins/gdata/.cvsignore
+	* src/plugins/mailmbox/.cvsignore
+	* src/plugins/newmail/.cvsignore
+	* src/plugins/notification/.cvsignore
+	* src/plugins/notification/gtkhotkey/.cvsignore
+	* src/plugins/notification/gtkhotkey/x11/.cvsignore
+	* src/plugins/pdf_viewer/.cvsignore
+	* src/plugins/perl/.cvsignore
+	* src/plugins/perl/tools/.cvsignore
+	* src/plugins/pgpcore/.cvsignore
+	* src/plugins/pgpinline/.cvsignore
+	* src/plugins/pgpmime/.cvsignore
+	* src/plugins/python/.cvsignore
+	* src/plugins/rssyl/.cvsignore
+	* src/plugins/smime/.cvsignore
+	* src/plugins/spam_report/.cvsignore
+	* src/plugins/spamassassin/.cvsignore
+	* src/plugins/tnef_parse/.cvsignore
+	* src/plugins/vcalendar/.cvsignore
+	* src/plugins/vcalendar/libical/.cvsignore
+	* .../vcalendar/libical/design-data/.cvsignore
+	* src/plugins/vcalendar/libical/libical/.cvsignore
+	* src/plugins/vcalendar/libical/libicalss/.cvsignore
+	* .../vcalendar/libical/libicalvcal/.cvsignore
+	* src/plugins/vcalendar/libical/scripts/.cvsignore
+	* tools/.cvsignore		
+		Initial setup for git
+
+2013-03-15  [Colin Leroy] 3.9.0-138-g41acae3
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_viewer.c		
+		2013-03-15 [colin]	3.9.0cvs128  * src/plugins/fancy/fancy_viewer.c
+		Fix default fonts on Windows
+
+2013-03-15  [Colin Leroy] 3.9.0-137-gfcfd10f
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/address_keeper/version.rc
+	* src/plugins/att_remover/version.rc
+	* src/plugins/attachwarner/version.rc
+	* src/plugins/bsfilter/version.rc
+	* src/plugins/fancy/version.rc
+	* src/plugins/fetchinfo/version.rc
+	* src/plugins/mailmbox/version.rc
+	* src/plugins/notification/version.rc
+	* src/plugins/pgpcore/version.rc
+	* src/plugins/pgpinline/version.rc
+	* src/plugins/pgpmime/version.rc
+	* src/plugins/rssyl/version.rc
+	* src/plugins/smime/version.rc
+	* src/plugins/spam_report/version.rc
+	* src/plugins/tnef_parse/version.rc
+	* src/plugins/vcalendar/version.rc		
+		2013-03-15 [colin]	3.9.0cvs127  *
+		src/plugins/address_keeper/version.rc *
+		src/plugins/attachwarner/version.rc *
+		src/plugins/att_remover/version.rc * src/plugins/bsfilter/version.rc
+		* src/plugins/fancy/version.rc * src/plugins/fetchinfo/version.rc *
+		src/plugins/mailmbox/version.rc * src/plugins/notification/version.rc
+		* src/plugins/pgpcore/version.rc * src/plugins/pgpinline/version.rc *
+		src/plugins/pgpmime/version.rc * src/plugins/rssyl/version.rc *
+		src/plugins/smime/version.rc * src/plugins/spam_report/version.rc *
+		src/plugins/tnef_parse/version.rc * src/plugins/vcalendar/version.rc
+		Fix names and copyrights
+
+2013-03-15  [Colin Leroy] 3.9.0-136-g87b1d66
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_viewer.c
+	* src/plugins/vcalendar/vcal_folder.c		
+		2013-03-15 [colin]	3.9.0cvs126  * src/plugins/fancy/fancy_viewer.c
+		Fix attached images URIs generation *
+		src/plugins/vcalendar/vcal_folder.c Fix crash on NULL uri
+
+2013-03-14  [Colin Leroy] 3.9.0-135-g7aafbfc
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_viewer.c		
+		2013-03-14 [colin]	3.9.0cvs125  * src/plugins/fancy/fancy_viewer.c
+		Remove some crashy calls (wonder why.)
+
+2013-03-13  [Colin Leroy] 3.9.0-134-g8d838eb
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/Makefile.am
+	* src/plugins/fancy/claws.def
+	* src/plugins/fancy/plugin.def
+	* src/plugins/fancy/version.rc		
+		2013-03-13 [colin]	3.9.0cvs124  * src/plugins/fancy/Makefile.am *
+		src/plugins/fancy/claws.def * src/plugins/fancy/plugin.def *
+		src/plugins/fancy/version.rc Preparing for win32 Fancy port
+
+2013-03-13  [Colin Leroy] 3.9.0-133-g3a241b8
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_viewer.h		
+		2013-03-13 [colin]	3.9.0cvs123  * src/plugins/fancy/fancy_viewer.h
+		Fix wrong include
+
+2013-03-13  [Ricardo Mones] 3.9.0-132-gb3863d7
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/pdf_viewer/poppler_viewer.c		
+		2013-03-13 [mones]	3.9.0cvs122  *
+		src/plugins/pdf_viewer/poppler_viewer.c Fix crash closing PDF
+		information alert panel and use a better label than the plugin name
+		for the dialog
+
+2013-03-13  [Colin Leroy] 3.9.0-131-gcfe802b
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_prefs.c		
+		2013-03-13 [colin]	3.9.0cvs121  * src/plugins/fancy/fancy_prefs.c
+		More whitespace!
+
+2013-03-13  [Colin Leroy] 3.9.0-130-g56c256b
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_prefs.c
+	* src/plugins/fancy/fancy_prefs.h
+	* src/plugins/fancy/fancy_viewer.c
+	* src/plugins/fancy/fancy_viewer.h		
+		2013-03-13 [colin]	3.9.0cvs120  * src/plugins/fancy/fancy_prefs.c *
+		src/plugins/fancy/fancy_prefs.h * src/plugins/fancy/fancy_viewer.c *
+		src/plugins/fancy/fancy_viewer.h Fix whitespace and indentation
+
+2013-03-13  [Colin Leroy] 3.9.0-129-gc0b5c9f
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_prefs.c
+	* src/plugins/fancy/fancy_prefs.h
+	* src/plugins/fancy/fancy_viewer.c
+	* src/plugins/fancy/fancy_viewer.h		
+		2013-03-13 [colin]	3.9.0cvs119  * src/plugins/fancy/fancy_prefs.c *
+		src/plugins/fancy/fancy_prefs.h * src/plugins/fancy/fancy_viewer.c *
+		src/plugins/fancy/fancy_viewer.h More rework of the options to make
+		things clear. Also, make Enable remote content actually do what it
+		says.
+
+2013-03-13  [Colin Leroy] 3.9.0-128-g9b045e6
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/perl/tools/Makefile.am
+	* src/summaryview.c		
+		2013-03-13 [colin]	3.9.0cvs118  * src/summaryview.c Fix w32 build
+		where apparently 'small' is a reserved word *
+		src/plugins/perl/tools/Makefile.am Fix out-of-tree build
+
+2013-03-13  [Ricardo Mones] 3.9.0-127-g582f953
+
+	* ChangeLog
+	* INSTALL
+	* PATCHSETS
+	* README
+	* configure.ac		
+		2013-03-13 [mones]	3.9.0cvs117  * INSTALL * README Forgotten tool is
+		not needed anymore, bye bye html2ps.
+
+2013-03-13  [Colin Leroy] 3.9.0-126-g763d745
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/Makefile.am
+	* src/plugins/fancy/fancy_viewer.c		
+		2013-03-13 [colin]	3.9.0cvs116  * src/plugins/fancy/Makefile.am *
+		src/plugins/fancy/fancy_viewer.c Fix bug #2980, "html2ps
+		required...". Use standard GtkPrint
+
+2013-03-13  [Colin Leroy] 3.9.0-125-ge61294d
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_prefs.c
+	* src/plugins/fancy/fancy_prefs.h
+	* src/plugins/fancy/fancy_viewer.c
+	* src/plugins/fancy/fancy_viewer.h		
+		2013-03-13 [colin]	3.9.0cvs115  * src/plugins/fancy/fancy_prefs.c *
+		src/plugins/fancy/fancy_prefs.h * src/plugins/fancy/fancy_viewer.c *
+		src/plugins/fancy/fancy_viewer.h Untangle prefs handling, untangle
+		open in browser and move back to Enable remote content instead of
+		Enable inner navigation.
+
+2013-03-13  [Ricardo Mones] 3.9.0-124-gfb3e030
+
+	* ChangeLog
+	* INSTALL
+	* PATCHSETS
+	* README
+	* configure.ac		
+		2013-03-13 [mones]	3.9.0cvs114  * INSTALL * README Some minor fix and
+		an always forgotten support tool... Fortunately our users keep
+		reminding us they really use all those features, thanks to all of
+		them :-)
+
+2013-03-12  [Tristan Chabredier] 3.9.0-123-g3df21e6
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/account.c		
+		2013-03-12 [wwp]	3.9.0cvs113  * src/account.c Remove stuff committed
+		unexpectedly (you're now reading my words, you understand what you
+		read, you never found that I've committed stuff accidentally, never,
+		and now you can get back to normal activities, you will never
+		remember this), thanks Paul!
+
+2013-03-12  [Tristan Chabredier] 3.9.0-122-g3c87d3f
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/account.c		
+		2013-03-12 [wwp]	3.9.0cvs112  * src/account.c Fix 'edit accounts'
+		windows going backward when leaving an 'account preferences' window,
+		by focusing this window again.
+
+2013-03-09  [Ricardo Mones] 3.9.0-121-g1569d00
+
+	* ChangeLog
+	* INSTALL
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c
+	* src/summaryview.c		
+		2013-03-09 [mones]	3.9.0cvs111  * INSTALL Update required GTK+
+		version and configure plugin flags * src/mainwindow.c *
+		src/summaryview.c Remove unnecessary checks, newer keysyms are
+		already included by gtkutils.h if needed
+
+2013-03-08  [Paul Mangan] 3.9.0-120-g75159a9
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-03-08 [paul]	3.9.0cvs110  * configure.ac fix outputting config
+		dir value at end of configure
+
+2013-03-07  [Colin Leroy] 3.9.0-119-gbaef411
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_prefs.c		
+		2013-03-07 [colin]	3.9.0cvs109  * src/plugins/fancy/fancy_prefs.c And
+		make Open External default to true :)
+
+2013-03-07  [Paul Mangan] 3.9.0-118-g9b859d4
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_prefs.c		
+		2013-03-07 [paul]	3.9.0cvs108  * src/plugins/fancy/fancy_prefs.c make
+		"enable_inner_navigation" default to FALSE
+
+2013-03-06  [Colin Leroy] 3.9.0-117-ga63e873
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_prefs.c
+	* src/plugins/fancy/fancy_prefs.h
+	* src/plugins/fancy/fancy_viewer.c
+	* src/plugins/fancy/fancy_viewer.h		
+		2013-03-06 [colin]	3.9.0cvs107  * src/plugins/fancy/fancy_prefs.c *
+		src/plugins/fancy/fancy_prefs.h * src/plugins/fancy/fancy_viewer.c *
+		src/plugins/fancy/fancy_viewer.h Fix bug #2882, "Reverse preference
+		for external content" "Block external content" was the only negative
+		preference along the other "Enable ..." positive ones, but also had
+		several shortcomings, in that it only blocked user- requested
+		interactions, like - prevent clicking on links - prevent
+		right-click/Download link - prevent right-click/Save image But NOT -
+		prevent auto download of images (that's controlled by Auto-load
+		images) - prevent auto download of javascript (that's controlled by
+		Enable scripts) - prevent auto download of applets (that's controlled
+		by Enable java) - prevent auto download of css (that can't be
+		disabled) New preference to replace it is "Enable inner navigation"
+		and allows to control whether one can click on links to navigate
+		inside Fancy viewer. If disabled and "Open in external browser" is
+		set, links will be opened in external browser; else nothing will
+		happen. In any state of these preferences, right-clicking and
+		choosing "Open in viewer" or "Open in browser" will do what asked.
+
+2013-03-06  [Colin Leroy] 3.9.0-116-gab4eb17
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_viewer.c		
+		2013-03-06 [colin]	3.9.0cvs106  * src/plugins/fancy/fancy_viewer.c
+		Make options setting clearer
+
+2013-02-28  [Ricardo Mones] 3.9.0-115-g9cf821f
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/perl/Makefile.am
+	* src/plugins/perl/cm_perl.pod
+	* src/plugins/perl/tools/.cvsignore
+	* src/plugins/perl/tools/Makefile.am
+	* src/plugins/perl/tools/insert_perl.pl
+	* src/plugins/perl/tools/matcherrc2perlfilter.pl		
+		2013-02-28 [mones]	3.9.0cvs105  * configure.ac *
+		src/plugins/perl/Makefile.am * src/plugins/perl/cm_perl.pod *
+		src/plugins/perl/tools/.cvsignore *
+		src/plugins/perl/tools/Makefile.am *
+		src/plugins/perl/tools/insert_perl.pl *
+		src/plugins/perl/tools/matcherrc2perlfilter.pl Make perl plugin tools
+		and manpage available into distribution tarball.
+
+2013-02-27  [Ricardo Mones] 3.9.0-114-g79c727f
+
+	* ChangeLog
+	* PATCHSETS
+	* README
+	* configure.ac		
+		2013-02-27 [mones]	3.9.0cvs104  * README Updated plugin list, now
+		they are integrated. Added missing items to hidden properties list.
+
+2013-02-26  [Tristan Chabredier] 3.9.0-113-gdb3e892
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/messageview.c		
+		2013-02-26 [wwp]	3.9.0cvs103  * src/messageview.c Fix wrong message,
+		as message could have been moved to another folder and not trashed
+		(it could have also be deleted without staying in trash, but that's a
+		piece of detail, and while we're at it, the message could also have
+		vanished into another dimension or be now part of the twilight zone
+		but we should not always tell the truth to users. At last, and to be
+		exhaustive, the message could have disappeared because of a technical
+		issue which doesn't imply user action and none of the above mentions.
+		One would say that the message could also have never existed, but
+		it's another story).
+
+2013-02-24  [Colin Leroy] 3.9.0-112-gcc06459
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/vcalendar/libical/libical/Makefile.am		
+		2013-02-24 [colin]	3.9.0cvs102  *
+		src/plugins/vcalendar/libical/libical/Makefile.am Fix build without
+		vcalendar
+
+2013-02-23  [Paul Mangan] 3.9.0-111-g44281b6
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mimeview.c		
+		2013-02-23 [paul]	3.9.0cvs101  * src/mimeview.c escape
+		filename/description text, prevents error if, e.g., the filename
+		contains an ampersand
+
+2013-02-22  [Colin Leroy] 3.9.0-110-g47b57a9
+
+	* AUTHORS
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/gtk/authors.h
+	* src/summaryview.c		
+		2013-02-22 [colin]	3.9.0cvs100  * AUTHORS * src/gtk/authors.h *
+		src/summaryview.c Fix bug #2702, "Support splitting subject line for
+		small screen layout". Patch by Ben Deering.
+
+2013-02-21  [Paul Mangan] 3.9.0-109-g79bc33c
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-02-21 [paul]	3.9.0cvs99  * configure.ac add he to ALL_LINGUAS
+
+2013-02-21  [Colin Leroy] 3.9.0-108-gb09f3f3
+
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/he.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po		
+		* Final po merge (thanks to Genghis Khan for he.po !)
+
+2013-02-20  [Colin Leroy] 3.9.0-107-g63e8e48
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/main.c		
+		2013-02-20 [colin]	3.9.0cvs98  * src/main.c Fix seg on w32
+
+2013-02-20  [Colin Leroy] 3.9.0-106-g25663fc
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/att_remover/claws.def
+	* src/plugins/fetchinfo/claws.def
+	* src/plugins/spam_report/claws.def		
+		2013-02-20 [colin]	3.9.0cvs97  * src/plugins/att_remover/claws.def *
+		src/plugins/fetchinfo/claws.def * src/plugins/spam_report/claws.def
+		Add more needed symbols
+
+2013-02-20  [Colin Leroy] 3.9.0-105-ga6a5634
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/att_remover/Makefile.am
+	* src/plugins/fetchinfo/Makefile.am
+	* src/plugins/spam_report/Makefile.am		
+		2013-02-20 [colin]	3.9.0cvs96  * src/plugins/att_remover/Makefile.am
+		* src/plugins/fetchinfo/Makefile.am *
+		src/plugins/spam_report/Makefile.am Fix missed parts for w32
+
+2013-02-20  [Colin Leroy] 3.9.0-104-g495d321
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/address_keeper/claws.def
+	* src/plugins/att_remover/Makefile.am
+	* src/plugins/att_remover/claws.def
+	* src/plugins/att_remover/plugin.def
+	* src/plugins/att_remover/version.rc
+	* src/plugins/clamd/libclamd/Makefile.am
+	* src/plugins/fetchinfo/Makefile.am
+	* src/plugins/fetchinfo/claws.def
+	* src/plugins/fetchinfo/plugin.def
+	* src/plugins/fetchinfo/version.rc
+	* src/plugins/mailmbox/Makefile.am
+	* src/plugins/mailmbox/claws.def
+	* src/plugins/mailmbox/plugin.def
+	* src/plugins/mailmbox/version.rc
+	* src/plugins/notification/gtkhotkey/Makefile.am
+	* src/plugins/spam_report/Makefile.am
+	* src/plugins/spam_report/claws.def
+	* src/plugins/spam_report/plugin.def
+	* src/plugins/spam_report/spam_report.c
+	* src/plugins/spam_report/version.rc
+	* src/prefs_common.h		
+		2013-02-20 [colin]	3.9.0cvs95  * src/prefs_common.h *
+		src/plugins/address_keeper/claws.def *
+		src/plugins/att_remover/Makefile.am *
+		src/plugins/att_remover/claws.def *
+		src/plugins/att_remover/plugin.def *
+		src/plugins/att_remover/version.rc *
+		src/plugins/clamd/libclamd/Makefile.am *
+		src/plugins/fetchinfo/Makefile.am * src/plugins/fetchinfo/claws.def *
+		src/plugins/fetchinfo/plugin.def * src/plugins/fetchinfo/version.rc *
+		src/plugins/mailmbox/Makefile.am * src/plugins/mailmbox/claws.def *
+		src/plugins/mailmbox/plugin.def * src/plugins/mailmbox/version.rc *
+		src/plugins/notification/gtkhotkey/Makefile.am *
+		src/plugins/spam_report/Makefile.am *
+		src/plugins/spam_report/claws.def *
+		src/plugins/spam_report/plugin.def *
+		src/plugins/spam_report/spam_report.c *
+		src/plugins/spam_report/version.rc Win32 build fixes (and add of
+		address_keeper, att_remover, fetchinfo and spam_report)
+
+2013-02-20  [Paul Mangan] 3.9.0-103-g7684aae
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-02-20 [paul]	3.9.0cvs94  * configure.ac a little more report
+		layout tweaking
+
+2013-02-20  [Colin Leroy] 3.9.0-102-g9ec794b
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/plugin.c		
+		2013-02-20 [colin]	3.9.0cvs93  * src/common/plugin.c Auto fix plugin
+		names ending in	"_plugin"
+
+2013-02-20  [Colin Leroy] 3.9.0-101-g9f938fe
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/gdata/Makefile.am		
+		2013-02-20 [colin]	3.9.0cvs92  * src/plugins/gdata/Makefile.am Change
+		plugin name
+
+2013-02-20  [Colin Leroy] 3.9.0-100-ga777418
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fetchinfo/Makefile.am
+	* src/plugins/notification/Makefile.am
+	* src/plugins/perl/Makefile.am
+	* src/plugins/python/Makefile.am		
+		2013-02-20 [colin]	3.9.0cvs91  * src/plugins/fetchinfo/Makefile.am *
+		src/plugins/notification/Makefile.am * src/plugins/perl/Makefile.am *
+		src/plugins/python/Makefile.am Drop _plugin from the plugin's
+		filename
+
+2013-02-20  [Colin Leroy] 3.9.0-99-g9086845
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-02-20 [colin]	3.9.0cvs90  * configure.ac Group core's
+		--{en,dis}able switches
+
+2013-02-20  [Colin Leroy] 3.9.0-98-g3f33fe4
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-02-20 [colin]	3.9.0cvs89  * configure.ac typos
+
+2013-02-20  [Colin Leroy] 3.9.0-97-g0016de7
+
+	* ChangeLog
+	* Makefile.am
+	* PATCHSETS
+	* configure.ac		
+		2013-02-20 [colin]	3.9.0cvs88  * configure.ac * Makefile.am Don't
+		check for GNOME2 when we want to check for gtk-update-icon-cache;
+		Typo fix
+
+2013-02-20  [Colin Leroy] 3.9.0-95-gd57e5e8
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/Makefile.am
+	* src/plugins/acpi_notifier/Makefile.am
+	* src/plugins/address_keeper/Makefile.am
+	* src/plugins/archive/Makefile.am
+	* src/plugins/att_remover/Makefile.am
+	* src/plugins/attachwarner/Makefile.am
+	* src/plugins/bogofilter/Makefile.am
+	* src/plugins/bsfilter/Makefile.am
+	* src/plugins/clamd/Makefile.am
+	* src/plugins/demo/Makefile.am
+	* src/plugins/fancy/Makefile.am
+	* src/plugins/fetchinfo/Makefile.am
+	* src/plugins/gdata/Makefile.am
+	* src/plugins/mailmbox/Makefile.am
+	* src/plugins/newmail/Makefile.am
+	* src/plugins/notification/Makefile.am
+	* src/plugins/pdf_viewer/Makefile.am
+	* src/plugins/perl/Makefile.am
+	* src/plugins/pgpcore/Makefile.am
+	* src/plugins/pgpinline/Makefile.am
+	* src/plugins/pgpmime/Makefile.am
+	* src/plugins/python/Makefile.am
+	* src/plugins/rssyl/Makefile.am
+	* src/plugins/smime/Makefile.am
+	* src/plugins/spam_report/Makefile.am
+	* src/plugins/spamassassin/Makefile.am
+	* src/plugins/tnef_parse/Makefile.am
+	* src/plugins/vcalendar/Makefile.am		
+		2013-02-20 [colin]	3.9.0cvs87  * src/plugins/Makefile.am *
+		src/plugins/acpi_notifier/Makefile.am *
+		src/plugins/address_keeper/Makefile.am *
+		src/plugins/archive/Makefile.am * src/plugins/att_remover/Makefile.am
+		* src/plugins/attachwarner/Makefile.am *
+		src/plugins/bogofilter/Makefile.am * src/plugins/bsfilter/Makefile.am
+		* src/plugins/clamd/Makefile.am * src/plugins/demo/Makefile.am *
+		src/plugins/fancy/Makefile.am * src/plugins/fetchinfo/Makefile.am *
+		src/plugins/gdata/Makefile.am * src/plugins/mailmbox/Makefile.am *
+		src/plugins/newmail/Makefile.am *
+		src/plugins/notification/Makefile.am *
+		src/plugins/pdf_viewer/Makefile.am * src/plugins/perl/Makefile.am *
+		src/plugins/pgpcore/Makefile.am * src/plugins/pgpinline/Makefile.am *
+		src/plugins/pgpmime/Makefile.am * src/plugins/python/Makefile.am *
+		src/plugins/rssyl/Makefile.am * src/plugins/smime/Makefile.am *
+		src/plugins/spam_report/Makefile.am *
+		src/plugins/spamassassin/Makefile.am *
+		src/plugins/tnef_parse/Makefile.am *
+		src/plugins/vcalendar/Makefile.am Change automake conditionals so
+		that all plugins subdirectories are included, but nothing built in
+		disabled plugins. Fixes make dist with some plugins --disabled.
+
+2013-02-20  [Colin Leroy] 3.9.0-94-g3e0e3d1
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_viewer.h		
+		2013-02-20 [colin]	3.9.0cvs86  * configure.ac *
+		src/plugins/fancy/fancy_viewer.h Fix build for Fancy and vCalendar
+
+2013-02-20  [Colin Leroy] 3.9.0-93-ga0e9ba8
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/fancy_viewer.c
+	* src/plugins/fancy/fancy_viewer.h
+	* src/plugins/notification/Makefile.am
+	* src/plugins/notification/gtkhotkey/.cvsignore
+	* src/plugins/notification/gtkhotkey/Makefile.am
+	* .../notification/gtkhotkey/gtk-hotkey-error.c
+	* .../notification/gtkhotkey/gtk-hotkey-error.h
+	* .../notification/gtkhotkey/gtk-hotkey-info.c
+	* .../notification/gtkhotkey/gtk-hotkey-info.h
+	* .../gtkhotkey/gtk-hotkey-key-file-registry.c
+	* .../gtkhotkey/gtk-hotkey-key-file-registry.h
+	* .../notification/gtkhotkey/gtk-hotkey-listener.c
+	* .../notification/gtkhotkey/gtk-hotkey-listener.h
+	* .../notification/gtkhotkey/gtk-hotkey-marshal.c
+	* .../notification/gtkhotkey/gtk-hotkey-marshal.h
+	* .../notification/gtkhotkey/gtk-hotkey-registry.c
+	* .../notification/gtkhotkey/gtk-hotkey-registry.h
+	* .../notification/gtkhotkey/gtk-hotkey-utils.c
+	* .../notification/gtkhotkey/gtk-hotkey-utils.h
+	* .../gtkhotkey/gtk-hotkey-x11-listener.c
+	* .../gtkhotkey/gtk-hotkey-x11-listener.h
+	* src/plugins/notification/gtkhotkey/gtkhotkey.h
+	* .../notification/gtkhotkey/x11/eggaccelerators.c
+	* .../notification/gtkhotkey/x11/eggaccelerators.h
+	* .../notification/gtkhotkey/x11/tomboykeybinder.c
+	* .../notification/gtkhotkey/x11/tomboykeybinder.h
+	* src/plugins/notification/notification_plugin.c
+	* src/plugins/spam_report/Makefile.am
+	* src/plugins/spam_report/spam_report.c
+	* src/plugins/tnef_parse/Makefile.am		
+		2013-02-20 [colin]	3.9.0cvs85  * configure.ac Rework plugin enabling
+		logic. More clean! * src/plugins/fancy/fancy_viewer.c *
+		src/plugins/fancy/fancy_viewer.h *
+		src/plugins/spam_report/spam_report.c Make curl dependancy mandatory
+		* src/plugins/notification/notification_plugin.c Fix build with every
+		possible thing disabled * src/plugins/notification/Makefile.am *
+		src/plugins/notification/gtkhotkey/.cvsignore *
+		src/plugins/notification/gtkhotkey/Makefile.am *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-error.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-error.h *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-info.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-info.h *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-key-file-registry.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-key-file-registry.h *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-listener.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-listener.h *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-marshal.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-marshal.h *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-registry.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-registry.h *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-utils.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-utils.h *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-x11-listener.c *
+		src/plugins/notification/gtkhotkey/gtk-hotkey-x11-listener.h *
+		src/plugins/notification/gtkhotkey/gtkhotkey.h *
+		src/plugins/notification/gtkhotkey/x11/eggaccelerators.c *
+		src/plugins/notification/gtkhotkey/x11/eggaccelerators.h *
+		src/plugins/notification/gtkhotkey/x11/tomboykeybinder.c *
+		src/plugins/notification/gtkhotkey/x11/tomboykeybinder.h Re-add
+		hotkey support * src/plugins/spam_report/Makefile.am *
+		src/plugins/tnef_parse/Makefile.am Remove gettext.h
+
+2013-02-20  [Colin Leroy] 3.9.0-92-gfa12fb4
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/POTFILES.in
+	* src/plugins/Makefile.am
+	* src/plugins/dillo_viewer/.cvsignore
+	* src/plugins/dillo_viewer/Makefile.am
+	* src/plugins/dillo_viewer/README
+	* src/plugins/dillo_viewer/dillo_prefs.c
+	* src/plugins/dillo_viewer/dillo_prefs.h
+	* src/plugins/dillo_viewer/dillo_viewer.c
+	* src/plugins/trayicon/.cvsignore
+	* src/plugins/trayicon/Makefile.am
+	* src/plugins/trayicon/README
+	* src/plugins/trayicon/libeggtrayicon/.cvsignore
+	* src/plugins/trayicon/trayicon.c
+	* src/plugins/trayicon/trayicon_prefs.c
+	* src/plugins/trayicon/trayicon_prefs.h		
+		2013-02-20 [colin]	3.9.0cvs84  * configure.ac * po/POTFILES.in *
+		src/plugins/Makefile.am * src/plugins/dillo_viewer/.cvsignore *
+		src/plugins/dillo_viewer/Makefile.am *
+		src/plugins/dillo_viewer/README *
+		src/plugins/dillo_viewer/dillo_prefs.c *
+		src/plugins/dillo_viewer/dillo_prefs.h *
+		src/plugins/dillo_viewer/dillo_viewer.c *
+		src/plugins/trayicon/.cvsignore * src/plugins/trayicon/Makefile.am *
+		src/plugins/trayicon/README * src/plugins/trayicon/trayicon.c *
+		src/plugins/trayicon/trayicon_prefs.c *
+		src/plugins/trayicon/trayicon_prefs.h *
+		src/plugins/trayicon/libeggtrayicon/.cvsignore Drop trayicon and
+		dillo_viewer
+
+2013-02-20  [Colin Leroy] 3.9.0-91-gefe0b01
+
+	* po/POTFILES.in
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po		
+		*direct commit of translations from spam_report and tnef_parse
+
+2013-02-20  [Colin Leroy] 3.9.0-90-g260386b
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/Makefile.am
+	* src/plugins/spam_report/.cvsignore
+	* src/plugins/spam_report/Makefile.am
+	* src/plugins/spam_report/placeholder.txt
+	* src/plugins/spam_report/spam_report.c
+	* src/plugins/spam_report/spam_report_prefs.c
+	* src/plugins/spam_report/spam_report_prefs.h
+	* src/plugins/tnef_parse/.cvsignore
+	* src/plugins/tnef_parse/Makefile.am
+	* src/plugins/tnef_parse/claws.def
+	* src/plugins/tnef_parse/mapi.h
+	* src/plugins/tnef_parse/mapidefs.h
+	* src/plugins/tnef_parse/mapitags.h
+	* src/plugins/tnef_parse/placeholder.txt
+	* src/plugins/tnef_parse/plugin.def
+	* src/plugins/tnef_parse/tnef-errors.h
+	* src/plugins/tnef_parse/tnef-types.h
+	* src/plugins/tnef_parse/tnef_dump.c
+	* src/plugins/tnef_parse/tnef_dump.h
+	* src/plugins/tnef_parse/tnef_parse.c
+	* src/plugins/tnef_parse/version.rc
+	* src/plugins/tnef_parse/ytnef.c
+	* src/plugins/tnef_parse/ytnef.h		
+		2013-02-20 [colin]	3.9.0cvs83  * configure.ac *
+		src/plugins/Makefile.am * src/plugins/spam_report/.cvsignore *
+		src/plugins/spam_report/Makefile.am *
+		src/plugins/spam_report/placeholder.txt *
+		src/plugins/spam_report/spam_report.c *
+		src/plugins/spam_report/spam_report_prefs.c *
+		src/plugins/spam_report/spam_report_prefs.h *
+		src/plugins/tnef_parse/.cvsignore *
+		src/plugins/tnef_parse/Makefile.am * src/plugins/tnef_parse/claws.def
+		* src/plugins/tnef_parse/mapi.h * src/plugins/tnef_parse/mapidefs.h *
+		src/plugins/tnef_parse/mapitags.h *
+		src/plugins/tnef_parse/placeholder.txt *
+		src/plugins/tnef_parse/plugin.def *
+		src/plugins/tnef_parse/tnef-errors.h *
+		src/plugins/tnef_parse/tnef-types.h *
+		src/plugins/tnef_parse/tnef_dump.c *
+		src/plugins/tnef_parse/tnef_dump.h *
+		src/plugins/tnef_parse/tnef_parse.c *
+		src/plugins/tnef_parse/version.rc * src/plugins/tnef_parse/ytnef.c *
+		src/plugins/tnef_parse/ytnef.h Add tnef_parse and spam_report
+
+2013-02-20  [Colin Leroy] 3.9.0-89-g0880b64
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/bogofilter/Makefile.am
+	* src/plugins/clamd/Makefile.am
+	* src/plugins/demo/Makefile.am
+	* src/plugins/dillo_viewer/Makefile.am
+	* src/plugins/fancy/Makefile.am
+	* src/plugins/fetchinfo/Makefile.am
+	* src/plugins/gdata/Makefile.am
+	* src/plugins/mailmbox/Makefile.am
+	* src/plugins/newmail/Makefile.am
+	* src/plugins/notification/Makefile.am
+	* src/plugins/pdf_viewer/Makefile.am
+	* src/plugins/perl/Makefile.am
+	* src/plugins/python/Makefile.am
+	* src/plugins/spamassassin/Makefile.am
+	* src/plugins/trayicon/Makefile.am
+	* src/plugins/vcalendar/libical/libical/Makefile.am		
+		2013-02-20 [colin]	3.9.0cvs82  * src/plugins/bogofilter/Makefile.am *
+		src/plugins/clamd/Makefile.am * src/plugins/demo/Makefile.am *
+		src/plugins/dillo_viewer/Makefile.am * src/plugins/fancy/Makefile.am
+		* src/plugins/fetchinfo/Makefile.am * src/plugins/gdata/Makefile.am *
+		src/plugins/mailmbox/Makefile.am * src/plugins/newmail/Makefile.am *
+		src/plugins/notification/Makefile.am *
+		src/plugins/pdf_viewer/Makefile.am * src/plugins/perl/Makefile.am *
+		src/plugins/python/Makefile.am * src/plugins/spamassassin/Makefile.am
+		* src/plugins/trayicon/Makefile.am *
+		src/plugins/vcalendar/libical/libical/Makefile.am Fix out-of-tree
+		build
+
+2013-02-19  [Colin Leroy] 3.9.0-88-ga6c230e
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-02-19 [colin]	3.9.0cvs81  * configure.ac Fix inverted logic in a
+		few plugins
+
+2013-02-18  [Ricardo Mones] 3.9.0-87-g09d564e
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/notification/Makefile.am
+	* src/plugins/pdf_viewer/Makefile.am
+	* src/plugins/python/Makefile.am		
+		2013-02-18 [mones]	3.9.0cvs80  * src/plugins/notification/Makefile.am
+		* src/plugins/pdf_viewer/Makefile.am * src/plugins/python/Makefile.am
+		Allow 'make dist' to generate a nice tarball
+
+2013-02-18  [Tristan Chabredier] 3.9.0-86-gbfebd94
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/clamd/libclamd/.cvsignore		
+		2013-02-18 [wwp]	3.9.0cvs79  * src/plugins/clamd/libclamd/.cvsignore
+		Add one more .cvsignore file.
+
+2013-02-18  [Tristan Chabredier] 3.9.0-85-g7f83436
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-02-18 [wwp]	3.9.0cvs78  * src/plugins/clamd/libclamd/.cvsignore
+		One more .cvsignore file.
+
+2013-02-18  [Tristan Chabredier] 3.9.0-84-g03084bd
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/clamd/.cvsignore
+	* src/plugins/fetchinfo/.cvsignore
+	* src/plugins/gdata/.cvsignore
+	* src/plugins/mailmbox/.cvsignore
+	* src/plugins/newmail/.cvsignore
+	* src/plugins/notification/.cvsignore
+	* src/plugins/pdf_viewer/.cvsignore
+	* src/plugins/perl/.cvsignore
+	* src/plugins/python/.cvsignore		
+		2013-02-18 [wwp]	3.9.0cvs77  * src/plugins/clamd/.cvsignore *
+		src/plugins/clamd/libclamd/.cvsignore *
+		src/plugins/fetchinfo/.cvsignore * src/plugins/gdata/.cvsignore *
+		src/plugins/mailmbox/.cvsignore * src/plugins/newmail/.cvsignore *
+		src/plugins/notification/.cvsignore *
+		src/plugins/pdf_viewer/.cvsignore * src/plugins/perl/.cvsignore *
+		src/plugins/python/.cvsignore Silent up stuff a bit.
+
+2013-02-17  [Colin Leroy] 3.9.0-83-gc74cc16
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/notification/Makefile.am
+	* src/plugins/notification/notification_banner.c
+	* src/plugins/notification/notification_banner.h
+	* src/plugins/notification/notification_command.c
+	* src/plugins/notification/notification_command.h
+	* src/plugins/notification/notification_core.c
+	* .../notification/notification_foldercheck.c
+	* .../notification/notification_foldercheck.h
+	* src/plugins/notification/notification_hotkeys.c
+	* src/plugins/notification/notification_hotkeys.h
+	* src/plugins/notification/notification_indicator.c
+	* src/plugins/notification/notification_indicator.h
+	* src/plugins/notification/notification_lcdproc.c
+	* src/plugins/notification/notification_lcdproc.h
+	* src/plugins/notification/notification_plugin.c
+	* src/plugins/notification/notification_plugin.h
+	* src/plugins/notification/notification_popup.c
+	* src/plugins/notification/notification_popup.h
+	* src/plugins/notification/notification_prefs.c
+	* src/plugins/notification/notification_prefs.h
+	* src/plugins/notification/notification_trayicon.c
+	* src/plugins/notification/notification_trayicon.h		
+		2013-02-17 [colin]	3.9.0cvs76  * src/plugins/notification/Makefile.am
+		* src/plugins/notification/notification_banner.c *
+		src/plugins/notification/notification_banner.h *
+		src/plugins/notification/notification_command.c *
+		src/plugins/notification/notification_command.h *
+		src/plugins/notification/notification_core.c *
+		src/plugins/notification/notification_foldercheck.c *
+		src/plugins/notification/notification_foldercheck.h *
+		src/plugins/notification/notification_hotkeys.c *
+		src/plugins/notification/notification_hotkeys.h *
+		src/plugins/notification/notification_indicator.c *
+		src/plugins/notification/notification_indicator.h *
+		src/plugins/notification/notification_lcdproc.c *
+		src/plugins/notification/notification_lcdproc.h *
+		src/plugins/notification/notification_plugin.c *
+		src/plugins/notification/notification_plugin.h *
+		src/plugins/notification/notification_popup.c *
+		src/plugins/notification/notification_popup.h *
+		src/plugins/notification/notification_prefs.c *
+		src/plugins/notification/notification_prefs.h *
+		src/plugins/notification/notification_trayicon.c *
+		src/plugins/notification/notification_trayicon.h Activate and fix
+		notification (without libindicate)
+
+2013-02-17  [Colin Leroy] 3.9.0-82-g1d11f6c
+
+	* po/POTFILES.in
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sr.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po		
+		Direct commit of translations for
+		{clamd,fetchinfo,gdata,mailmbox,newm
+		thon}. Can't wait 15 minutes.
+
+2013-02-17  [Colin Leroy] 3.9.0-80-gabf3a16
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/Makefile.am
+	* src/plugins/archive/Makefile.am
+	* src/plugins/clamd/Makefile.am
+	* src/plugins/clamd/clamav_plugin.c
+	* src/plugins/clamd/clamav_plugin.h
+	* src/plugins/clamd/clamav_plugin_gtk.c
+	* src/plugins/clamd/libclamd/Makefile.am
+	* src/plugins/clamd/libclamd/clamd-plugin.c
+	* src/plugins/clamd/libclamd/clamd-plugin.h
+	* src/plugins/clamd/placeholder.txt
+	* src/plugins/fetchinfo/Makefile.am
+	* src/plugins/fetchinfo/fetchinfo_plugin.c
+	* src/plugins/fetchinfo/fetchinfo_plugin.h
+	* src/plugins/fetchinfo/fetchinfo_plugin_gtk.c
+	* src/plugins/fetchinfo/placeholder.txt
+	* src/plugins/gdata/Makefile.am
+	* src/plugins/gdata/cm_gdata_contacts.c
+	* src/plugins/gdata/cm_gdata_contacts.h
+	* src/plugins/gdata/cm_gdata_prefs.c
+	* src/plugins/gdata/cm_gdata_prefs.h
+	* src/plugins/gdata/gdata_plugin.c
+	* src/plugins/gdata/gdata_plugin.h
+	* src/plugins/gdata/placeholder.txt
+	* src/plugins/geolocation/placeholder.txt
+	* src/plugins/gtkhtml2_viewer/placeholder.txt
+	* src/plugins/mailmbox/Makefile.am
+	* src/plugins/mailmbox/carray.c
+	* src/plugins/mailmbox/carray.h
+	* src/plugins/mailmbox/chash.c
+	* src/plugins/mailmbox/chash.h
+	* src/plugins/mailmbox/clist.c
+	* src/plugins/mailmbox/clist.h
+	* src/plugins/mailmbox/mailimf.c
+	* src/plugins/mailmbox/mailimf.h
+	* src/plugins/mailmbox/mailimf_types.c
+	* src/plugins/mailmbox/mailimf_types.h
+	* src/plugins/mailmbox/mailimf_types_helper.c
+	* src/plugins/mailmbox/mailimf_types_helper.h
+	* src/plugins/mailmbox/mailimf_write.c
+	* src/plugins/mailmbox/mailimf_write.h
+	* src/plugins/mailmbox/maillock.c
+	* src/plugins/mailmbox/maillock.h
+	* src/plugins/mailmbox/mailmbox.c
+	* src/plugins/mailmbox/mailmbox.h
+	* src/plugins/mailmbox/mailmbox_folder.c
+	* src/plugins/mailmbox/mailmbox_folder.h
+	* src/plugins/mailmbox/mailmbox_gtk.deps
+	* src/plugins/mailmbox/mailmbox_parse.c
+	* src/plugins/mailmbox/mailmbox_parse.h
+	* src/plugins/mailmbox/mailmbox_types.c
+	* src/plugins/mailmbox/mailmbox_types.h
+	* src/plugins/mailmbox/mmapstring.c
+	* src/plugins/mailmbox/mmapstring.h
+	* src/plugins/mailmbox/placeholder.txt
+	* src/plugins/mailmbox/plugin.c
+	* src/plugins/mailmbox/plugin_gtk.c
+	* src/plugins/mailmbox/plugin_gtk.h
+	* src/plugins/newmail/Makefile.am
+	* src/plugins/newmail/newmail.c
+	* src/plugins/newmail/placeholder.txt
+	* src/plugins/notification/Makefile.am
+	* src/plugins/notification/claws.def
+	* src/plugins/notification/notification_banner.c
+	* src/plugins/notification/notification_banner.h
+	* src/plugins/notification/notification_command.c
+	* src/plugins/notification/notification_command.h
+	* src/plugins/notification/notification_core.c
+	* src/plugins/notification/notification_core.h
+	* .../notification/notification_foldercheck.c
+	* .../notification/notification_foldercheck.h
+	* src/plugins/notification/notification_hotkeys.c
+	* src/plugins/notification/notification_hotkeys.h
+	* src/plugins/notification/notification_indicator.c
+	* src/plugins/notification/notification_indicator.h
+	* src/plugins/notification/notification_lcdproc.c
+	* src/plugins/notification/notification_lcdproc.h
+	* src/plugins/notification/notification_pixbuf.c
+	* src/plugins/notification/notification_pixbuf.h
+	* src/plugins/notification/notification_plugin.c
+	* src/plugins/notification/notification_plugin.h
+	* src/plugins/notification/notification_popup.c
+	* src/plugins/notification/notification_popup.h
+	* src/plugins/notification/notification_prefs.c
+	* src/plugins/notification/notification_prefs.h
+	* src/plugins/notification/notification_trayicon.c
+	* src/plugins/notification/notification_trayicon.h
+	* src/plugins/notification/placeholder.txt
+	* src/plugins/notification/plugin.def
+	* .../notification/raw_claws_mail_logo_64x64.h
+	* src/plugins/notification/version.rc
+	* src/plugins/pdf_viewer/Makefile.am
+	* src/plugins/pdf_viewer/doc_index.xpm
+	* src/plugins/pdf_viewer/doc_index_close.xpm
+	* src/plugins/pdf_viewer/doc_info.xpm
+	* src/plugins/pdf_viewer/first_arrow.xpm
+	* src/plugins/pdf_viewer/last_arrow.xpm
+	* src/plugins/pdf_viewer/left_arrow.xpm
+	* src/plugins/pdf_viewer/placeholder.txt
+	* src/plugins/pdf_viewer/poppler_viewer.c
+	* src/plugins/pdf_viewer/poppler_viewer.h
+	* src/plugins/pdf_viewer/right_arrow.xpm
+	* src/plugins/pdf_viewer/rotate_left.xpm
+	* src/plugins/pdf_viewer/rotate_right.xpm
+	* src/plugins/pdf_viewer/zoom_fit.xpm
+	* src/plugins/pdf_viewer/zoom_in.xpm
+	* src/plugins/pdf_viewer/zoom_out.xpm
+	* src/plugins/pdf_viewer/zoom_width.xpm
+	* src/plugins/perl/Makefile.am
+	* src/plugins/perl/perl_gtk.c
+	* src/plugins/perl/perl_gtk.h
+	* src/plugins/perl/perl_plugin.c
+	* src/plugins/perl/perl_plugin.h
+	* src/plugins/perl/placeholder.txt
+	* src/plugins/python/Makefile.am
+	* src/plugins/python/clawsmailmodule.c
+	* src/plugins/python/clawsmailmodule.h
+	* src/plugins/python/composewindowtype.c
+	* src/plugins/python/composewindowtype.h
+	* src/plugins/python/foldertype.c
+	* src/plugins/python/foldertype.h
+	* src/plugins/python/messageinfotype.c
+	* src/plugins/python/messageinfotype.h
+	* src/plugins/python/nodetype.c
+	* src/plugins/python/nodetype.h
+	* src/plugins/python/placeholder.txt
+	* src/plugins/python/python-hooks.c
+	* src/plugins/python/python-hooks.h
+	* src/plugins/python/python-shell.c
+	* src/plugins/python/python-shell.h
+	* src/plugins/python/python_plugin.c
+	* src/plugins/vcalendar/Makefile.in		
+		2013-02-17 [colin]	3.9.0cvs75  * src/plugins/Makefile.am *
+		src/plugins/archive/Makefile.am * src/plugins/clamd/Makefile.am *
+		src/plugins/clamd/clamav_plugin.c * src/plugins/clamd/clamav_plugin.h
+		* src/plugins/clamd/clamav_plugin_gtk.c *
+		src/plugins/clamd/placeholder.txt *
+		src/plugins/clamd/libclamd/Makefile.am *
+		src/plugins/clamd/libclamd/clamd-plugin.c *
+		src/plugins/clamd/libclamd/clamd-plugin.h *
+		src/plugins/fetchinfo/Makefile.am *
+		src/plugins/fetchinfo/fetchinfo_plugin.c *
+		src/plugins/fetchinfo/fetchinfo_plugin.h *
+		src/plugins/fetchinfo/fetchinfo_plugin_gtk.c *
+		src/plugins/fetchinfo/placeholder.txt * src/plugins/gdata/Makefile.am
+		* src/plugins/gdata/cm_gdata_contacts.c *
+		src/plugins/gdata/cm_gdata_contacts.h *
+		src/plugins/gdata/cm_gdata_prefs.c *
+		src/plugins/gdata/cm_gdata_prefs.h * src/plugins/gdata/gdata_plugin.c
+		* src/plugins/gdata/gdata_plugin.h *
+		src/plugins/gdata/placeholder.txt *
+		src/plugins/geolocation/placeholder.txt *
+		src/plugins/gtkhtml2_viewer/placeholder.txt *
+		src/plugins/mailmbox/Makefile.am * src/plugins/mailmbox/carray.c *
+		src/plugins/mailmbox/carray.h * src/plugins/mailmbox/chash.c *
+		src/plugins/mailmbox/chash.h * src/plugins/mailmbox/clist.c *
+		src/plugins/mailmbox/clist.h * src/plugins/mailmbox/mailimf.c *
+		src/plugins/mailmbox/mailimf.h * src/plugins/mailmbox/mailimf_types.c
+		* src/plugins/mailmbox/mailimf_types.h *
+		src/plugins/mailmbox/mailimf_types_helper.c *
+		src/plugins/mailmbox/mailimf_types_helper.h *
+		src/plugins/mailmbox/mailimf_write.c *
+		src/plugins/mailmbox/mailimf_write.h *
+		src/plugins/mailmbox/maillock.c * src/plugins/mailmbox/maillock.h *
+		src/plugins/mailmbox/mailmbox.c * src/plugins/mailmbox/mailmbox.h *
+		src/plugins/mailmbox/mailmbox_folder.c *
+		src/plugins/mailmbox/mailmbox_folder.h *
+		src/plugins/mailmbox/mailmbox_gtk.deps *
+		src/plugins/mailmbox/mailmbox_parse.c *
+		src/plugins/mailmbox/mailmbox_parse.h *
+		src/plugins/mailmbox/mailmbox_types.c *
+		src/plugins/mailmbox/mailmbox_types.h *
+		src/plugins/mailmbox/mmapstring.c * src/plugins/mailmbox/mmapstring.h
+		* src/plugins/mailmbox/placeholder.txt *
+		src/plugins/mailmbox/plugin.c * src/plugins/mailmbox/plugin_gtk.c *
+		src/plugins/mailmbox/plugin_gtk.h * src/plugins/newmail/Makefile.am *
+		src/plugins/newmail/newmail.c * src/plugins/newmail/placeholder.txt *
+		src/plugins/notification/Makefile.am *
+		src/plugins/notification/claws.def *
+		src/plugins/notification/notification_banner.c *
+		src/plugins/notification/notification_banner.h *
+		src/plugins/notification/notification_command.c *
+		src/plugins/notification/notification_command.h *
+		src/plugins/notification/notification_core.c *
+		src/plugins/notification/notification_core.h *
+		src/plugins/notification/notification_foldercheck.c *
+		src/plugins/notification/notification_foldercheck.h *
+		src/plugins/notification/notification_hotkeys.c *
+		src/plugins/notification/notification_hotkeys.h *
+		src/plugins/notification/notification_indicator.c *
+		src/plugins/notification/notification_indicator.h *
+		src/plugins/notification/notification_lcdproc.c *
+		src/plugins/notification/notification_lcdproc.h *
+		src/plugins/notification/notification_pixbuf.c *
+		src/plugins/notification/notification_pixbuf.h *
+		src/plugins/notification/notification_plugin.c *
+		src/plugins/notification/notification_plugin.h *
+		src/plugins/notification/notification_popup.c *
+		src/plugins/notification/notification_popup.h *
+		src/plugins/notification/notification_prefs.c *
+		src/plugins/notification/notification_prefs.h *
+		src/plugins/notification/notification_trayicon.c *
+		src/plugins/notification/notification_trayicon.h *
+		src/plugins/notification/placeholder.txt *
+		src/plugins/notification/plugin.def *
+		src/plugins/notification/raw_claws_mail_logo_64x64.h *
+		src/plugins/notification/version.rc *
+		src/plugins/pdf_viewer/Makefile.am *
+		src/plugins/pdf_viewer/doc_index.xpm *
+		src/plugins/pdf_viewer/doc_index_close.xpm *
+		src/plugins/pdf_viewer/doc_info.xpm *
+		src/plugins/pdf_viewer/first_arrow.xpm *
+		src/plugins/pdf_viewer/last_arrow.xpm *
+		src/plugins/pdf_viewer/left_arrow.xpm *
+		src/plugins/pdf_viewer/placeholder.txt *
+		src/plugins/pdf_viewer/poppler_viewer.c *
+		src/plugins/pdf_viewer/poppler_viewer.h *
+		src/plugins/pdf_viewer/right_arrow.xpm *
+		src/plugins/pdf_viewer/rotate_left.xpm *
+		src/plugins/pdf_viewer/rotate_right.xpm *
+		src/plugins/pdf_viewer/zoom_fit.xpm *
+		src/plugins/pdf_viewer/zoom_in.xpm *
+		src/plugins/pdf_viewer/zoom_out.xpm *
+		src/plugins/pdf_viewer/zoom_width.xpm * src/plugins/perl/Makefile.am
+		* src/plugins/perl/perl_gtk.c * src/plugins/perl/perl_gtk.h *
+		src/plugins/perl/perl_plugin.c * src/plugins/perl/perl_plugin.h *
+		src/plugins/perl/placeholder.txt * src/plugins/python/Makefile.am *
+		src/plugins/python/clawsmailmodule.c *
+		src/plugins/python/clawsmailmodule.h *
+		src/plugins/python/composewindowtype.c *
+		src/plugins/python/composewindowtype.h *
+		src/plugins/python/foldertype.c * src/plugins/python/foldertype.h *
+		src/plugins/python/messageinfotype.c *
+		src/plugins/python/messageinfotype.h * src/plugins/python/nodetype.c
+		* src/plugins/python/nodetype.h * src/plugins/python/placeholder.txt
+		* src/plugins/python/python-hooks.c *
+		src/plugins/python/python-hooks.h * src/plugins/python/python-shell.c
+		* src/plugins/python/python-shell.h *
+		src/plugins/python/python_plugin.c *
+		src/plugins/vcalendar/Makefile.in Add some plugins (clamd, fetchinfo,
+		gdata, mailmbox, newmail, notification, pdf_viewer, perl, python).
+		Notification not yet enabled because it has too much autoconf
+		switches for my taste.
+
+2013-02-16  [Colin Leroy] 3.9.0-79-g2c79a20
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/POTFILES.in
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po
+	* src/plugins/Makefile.am
+	* src/plugins/archive/.cvsignore
+	* src/plugins/archive/Makefile.am
+	* src/plugins/archive/archiver.c
+	* src/plugins/archive/archiver.h
+	* src/plugins/archive/archiver_gtk.c
+	* src/plugins/archive/archiver_prefs.c
+	* src/plugins/archive/archiver_prefs.h
+	* src/plugins/archive/libarchive_archive.c
+	* src/plugins/archive/libarchive_archive.h
+	* src/plugins/archive/placeholder.txt
+	* src/plugins/att_remover/.cvsignore
+	* src/plugins/att_remover/Makefile.am
+	* src/plugins/att_remover/att_remover.c
+	* src/plugins/att_remover/placeholder.txt
+	* src/plugins/bsfilter/.cvsignore
+	* src/plugins/bsfilter/Makefile.am
+	* src/plugins/bsfilter/bsfilter.c
+	* src/plugins/bsfilter/bsfilter.h
+	* src/plugins/bsfilter/bsfilter_gtk.c
+	* src/plugins/bsfilter/claws.def
+	* src/plugins/bsfilter/placeholder.txt
+	* src/plugins/bsfilter/plugin.def
+	* src/plugins/bsfilter/version.rc
+	* src/plugins/vcalendar/Makefile.in
+	* .../vcalendar/libical/libical/icalversion.h		
+		2013-02-16 [colin]	3.9.0cvs74  * po/POTFILES.in * po/bg.po * po/ca.po
+		* po/cs.po * po/de.po * po/en_GB.po * po/es.po * po/fi.po * po/fr.po
+		* po/hu.po * po/id_ID.po * po/it.po * po/ja.po * po/lt.po * po/nl.po
+		* po/pl.po * po/pt_BR.po * po/pt_PT.po * po/ru.po * po/sk.po *
+		po/sv.po * po/uk.po * po/zh_CN.po * po/zh_TW.po *
+		src/plugins/Makefile.am * src/plugins/archive/.cvsignore *
+		src/plugins/archive/Makefile.am * src/plugins/archive/archiver.c *
+		src/plugins/archive/archiver.h * src/plugins/archive/archiver_gtk.c *
+		src/plugins/archive/archiver_prefs.c *
+		src/plugins/archive/archiver_prefs.h *
+		src/plugins/archive/libarchive_archive.c *
+		src/plugins/archive/libarchive_archive.h *
+		src/plugins/archive/placeholder.txt *
+		src/plugins/att_remover/.cvsignore *
+		src/plugins/att_remover/Makefile.am *
+		src/plugins/att_remover/att_remover.c *
+		src/plugins/att_remover/placeholder.txt *
+		src/plugins/bsfilter/.cvsignore * src/plugins/bsfilter/Makefile.am *
+		src/plugins/bsfilter/bsfilter.c * src/plugins/bsfilter/bsfilter.h *
+		src/plugins/bsfilter/bsfilter_gtk.c * src/plugins/bsfilter/claws.def
+		* src/plugins/bsfilter/placeholder.txt *
+		src/plugins/bsfilter/plugin.def * src/plugins/bsfilter/version.rc Add
+		archive, att_remover, bsfilter * src/plugins/vcalendar/Makefile.in *
+		src/plugins/vcalendar/libical/libical/icalversion.h Remove useless
+		files
+
+2013-02-16  [Colin Leroy] 3.9.0-78-gcc39433
+
+	* src/plugins/acpi_notifier/.cvsignore
+	* src/plugins/address_keeper/.cvsignore
+	* src/plugins/attachwarner/.cvsignore
+	* src/plugins/fancy/.cvsignore
+	* src/plugins/rssyl/.cvsignore
+	* src/plugins/vcalendar/.cvsignore
+	* src/plugins/vcalendar/libical/libicalss/.cvsignore
+	* src/plugins/vcalendar/libical/libicalvcal/.cvsignore		
+		add .cvsignore files
+
+2013-02-16  [Colin Leroy] 3.9.0-77-g99bb499
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/POTFILES.in
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sr.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po
+	* src/plugins/Makefile.am
+	* src/plugins/acpi_notifier/Makefile.am
+	* src/plugins/acpi_notifier/acpi_notifier.c
+	* src/plugins/acpi_notifier/placeholder.txt
+	* src/plugins/address_keeper/Makefile.am
+	* src/plugins/address_keeper/address_keeper.c
+	* src/plugins/address_keeper/address_keeper.h
+	* src/plugins/address_keeper/address_keeper_prefs.c
+	* src/plugins/address_keeper/address_keeper_prefs.h
+	* src/plugins/address_keeper/claws.def
+	* src/plugins/address_keeper/placeholder.txt
+	* src/plugins/address_keeper/plugin.def
+	* src/plugins/address_keeper/version.rc
+	* src/plugins/attachwarner/Makefile.am
+	* src/plugins/attachwarner/attachwarner.c
+	* src/plugins/attachwarner/attachwarner.h
+	* src/plugins/attachwarner/attachwarner_prefs.c
+	* src/plugins/attachwarner/attachwarner_prefs.h
+	* src/plugins/attachwarner/claws.def
+	* src/plugins/attachwarner/placeholder.txt
+	* src/plugins/attachwarner/plugin.def
+	* src/plugins/attachwarner/version.rc
+	* .../vcalendar/libical/libical/icalversion.h		
+		2013-02-16 [colin]	3.9.0cvs73  * src/plugins/Makefile.am *
+		src/plugins/acpi_notifier/Makefile.am *
+		src/plugins/acpi_notifier/acpi_notifier.c *
+		src/plugins/acpi_notifier/placeholder.txt *
+		src/plugins/address_keeper/Makefile.am *
+		src/plugins/address_keeper/address_keeper.c *
+		src/plugins/address_keeper/address_keeper.h *
+		src/plugins/address_keeper/address_keeper_prefs.c *
+		src/plugins/address_keeper/address_keeper_prefs.h *
+		src/plugins/address_keeper/claws.def *
+		src/plugins/address_keeper/placeholder.txt *
+		src/plugins/address_keeper/plugin.def *
+		src/plugins/address_keeper/version.rc *
+		src/plugins/attachwarner/Makefile.am *
+		src/plugins/attachwarner/attachwarner.c *
+		src/plugins/attachwarner/attachwarner.h *
+		src/plugins/attachwarner/attachwarner_prefs.c *
+		src/plugins/attachwarner/attachwarner_prefs.h *
+		src/plugins/attachwarner/claws.def *
+		src/plugins/attachwarner/placeholder.txt *
+		src/plugins/attachwarner/plugin.def *
+		src/plugins/attachwarner/version.rc *
+		src/plugins/vcalendar/libical/libical/icalversion.h * po/POTFILES.in
+		* po/bg.po * po/ca.po * po/cs.po * po/de.po * po/en_GB.po * po/es.po
+		* po/fi.po * po/fr.po * po/hu.po * po/id_ID.po * po/it.po * po/ja.po
+		* po/lt.po * po/nl.po * po/pl.po * po/pt_BR.po * po/pt_PT.po *
+		po/ru.po * po/sk.po * po/sr.po * po/sv.po * po/uk.po * po/zh_CN.po *
+		po/zh_TW.po Now do acpi_notifier, attachwarner, address_keeper
+
+2013-02-16  [Colin Leroy] 3.9.0-76-gb9ecb98
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/POTFILES.in
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sr.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po		
+		2013-02-16 [colin]	3.9.0cvs72  * po/POTFILES.in * po/bg.po * po/ca.po
+		* po/cs.po * po/de.po * po/en_GB.po * po/es.po * po/fi.po * po/fr.po
+		* po/hu.po * po/id_ID.po * po/it.po * po/ja.po * po/lt.po * po/nl.po
+		* po/pl.po * po/pt_BR.po * po/pt_PT.po * po/ru.po * po/sk.po *
+		po/sr.po * po/sv.po * po/uk.po * po/zh_CN.po * po/zh_TW.po Merge
+		RSSyl's translations
+
+2013-02-16  [Colin Leroy] 3.9.0-75-g6e41f21
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c		
+		2013-02-16 [colin]	3.9.0cvs71  * src/mainwindow.c Fix use-after-free
+		(introduced in cvs61)
+
+2013-02-16  [Colin Leroy] 3.9.0-74-g9c88c12
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/defs.h
+	* src/common/w32_account.c
+	* src/main.c
+	* src/plugins/Makefile.am
+	* src/plugins/rssyl/Makefile.am
+	* src/plugins/rssyl/claws.def
+	* src/plugins/rssyl/date.c
+	* src/plugins/rssyl/date.h
+	* src/plugins/rssyl/feed.c
+	* src/plugins/rssyl/feed.h
+	* src/plugins/rssyl/feedprops.c
+	* src/plugins/rssyl/feedprops.h
+	* src/plugins/rssyl/opml.c
+	* src/plugins/rssyl/opml.h
+	* src/plugins/rssyl/parsers.c
+	* src/plugins/rssyl/parsers.h
+	* src/plugins/rssyl/placeholder.txt
+	* src/plugins/rssyl/plugin.c
+	* src/plugins/rssyl/plugin.def
+	* src/plugins/rssyl/rssyl.c
+	* src/plugins/rssyl/rssyl.h
+	* src/plugins/rssyl/rssyl_cb_gtk.c
+	* src/plugins/rssyl/rssyl_cb_gtk.h
+	* src/plugins/rssyl/rssyl_cb_menu.c
+	* src/plugins/rssyl/rssyl_cb_menu.h
+	* src/plugins/rssyl/rssyl_gtk.c
+	* src/plugins/rssyl/rssyl_gtk.h
+	* src/plugins/rssyl/rssyl_prefs.c
+	* src/plugins/rssyl/rssyl_prefs.h
+	* src/plugins/rssyl/strreplace.c
+	* src/plugins/rssyl/strreplace.h
+	* src/plugins/rssyl/version.rc
+	* src/plugins/vcalendar/Makefile.am
+	* src/plugins/vcalendar/Makefile.in
+	* .../vcalendar/libical/libical/icalversion.h
+	* src/plugins/vcalendar/plugin.c
+	* src/prefs_common.c
+	* src/prefs_common.h		
+		2013-02-16 [colin]	3.9.0cvs70  * src/main.c * src/prefs_common.c *
+		src/prefs_common.h * src/common/defs.h * src/common/w32_account.c Add
+		an hidden preference to set the Windows theme *
+		src/plugins/Makefile.am * src/plugins/rssyl/Makefile.am *
+		src/plugins/rssyl/claws.def * src/plugins/rssyl/date.c *
+		src/plugins/rssyl/date.h * src/plugins/rssyl/feed.c *
+		src/plugins/rssyl/feed.h * src/plugins/rssyl/feedprops.c *
+		src/plugins/rssyl/feedprops.h * src/plugins/rssyl/opml.c *
+		src/plugins/rssyl/opml.h * src/plugins/rssyl/parsers.c *
+		src/plugins/rssyl/parsers.h * src/plugins/rssyl/placeholder.txt *
+		src/plugins/rssyl/plugin.c * src/plugins/rssyl/plugin.def *
+		src/plugins/rssyl/rssyl.c * src/plugins/rssyl/rssyl.h *
+		src/plugins/rssyl/rssyl_cb_gtk.c * src/plugins/rssyl/rssyl_cb_gtk.h *
+		src/plugins/rssyl/rssyl_cb_menu.c * src/plugins/rssyl/rssyl_cb_menu.h
+		* src/plugins/rssyl/rssyl_gtk.c * src/plugins/rssyl/rssyl_gtk.h *
+		src/plugins/rssyl/rssyl_prefs.c * src/plugins/rssyl/rssyl_prefs.h *
+		src/plugins/rssyl/strreplace.c * src/plugins/rssyl/strreplace.h *
+		src/plugins/rssyl/version.rc Add RSSyl *
+		src/plugins/vcalendar/Makefile.am * src/plugins/vcalendar/Makefile.in
+		* src/plugins/vcalendar/plugin.c *
+		src/plugins/vcalendar/libical/libical/icalversion.h Fix Curl flags :)
+
+2013-02-14  [Paul Mangan] 3.9.0-73-g2df9692
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/id_ID.po		
+		2013-02-14 [paul]	3.9.0cvs69  * po/id_ID.po "fix" plural forms
+
+2013-02-14  [Colin Leroy] 3.9.0-72-g90bed4e
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/POTFILES.in
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/merge-po-from-plugin.sh
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sr.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po		
+		2013-02-14 [colin]	3.9.0cvs68  * po/POTFILES.in Add vcalendar files *
+		po/merge-po-from-plugin.sh Add helper script to merge external
+		plugins translations * po/bg.po * po/ca.po * po/cs.po * po/de.po *
+		po/en_GB.po * po/es.po * po/fi.po * po/fr.po * po/hu.po * po/id_ID.po
+		* po/it.po * po/ja.po * po/lt.po * po/nl.po * po/pl.po * po/pt_BR.po
+		* po/pt_PT.po * po/ru.po * po/sk.po * po/sr.po * po/sv.po * po/uk.po
+		* po/zh_CN.po * po/zh_TW.po Merge translations from fancy and
+		vcalendar
+
+2013-02-14  [Colin Leroy] 3.9.0-71-g145fef0
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac		
+		2013-02-14 [colin]	3.9.0cvs67  * configure.ac Fix perl detection
+
+2013-02-14  [Colin Leroy] 3.9.0-70-gbe24476
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/vcalendar/claws.def
+	* src/plugins/vcalendar/libical/Makefile.in
+	* .../vcalendar/libical/design-data/Makefile.in
+	* src/plugins/vcalendar/libical/libical/Makefile.in
+	* src/plugins/vcalendar/libical/scripts/Makefile.in
+	* src/plugins/vcalendar/plugin.def		
+		2013-02-14 [colin]	3.9.0cvs66  * src/plugins/vcalendar/claws.def *
+		src/plugins/vcalendar/plugin.def Add missing files *
+		src/plugins/vcalendar/libical/Makefile.in *
+		src/plugins/vcalendar/libical/design-data/Makefile.in *
+		src/plugins/vcalendar/libical/libical/Makefile.in *
+		src/plugins/vcalendar/libical/scripts/Makefile.in Remove extraneous
+		files
+
+2013-02-13  [Colin Leroy] 3.9.0-69-g9bf8cef
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/Makefile.am
+	* src/plugins/address_dup_finder/placeholder.txt
+	* src/plugins/synce/placeholder.txt
+	* src/plugins/vcalendar/Makefile.am
+	* src/plugins/vcalendar/Makefile.in
+	* src/plugins/vcalendar/common-views.c
+	* src/plugins/vcalendar/common-views.h
+	* src/plugins/vcalendar/day-view.c
+	* src/plugins/vcalendar/icaltime_as_local.c
+	* src/plugins/vcalendar/icaltime_as_local.h
+	* src/plugins/vcalendar/libical/.cvsignore
+	* src/plugins/vcalendar/libical/Makefile.am
+	* src/plugins/vcalendar/libical/Makefile.in
+	* .../vcalendar/libical/design-data/.cvsignore
+	* .../vcalendar/libical/design-data/Makefile.am
+	* .../vcalendar/libical/design-data/Makefile.in
+	* .../vcalendar/libical/design-data/parameters.csv
+	* .../vcalendar/libical/design-data/properties.csv
+	* .../vcalendar/libical/design-data/restrictions.csv
+	* .../vcalendar/libical/design-data/status.txt
+	* .../vcalendar/libical/design-data/value-types.csv
+	* src/plugins/vcalendar/libical/libical/.cvsignore
+	* src/plugins/vcalendar/libical/libical/Makefile.am
+	* src/plugins/vcalendar/libical/libical/Makefile.in
+	* .../vcalendar/libical/libical/icalattendee.c
+	* .../vcalendar/libical/libical/icalattendee.h
+	* .../vcalendar/libical/libical/icalcomponent.c
+	* .../vcalendar/libical/libical/icalcomponent.h
+	* .../libical/libical/icalderivedparameter.c.in
+	* .../libical/libical/icalderivedparameter.h.in
+	* .../libical/libical/icalderivedproperty.c.in
+	* .../libical/libical/icalderivedproperty.h.in
+	* .../libical/libical/icalderivedvalue.c.in
+	* .../libical/libical/icalderivedvalue.h.in
+	* .../vcalendar/libical/libical/icalduration.c
+	* .../vcalendar/libical/libical/icalduration.h
+	* src/plugins/vcalendar/libical/libical/icalenums.c
+	* src/plugins/vcalendar/libical/libical/icalenums.h
+	* src/plugins/vcalendar/libical/libical/icalerror.c
+	* src/plugins/vcalendar/libical/libical/icalerror.h
+	* .../vcalendar/libical/libical/icallangbind.c
+	* .../vcalendar/libical/libical/icallangbind.h
+	* src/plugins/vcalendar/libical/libical/icallexer.l
+	* src/plugins/vcalendar/libical/libical/icalmemory.c
+	* src/plugins/vcalendar/libical/libical/icalmemory.h
+	* src/plugins/vcalendar/libical/libical/icalmime.c
+	* src/plugins/vcalendar/libical/libical/icalmime.h
+	* .../vcalendar/libical/libical/icalparameter.c
+	* .../vcalendar/libical/libical/icalparameter.h
+	* .../vcalendar/libical/libical/icalparameterimpl.h
+	* src/plugins/vcalendar/libical/libical/icalparser.c
+	* src/plugins/vcalendar/libical/libical/icalparser.h
+	* src/plugins/vcalendar/libical/libical/icalperiod.c
+	* src/plugins/vcalendar/libical/libical/icalperiod.h
+	* .../vcalendar/libical/libical/icalproperty.c
+	* .../vcalendar/libical/libical/icalproperty.h
+	* src/plugins/vcalendar/libical/libical/icalrecur.c
+	* src/plugins/vcalendar/libical/libical/icalrecur.h
+	* .../vcalendar/libical/libical/icalrestriction.c.in
+	* .../vcalendar/libical/libical/icalrestriction.h
+	* src/plugins/vcalendar/libical/libical/icaltime.c
+	* src/plugins/vcalendar/libical/libical/icaltime.h
+	* src/plugins/vcalendar/libical/libical/icaltypes.c
+	* src/plugins/vcalendar/libical/libical/icaltypes.h
+	* src/plugins/vcalendar/libical/libical/icalvalue.c
+	* src/plugins/vcalendar/libical/libical/icalvalue.h
+	* .../vcalendar/libical/libical/icalvalueimpl.h
+	* .../vcalendar/libical/libical/icalversion.h
+	* .../vcalendar/libical/libical/icalversion.h.in
+	* .../vcalendar/libical/libical/icalyacc.output
+	* src/plugins/vcalendar/libical/libical/icalyacc.y
+	* src/plugins/vcalendar/libical/libical/pvl.c
+	* src/plugins/vcalendar/libical/libical/pvl.h
+	* src/plugins/vcalendar/libical/libical/sspm.c
+	* src/plugins/vcalendar/libical/libical/sspm.h
+	* src/plugins/vcalendar/libical/libical/vsnprintf.c
+	* src/plugins/vcalendar/libical/scripts/.cvsignore
+	* src/plugins/vcalendar/libical/scripts/Makefile.am
+	* src/plugins/vcalendar/libical/scripts/Makefile.in
+	* .../libical/scripts/mkderivedcomponents.pl
+	* .../libical/scripts/mkderivedparameters.pl
+	* .../libical/scripts/mkderivedproperties.pl
+	* .../vcalendar/libical/scripts/mkderivedvalues.pl
+	* .../libical/scripts/mkparameterrestrictions.pl
+	* .../libical/scripts/mkrestrictionrecords.pl
+	* .../libical/scripts/mkrestrictiontable.pl
+	* .../vcalendar/libical/scripts/readvaluesfile.pl
+	* src/plugins/vcalendar/month-view.c
+	* src/plugins/vcalendar/placeholder.txt
+	* src/plugins/vcalendar/plugin.c
+	* src/plugins/vcalendar/vcal_dbus.c
+	* src/plugins/vcalendar/vcal_dbus.h
+	* src/plugins/vcalendar/vcal_folder.c
+	* src/plugins/vcalendar/vcal_folder.h
+	* src/plugins/vcalendar/vcal_interface.h
+	* src/plugins/vcalendar/vcal_manager.c
+	* src/plugins/vcalendar/vcal_manager.h
+	* src/plugins/vcalendar/vcal_meeting_gtk.c
+	* src/plugins/vcalendar/vcal_meeting_gtk.h
+	* src/plugins/vcalendar/vcal_prefs.c
+	* src/plugins/vcalendar/vcal_prefs.h
+	* src/plugins/vcalendar/vcalendar.c
+	* src/plugins/vcalendar/vcalendar.h
+	* src/plugins/vcalendar/version.rc		
+		2013-02-13 [colin]	3.9.0cvs65  *
+		src/plugins/address_dup_finder/placeholder.txt *
+		src/plugins/synce/placeholder.txt Removed, deprecated plugins *
+		src/plugins/Makefile.am * src/plugins/vcalendar/Makefile.am *
+		src/plugins/vcalendar/Makefile.in *
+		src/plugins/vcalendar/common-views.c *
+		src/plugins/vcalendar/common-views.h *
+		src/plugins/vcalendar/day-view.c *
+		src/plugins/vcalendar/icaltime_as_local.c *
+		src/plugins/vcalendar/icaltime_as_local.h *
+		src/plugins/vcalendar/month-view.c *
+		src/plugins/vcalendar/placeholder.txt *
+		src/plugins/vcalendar/plugin.c * src/plugins/vcalendar/vcal_dbus.c *
+		src/plugins/vcalendar/vcal_dbus.h *
+		src/plugins/vcalendar/vcal_folder.c *
+		src/plugins/vcalendar/vcal_folder.h *
+		src/plugins/vcalendar/vcal_interface.h *
+		src/plugins/vcalendar/vcal_manager.c *
+		src/plugins/vcalendar/vcal_manager.h *
+		src/plugins/vcalendar/vcal_meeting_gtk.c *
+		src/plugins/vcalendar/vcal_meeting_gtk.h *
+		src/plugins/vcalendar/vcal_prefs.c *
+		src/plugins/vcalendar/vcal_prefs.h *
+		src/plugins/vcalendar/vcalendar.c * src/plugins/vcalendar/vcalendar.h
+		* src/plugins/vcalendar/version.rc *
+		src/plugins/vcalendar/libical/.cvsignore *
+		src/plugins/vcalendar/libical/Makefile.am *
+		src/plugins/vcalendar/libical/Makefile.in *
+		src/plugins/vcalendar/libical/design-data/.cvsignore *
+		src/plugins/vcalendar/libical/design-data/Makefile.am *
+		src/plugins/vcalendar/libical/design-data/Makefile.in *
+		src/plugins/vcalendar/libical/design-data/parameters.csv *
+		src/plugins/vcalendar/libical/design-data/properties.csv *
+		src/plugins/vcalendar/libical/design-data/restrictions.csv *
+		src/plugins/vcalendar/libical/design-data/status.txt *
+		src/plugins/vcalendar/libical/design-data/value-types.csv *
+		src/plugins/vcalendar/libical/libical/.cvsignore *
+		src/plugins/vcalendar/libical/libical/Makefile.am *
+		src/plugins/vcalendar/libical/libical/Makefile.in *
+		src/plugins/vcalendar/libical/libical/icalattendee.c *
+		src/plugins/vcalendar/libical/libical/icalattendee.h *
+		src/plugins/vcalendar/libical/libical/icalcomponent.c *
+		src/plugins/vcalendar/libical/libical/icalcomponent.h *
+		src/plugins/vcalendar/libical/libical/icalderivedparameter.c.in *
+		src/plugins/vcalendar/libical/libical/icalderivedparameter.h.in *
+		src/plugins/vcalendar/libical/libical/icalderivedproperty.c.in *
+		src/plugins/vcalendar/libical/libical/icalderivedproperty.h.in *
+		src/plugins/vcalendar/libical/libical/icalderivedvalue.c.in *
+		src/plugins/vcalendar/libical/libical/icalderivedvalue.h.in *
+		src/plugins/vcalendar/libical/libical/icalduration.c *
+		src/plugins/vcalendar/libical/libical/icalduration.h *
+		src/plugins/vcalendar/libical/libical/icalenums.c *
+		src/plugins/vcalendar/libical/libical/icalenums.h *
+		src/plugins/vcalendar/libical/libical/icalerror.c *
+		src/plugins/vcalendar/libical/libical/icalerror.h *
+		src/plugins/vcalendar/libical/libical/icallangbind.c *
+		src/plugins/vcalendar/libical/libical/icallangbind.h *
+		src/plugins/vcalendar/libical/libical/icallexer.l *
+		src/plugins/vcalendar/libical/libical/icalmemory.c *
+		src/plugins/vcalendar/libical/libical/icalmemory.h *
+		src/plugins/vcalendar/libical/libical/icalmime.c *
+		src/plugins/vcalendar/libical/libical/icalmime.h *
+		src/plugins/vcalendar/libical/libical/icalparameter.c *
+		src/plugins/vcalendar/libical/libical/icalparameter.h *
+		src/plugins/vcalendar/libical/libical/icalparameterimpl.h *
+		src/plugins/vcalendar/libical/libical/icalparser.c *
+		src/plugins/vcalendar/libical/libical/icalparser.h *
+		src/plugins/vcalendar/libical/libical/icalperiod.c *
+		src/plugins/vcalendar/libical/libical/icalperiod.h *
+		src/plugins/vcalendar/libical/libical/icalproperty.c *
+		src/plugins/vcalendar/libical/libical/icalproperty.h *
+		src/plugins/vcalendar/libical/libical/icalrecur.c *
+		src/plugins/vcalendar/libical/libical/icalrecur.h *
+		src/plugins/vcalendar/libical/libical/icalrestriction.c.in *
+		src/plugins/vcalendar/libical/libical/icalrestriction.h *
+		src/plugins/vcalendar/libical/libical/icaltime.c *
+		src/plugins/vcalendar/libical/libical/icaltime.h *
+		src/plugins/vcalendar/libical/libical/icaltypes.c *
+		src/plugins/vcalendar/libical/libical/icaltypes.h *
+		src/plugins/vcalendar/libical/libical/icalvalue.c *
+		src/plugins/vcalendar/libical/libical/icalvalue.h *
+		src/plugins/vcalendar/libical/libical/icalvalueimpl.h *
+		src/plugins/vcalendar/libical/libical/icalversion.h *
+		src/plugins/vcalendar/libical/libical/icalversion.h.in *
+		src/plugins/vcalendar/libical/libical/icalyacc.output *
+		src/plugins/vcalendar/libical/libical/icalyacc.y *
+		src/plugins/vcalendar/libical/libical/pvl.c *
+		src/plugins/vcalendar/libical/libical/pvl.h *
+		src/plugins/vcalendar/libical/libical/sspm.c *
+		src/plugins/vcalendar/libical/libical/sspm.h *
+		src/plugins/vcalendar/libical/libical/vsnprintf.c *
+		src/plugins/vcalendar/libical/scripts/.cvsignore *
+		src/plugins/vcalendar/libical/scripts/Makefile.am *
+		src/plugins/vcalendar/libical/scripts/Makefile.in *
+		src/plugins/vcalendar/libical/scripts/mkderivedcomponents.pl *
+		src/plugins/vcalendar/libical/scripts/mkderivedparameters.pl *
+		src/plugins/vcalendar/libical/scripts/mkderivedproperties.pl *
+		src/plugins/vcalendar/libical/scripts/mkderivedvalues.pl *
+		src/plugins/vcalendar/libical/scripts/mkparameterrestrictions.pl *
+		src/plugins/vcalendar/libical/scripts/mkrestrictionrecords.pl *
+		src/plugins/vcalendar/libical/scripts/mkrestrictiontable.pl *
+		src/plugins/vcalendar/libical/scripts/readvaluesfile.pl Add
+		vcalendar.
+
+2013-02-13  [Colin Leroy] 3.9.0-68-g476051c
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/acpi_notifier/placeholder.txt
+	* src/plugins/address_dup_finder/placeholder.txt
+	* src/plugins/address_keeper/placeholder.txt
+	* src/plugins/archive/placeholder.txt
+	* src/plugins/att_remover/placeholder.txt
+	* src/plugins/attachwarner/placeholder.txt
+	* src/plugins/bsfilter/placeholder.txt
+	* src/plugins/clamd/placeholder.txt
+	* src/plugins/fetchinfo/placeholder.txt
+	* src/plugins/gdata/placeholder.txt
+	* src/plugins/geolocation/placeholder.txt
+	* src/plugins/gtkhtml2_viewer/placeholder.txt
+	* src/plugins/mailmbox/placeholder.txt
+	* src/plugins/newmail/placeholder.txt
+	* src/plugins/notification/placeholder.txt
+	* src/plugins/pdf_viewer/placeholder.txt
+	* src/plugins/perl/placeholder.txt
+	* src/plugins/python/placeholder.txt
+	* src/plugins/rssyl/placeholder.txt
+	* src/plugins/spam_report/placeholder.txt
+	* src/plugins/synce/placeholder.txt
+	* src/plugins/tnef_parse/placeholder.txt
+	* src/plugins/vcalendar/placeholder.txt		
+		2013-02-13 [colin]	3.9.0cvs64  *
+		src/plugins/acpi_notifier/placeholder.txt *
+		src/plugins/address_dup_finder/placeholder.txt *
+		src/plugins/address_keeper/placeholder.txt *
+		src/plugins/archive/placeholder.txt *
+		src/plugins/att_remover/placeholder.txt *
+		src/plugins/attachwarner/placeholder.txt *
+		src/plugins/bsfilter/placeholder.txt *
+		src/plugins/clamd/placeholder.txt *
+		src/plugins/fetchinfo/placeholder.txt *
+		src/plugins/gdata/placeholder.txt *
+		src/plugins/geolocation/placeholder.txt *
+		src/plugins/gtkhtml2_viewer/placeholder.txt *
+		src/plugins/mailmbox/placeholder.txt *
+		src/plugins/newmail/placeholder.txt *
+		src/plugins/notification/placeholder.txt *
+		src/plugins/pdf_viewer/placeholder.txt *
+		src/plugins/perl/placeholder.txt * src/plugins/python/placeholder.txt
+		* src/plugins/rssyl/placeholder.txt *
+		src/plugins/spam_report/placeholder.txt *
+		src/plugins/synce/placeholder.txt *
+		src/plugins/tnef_parse/placeholder.txt *
+		src/plugins/vcalendar/placeholder.txt Add temporary placeholders for
+		ex-extra-plugins to be integrated.
+
+2013-02-13  [Paul Mangan] 3.9.0-67-gfbbf3c4
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/plugins/fancy/Makefile.am		
+		2013-02-13 [paul]	3.9.0cvs63  * src/plugins/fancy/Makefile.am no need
+		for EXTRA_DIST
+
+2013-02-13  [Paul Mangan] 3.9.0-66-gae302aa
+
+	* src/plugins/fancy/Makefile.am
+	* src/plugins/fancy/fancy_prefs.c
+	* src/plugins/fancy/fancy_prefs.h
+	* src/plugins/fancy/fancy_viewer.c
+	* src/plugins/fancy/fancy_viewer.h
+	* src/plugins/fancy/test		
+		move the Fancy plugin into core
+
+2013-02-13  [Paul Mangan] 3.9.0-64-ged13b0d
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/POTFILES.in
+	* src/plugins/Makefile.am		
+		2013-02-13 [paul]	3.9.0cvs62  * configure.ac * po/POTFILES.in *
+		src/plugins/Makefile.am * src/plugins/fancy/Makefile.am *
+		src/plugins/fancy/fancy_prefs.c * src/plugins/fancy/fancy_prefs.h *
+		src/plugins/fancy/fancy_viewer.c * src/plugins/fancy/fancy_viewer.h
+		move the Fancy plugin into core
+
+2013-02-11  [Paul Mangan] 3.9.0-63-g2d6b706
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c		
+		2013-02-11 [paul]	3.9.0cvs61  * src/mainwindow.c use the Delete key
+		to remove colour label accels (same as everywhere else). complete the
+		change to gtk_accel_map_add_entry() for older/newer GTKs
+
+2013-01-26  [Michael Rasmussen] 3.9.0-62-g9a484d2
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* tools/vcard2xml.py		
+		2013-01-26 [mir]	3.9.0cvs60  * tools/vcard2xml.py Fixes bugs: 1)
+		Lines split over more than one line breaks parser 2) Get email addres
+		correct. Not only email;internet Improvements: 1) Basic handling of
+		vcard 3.0
+
+2013-01-23  [Colin Leroy] 3.9.0-61-g9602106
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/action.c
+	* src/common/utils.c		
+		2013-01-23 [colin]	3.9.0cvs59  * src/action.c * src/common/utils.c
+		Fix actions with spaces (and quotes). Thanks to H. Merijn Brand
+
+2013-01-23  [Colin Leroy] 3.9.0-60-g4e0e364
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/imap.c		
+		2013-01-23 [colin]	3.9.0cvs58  * src/imap.c Fix bug #2863, "Applying
+		has_attachment quicksearch on IMAP segfaults".
+
+2013-01-21  [Paul Mangan] 3.9.0-59-g205b490
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/codeconv.h
+	* src/procmime.c		
+		2013-01-21 [paul]	3.9.0cvs57  * src/codeconv.h * src/procmime.c fix
+		bug 2862, 'Segmentation fault when replying to a message where the
+		"code conversion" fails'. add support for X-VIET-VPS encoding
+
+2013-01-21  [Paul Mangan] 3.9.0-58-gaf9e33f
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/defs.h
+	* src/gtk/about.c		
+		2013-01-21 [paul]	3.9.0cvs56  * src/common/defs.h * src/gtk/about.c
+		promote the users' ml on the About/Info tab
+
+2013-01-09  [Paul Mangan] 3.9.0-57-gcf5fc7f
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* doc/man/claws-mail.1
+	* src/gtk/about.c		
+		2013-01-09 [paul]	3.9.0cvs55  * doc/man/claws-mail.1 *
+		src/gtk/about.c update copyright year
+
+2013-01-09  [Paul Mangan] 3.9.0-56-g3b797b4
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/gtk/gtkaspell.c		
+		2013-01-09 [paul]	3.9.0cvs54  * src/gtk/gtkaspell.c fix sensitivity
+		of 'Use both dictionaries' in compose window
+
+2013-01-09  [Michael Rasmussen] 3.9.0-55-g8234fe1
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* tools/vcard2xml.py		
+		2013-01-09 [mir]	3.9.0cvs53  * tools/vcard2xml.py Fix missing file
+		encoding info. See -> http://www.python.org/dev/peps/pep-0263/
+
+2013-01-08  [Ricardo Mones] 3.9.0-54-gd30abf8
+
+	* ChangeLog
+	* PATCHSETS
+	* claws-mail.desktop
+	* configure.ac		
+		2013-01-08 [mones]	3.9.0cvs52  * claws-mail.desktop Added Swedish
+		translation by Andreas RÃ¶nnquist
+
+2012-12-20  [Colin Leroy] 3.9.0-53-gc07c190
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/action.c		
+		2012-12-20 [colin]	3.9.0cvs51  * src/action.c Fix crash on action
+		error; Fix trimming of leading spaces in actions
+
+2012-12-19  [Colin Leroy] 3.9.0-52-g7df8c38
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/editldap.c
+	* src/ldapctrl.c
+	* src/ldapserver.c		
+		2012-12-19 [colin]	3.9.0cvs50  * src/editldap.c * src/ldapctrl.c *
+		src/ldapserver.c Make LDAP over SSL work on Win32 - but not TLS,
+		unfortunately. Also, it requires the certificate to be trusted.
+
+2012-12-16  [Colin Leroy] 3.9.0-51-g43307fb
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/messageview.c		
+		2012-12-16 [colin]	3.9.0cvs49  * src/messageview.c Add missing \n at
+		end of the return receipt last part's headers.
+
+2012-12-15  [Paul Mangan] 3.9.0-50-g8f63427
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/addrselect.c		
+		2012-12-15 [paul]	3.9.0cvs48  * src/addrselect.c fix bug 2832, 'mail
+		to from adress-book splitt names'
+
+2012-12-12  [Colin Leroy] 3.9.0-49-g52516ea
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/action.c
+	* src/mainwindow.c		
+		2012-12-12 [colin]	3.9.0cvs47  * src/action.c Port to g_spawn API and
+		make actions work better on Win32 * src/mainwindow.c Indentation
+
+2012-12-12  [Andrej Kacian] 3.9.0-47-g7f17fbf
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/compose.c		
+		2012-12-12 [ticho]	3.9.0cvs46  * src/compose.c Move focus to body
+		textview when subject entry is activated (Enter key pressed) in
+		compose window.
+
+2012-12-10  [Ricardo Mones] 3.9.0-46-ge5bce43
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/addr_compl.c		
+		2012-12-10 [mones]	3.9.0cvs45  * src/addr_compl.c Fix bug #2835 (core
+		part) to allow NULL names which have an address
+
+2012-12-07  [Colin Leroy] 3.9.0-45-gadb0fbc
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/news.c		
+		2012-12-07 [colin]	3.9.0cvs44  * src/news.c Try to fix strange crash
+		in nntp_ping/session_destroy...
+
+2012-12-06  [Ricardo Mones] 3.9.0-44-g034d65b
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* tools/README
+	* tools/gif2xface.pl
+	* tools/outlook2claws-mail.pl		
+		2012-12-06 [mones]	3.9.0cvs43  * tools/README * tools/gif2xface.pl *
+		tools/outlook2claws-mail.pl Fix address not working since years ago
+
+2012-12-06  [Ricardo Mones] 3.9.0-43-gf291852
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/prefs_gtk.c		
+		2012-12-05 [mones]	3.9.0cvs42  * src/prefs_gtk.c Do not set to NULL
+		string preferences which have "" as default value
+
+2012-12-05  [Colin Leroy] 3.9.0-42-gf851947
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/ssl.c		
+		2012-12-05 [colin]	3.9.0cvs41  * src/common/ssl.c Nullify xcred
+		pointer like the other ones
+
+2012-12-03  [Tristan Chabredier] 3.9.0-41-g6dea180
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c
+	* src/summaryview.c		
+		2012-12-03 [wwp]	3.9.0cvs40  * src/summaryview.c * src/mainwindow.c
+		Avoid any possible confusion: 0 is not a neutral value when passed to
+		main_window_get_mask() - use -1 instead, even in those cases we don't
+		care.
+
+2012-12-03  [Tristan Chabredier] 3.9.0-40-g54c3c93
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/toolbar.c		
+		2012-12-03 [wwp]	3.9.0cvs39  * src/toolbar.c Fix sensitivity of
+		next-unread toolbar button.
+
+2012-12-03  [Colin Leroy] 3.9.0-39-gb6baa93
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/utils.c		
+		2012-12-03 [colin]	3.9.0cvs38  * src/common/utils.c Fix following
+		relative symlinks
+
+2012-12-02  [Colin Leroy] 3.9.0-38-gb2d2435
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/main.c		
+		2012-12-02 [colin]	3.9.0cvs37  * src/main.c Of course you can't,
+		Windows. Of course...
+
+2012-12-02  [Colin Leroy] 3.9.0-37-gd3d3bb9
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/main.c		
+		2012-12-02 [colin]	3.9.0cvs36  * src/main.c Move control sockets
+		inside their own directory, $TMPDIR/claws-mail-$UID/, and name them
+		after the configuration 		directory md5 hash. That allows - cleaner
+		separation of sockets and config dirs in case of alternate config
+		directories - forward migration is handled: if
+		$TMPDIR/claws-mail-$UID exists as a socket, use it to control the
+		running entity - backwards migration is handled: starting an old
+		Claws Mail version will bail out as creating the legacy socket won't
+		be possible. - migration for alternate-config-dirs is not handled,
+		which could be mentioned in release notes. Fixes bug #2828, "Use MD5
+		digest for socket name"
+
+2012-12-01  [Colin Leroy] 3.9.0-36-g726ed3d
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/utils.c		
+		2012-12-01 [colin]	3.9.0cvs35  * src/common/utils.c As usual, Windows
+		is a little bit different (you have to love it the same as the normal
+		OSes...)
+
+2012-12-01  [Colin Leroy] 3.9.0-35-gee15052
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/utils.c
+	* src/common/utils.h		
+		2012-12-01 [colin]	3.9.0cvs34  * src/common/utils.c *
+		src/common/utils.h Add a canonicalizer function and use it to
+		canonicalize rc_dir.
+
+2012-11-30  [Ricardo Mones] 3.9.0-34-gfa93b1c
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/plugin.c		
+		2012-11-30 [mones]	3.9.0cvs33  * src/common/plugin.c Fixes #1137
+		completely, saving path-less plugins as is in config. With this patch
+		user can edit plugin list on clawsrc and remove absolute paths from
+		shared plugins, leaving only the "pluginname.so". Those will be tried
+		to load from plugin dir of the loading core. Notice that those will
+		also fail to load on older versions, and will probably be removed
+		from your config without warning by the older version.
+
+2012-11-30  [Tristan Chabredier] 3.9.0-33-gf1c08b4
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c
+	* src/mainwindow.h
+	* src/summaryview.c
+	* src/toolbar.c		
+		2012-11-30 [wwp]	3.9.0cvs32  * src/mainwindow.c * src/mainwindow.h *
+		src/summaryview.c * src/toolbar.c Fix wrong types used (mix between
+		SensitiveCond and SensitiveCondMask), also fix list loop
+		initializers.
+
+2012-11-30  [Tristan Chabredier] 3.9.0-32-g931e462
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c
+	* src/mainwindow.h
+	* src/procmsg.c
+	* src/send_message.c
+	* src/send_message.h
+	* src/toolbar.c
+	* src/toolbar.h		
+		2012-11-30 [wwp]	3.9.0cvs31  * src/mainwindow.c * src/mainwindow.h *
+		src/procmsg.c * src/send_message.c * src/send_message.h *
+		src/toolbar.c * src/toolbar.h Add Message/Cancel sending (same as
+		--cancel-sending), adds the relevant toolbar icon, and an extra
+		cancel sending+receiving icon for convenience.
+
+2012-11-29  [Colin Leroy] 3.9.0-31-g6581aad
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c		
+		2012-11-29 [colin]	3.9.0cvs30  * src/mainwindow.c Fix mask on a few
+		menu items (thanks Ricardo!)
+
+2012-11-28  [Tristan Chabredier] 3.9.0-30-g9b75d6e
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c
+	* src/mainwindow.h
+	* src/summaryview.c
+	* src/toolbar.c		
+		2012-11-28 [wwp]	3.9.0cvs29  * src/mainwindow.c * src/mainwindow.h *
+		src/summaryview.c * src/toolbar.c Rework SensitiveCond enum to allow
+		more than 32 flags for GUI status checking. Complete toolbar_init(),
+		which was missing few inits.
+
+2012-11-28  [Colin Leroy] 3.9.0-29-g91892f5
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/etpan/nntp-thread.c
+	* src/mainwindow.c
+	* src/news.c
+	* src/news.h		
+		2012-11-28 [colin]	3.9.0cvs28  * src/mainwindow.c * src/news.c *
+		src/news.h * src/etpan/nntp-thread.c Disconnect NNTP accounts too
+		when switching offline
+
+2012-11-28  [Colin Leroy] 3.9.0-28-g94b2484
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/session.c
+	* src/common/session.h
+	* src/imap.c
+	* src/news.c		
+		2012-11-28 [colin]	3.9.0cvs27  * src/imap.c * src/news.c *
+		src/common/session.c * src/common/session.h Add keep-alive pings on
+		IMAP and NNTP
+
+2012-11-28  [Colin Leroy] 3.9.0-27-gddf3aca
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/etpan/imap-thread.c
+	* src/etpan/imap-thread.h
+	* src/imap.c		
+		2012-11-28 [colin]	3.9.0cvs26  * src/imap.c * src/etpan/imap-thread.c
+		* src/etpan/imap-thread.h Try locale's charset and UTF-7 on
+		server-side searches when UTF-8 fails. Also, don't even mention a
+		charset if searching for an ASCII string.
+
+2012-11-27  [Colin Leroy] 3.9.0-26-ga32c2d6
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/main.c		
+		2012-11-27 [colin]	3.9.0cvs25  * src/main.c Unbreak the build.
+
+2012-11-27  [Colin Leroy] 3.9.0-25-g4825388
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/ssl.c		
+		2012-11-27 [colin]	3.9.0cvs24  * src/common/ssl.c Fix bug #2826,
+		"replace deprecated gnutls function" Patch by Christian Hesse
+
+2012-11-27  [Colin Leroy] 3.9.0-24-g08ec3ee
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/gtk/manage_window.c		
+		2012-11-27 [colin]	3.9.0cvs23  * src/gtk/manage_window.c Stop
+		spamming logs with focus events.
+
+2012-11-27  [Colin Leroy] 3.9.0-23-gd5eabdd
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mainwindow.c
+	* src/prefs_common.c
+	* src/prefs_common.h		
+		2012-11-27 [colin]	3.9.0cvs22  * src/mainwindow.c *
+		src/prefs_common.c * src/prefs_common.h Unsneak a work-in-progress
+		patch that I mistakengly commited with a cleanup
+
+2012-11-27  [Tristan Chabredier] 3.9.0-22-g97fda80
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* doc/man/claws-mail.1
+	* src/main.c
+	* src/send_message.c
+	* src/send_message.h		
+		2012-11-27 [wwp]	3.9.0cvs21  * doc/man/claws-mail.1 * src/main.c *
+		src/send_message.c * src/send_message.h Add --cancel-sending
+		command-line switch.
+
+2012-11-23  [Colin Leroy] 3.9.0-21-gffacaed
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/common/socket.c
+	* src/common/socket.h
+	* src/common/ssl.c
+	* src/common/ssl_certificate.c
+	* src/common/ssl_certificate.h
+	* src/etpan/imap-thread.c
+	* src/etpan/nntp-thread.c
+	* src/jpilot.c
+	* src/main.c
+	* src/mainwindow.c
+	* src/matcher.c
+	* src/prefs_common.c
+	* src/prefs_common.h
+	* src/procmsg.c		
+		2012-11-23 [colin]	3.9.0cvs20  * src/jpilot.c * src/main.c *
+		src/mainwindow.c * src/matcher.c * src/prefs_common.c *
+		src/prefs_common.h * src/procmsg.c * src/common/socket.c *
+		src/common/socket.h * src/common/ssl.c * src/common/ssl_certificate.c
+		* src/common/ssl_certificate.h * src/etpan/imap-thread.c *
+		src/etpan/nntp-thread.c Cleanup some warnings and deprecated types.
+		Patch by Christian Hesse, fixing bug #2617. Thanks!
+
+2012-11-23  [Colin Leroy] 3.9.0-20-gcc7bf78
+
+	* AUTHORS
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/gtk/authors.h		
+		2012-11-23 [colin]	3.9.0cvs19  * AUTHORS * src/gtk/authors.h Add
+		Christian Hesse which was forgotten for some reason
+
+2012-11-21  [Colin Leroy] 3.9.0-18-g7ba3588
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/etpan/imap-thread.c		
+		2012-11-21 [colin]	3.9.0cvs18  * src/etpan/imap-thread.c Don't set
+		charset on simple searches. Fixes Exchange 2007.
+
+2012-11-20  [Colin Leroy] 3.9.0-17-g6232129
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/prefs_matcher.c		
+		2012-11-20 [colin]	3.9.0cvs17  * src/prefs_matcher.c Fix bug #2801,
+		"Filtering Header:Name list is blank/corrupt"
+
+2012-11-20  [Andrej Kacian] 3.9.0-16-g30a3dfa
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/gtk/prefswindow.c		
+		2012-11-20 [ticho]	3.9.0cvs16  * src/gtk/prefswindow.c Actually allow
+		folder preference pages which are in top level of page index UI to be
+		selected.
+
+2012-11-20  [Andrej Kacian] 3.9.0-15-gdd1eb1b
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/prefs_folder_item.c		
+		2012-11-20 [ticho]	3.9.0cvs15  * src/prefs_folder_item.c Remove
+		useless "Folder" root in page index of folder preferences UI.
+
+2012-11-18  [Colin Leroy] 3.9.0-14-g123d26d
+
+	* AUTHORS
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/advsearch.c
+	* src/gtk/authors.h
+	* src/gtk/quicksearch.c
+	* src/matcher.c
+	* src/matcher.h
+	* src/matcher_parser_parse.y
+	* src/prefs_matcher.c		
+		2012-11-18 [colin]	3.9.0cvs14  * AUTHORS * src/advsearch.c *
+		src/matcher.c * src/matcher.h * src/matcher_parser_parse.y *
+		src/prefs_matcher.c * src/gtk/authors.h * src/gtk/quicksearch.c Add
+		age_{greater,lower}_hours matcher criteria Initial patch by Abhay S.
+		Kushwaha.
+
+2012-11-18  [Andrej Kacian] 3.9.0-13-g0af9d59
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/mbox.c		
+		2012-11-18 [ticho]	3.9.0cvs13  * src/mbox.c Improve i18n plural
+		handling in a string used while importing from mbox.
+
+2012-11-16  [Andrej Kacian] 3.9.0-12-g446d146
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/Makevars
+	* po/bg.po
+	* po/ca.po
+	* po/cs.po
+	* po/de.po
+	* po/en_GB.po
+	* po/es.po
+	* po/fi.po
+	* po/fr.po
+	* po/he.po
+	* po/hu.po
+	* po/id_ID.po
+	* po/it.po
+	* po/ja.po
+	* po/lt.po
+	* po/nl.po
+	* po/pl.po
+	* po/pt_BR.po
+	* po/pt_PT.po
+	* po/ru.po
+	* po/sk.po
+	* po/sr.po
+	* po/sv.po
+	* po/uk.po
+	* po/zh_CN.po
+	* po/zh_TW.po		
+		2012-11-16 [ticho]	3.9.0cvs12  * po/bg.po * po/ca.po * po/cs.po *
+		po/de.po * po/en_GB.po * po/es.po * po/fi.po * po/fr.po * po/he.po *
+		po/hu.po * po/id_ID.po * po/it.po * po/ja.po * po/lt.po * po/nl.po *
+		po/pl.po * po/pt_BR.po * po/pt_PT.po * po/ru.po * po/sk.po * po/sr.po
+		* po/sv.po * po/uk.po * po/zh_CN.po * po/zh_TW.po * po/Makevars
+		Update message catalogs to match changes in 3.9.0cvs11.
+
+2012-11-16  [Andrej Kacian] 3.9.0-11-g57ee5bb
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/account.c
+	* src/addrcustomattr.c
+	* src/common/utils.c
+	* src/edittags.c
+	* src/gtk/about.c
+	* src/prefs_filtering.c
+	* src/prefs_matcher.c
+	* src/prefs_msg_colors.c
+	* src/toolbar.c
+	* src/uri_opener.c
+	* src/wizard.c		
+		2012-11-16 [ticho]	3.9.0cvs11  * src/account.c * src/addrcustomattr.c
+		* src/edittags.c * src/prefs_filtering.c * src/prefs_matcher.c *
+		src/prefs_msg_colors.c * src/toolbar.c * src/uri_opener.c *
+		src/wizard.c * src/common/utils.c * src/gtk/about.c Use pgettext()
+		and friends for i18n context strings, instead of having a pipe
+		character in msgid for context separation. This uses glib's C_ macro,
+		instead of Q_.
+
+2012-11-16  [Colin Leroy] 3.9.0-10-gd114048
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/foldersel.c
+	* src/gtk/description_window.c
+	* src/gtk/description_window.h
+	* src/gtk/inputdialog.c
+	* src/gtk/manage_window.c
+	* src/gtk/quicksearch.c
+	* src/prefs_actions.c
+	* src/prefs_filtering_action.c
+	* src/prefs_matcher.c
+	* src/quote_fmt.c		
+		2012-11-16 [colin]	3.9.0cvs10  * src/foldersel.c *
+		src/prefs_actions.c * src/prefs_filtering_action.c *
+		src/prefs_matcher.c * src/quote_fmt.c * src/gtk/description_window.c
+		* src/gtk/description_window.h * src/gtk/inputdialog.c *
+		src/gtk/manage_window.c * src/gtk/quicksearch.c Try to better fix
+		focus problems. Should address: Bug #2774 Bug #2624 Bug #1963 Please
+		check using your favorite WM that the following works: Information
+		button (Quicksearch, Templates, 'Test' filtering condition) Folder
+		selection (Move/Copy contextual menu, various preferences, including
+		'New folder'). Tested with XFCE, Gnome Shell and Windows.
+
+2012-11-16  [Colin Leroy] 3.9.0-9-g2fa3d21
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/advsearch.c		
+		2012-11-16 [colin]	3.9.0cvs9  * src/advsearch.c Init is_fast too
+
+2012-11-16  [Colin Leroy] 3.9.0-8-gb82f405
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/advsearch.c		
+		2012-11-16 [colin]	3.9.0cvs8  * src/advsearch.c Fix missing
+		initialisation of bool_and which could lead to From/To/Subject/Tag
+		searches searching with binary and. Also clean up tag expansion. No
+		need to create a matcher string and re-parse it.
+
+2012-11-16  [Paul Mangan] 3.9.0-7-gb24d520
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* po/de.po		
+		2012-11-16 [paul]	3.9.0cvs7  * po/de.po fix by Thomas Bellmann
+
+2012-11-15  [Colin Leroy] 3.9.0-6-gd09f676
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/summaryview.c		
+		2012-11-15 [colin]	3.9.0cvs6  * src/summaryview.c Fix bug #2785,
+		"Marking mails for deletion reopens internal message view"
+
+2012-11-15  [Colin Leroy] 3.9.0-5-gc3e4f83
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/gtk/gtkcmclist.c
+	* src/gtk/gtkcmclist.h
+	* src/main.c
+	* src/statusbar.c		
+		2012-11-15 [colin]	3.9.0cvs5  * src/main.c * src/statusbar.c *
+		src/gtk/gtkcmclist.c * src/gtk/gtkcmclist.h a few more GTK+3 fixes.
+		Segfaults on me, though.
+
+2012-11-15  [Colin Leroy] 3.9.0-4-ga8a31e2
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/Makefile.am
+	* src/action.c
+	* src/addr_compl.c
+	* src/addressbook.c
+	* src/addrgather.c
+	* src/compose.c
+	* src/editaddress.c
+	* src/editgroup.c
+	* src/gtk/Makefile.am
+	* src/gtk/colorlabel.c
+	* src/gtk/combobox.c
+	* src/gtk/combobox.h
+	* src/gtk/gtkcmclist.c
+	* src/gtk/gtkcmclist.h
+	* src/gtk/gtkcmctree.c
+	* src/gtk/gtksctree.c
+	* src/gtk/gtkshruler.c
+	* src/gtk/gtkutils.c
+	* src/gtk/gtkutils.h
+	* src/gtk/inputdialog.c
+	* src/gtk/quicksearch.c
+	* src/main.c
+	* src/mainwindow.c
+	* src/message_search.c
+	* src/plugins/pgpcore/Makefile.am
+	* src/plugins/pgpinline/Makefile.am
+	* src/plugins/pgpmime/Makefile.am
+	* src/plugins/smime/Makefile.am
+	* src/prefs_display_header.c
+	* src/prefs_filtering_action.c
+	* src/prefs_matcher.c
+	* src/prefs_other.c
+	* src/prefs_toolbar.c
+	* src/printing.c
+	* src/stock_pixmap.c
+	* src/summary_search.c
+	* src/summaryview.c
+	* src/textview.c		
+		2012-11-15 [colin]	3.9.0cvs4  * src/Makefile.am * src/action.c *
+		src/addr_compl.c * src/addressbook.c * src/addrgather.c *
+		src/compose.c * src/editaddress.c * src/editgroup.c * src/main.c *
+		src/mainwindow.c * src/message_search.c * src/prefs_display_header.c
+		* src/prefs_filtering_action.c * src/prefs_matcher.c *
+		src/prefs_other.c * src/prefs_toolbar.c * src/printing.c *
+		src/stock_pixmap.c * src/summary_search.c * src/summaryview.c *
+		src/textview.c * src/gtk/Makefile.am * src/gtk/colorlabel.c *
+		src/gtk/combobox.c * src/gtk/combobox.h * src/gtk/gtkcmclist.c *
+		src/gtk/gtkcmclist.h * src/gtk/gtkcmctree.c * src/gtk/gtksctree.c *
+		src/gtk/gtkshruler.c * src/gtk/gtkutils.c * src/gtk/gtkutils.h *
+		src/gtk/inputdialog.c * src/gtk/quicksearch.c *
+		src/plugins/pgpcore/Makefile.am * src/plugins/pgpinline/Makefile.am *
+		src/plugins/pgpmime/Makefile.am * src/plugins/smime/Makefile.am Big
+		GTK+3 patch from Hanno Meyer-Thurow
+
+2012-11-15  [Tristan Chabredier] 3.9.0-3-gc08c3f7
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* doc/man/claws-mail.1
+	* src/main.c		
+		2012-11-15 [wwp]	3.9.0cvs3  * doc/man/claws-mail.1 * src/main.c Add
+		--cancel-receiving command-line switch.
+
+2012-11-15  [Tristan Chabredier] 3.9.0-2-g7e2fbf9
+
+	* ChangeLog
+	* PATCHSETS
+	* configure.ac
+	* src/gtk/sslcertwindow.c
+	* src/ssl_manager.c		
+		2012-11-15 [wwp]	3.9.0cvs2  * src/ssl_manager.c *
+		src/gtk/sslcertwindow.c Fix Capitalization.

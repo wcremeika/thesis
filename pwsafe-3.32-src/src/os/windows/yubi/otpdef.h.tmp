@@ -1,0 +1,40 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\pwsafe-3.32-src\src\os\windows\yubi\otpdef.h" 0
+/*****************************************************************************************
+**																						**
+**		O T P D E F  -  Common OTP settings                                             **
+**																						**
+**		Date		/ Rev		/ Sign	/ Remark										**
+**		10-04-28	/ 1.0.0		/ J E	/ Main											**
+**      11-07-07    / 1.0.1     / J E   / Changed prefix limits                         **
+**																						**
+*****************************************************************************************/
+
+                             
+       	                     
+
+                                             
+                                              
+
+                                             
+                                                
+
+                                             
+                                                  
+
+                                                        
+                                                   
+
+                                                
+                                               
+
+// Reserved for upload to the Yubico server
+
+                                                
+
+// openauthentication.org assigned manufacturer prefix
+
+                                                
+                                                                            
+
+      		// __OTPDEF_H_INCLUDED__

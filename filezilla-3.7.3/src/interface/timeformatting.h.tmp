@@ -1,0 +1,13 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\timeformatting.h" 0
+                            
+                            
+
+class CTimeFormat
+{
+public:
+	static wxString FormatDateTime(wxDateTime const& time);
+	static wxString FormatDate(wxDateTime const& time);
+};
+
+       //__TIMEFORMATTING_H__

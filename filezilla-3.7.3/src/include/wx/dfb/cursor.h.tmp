@@ -1,0 +1,49 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\dfb\cursor.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/dfb/cursor.h
+// Purpose:     wxCursor declaration
+// Author:      Vaclav Slavik
+// Created:     2006-08-08
+// Copyright:   (c) 2006 REA Elektronik GmbH
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                         
+                         
+
+                     
+                     
+
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+
+//-----------------------------------------------------------------------------
+// wxCursor
+//-----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxCursor : public wxGDIObject
+{
+public:
+    wxCursor() {}
+    wxCursor(wxStockCursor id) { InitFromStock(id); }
+                           
+                                                          
+      
+    wxCursor(const wxString& name,
+             wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
+             int hotSpotX = 0, int hotSpotY = 0);
+
+    // implementation
+    wxBitmap GetBitmap() const;
+
+protected:
+    void InitFromStock(wxStockCursor);
+
+    // ref counting code
+    virtual wxGDIRefData *CreateGDIRefData() const;
+    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;
+
+    DECLARE_DYNAMIC_CLASS(wxCursor)
+};
+
+       // _WX_DFB_CURSOR_H_

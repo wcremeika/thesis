@@ -1,0 +1,32 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\private\datecontrols.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/private/datecontrols.h
+// Purpose:     implementation helpers for wxDatePickerCtrl and wxCalendarCtrl
+// Author:      Vadim Zeitlin
+// Created:     2008-04-04
+// Copyright:   (c) 2008 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                                    
+                                    
+
+                       
+
+                          
+
+// namespace for the helper functions related to the date controls
+namespace wxMSWDateControls
+{
+
+// do the one time only initialization of date classes of comctl32.dll, return
+// true if ok or log an error and return false if we failed (this can only
+// happen with a very old version of common controls DLL, i.e. before 4.70)
+extern bool CheckInitialization();
+
+} // namespace wxMSWDateControls
+
+       // _MSW_PRIVATE_DATECONTROLS_H_
+
+

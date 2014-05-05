@@ -1,0 +1,70 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\apptrait.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/apptrait.h
+// Purpose:     class implementing wxAppTraits for OS/2
+// Author:      Stefan Neis
+// Modified by:
+// Created:     22.09.2003
+// Copyright:   (c) 2003 Stefan Neis <Stefan.Neis@t-online.de>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                           
+                           
+
+// ----------------------------------------------------------------------------
+// wxGUI/ConsoleAppTraits: must derive from wxAppTraits, not wxAppTraitsBase
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_BASE wxConsoleAppTraits : public wxConsoleAppTraitsBase
+{
+public:
+                           
+                                               
+       // wxUSE_CONSOLE_EVENTLOOP
+               
+                                                         
+      
+};
+
+             
+
+                                                                 
+ 
+       
+                                               
+               
+                                                         
+      
+                                                                                     
+
+                       
+                       
+
+                                                    
+                                                     
+
+                              
+                                                   
+                
+                                                   
+      
+                 
+                                            
+      
+  
+
+                
+                                                                         
+ 
+ 
+
+                                                                       
+ 
+ 
+      
+
+       // wxUSE_GUI
+
+       // _WX_OS2_APPTRAIT_H_

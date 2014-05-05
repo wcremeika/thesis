@@ -1,0 +1,161 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\atomic.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/atomic.h
+// Purpose:     functions to manipulate atomically integers and pointers
+// Author:      Armel Asselin
+// Created:     12/13/2006
+// Copyright:   (c) Armel Asselin
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                     
+                     
+
+// ----------------------------------------------------------------------------
+// headers
+// ----------------------------------------------------------------------------
+
+// get the value of wxUSE_THREADS configuration flag
+                   
+
+// constraints on the various functions:
+//  - wxAtomicDec must return a zero value if the value is zero once
+//  decremented else it must return any non-zero value (the true value is OK
+//  but not necessary).
+
+                 
+
+                                     
+
+                                                                           
+                                                                       
+                                             
+                                                   
+
+                                         
+ 
+                                    
+ 
+
+                                             
+ 
+                                           
+ 
+
+
+                          
+
+                                   
+                           
+
+                                         
+ 
+                                         
+ 
+
+                                             
+ 
+                                                
+ 
+
+                                               
+
+                             
+                                         
+ 
+                                           
+ 
+
+                                             
+ 
+                                                  
+ 
+
+                           
+
+                   
+
+                                         
+ 
+                                         
+ 
+
+                                             
+ 
+                                                              
+ 
+
+                         
+
+                                                                                          
+                                  
+
+                          
+
+      // else of wxUSE_THREADS
+// if no threads are used we can safely use simple ++/--
+
+inline void wxAtomicInc (wxUint32 &value) { ++value; }
+inline wxUint32 wxAtomicDec (wxUint32 &value) { return --value; }
+
+       // !wxUSE_THREADS
+
+// ----------------------------------------------------------------------------
+// proxies to actual implementations, but for various other types with same
+//  behaviour
+// ----------------------------------------------------------------------------
+
+                                 
+
+                                               
+
+                   
+ 
+       
+                                                                              
+                                             
+                                                                 
+
+                                                
+                                                    
+
+                                                                      
+
+              
+     
+                                               
+                  
+     
+
+                 
+     
+                                               
+                         
+     
+
+        
+                              
+                               
+  
+
+                                                              
+                                                                        
+
+      // !wxNEEDS_GENERIC_ATOMIC_OPS
+
+                        
+
+inline void wxAtomicInc(wxInt32 &value) { wxAtomicInc((wxUint32&)value); }
+inline wxInt32 wxAtomicDec(wxInt32 &value) { return wxAtomicDec((wxUint32&)value); }
+
+typedef wxInt32 wxAtomicInt32;
+
+       // wxNEEDS_GENERIC_ATOMIC_OPS
+
+// all the native implementations use 32 bits currently
+// for a 64 bits implementation we could use (a future) wxAtomicInt64 as
+// default type
+typedef wxAtomicInt32 wxAtomicInt;
+
+       // _WX_ATOMIC_H_

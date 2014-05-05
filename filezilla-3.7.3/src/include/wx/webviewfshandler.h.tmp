@@ -1,0 +1,39 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\webviewfshandler.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        webviewfshandler.h
+// Purpose:     Custom webview handler for virtual file system
+// Author:      Nick Matthews
+// Copyright:   (c) 2012 Steven Lamerton
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+// Based on webviewarchivehandler.h file by Steven Lamerton
+
+                                 
+                                 
+
+                    
+
+                 
+
+               
+                   
+
+                       
+
+                                             
+
+                                                                      
+ 
+       
+                                               
+                                  
+                                                   
+        
+                               
+  
+
+       // wxUSE_WEBVIEW
+
+       // _WX_WEBVIEW_FS_HANDLER_H_

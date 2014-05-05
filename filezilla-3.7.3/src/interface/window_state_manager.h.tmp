@@ -1,0 +1,40 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\window_state_manager.h" 0
+                                  
+                                  
+
+// This class get used to remember toplevel window size and position across
+// sessions.
+
+class CWindowStateManager : public wxEvtHandler
+{
+public:
+	CWindowStateManager(wxTopLevelWindow* pWindow);
+	virtual ~CWindowStateManager();
+
+	bool Restore(const unsigned int optionId, const wxSize& default_size = wxSize(-1, -1));
+	void Remember(unsigned int optionId);
+
+	static wxRect GetScreenDimensions();
+
+                
+	                                               
+	                                                                       
+	                                                            
+	                                  
+      
+
+protected:
+	bool ReadDefaults(const unsigned int optionId, bool& maximized, wxPoint& position, wxSize& size);
+
+	wxTopLevelWindow* m_pWindow;
+
+	bool m_lastMaximized;
+	wxPoint m_lastWindowPosition;
+	wxSize m_lastWindowSize;
+
+	void OnSize(wxSizeEvent& event);
+	void OnMove(wxMoveEvent& event);
+};
+
+       //__WINDOW_STATE_MANAGER_H__

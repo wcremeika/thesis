@@ -1,0 +1,25 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\motif\dataobj.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/motif/dataobj.h
+// Purpose:     declaration of the wxDataObject class for Motif
+// Author:      Julian Smart
+// Copyright:   (c) 1998 Julian Smart
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                            
+                            
+
+// ----------------------------------------------------------------------------
+// wxDataObject is the same as wxDataObjectBase under wxMotif
+// ----------------------------------------------------------------------------
+
+class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
+{
+public:
+    virtual ~wxDataObject();
+};
+
+       //_WX_MOTIF_DATAOBJ_H_
+

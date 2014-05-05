@@ -1,0 +1,42 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\os2\pnghand.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/os2/pnghand.h
+// Purpose:     PNG bitmap handler
+// Author:      Julian Smart
+// Modified by:
+// Created:     04/01/98
+// Copyright:   (c) Microsoft, Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+class WXDLLIMPEXP_CORE wxPNGFileHandler: public wxBitmapHandler
+{
+    DECLARE_DYNAMIC_CLASS(wxPNGFileHandler)
+public:
+    inline wxPNGFileHandler(void)
+    {
+        m_sName = "PNG bitmap file";
+        m_sExtension = "bmp";
+        m_lType = wxBITMAP_TYPE_PNG;
+    }
+
+    virtual bool LoadFile( wxBitmap*       pBitmap
+                          ,const wxString& rName
+                          ,HPS             hPs
+                          ,long            lFlags
+                          ,int             nDesiredWidth
+                          ,int             nDesiredHeight
+                         );
+    virtual bool SaveFile( wxBitmap*        pBitmap
+                          ,const wxString&  rName
+                          ,int              nType
+                          ,const wxPalette* pPalette = NULL
+                         );
+};
+
+      
+    // _WX_PNGHAND_H_

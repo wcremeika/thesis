@@ -1,0 +1,19 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\interface\settings\optionspage_connection.h" 0
+                                    
+                                    
+
+class COptionsPageConnection : public COptionsPage
+{
+public:
+	virtual wxString GetResourceName() { return _T("ID_SETTINGS_CONNECTION"); }
+	virtual bool LoadPage();
+	virtual bool SavePage();
+	virtual bool Validate();
+
+protected:
+	DECLARE_EVENT_TABLE()
+	void OnWizard(wxCommandEvent& event);
+};
+
+       //__OPTIONSPAGE_CONNECTION_H__

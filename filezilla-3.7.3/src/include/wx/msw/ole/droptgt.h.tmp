@@ -1,0 +1,91 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\msw\ole\droptgt.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/msw/ole/droptgt.h
+// Purpose:     declaration of the wxDropTarget class
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     06.03.98
+// Copyright:   (c) 1998 Vadim Zeitlin <zeitlin@dptmaths.ens-cachan.fr>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                        
+                          
+
+                       
+
+                                                                               
+                       
+                                                                               
+
+                     
+                           
+                   
+
+                                                                               
+                                                                            
+                                                                            
+                                                                              
+  
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+
+                                                             
+ 
+       
+                  
+                                                  
+                            
+
+                                                                               
+                                                                     
+                               
+                             
+
+                                                                  
+                                              
+                           
+
+                                               
+                                   
+
+                                      
+                                      
+
+                                      
+                                                            
+
+                                                                               
+                                                      
+                                                     
+
+                                                                               
+              
+      
+                                                                      
+                                                                            
+                     
+                                   
+                                  
+                                                                          
+                                                                              
+                                                                           
+                                     
+
+        
+                                                    
+                                                                        
+
+                                                                          
+                                                                               
+                                                                      
+
+                                          
+  
+
+        //wxUSE_DRAG_AND_DROP
+
+        //_WX_OLEDROPTGT_H

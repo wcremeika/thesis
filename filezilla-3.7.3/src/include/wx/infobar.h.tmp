@@ -1,0 +1,69 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\infobar.h" 0
+///////////////////////////////////////////////////////////////////////////////
+// Name:        wx/infobar.h
+// Purpose:     declaration of wxInfoBarBase defining common API of wxInfoBar
+// Author:      Vadim Zeitlin
+// Created:     2009-07-28
+// Copyright:   (c) 2009 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+///////////////////////////////////////////////////////////////////////////////
+
+                      
+                      
+
+                   
+
+                 
+
+                       
+
+                                                                               
+                                                                     
+                                                                               
+
+                                                       
+ 
+       
+                                                                              
+                                                                        
+                                                                              
+                                                                               
+                                         
+                       
+
+
+                                                                      
+                                                 
+                                                                 
+
+                        
+                               
+
+                                                                              
+                                                                     
+                                            
+                                                                   
+
+                                                      
+                                                    
+
+        
+                                           
+  
+
+                                                  
+                                                      
+                               
+                                
+                
+
+                                                         
+                            
+                                   
+                                      
+      
+
+       // wxUSE_INFOBAR
+
+       // _WX_INFOBAR_H_

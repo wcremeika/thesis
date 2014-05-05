@@ -1,0 +1,31 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\xrc\xh_animatctrl.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/xrc/xh_animatctrl.h
+// Purpose:     XML resource handler for wxAnimationCtrl
+// Author:      Francesco Montorsi
+// Created:     2006-10-15
+// Copyright:   (c) 2006 Francesco Montorsi
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                               
+                               
+
+                         
+
+                                    
+
+                                                                             
+ 
+                                                    
+
+       
+                                
+                                         
+                                            
+  
+
+       // wxUSE_XRC && wxUSE_ANIMATIONCTRL
+
+       // _WX_XH_ANIMATIONCTRL_H_

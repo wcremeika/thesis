@@ -1,0 +1,46 @@
+
+#__FILE__ _"C:\Users\Billy\Dropbox\Thesis\Projects\filezilla-3.7.3\src\include\wx\motif\dcmemory.h" 0
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/motif/dcmemory.h
+// Purpose:     wxMemoryDCImpl class
+// Author:      Julian Smart
+// Modified by:
+// Created:     17/09/98
+// Copyright:   (c) Julian Smart
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+                       
+                       
+
+                             
+
+class WXDLLIMPEXP_CORE wxMemoryDCImpl : public wxWindowDCImpl
+{
+public:
+    wxMemoryDCImpl(wxMemoryDC *owner) : wxWindowDCImpl(owner) { Init(); }
+    wxMemoryDCImpl(wxMemoryDC *owner, wxBitmap& bitmap)
+        : wxWindowDCImpl(owner)
+    {
+        Init();
+        DoSelect(bitmap);
+    }
+
+    wxMemoryDCImpl(wxMemoryDC *owner, wxDC *dc);
+    virtual ~wxMemoryDCImpl();
+
+    virtual void DoGetSize( int *width, int *height ) const;
+    virtual void DoSelect(const wxBitmap& bitmap);
+
+private:
+    friend class wxPaintDC;
+
+    void Init();
+
+    wxBitmap m_bitmap;
+
+    DECLARE_DYNAMIC_CLASS(wxMemoryDCImpl)
+};
+
+      
+// _WX_DCMEMORY_H_
